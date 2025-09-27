@@ -1,0 +1,30 @@
+ But du lexing: on a une chaine char *, il faut recuperer les tokens. les tokens
+les bouts de de  la phrase qui auront une action independante : 
+ex: < infile cat -e | "wc -l" >> double chevrons est redirection qvec ajout
+du texte -> flag open(append et pas truncate)
+
+pour comprendre comment parser chaque element il faut determiner quels sont les
+elements et quels sont les comportements de chacun: 
+
+1 les chevrons 
+le < , > , << >>: si on veut parser cette element, on peut avoir un 
+< ou deux << et de meme de l'autre coté on peut avoir un > ou >>, 
+ERROR pour "> >" ou " >>>", 
+par contre ce n'est pas une erreur si on colle le > a un caractere ou un autre chevrons
+
+REGLE GENERALE : si str[i] == '>' quel est le caractere suivant ?
+- si c'est un espace : c'est good on parse ">"
+- si c'est une lettre: c'est good et on parse ">"
+- si c'est un > alors on a un double >>, 
+si on a >>> ce sera une erreur mais finalement ce sera parser ">>" puis ">"
+REGLE PLUS GENERAL : "si le caractere suivant est un > alors on parse >>.
+else (je crois) on parse ">".
+
+on ne s'occupe pas des erreurs mais juste de lexer donc de decomposer
+
+2 les pipes
+REGLE GENERAL : si str[i] == | quel est le caractere suivant ? 
+- si c'est un espace : c'est good on parse "|"
+- si c'est une lettre: c'est good et on parse "|"
+- si c'est un | c'est un "||"
+(meme regle finalement que le chevrons)
