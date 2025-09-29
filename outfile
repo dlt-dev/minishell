@@ -1,0 +1,34 @@
+touch infile<<< grep -c | dasdas"ar		thurd"dwsadcat -e > outfile
+mode normal: 
+" $jeanne  salut arthur"  ls -la 
+
+mode general / mode "" ou ' ' " < | " \t \n \v \f 
+touch (non pas de quote = parsing normal)
+infile 9c'est good)
+<< (est ce aue je sui ) 
+\
+
+
+
+
+whilke str[i](" caractere speciaux et '\0') 
+	if(" " ) => flags = mode = quotes
+i++
+
+
+
+typedef strucxt s_list
+{
+	char *token; 
+	int type (word, pipe, redirection(in/out), heredoc  )
+	mot /pipe 
+	t_lst *next;
+	t_lst *previous;
+
+} t_lst
+ 1 - 1 - 1 - 1 - env
+
+/////////////////////////////////////////////////////////
+
+
+ \n = token 
