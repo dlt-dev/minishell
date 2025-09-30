@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/09/30 18:59:49 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/09/30 19:27:26 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_list
 
 //free_exit
 void free_exit(t_list *lst, int code, char *message);
+void ft_free_lst(t_list *lst);
+
 
 //malloc_lexing.c
 char *ft_strndup(char *str, int size);

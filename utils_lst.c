@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 13:52:12 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/09/30 18:50:28 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/09/30 19:23:28 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,23 +78,8 @@ void print_str_lst(t_list *lst)
 		lst = lst->next;
 	}
 }
-
-void ft_free_lst(t_list *lst)
-{
-	t_list *tmp;
-	
-	tmp = lst;  
-	if(lst == NULL)
-		return;
-	while(lst != NULL)
-	{
-		tmp = (lst)->next;
-		free((lst)->content);
-		free(lst);
-		lst = tmp; 
-	}
-}
 //GOODJOB
+
 
 /**
  * @param print_str_lst print chaque element de la chaine;
@@ -102,19 +87,19 @@ void ft_free_lst(t_list *lst)
  * @param main pour tester si tu veux
  */
  
-int main()
-{
-	t_list *lst;
-	lst = NULL;
+// int main()
+// {
+// 	t_list *lst;
+// 	lst = NULL;
 
-	char *a = ft_strndup("arthur", 6);
-	char *b = ft_strndup("oscar", 5);
-	char *c = ft_strndup("papa",  4); 
-	char *d = NULL;
-	fill_in_lst(&lst, a);
-	fill_in_lst(&lst, b);
-	fill_in_lst(&lst, c);
-	fill_in_lst(&lst, d);
-	print_str_lst(lst);
-	ft_free_lst(lst);
-}
+// 	char *a = ft_strndup("arthur", 6);
+// 	char *b = ft_strndup("oscar", 5);
+// 	char *c = ft_strndup("papa",  4); 
+// 	char *d = NULL;
+// 	fill_in_lst(&lst, a);
+// 	fill_in_lst(&lst, b);
+// 	fill_in_lst(&lst, c);
+// 	fill_in_lst(&lst, d);
+// 	print_str_lst(lst);
+// 	ft_free_lst(lst);
+// }

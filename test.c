@@ -6,27 +6,51 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/09/30 18:26:26 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/09/30 19:49:12 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-void big_malloc (void)
+int lexing_spaces(char *str, t_list **tok)
 { 
-	int *p;
-	p = malloc(sizeof(int) * 1000000000000);
-
+	char *sep;
+	int i;
+	char *p;
+	if(str == NULL)
+		return(0);
+	i = 0;
+	sep = " \t\n\v\f\r";
+	while(is_separator(str[i]) == IS && str[i] != '\0')
+		i++;
+	p = ft_strndup(str, i);
+	if(p == NULL)
+		return(ERROR);
+	if(fill_in_lst(tok, p) == ERROR)
+		return(ERROR);
+	return(0);
 }
 
-int main ( )
-{ 
-	big_malloc();
-	perror(NULL);
+int main()
+{
+	t_list *lst;
+	lst = NULL;
 
-	
+	char *a = "  prout";
+	char *b = " 			 ok eae k ";
+	char *c = "";
+	char *d = NULL;
+	lexing_spaces(a, &lst);
+	lexing_spaces(b, &lst);
+	lexing_spaces(c, &lst);
+	lexing_spaces(d, &lst);
+	print_str_lst(lst);
+	ft_free_lst(lst);
 }
+
+
+
 
 /**
  * @brief environnement pour tester plusieurs fonctions pour s'assurer qu'elles
