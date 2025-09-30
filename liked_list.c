@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:19:29 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/09/30 17:18:45 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/09/30 19:00:28 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ int lexing_spaces(char *str, t_list **tok)
 	p = ft_strndup(str, i);
 	if(p == NULL)
 		return(ERROR);
-	if(fill_in_lst(tok, p) == ;
+	if(fill_in_lst(tok, p) == ERROR);
+		return(ERROR);
+	return(0);
 } 
 
 
@@ -73,25 +75,27 @@ void lexing(char *str, t_list **tok)
 {
 	int i;
 	char *tik;
+	int value; 
 
 	i = 0;
 	while(str[i] != '\0')
 	{ 
 		if(is_separator(str[i]) == IS)
-			lexing_spaces(&str[i], tok);
+			value = lexing_spaces(&str[i], tok);
 		else if(str[i] == "\"" || str[i] == "\'")
-			lexing_quotes(&str[i], tok);
+			value = lexing_quotes(&str[i], tok);
 		else if(is_pipe_bracket(&str[i]) == IS)
-			lexing_like_pipe(&str[i], tok);
+			value = lexing_like_pipe(&str[i], tok);
 		else if(str[i] == "$")
-			lexing_dollar(&str[i], tok);
+			value = lexing_dollar(&str[i], tok);
 		else if(is_different(&str[i]) == IS)
-			lexing(&str[i], tok);
+			value = lexing(&str[i], tok);
 		if(str[i] == '\0')
 			break;
+		if(value == ERROR)
+			free_exit(*lst, GEN_ERRNO, NULL);
 		i++;
 	}
-
 }
 
 
@@ -107,11 +111,3 @@ int	main(int ac, char **av)
 
 	}
 }
-
-
-espace = " \t\n\v\f\r" // si c'est autre chose qu'espace on arrete
-quote = " \"\'" // si on touche au deuxieme quote on s'arrete
-pipe = "|<>\t\n\v\f\r" // on regarde le caractere suivant et on s'arrete  toutde
-// suite si autre chose qu'un pipe et   
-dollars = "\t\n\v\"
-different = " \t\n\v\f\r\'\'|<>$"

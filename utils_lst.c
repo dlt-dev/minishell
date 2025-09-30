@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 13:52:12 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/09/30 17:19:11 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:50:28 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_list	*ft_lstnew(void *content)
 }
 //GOODJOB
 
-t_list	*ft_lstlast(t_list *lst)
+static t_list	*ft_lstlast(t_list *lst)
 {
 	if (lst == NULL)
 		return (NULL);
@@ -78,6 +78,22 @@ void print_str_lst(t_list *lst)
 		lst = lst->next;
 	}
 }
+
+void ft_free_lst(t_list *lst)
+{
+	t_list *tmp;
+	
+	tmp = lst;  
+	if(lst == NULL)
+		return;
+	while(lst != NULL)
+	{
+		tmp = (lst)->next;
+		free((lst)->content);
+		free(lst);
+		lst = tmp; 
+	}
+}
 //GOODJOB
 
 /**
@@ -86,17 +102,19 @@ void print_str_lst(t_list *lst)
  * @param main pour tester si tu veux
  */
  
-// int main()
-// {
-// 	t_list *lst;
-// 	lst = NULL;
-// 	char *a = "arthur";
-// 	char *b = "oscar";
-// 	char *c = "papa";
-// 	char *d = NULL;
-// 	fill_in_lst(&lst, a);
-// 	fill_in_lst(&lst, b);
-// 	fill_in_lst(&lst, c);
-// 	fill_in_lst(&lst, d);
-// 	printf_str_lst(lst);
-// }
+int main()
+{
+	t_list *lst;
+	lst = NULL;
+
+	char *a = ft_strndup("arthur", 6);
+	char *b = ft_strndup("oscar", 5);
+	char *c = ft_strndup("papa",  4); 
+	char *d = NULL;
+	fill_in_lst(&lst, a);
+	fill_in_lst(&lst, b);
+	fill_in_lst(&lst, c);
+	fill_in_lst(&lst, d);
+	print_str_lst(lst);
+	ft_free_lst(lst);
+}

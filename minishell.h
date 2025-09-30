@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/09/30 16:53:09 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:59:49 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <errno.h>
 #include <stdio.h>
 
+#define GEN_ERRNO 1
 #define ERROR -1
 #define IS_NOT 0
 #define IS 1
@@ -41,15 +42,22 @@ typedef struct s_list
 	struct s_list *next;
 }	t_list;
 
-// utils.c
-size_t	ft_strlen(char *str);
+//free_exit
+void free_exit(t_list *lst, int code, char *message);
+
+//malloc_lexing.c
+char *ft_strndup(char *str, int size);
+
+//utils_lexing.c
+int is_separator (char c);
 
 // utils_lst.c
-t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_back(t_list **lst, t_list *new);
+int fill_in_lst(t_list **lst, char *content);
+void print_str_lst(t_list *lst);
 
-//util_lexing.c
-int is_separator (char c);
+// utils.c
+size_t	ft_strlen(char *str);
 
 #endif
