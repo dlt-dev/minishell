@@ -4,7 +4,7 @@
 // 	int i;
 	 
 // 	i = 0;
-// 	while(is_separator(str[i]) == IS_NOT && str[i] != '\0')
+// 	while(is_spaces(str[i]) == IS_NOT && str[i] != '\0')
 // 	{ 
 // 		if(str[i] == "\"" || str[i] == "\'")
 // 			return(MODE_QUOTES);

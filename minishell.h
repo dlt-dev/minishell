@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/09/30 19:27:26 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/01 19:16:35 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@
 // 	T_REDIR_OUT
 // 	T_
 // };
+/* 
+WORD (commandes, arguments, fichiers)
+
+PIPE (|)
+
+REDIR_IN (<)
+
+REDIR_OUT (>)
+
+APPEND (>>)
+
+HEREDOC (<<) */
 
 typedef struct s_list
 { 
@@ -51,7 +63,11 @@ void ft_free_lst(t_list *lst);
 char *ft_strndup(char *str, int size);
 
 //utils_lexing.c
-int is_separator (char c);
+int is_spaces (char c);
+int is_separator(char c);
+int is_metachar(char c);
+int is_quote(char c);
+
 
 // utils_lst.c
 t_list	*ft_lstnew(void *content);
@@ -61,5 +77,7 @@ void print_str_lst(t_list *lst);
 
 // utils.c
 size_t	ft_strlen(char *str);
+char	*ft_strdup(char *s);
 
 #endif
+

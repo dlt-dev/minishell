@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 13:52:12 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/09/30 19:23:28 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/01 19:06:29 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ void print_str_lst(t_list *lst)
 // 	t_list *lst;
 // 	lst = NULL;
 
-// 	char *a = ft_strndup("arthur", 6);
-// 	char *b = ft_strndup("oscar", 5);
-// 	char *c = ft_strndup("papa",  4); 
+// 	char *a = ft_ft_strndup("arthur", 6);
+// 	char *b = ft_ft_strndup("oscar", 5);
+// 	char *c = ft_ft_strndup("papa",  4); 
 // 	char *d = NULL;
 // 	fill_in_lst(&lst, a);
 // 	fill_in_lst(&lst, b);
