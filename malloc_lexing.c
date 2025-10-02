@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_lexing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:22:03 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/09/30 17:16:52 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/01 19:07:01 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ char *ft_strndup(char *str, int size)
 
 /**
  * @brief 
- * @param ft_strndup : malloc une chaine de caractere de 
+ * @param ft_ft_strndup : malloc une chaine de caractere de 
  * longueur size;
  */
