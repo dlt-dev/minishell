@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   init_var.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/08 19:39:25 by aoesterl         ###   ########.fr       */
+/*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
+/*   Updated: 2025/10/08 16:41:21 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-
-/**
- * @brief environnement pour tester plusieurs fonctions pour s'assurer qu'elles
- * fonctionnent bien avant de les incorporer dans le projet. si une fonction a
- * ete test et a l'air de bien fonctionner, on peut mettre un commentaire
- * GOODJOB sous la fonction: ce qui veut dire que la fonction a subit une
- * batterie de test.
- **/
-
+void init_var(t_list **lst, t_syntax *syntax)
+{ 
+	*lst = NULL;
+	syntax->blank= " \t";
+	syntax->ifs = " \t\n";
+	syntax->white_space= " \t\n\v\f\r";
+	syntax->metachar=" \t\n|<>";
+}

@@ -3,22 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   utils_lexing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 13:58:46 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/01 18:48:34 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/10/08 19:42:45 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int is_spaces(char c)
-{  
+int is_str(char c, char *sep)
+{ 
 	int i;
-	char *sep;
 	
 	i = 0;
-	sep = " \t\n\v\f\r";
 	while(sep[i] != '\0') 
 	{ 
 		if(c == sep[i])
@@ -27,64 +25,32 @@ int is_spaces(char c)
 	}
 	return(IS_NOT);
 }
-//GOODJOB
 
-int is_separator(char c)
-{ 
 
+char *ft_strndup(char *str, int size)
+{
 	int i;
-	char *sep;
-
+	char *p;
+	
 	i = 0;
-	sep = " \t\n\v\f\r<>$|\'\""; // quotes ?
-	while (sep[i] != '\0')
-	{
-		if (c == sep[i])
-			return (IS);
+	if(str == NULL)
+		return(NULL);
+	p = malloc(sizeof(char) * size + 1);
+	if( p == NULL)
+		return(NULL);
+	while(i < size)
+	{ 
+		p[i] = str[i];
 		i++;
 	}
-	return (IS_NOT);
+	p[i] = '\0';
+	return(p);
 }
-
-int is_metachar(char c)
-{ 
-
-	int i;
-	char *sep;
-
-	i = 0;
-	sep = "<>$|"; // quotes ?
-	while (sep[i] != '\0')
-	{
-		if (c == sep[i])
-			return (IS);
-		i++;
-	}
-	return (IS_NOT);
-}
-
-int is_quote(char c)
-{ 
-
-	int i;
-	char *sep;
-
-	i = 0;
-	sep = "\'\""; // quotes ?
-	while (sep[i] != '\0')
-	{
-		if (c == sep[i])
-			return (IS);
-		i++;
-	}
-	return (IS_NOT);
-}
-
 
 /**
  * @brief 
- * @param is_spaces voir si un caractere est un "espace"
- * 
+ * @param ft_ft_strndup : malloc une chaine de caractere de 
+ * longueur size;
  */
 
  
