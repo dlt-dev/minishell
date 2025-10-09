@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/09 13:59:15 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/09 16:16:19 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@
 int main()
 { 
 	t_list *lst;
-	// t_syntax syntax;
-	
+	char *a;
 	lst = NULL; 
-	//char * a= ">>     <                 b$$$onjour \"je m'appelle \"michelle";
-	//char * a= "     \'jhgasd dasjg awjdg$$$$$KH'  kdshd\"\"\"\"\"\"\"hjhjhjk&";
-	char * a= " <<< <<<<<  \"arthur\"\"oscar\"\"papa\"  $var\"jeanne\" arthur ";
+	while(1)
+	{ 
+		readline(a);
+		
+	}
 	lexing(a, &lst);
 	print_str_lst(lst);
-
 }

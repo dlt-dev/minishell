@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:40:19 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/09 13:22:36 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/09 14:23:44 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include <stddef.h>
 #include "struct.h"
-
 
 //utils_lst.c
 t_list	*ft_lstnew(void *content);

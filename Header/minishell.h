@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/09 11:56:24 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/09 16:15:36 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <stdio.h>
+#include <readline/readline.h>
+
 
 #include "macro.h"
 #include "struct.h"
