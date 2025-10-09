@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 13:58:46 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/08 19:42:45 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/09 11:57:34 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,6 @@ char *ft_strndup(char *str, int size)
  * @brief 
  * @param ft_ft_strndup : malloc une chaine de caractere de 
  * longueur size;
+ * @param is_str: regarde si le caractere fais partie de la chaine envoyer
+ * en parametre de la fonction is_str
  */
-
- 
-// int main ()
-// { 
-// 	printf("%d\n", is_spaces('h'));
-// 	printf("%d\n", is_spaces('\0')); 
-// 	printf("%d\n", is_spaces('	'));
-// 	printf("%d\n", is_spaces(' '));
-// 	printf("%d\n", is_spaces('\v'));
-// 	printf("%d\n", is_spaces('?'));
-// }

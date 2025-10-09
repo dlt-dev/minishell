@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_var.c                                         :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/08 16:41:21 by aoesterl         ###   ########.fr       */
+/*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
+/*   Updated: 2025/10/09 11:56:24 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-void init_var(t_list **lst, t_syntax *syntax)
-{ 
-	*lst = NULL;
-	syntax->blank= " \t";
-	syntax->ifs = " \t\n";
-	syntax->white_space= " \t\n\v\f\r";
-	syntax->metachar=" \t\n|<>";
-}
+#include <unistd.h> 
+#include <stdlib.h>
+#include <errno.h>
+#include <stdio.h>
+
+#include "macro.h"
+#include "struct.h"
+#include "utils.h"
+
+//lexing
+void lexing(char *str, t_list **lst);
+int is_str(char c, char *sep);
+char *ft_strndup(char *str, int size);
+
+
+#endif
+

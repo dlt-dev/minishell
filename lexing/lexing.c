@@ -6,13 +6,13 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:19:29 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/08 19:49:22 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/09 13:13:21 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int len_word(char *str)
+static int len_word(char *str)
 { 
 	int i;
 	char quote;
@@ -35,7 +35,7 @@ int len_word(char *str)
 	return(i);
 }
 
-int lexing_word (char *str, t_list** lst, int *count)
+static int lexing_word (char *str, t_list** lst, int *count)
 {
 	int i;
 	char *p;
@@ -53,11 +53,12 @@ int lexing_word (char *str, t_list** lst, int *count)
 	return(0);
 }
 
-int	lexing_metachar(char *str, t_list **lst, int *count)
+static int	lexing_metachar(char *str, t_list **lst, int *count)
 {
 	int	i;
 	char *p;
 	
+	p = NULL; 
 	if (str == NULL)
 		return (0);
 	i = 0;
@@ -82,11 +83,12 @@ int	lexing_metachar(char *str, t_list **lst, int *count)
 void lexing(char *str, t_list **lst)
 {
 	int i;
-	char *tokens;
 	int value; 
 	int size_tok;
+	
 	i = 0;
 	size_tok = 0;
+	value = 0;
 	while(str[i] != '\0')
 	{
 		if(is_str(str[i], " \t\n") == IS)
@@ -100,32 +102,3 @@ void lexing(char *str, t_list **lst)
 		i += size_tok;
 	}
 }
-
-
-
-int main()
-{ 
-	t_list *lst;
-	t_syntax syntax;
-	
-	lst = NULL; 
-	//char * a= ">>     <                 b$$$onjour \"je m'appelle \"michelle";
-	//char * a= "     \'jhgasd dasjg awjdg$$$$$KH'  kdshd\"\"\"\"\"\"\"hjhjhjk&";
-	char * a= " <<< <<<<<  \"arthur\"\"oscar\"\"papa\"  $var\"jeanne\" arthur ";
-	lexing(a, &lst);
-	print_str_lst(lst);
-
-}
-
-// /**
-//  * @brief 
-//  * @param lexing recupere la ligne de commande et creer des char *malloc
-//  * de lstens qui seront mis dans une t_list selon la categorie du lsten
-//  * @param lexing_spaces si le caractere str[i] est un espace on arrive dans
-//  * cette fonction. @param lexing_spaces malloc et remplit la liste avec un lsten
-//  * d'espaces.
-//  * @param lexing_quotes malloc + remplit les quotes
-//  * @param is_pipe_bracket malloc + remplit les pipe < > | 
-//  * @param lexing_dollar malloc + remplit les dollars (avec le nom de la variable)
-//  * @param lexing_word malloc + remplit un mot (tout caractere different des precedents)
-//  */
