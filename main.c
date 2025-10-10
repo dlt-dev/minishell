@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/09 16:16:19 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/09 23:51:09 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int main()
 { 
 	t_list *lst;
 	char *a;
+	a = NULL;
 	lst = NULL; 
 	while(1)
 	{ 

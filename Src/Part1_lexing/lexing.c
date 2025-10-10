@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:19:29 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/09 13:13:21 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/09 23:50:44 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,11 @@ static int lexing_word (char *str, t_list** lst, int *count)
 
 static int	lexing_metachar(char *str, t_list **lst, int *count)
 {
-	int	i;
 	char *p;
 	
 	p = NULL; 
 	if (str == NULL)
 		return (0);
-	i = 0;
 	if (str[0] == '<' && str[1] == '<')
 		p = ft_strdup("<<");
 	else if (str[0] == '>' && str[1] == '>')
