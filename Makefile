@@ -23,7 +23,7 @@ RED = \033[31;1;3m
 GREEN = \033[32;1;3m
 YEL = \033[33;1;3m
 CYAN = \033[36;1;3m
-RESET = \033[0m
+RESET = \033[m
 MESSAGE = Compilation de
 
 all: $(NAME)
