@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/10 19:20:25 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/10 19:35:45 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,23 +73,26 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 int len_prompt(t_prompt *prompt)
 { 
 	int i;
-	int count_slash;
+	int home_lenght;
 
-	count_slash = 0;
+	home_lenght = 0;
 	i = 0;
 	i += ft_strlen(prompt->color_user);
 	i += ft_strlen(prompt->user);
+	i += ft_strlen(" ");
 	i += ft_strlen(prompt->color_cwd);
 	if(prompt->home != NULL)
-	{ 	
+	{
 		if(ft_strncmp(prompt->home, prompt->cwd, ft_strlen(prompt->home)) == 0)
 		{ 
-			prompt->pos_cwd = ft_strlen(prompt->home);
-			i+= ft_strlen(prompt->cwd + prompt->pos_cwd);
+			home_lenght = ft_strlen(prompt->home);
+			i+= ft_strlen("~");
 		}
-	}
-	i += ft_strlen(&prompt->cwd[j]);
+	}	
+	prompt->pos_cwd = home_lenght;
+	i += ft_strlen(prompt->cwd + home_lenght);
 	i += (ft_strlen(prompt->color_reset) * 2);
+	i += ft_strlen("$");
 	return(i);
 }
 
@@ -128,9 +131,13 @@ char *create_prompt(t_prompt *prompt)
 	ft_strcat(prompt->color_user, p);
 	ft_strcat(prompt->user, p);
 	ft_strcat(prompt->color_reset, p);
+	ft_strcat(" ", p);
 	ft_strcat(prompt->color_cwd, p);
+	if(prompt->pos_cwd != 0)
+		ft_strcat("~", p);
 	ft_strcat(&prompt->cwd[prompt->pos_cwd], p);
 	ft_strcat(prompt->color_reset, p);
+	ft_strcat("$", p);
 	return(p);	
 }
 
