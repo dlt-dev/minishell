@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_lexing.c                                     :+:      :+:    :+:   */
+/*   utils_libft2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 13:58:46 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/09 11:57:34 by aoesterl         ###   ########.fr       */
+/*   Created: 2025/10/11 13:47:28 by aoesterl          #+#    #+#             */
+/*   Updated: 2025/10/11 13:48:37 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,3 @@ int is_str(char c, char *sep)
 	}
 	return(IS_NOT);
 }
-
-
-char *ft_strndup(char *str, int size)
-{
-	int i;
-	char *p;
-	
-	i = 0;
-	if(str == NULL)
-		return(NULL);
-	p = malloc(sizeof(char) * size + 1);
-	if( p == NULL)
-		return(NULL);
-	while(i < size)
-	{ 
-		p[i] = str[i];
-		i++;
-	}
-	p[i] = '\0';
-	return(p);
-}
-
-/**
- * @brief 
- * @param ft_ft_strndup : malloc une chaine de caractere de 
- * longueur size;
- * @param is_str: regarde si le caractere fais partie de la chaine envoyer
- * en parametre de la fonction is_str
- */
