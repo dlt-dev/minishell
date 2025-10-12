@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   Part7_refresh.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arthurito <arthurito@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/12 23:20:40 by arthurito        ###   ########.fr       */
+/*   Created: 2025/09/29 17:19:29 by jdelattr          #+#    #+#             */
+/*   Updated: 2025/10/12 22:36:55 by arthurito        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-#include <unistd.h> 
-#include <stdlib.h>
-#include <stdio.h>
-#include <errno.h>
-#include <readline/readline.h>
+int refresh(t_shell *sh)
+{
+    
 
 
-#include "macro.h"
-#include "struct.h"
-#include "utils.h"
-
-
-//Part0: Prompt
-int get_prompt(t_prompt *invite);
-
-//Part1: lexing
-void lexing(char *str, t_list **lst);
-
-
-#endif
-
+    
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arthurito <arthurito@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/11 13:07:15 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/12 23:30:15 by arthurito        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,22 @@ typedef struct s_list
 
 typedef struct s_prompt
 { 
-	int pos_cwd;
 	char *user;
 	char *cwd;
 	char *empty;
-	char *home;
 	char *prompt;
 
 	char *color_user;
 	char *color_cwd;
 	char *color_reset;
 }t_prompt;
+
+typedef struct s_shell
+{
+	t_prompt invite;
+	t_list *lst;
+	char *rd_line;
+}t_shell;
 
 
 // typedef struct s_syntax

@@ -1,100 +1,88 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   Part0_Prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arthurito <arthurito@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/11 13:36:42 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/12 23:31:55 by arthurito        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void init_prompt(t_prompt *prompt)
-{ 
-	*prompt = (t_prompt){0};
-	prompt->color_reset = RESET;
-	prompt->color_user = YELL_PS;
-	prompt->color_cwd = BLUE_PS;
-	prompt->empty = "\0";
+int replace_by_tilde (t_prompt *invite, int *len_home)
+{
+	int i;
+	char *home;
+	
+	home = getenv("HOME");
+	i = ft_strlen(home);
+	if(ft_strncmp(home, invite->cwd, i) == 0)
+	{
+		*len_home = i;
+		return(0); 
+	}
+	return(1);
 }
 
-int len_prompt(t_prompt *prompt)
+int len_prompt(t_prompt *invite, int *len_home)
 { 
 	int i;
-	int home_lenght;
-
-	home_lenght = 0;
+	
 	i = 0;
-	i += ft_strlen(prompt->color_user);
-	i += ft_strlen(prompt->user);
+	i += ft_strlen(invite->color_user);
+	i += ft_strlen(invite->user);
 	i += ft_strlen(" ");
-	i += ft_strlen(prompt->color_cwd);
-	if(prompt->home != NULL)
-	{
-		if(ft_strncmp(prompt->home, prompt->cwd, ft_strlen(prompt->home)) == 0)
-		{ 
-			home_lenght = ft_strlen(prompt->home);
-			i+= ft_strlen("~");
-		}
-	}	
-	prompt->pos_cwd = home_lenght;
-	i += ft_strlen(prompt->cwd + home_lenght);
-	i += (ft_strlen(prompt->color_reset) * 2);
+	i += ft_strlen(invite->color_cwd);
+	if(replace_by_tilde(invite, len_home) == 0)
+		i+= ft_strlen("~");
+	i += ft_strlen(invite->cwd + *len_home);
+	i += ft_strlen(invite->color_reset);
 	i += ft_strlen("$ ");
 	return(i);
 }
 
 
-char *create_prompt(t_prompt *prompt)
+char *create_prompt(t_prompt *invite)
 {
 	char *p;
+	int len_home; 
 	
-	p = malloc(sizeof(char ) * (len_prompt(prompt) + 1));
+	len_home= 0;
+	p = malloc(sizeof(char ) * (len_prompt(invite, &len_home) + 1));
 	if(p == NULL)
 		return(NULL);
 	p[0] = '\0';
-	ft_strcat(prompt->color_user, p);
-	ft_strcat(prompt->user, p);
-	ft_strcat(prompt->color_reset, p);
+	ft_strcat(invite->color_user, p);
+	ft_strcat(invite->user, p);
 	ft_strcat(" ", p);
-	ft_strcat(prompt->color_cwd, p);
-	if(prompt->pos_cwd != 0)
+	ft_strcat(invite->color_cwd, p);
+	if(len_home != 0)
 		ft_strcat("~", p);
-	ft_strcat(&prompt->cwd[prompt->pos_cwd], p);
-	ft_strcat(prompt->color_reset, p);
+	ft_strcat(&invite->cwd[len_home], p);
+	ft_strcat(invite->color_reset, p);
 	ft_strcat("$ ", p);
 	return(p);	
 }
 
-int get_prompt(t_prompt *prompt)
+int get_prompt(t_prompt *invite)
 {
-	prompt->user = getenv("USER");
-	if(prompt->user == NULL)
-		prompt->user = prompt->empty;
-	prompt->home = getenv("HOME");
-	prompt->cwd = getcwd(NULL, 0);
-	if(prompt->cwd == NULL)
+	invite->user = getenv("USER");
+	if(invite->user == NULL)
+		invite->user = invite->empty;
+	invite->cwd = getcwd(NULL, 0);
+	if(invite->cwd == NULL)
 		return(ERROR);
-	prompt->prompt = create_prompt(prompt);
-	free(prompt->cwd);
-	prompt->cwd = NULL;
-	if(prompt->prompt == NULL)
-		return(ERROR);
-	return(0);
-}
-
-
-
-int ft_prompt(t_prompt *prompt)
-{ 	
-	init_prompt(prompt);
-	if(get_prompt(prompt) == ERROR)
+	invite->prompt = create_prompt(invite);
+	free(invite->cwd);
+	invite->cwd = NULL;
+	if(invite->prompt == NULL)
 		return(ERROR);
 	return(0);
 }
+
 
 /**
  * @brief environnement pour tester plusieurs fonctions pour s'assurer qu'elles
