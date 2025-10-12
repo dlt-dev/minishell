@@ -6,7 +6,7 @@
 /*   By: arthurito <arthurito@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/12 23:20:40 by arthurito        ###   ########.fr       */
+/*   Updated: 2025/10/13 00:11:19 by arthurito        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 int get_prompt(t_prompt *invite);
 
 //Part1: lexing
-void lexing(char *str, t_list **lst);
+int lexing(char *str, t_list **lst);
 
 
 #endif

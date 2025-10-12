@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexing.c                                           :+:      :+:    :+:   */
+/*   Part1_lexing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arthurito <arthurito@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:19:29 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/09 23:50:44 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/13 00:13:02 by arthurito        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	lexing_metachar(char *str, t_list **lst, int *count)
 	return(0);
 }
 
-void lexing(char *str, t_list **lst)
+int lexing(char *str, t_list **lst)
 {
 	int i;
 	int value; 
@@ -96,7 +96,8 @@ void lexing(char *str, t_list **lst)
 		else 
 			lexing_word(&str[i], lst, &size_tok);
 		if(value == ERROR)
-			free_exit(*lst, GEN_ERRNO, NULL);
+			return(ERROR);
 		i += size_tok;
 	}
+	return(0);
 }

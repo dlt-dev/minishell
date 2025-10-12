@@ -6,16 +6,8 @@
 /*   By: arthurito <arthurito@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:19:29 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/12 22:36:55 by arthurito        ###   ########.fr       */
+/*   Updated: 2025/10/12 23:50:32 by arthurito        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int refresh(t_shell *sh)
-{
-    
-
-
-    
-}

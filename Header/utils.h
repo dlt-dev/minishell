@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arthurito <arthurito@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:40:19 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/11 13:51:20 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/13 00:05:54 by arthurito        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ char *ft_strndup(char *str, int size);
 int is_str(char c, char *sep);
 
 //free_exit.c
-void ft_free_lst(t_list *lst);
-void free_all(t_list *lst);
-void free_exit(t_list *lst, int code, char *message);
+void ft_free_lst(t_list **lst);
+void ft_free_str(char **str);
+void free_all(t_shell *shell);
+void free_exit(t_shell *shell, int code, char *message);
 
 #endif

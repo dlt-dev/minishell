@@ -3,42 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   free_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arthurito <arthurito@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:44:28 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/09/30 18:58:23 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/13 00:06:25 by arthurito        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_free_lst(t_list *lst)
+void ft_free_lst(t_list **lst)
 {
 	t_list *tmp;
 	
-	tmp = lst;  
-	if(lst == NULL)
+	if(*lst == NULL)
 		return;
-	while(lst != NULL)
+	tmp = *lst;
+	while(*lst != NULL)
 	{
-		tmp = (lst)->next;
-		free((lst)->content);
-		free(lst);
-		lst = tmp; 
+		tmp = (*lst)->next;
+		free((*lst)->content);
+		free(*lst);
+		*lst = tmp; 
 	}
 }
 //GOODJOB
-
-void free_all(t_list *lst)
+void ft_free_str(char **str)
+{
+	if(*str == NULL)
+		return;
+	free(*str);
+	*str = NULL; 
+	
+}
+void free_all(t_shell *shell)
 { 
-	ft_free_lst(lst);
+	ft_free_lst(&shell->lst);
+	ft_free_str(&shell->invite.prompt);
 }
 
-void free_exit(t_list *lst, int code, char *message)
+void free_exit(t_shell *shell, int code, char *message)
 { 
 	perror(message);
-	free_all(lst);
-	lst = NULL; // par forcement necessaire ici, mais petit exemple
+	free_all(shell);
 	exit(code);
 }
 
