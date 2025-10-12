@@ -6,7 +6,7 @@
 /*   By: arthurito <arthurito@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/12 23:30:15 by arthurito        ###   ########.fr       */
+/*   Updated: 2025/10/13 00:20:42 by arthurito        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_prompt
 { 
 	char *user;
 	char *cwd;
-	char *empty;
 	char *prompt;
 
 	char *color_user;

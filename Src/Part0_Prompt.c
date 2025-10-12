@@ -6,7 +6,7 @@
 /*   By: arthurito <arthurito@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/12 23:46:12 by arthurito        ###   ########.fr       */
+/*   Updated: 2025/10/13 00:40:18 by arthurito        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int replace_by_tilde(t_prompt *invite, int *len_home)
 	char *home;
 	
 	home = getenv("HOME");
+	if(home == NULL)
+		return(1);
 	i = ft_strlen(home);
 	if(ft_strncmp(home, invite->cwd, i) == 0)
 	{
@@ -71,8 +73,8 @@ char *create_prompt(t_prompt *invite)
 int get_prompt(t_prompt *invite)
 {
 	invite->user = getenv("USER");
-	if(invite->user == NULL)
-		invite->user = invite->empty;
+	if(invite->user == NULL || *invite->user == '\0')
+		invite->user = "Unknow";
 	invite->cwd = getcwd(NULL, 0);
 	if(invite->cwd == NULL)
 		return(ERROR);
