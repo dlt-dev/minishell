@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_exit.c                                        :+:      :+:    :+:   */
+/*   PartX_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthurito <arthurito@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:44:28 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/13 00:26:51 by arthurito        ###   ########.fr       */
+/*   Updated: 2025/10/14 00:59:37 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,28 @@ void ft_free_lst(t_list **lst)
 	}
 }
 //GOODJOB
+
 void ft_free_str(char **str)
 {
 	if(*str == NULL)
 		return;
 	free(*str);
 	*str = NULL; 
-	
 }
 void free_all(t_shell *shell)
 { 
 	ft_free_lst(&shell->lst);
 	ft_free_str(&shell->invite.prompt);
+	ft_free_str(&shell->rd_line);
 }
 
 void free_exit(t_shell *shell, int code, char *message)
 { 
 	perror(message);
 	free_all(shell);
+	ft_free_lst(&shell->var.env);
+	ft_free_lst(&shell->var.local);
+	clear_history();
 	exit(code);
 }
 

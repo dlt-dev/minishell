@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 13:52:12 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/01 19:06:29 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/10/13 23:56:18 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,12 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 }
 //GOODJOB
 
-int fill_in_lst(t_list **lst, char *content)
+int fill_in_lst(t_list **lst, char *content, int type, int flag_quote)
 { 
 	t_list *node;
 	node = ft_lstnew(content);
+	node->type = type;
+	node->quotes= flag_quote;
 	if(node == NULL)
 		return(ERROR);
 	ft_lstadd_back(lst, node);
@@ -71,10 +73,12 @@ void print_str_lst(t_list *lst)
 	while(lst != NULL)
 	{
 		if(lst->content != NULL)
-			write(1, lst->content, ft_strlen(lst->content));
+		{
+			printf("NODE:\n%s\n", lst->content);
+			printf("type: %d\nquotes: %d\n\n", lst->type, lst->quotes);
+		}
 		else
-			write(1, "(null)", 6);
-		write(1, "\n", 1);
+			write_str("(null)\n\n");
 		lst = lst->next;
 	}
 }

@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   Part1_lexing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthurito <arthurito@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:19:29 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/13 00:18:01 by arthurito        ###   ########.fr       */
+/*   Updated: 2025/10/13 23:33:29 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int len_word(char *str)
+
+
+static int len_word(char *str, int *flag_quote)
 { 
 	int i;
 	char quote;
@@ -21,7 +23,8 @@ static int len_word(char *str)
 	while(is_str(str[i], " \t\n|<>") == IS_NOT && str[i] != '\0')
 	{ 
 		if(str[i] == '\'' || str[i] == '\"')
-		{ 
+		{
+			*flag_quote = QUOTES;
 			quote = str[i];
 			i++;
 			while(str[i] != quote && str[i] != '\0')
@@ -35,20 +38,21 @@ static int len_word(char *str)
 	return(i);
 }
 
-static int lexing_word (char *str, t_list** lst, int *count)
+static int lexing_word(char *str, t_list** lst, int *count)
 {
 	int i;
 	char *p;
+	int flag_quote;
 	
+	flag_quote = 0;
 	if(str == NULL)
 		return(0);
-	i = 0;
-	i = len_word(str);
+	i = len_word(str, &flag_quote);
 	p = ft_strndup(str, i);
 	if(p == NULL)
 		return(ERROR);
 	*count = ft_strlen(p);
-	if(fill_in_lst(lst, p) == ERROR)
+	if(fill_in_lst(lst, p, WORD, flag_quote) == ERROR)
 		return(free(p), ERROR);
 	return(0);
 }
@@ -73,7 +77,7 @@ static int	lexing_metachar(char *str, t_list **lst, int *count)
 	if(p == NULL)
 		return(ERROR);
 	*count = ft_strlen(p);
-	if(fill_in_lst(lst, p) == ERROR)
+	if(fill_in_lst(lst, p, META, 0) == ERROR)
 		return(free(p), ERROR);
 	return(0);
 }

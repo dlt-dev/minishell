@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthurito <arthurito@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/13 00:11:19 by arthurito        ###   ########.fr       */
+/*   Updated: 2025/10/13 15:11:33 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include <readline/readline.h>
-
+#include <readline/history.h>
 
 #include "macro.h"
 #include "struct.h"
