@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:19:29 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/13 23:33:29 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/14 18:10:08 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 
 
-static int len_word(char *str, int *flag_quote)
+static int len_word(char *str)
 { 
 	int i;
 	char quote;
@@ -24,7 +24,6 @@ static int len_word(char *str, int *flag_quote)
 	{ 
 		if(str[i] == '\'' || str[i] == '\"')
 		{
-			*flag_quote = QUOTES;
 			quote = str[i];
 			i++;
 			while(str[i] != quote && str[i] != '\0')
@@ -42,17 +41,15 @@ static int lexing_word(char *str, t_list** lst, int *count)
 {
 	int i;
 	char *p;
-	int flag_quote;
 	
-	flag_quote = 0;
 	if(str == NULL)
 		return(0);
-	i = len_word(str, &flag_quote);
+	i = len_word(str);
 	p = ft_strndup(str, i);
 	if(p == NULL)
 		return(ERROR);
 	*count = ft_strlen(p);
-	if(fill_in_lst(lst, p, WORD, flag_quote) == ERROR)
+	if(fill_in_lst(lst, p, WORD) == ERROR)
 		return(free(p), ERROR);
 	return(0);
 }
@@ -77,7 +74,7 @@ static int	lexing_metachar(char *str, t_list **lst, int *count)
 	if(p == NULL)
 		return(ERROR);
 	*count = ft_strlen(p);
-	if(fill_in_lst(lst, p, META, 0) == ERROR)
+	if(fill_in_lst(lst, p, META) == ERROR)
 		return(free(p), ERROR);
 	return(0);
 }
@@ -96,9 +93,9 @@ int lexing(char *str, t_list **lst)
 		if(is_str(str[i], " \t\n") == IS)
 			size_tok = 1;
 		else if(is_str(str[i], "<>|" ) == IS)
-			lexing_metachar(&str[i], lst, &size_tok);
+			value = lexing_metachar(&str[i], lst, &size_tok);
 		else 
-			lexing_word(&str[i], lst, &size_tok);
+			value = lexing_word(&str[i], lst, &size_tok);
 		if(value == ERROR)
 			return(ERROR);
 		i += size_tok;

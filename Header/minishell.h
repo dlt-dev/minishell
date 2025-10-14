@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/13 15:11:33 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/14 17:17:15 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int get_prompt(t_prompt *invite);
 //Part1: lexing
 int lexing(char *str, t_list **lst);
 
+//Part3: Put_flag
+void put_flags (t_list *lst);
 
 #endif
 

@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/14 00:52:14 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/14 17:00:36 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,29 @@ enum token_type
 	META,
 	PIPE, 
 	REDIR,
-	QUOTES,
+	QUOTE,
+	DOLLAR,
+	AFFEC_VAR
 };
+
+typedef struct s_flag
+{ 
+	int type;
+	int quote;
+	int dollar;
+	int redir;
+	int pipe;
+	int affec_var;
+	int error;
+}t_flag;
 
 typedef struct s_list
 { 
 	char *content;
-	int type;
-	int quotes;
+	t_flag flag;
 	struct s_list *previous;
 	struct s_list *next;
-}	t_list;
+}t_list;
 
 typedef struct s_prompt
 { 

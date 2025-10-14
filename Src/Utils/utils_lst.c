@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 13:52:12 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/13 23:56:18 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/14 18:17:18 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,31 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 }
 //GOODJOB
 
-int fill_in_lst(t_list **lst, char *content, int type, int flag_quote)
+int fill_in_lst(t_list **lst, char *content, int type)
 { 
 	t_list *node;
 	node = ft_lstnew(content);
-	node->type = type;
-	node->quotes= flag_quote;
+	node->flag = (t_flag){0};
+	node->flag.type = type;
 	if(node == NULL)
 		return(ERROR);
 	ft_lstadd_back(lst, node);
 	return(0);	
 }
 //GOODJOB
+
+static void print_flag_lst(t_list *node)
+{ 
+	if(node == NULL)
+		return;
+	printf("type: %d\n", node->flag.type);
+	printf("quote: %d\n", node->flag.quote);
+	printf("dollar: %d\n", node->flag.dollar);
+	printf("redir: %d\n", node->flag.redir);
+	printf("pipe: %d\n", node->flag.pipe);
+	printf("affec_var: %d\n", node->flag.affec_var);
+	printf("error: %d\n\n", node->flag.error);
+}
 
 void print_str_lst(t_list *lst)
 { 
@@ -75,13 +88,15 @@ void print_str_lst(t_list *lst)
 		if(lst->content != NULL)
 		{
 			printf("NODE:\n%s\n", lst->content);
-			printf("type: %d\nquotes: %d\n\n", lst->type, lst->quotes);
+			print_flag_lst(lst);
 		}
 		else
 			write_str("(null)\n\n");
 		lst = lst->next;
 	}
 }
+
+
 //GOODJOB
 
 

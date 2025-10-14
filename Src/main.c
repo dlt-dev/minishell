@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/14 01:15:47 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/14 18:48:29 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int init_shell(t_shell *shell, int argc, char **argv, char **envp)
 		tmp = ft_strdup(envp[i]);
 		if(tmp == NULL)
 			return(ERROR);
-		if(fill_in_lst(&shell->var.env, tmp, 0, 0) == ERROR)
+		if(fill_in_lst(&shell->var.env, tmp, 0) == ERROR)
 			return(free(tmp), ERROR);
 		tmp = NULL;
 		i++;
@@ -80,7 +80,7 @@ int main(int argc, char **argv, char **envp)
 			add_history(shell.rd_line);
 		if(lexing(shell.rd_line, &shell.lst) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
-		
+		put_flags(shell.lst);
 		print_str_lst(shell.lst);
 		// print_str_lst(shell.var.env);
 		free_all(&shell);

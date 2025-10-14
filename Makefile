@@ -4,10 +4,11 @@ INC_DIR = Header
 SRC_DIR = Src/
 UTILS_DIR = Src/Utils
 OBJ_DIR = objs
-BIN_DIR = $(HOME)/bin_minishell
+BIN_DIR = $(HOME)/bin
 
 #Source de compilation
-SRC_SHELL = $(SRC_DIR)/Part0_Prompt.c $(SRC_DIR)/Part1_lexing.c $(SRC_DIR)/main.c \
+SRC_SHELL = $(SRC_DIR)/Part0_Prompt.c $(SRC_DIR)/Part1_lexing.c $(SRC_DIR)/Part3_put_flag.c \
+$(SRC_DIR)/main.c \
 $(SRC_DIR)/PartX_free.c
 SRC_UTILS = $(UTILS_DIR)/utils_libft1.c \
 $(UTILS_DIR)/utils_libft2.c $(UTILS_DIR)/utils_lst.c 
@@ -22,7 +23,7 @@ CC = cc
 FLAG_OBJ = -Wall -Wextra -Werror -g -c
 FLAG_NAME = -o $(NAME)
 RM = rm -rf
-SCRIPT_SHELL = .minishell.sh
+SCRIPT_SHELL = .minirc
 
 #Couleur de compilation
 RED = \033[31;1;3m
@@ -47,12 +48,17 @@ $(OBJ_DIR)/%.o: $(UTILS_DIR)/%.c
 	mkdir -p $(OBJ_DIR)
 	@echo "$(GREEN)$(MESSAGE) $< $(RESET)"
 	$(CC) $(FLAG_OBJ) $< -I$(INC_DIR) -o $@
-damn: all
+
+install: $(BIN_DIR)/$(NAME)
+
+$(BIN_DIR)/$(NAME): $(NAME)
 	mkdir -p $(BIN_DIR)
-#echo 'export PATH='$(BIN_DIR)':$$PATH' > $(BIN_DIR)/$(SCRIPT_SHELL)
 	echo "export PATH=$(BIN_DIR):$$PATH" > $(BIN_DIR)/$(SCRIPT_SHELL)
 	cp $(NAME) $(BIN_DIR)
-
+	@echo "$(CYAN)				Creation du dossier bin dans le home"
+	@echo "$(CYAN)				$(SCRIPT_SHELL) dans le bin pour sourcer le PATH"
+	@echo "			Assurez vous que la variable PATH contienne le chemin \
+	$(BIN_DIR)$(RESET)"
 clean:
 	$(RM) $(OBJ_DIR)
 	$(RM) $(BIN_DIR)
