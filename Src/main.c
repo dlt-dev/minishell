@@ -6,12 +6,12 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/15 20:05:28 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/16 00:22:21 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+ 
 void printbanner(void)
 {
 	write_str(
@@ -31,58 +31,12 @@ void printbanner(void)
 		"\033[0m\n");
 }
 
-void bzero_shell(t_shell *shell)
-{ 
-	*shell = (t_shell){0};
-	shell->invite.color_user = YELL_PS;
-	shell->invite.color_cwd = BLUE_PS;
-	shell->invite.color_reset = RESET;
-}
-
-int create_var_lst(t_valist *env, char *envp)
-{ 
-	int i;
-	int len;
-	char *name;
-	char *value;
-	
-	len = len_name(envp);
-	i = len + 1;
-	name = ft_strndup(envp, len);
-	if(name == NULL)
-		return(ERROR);
-	len = ft_strlen(envp) - i; 
-	value = ft_strndup(&envp[i], len);
-	if(value == NULL)
-		return(free(name), NULL);
-	var_in_lst()
-	
-}
-
-
-int init_shell(t_shell *shell, int argc, char **argv, char **envp)
-{
-	char *tmp;
-	int i;
-	(void)argc;
-	(void)argv;
-	
-	i = 0;
-	bzero_shell(shell);
-	while(envp[i] != NULL)	
-	{
-		create_var_lst (shell->var.env, envp[i]);
-	}
-	return(0);
-}
-
- 
 int main(int argc, char **argv, char **envp)
 { 
 	t_shell shell;
 	
 	printbanner();
-	if(init_shell(&shell, argc, argv, envp) == ERROR)
+	if(init_variable(&shell, argc, argv, envp) == ERROR)
 		free_exit(&shell, GEN_ERRNO, NULL);
 	while(1)
 	{
@@ -97,7 +51,7 @@ int main(int argc, char **argv, char **envp)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		put_flags(shell.lst);
 		// print_str_lst(shell.lst);
-		print_str_lst(shell.var.env);
+		print_var_lst(shell.var.env);
 		free_all(&shell);
 	}
 }

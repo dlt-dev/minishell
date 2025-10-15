@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 19:10:04 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/15 19:43:08 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/16 00:26:02 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,39 @@ int var_in_lst(t_valist **var, char *name, char *value)
 		return(ERROR);
 	var_addback(var, node);
 	return(0);
+}
+
+void ft_free_var(t_valist **var)
+{
+	t_valist *tmp;
+	if(var == NULL || *var == NULL)
+		return;
+	tmp = *var;
+	while(*var != NULL)
+	{
+		tmp = (*var)->next;
+		free((*var)->name);
+		free((*var)->value);
+		free(*var);
+		*var = tmp;
+	}
+}
+
+void print_var_lst(t_valist *var)
+{ 
+	if(var == NULL)
+		return;
+	while(var != NULL)
+	{
+		if(var->name != NULL && var->value != NULL)
+		{
+			printf("NODE\n");
+			printf("VAR NAME: %s\n", var->name);
+			printf("VAR VALUE: %s\n\n", var->value);
+		}
+		else
+			write_str("(null)\n\n");
+			
+		var = var->next;
+	}
 }

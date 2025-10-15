@@ -7,9 +7,10 @@ OBJ_DIR = objs
 BIN_DIR = $(HOME)/bin
 
 #Source de compilation
-SRC_SHELL = $(SRC_DIR)/Part0_Prompt.c $(SRC_DIR)/Part1_lexing.c $(SRC_DIR)/Part3_put_flag.c \
-$(SRC_DIR)/main.c \
-$(SRC_DIR)/PartX_free.c
+SRC_SHELL = $(SRC_DIR)/Part0_init_var.c $(SRC_DIR)/Part1_Prompt.c \
+$(SRC_DIR)/Part2_lexing.c $(SRC_DIR)/Part3_put_flag.c \
+$(SRC_DIR)/main.c $(SRC_DIR)/PartX_free.c
+
 SRC_UTILS = $(UTILS_DIR)/utils_libft1.c $(UTILS_DIR)/utils_va_lst.c \
 $(UTILS_DIR)/utils_libft2.c $(UTILS_DIR)/utils_lst.c 
 

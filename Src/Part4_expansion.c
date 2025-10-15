@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:15:26 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/15 19:12:57 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/16 00:51:52 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int len_name(char *name)
 	} 
 	return(i);
 }
-int search_var(t_list *env, t_list* local, char *name)
+
+int search_var(t_valist *env, t_valist* local, char *name)
 {
 	int i;
 	int len;
@@ -43,7 +44,7 @@ int search_var(t_list *env, t_list* local, char *name)
 		return(len);
 	while(env != NULL)
 	{ 
-		if(ft_strncmp(name, env->content, len) == 0)
+		if(ft_strncmp(name, env->name, len) == 0)
 		{
 			env = env->content;
 			while(env->content[i] != '\0')
@@ -55,13 +56,7 @@ int search_var(t_list *env, t_list* local, char *name)
 		}
 		env = env->next;
 	}
-	
-	
-		
-
-
 }
-
 
 int count_single(char *str)
 { 
@@ -73,46 +68,22 @@ int count_single(char *str)
 	return(i);
 }
 
-int count_double(t_shell *shell, char *str)
+
+int count_expansion(t_shell *shell, char *str)
 { 
 	int i;
-	
-	i = 1;
-	while(str[i] != '\0' && str[i] != "\"")
-	{ 
-		if(str[i] == "$")
-		{ 
-			i++;
-			search_var(shell->var.env, shell->var.local, str);
-		}
-	} 
-}
-
-
-char *count_expansion(char *str)
-{ 
-	int i;
-	int mode;
 	
 	i = 0;
-	mode = 0;
 	while(str[i] != '\0')
 	{ 
 		if(str[i] == "\'")
 			i+= count_single(&str[i]);
-		if(str[i] == "\"")
-		{ 
-			mode = DOUBLE;	
-			while(str[i] != '\0' && str[i] != "\"")
-			{
-				if(str[i] == "$")
-					search_var(shell->var);
-				i++;
-			}	
-		}	
-		
-		
-	}	
+		if(str[i] == "$")
+			i+= search_var(shell->var.env, shell->var.local, &str[i]);
+		if(str[i] != '\0')
+			i++;
+	}
+	return(i);
 }
 
 
@@ -123,7 +94,7 @@ int expand_param(t_shell *shell, t_list *lst)
 	while(lst != NULL)
 	{ 
 		if(lst->flag.dollar = DOLLAR)
-			count_expansion(lst->content);
+			count_expansion(shell, lst->content);
 		lst = lst->next;
 	}	
 }

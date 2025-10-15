@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/15 19:56:56 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/16 00:11:48 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,21 @@
 #include "struct.h"
 #include "utils.h"
 
+//Part0: init_variable
+int init_variable(t_shell *shell, int argc, char **argv, char **envp);
 
-//Part0: Prompt
+//Part1: Prompt
 int get_prompt(t_prompt *invite);
 
-//Part1: lexing
+//Part2: lexing
 int lexing(char *str, t_list **lst);
 
 //Part3: Put_flag
 void put_flags (t_list *lst);
 
+//Part4: Expansion
 int len_name(char *name);
+int expand_param(t_shell *shell, t_list *lst);
 
 #endif
 
