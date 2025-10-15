@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/13 15:03:55 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/15 14:36:00 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int get_prompt(t_prompt *invite)
 {
 	invite->user = getenv("USER");
 	if(invite->user == NULL || *invite->user == '\0')
-		invite->user = "Unknow";
+		invite->user = "Unknown";
 	invite->cwd = getcwd(NULL, 0);
 	if(invite->cwd == NULL)
 		return(ERROR);
@@ -94,4 +94,3 @@ int get_prompt(t_prompt *invite)
  * GOODJOB sous la fonction: ce qui veut dire que la fonction a subit une
  * batterie de test.
  **/
-

@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/14 17:00:36 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/15 19:54:39 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ enum token_type
 	REDIR,
 	QUOTE,
 	DOLLAR,
-	AFFEC_VAR
+	AFFEC_VAR,
+	SINGLE,
+	DOUBLE,
 };
 
 typedef struct s_flag
@@ -36,12 +38,13 @@ typedef struct s_flag
 }t_flag;
 
 typedef struct s_list
-{ 
+{
 	char *content;
 	t_flag flag;
 	struct s_list *previous;
 	struct s_list *next;
 }t_list;
+
 
 typedef struct s_prompt
 { 
@@ -54,10 +57,17 @@ typedef struct s_prompt
 	char *color_reset;
 }t_prompt;
 
+typedef struct s_valist
+{
+	char *name;
+	char *value;
+	struct s_valist *next;
+}t_valist;
+
 typedef struct s_var
 {
-	t_list *env;
-	t_list *local;
+	t_valist *env;
+	t_valist *local;
 }t_var;
 
 typedef struct s_shell

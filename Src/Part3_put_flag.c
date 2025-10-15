@@ -6,34 +6,34 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 23:12:31 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/14 18:49:50 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/15 19:10:29 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-int check_close_quote(char *str)
-{
-	int i;
-	char c;
+// int check_close_quote(char *str)
+// {
+// 	int i;
+// 	char c;
 	
-	i = 0;
-	c = 0;
-	while(str[i] != '\0')
-	{
-		if(str[i] == '\'' || str[i] == '\"')
-		{ 
-			c = str[i];
-			while(str[i] != '\0' && str[i] != c)
-				i++;
-			if(str[i] == '\0')
-				return(ERROR);
-		}		
-		i++;
-	}
-	return(0);
-}
+// 	i = 0;
+// 	c = 0;
+// 	while(str[i] != '\0')
+// 	{
+// 		if(str[i] == '\'' || str[i] == '\"')
+// 		{ 
+// 			c = str[i];
+// 			while(str[i] != '\0' && str[i] != c)
+// 				i++;
+// 			if(str[i] == '\0')
+// 				return(ERROR);
+// 		}
+// 		i++;
+// 	}
+// 	return(0);
+// }
 
 
 
@@ -71,11 +71,6 @@ void put_flags (t_list *lst)
 	while(lst != NULL)
 	{ 
 		content_flag(&lst->flag, lst->content);
-		if(lst->flag.quote == QUOTE)
-		{ 
-			if(check_close_quote(lst->content) == ERROR)
-				lst->flag.error = ERROR;	
-		}
 		lst = lst->next;
 	}
 }

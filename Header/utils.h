@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:40:19 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/14 18:09:15 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/15 19:44:03 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,13 @@ void ft_free_str(char **str);
 void free_all(t_shell *shell);
 void free_exit(t_shell *shell, int code, char *message);
 
+void lst_del_one(t_list *node);
+void delone_relink_chain(t_list **lst, t_list *node);
+
+//utils_va_lst.c
+t_valist *var_new(char *name, char *value);
+t_valist *var_last(t_valist *var);
+void var_addback(t_valist **var, t_valist *new);
+int var_in_lst(t_valist **var, char *name, char *value);
 
 #endif
