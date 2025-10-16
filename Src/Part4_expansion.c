@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:15:26 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/16 00:51:52 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/16 11:00:35 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int len_name(char *name)
 	return(i);
 }
 
-int search_var(t_valist *env, t_valist* local, char *name)
+int search_count_var(t_valist *env, t_valist* local, char *name)
 {
 	int i;
 	int len;
@@ -41,21 +41,17 @@ int search_var(t_valist *env, t_valist* local, char *name)
 	i = 0;
 	len = len_name(name);
 	if(len == 0)
-		return(len);
+		return(0);
 	while(env != NULL)
 	{ 
 		if(ft_strncmp(name, env->name, len) == 0)
 		{
-			env = env->content;
-			while(env->content[i] != '\0')
-			{
-				while()
-
-
-			}
+			i = ft_strlen(env->value);
+			break;
 		}
 		env = env->next;
 	}
+	return(i);
 }
 
 int count_single(char *str)
@@ -79,7 +75,7 @@ int count_expansion(t_shell *shell, char *str)
 		if(str[i] == "\'")
 			i+= count_single(&str[i]);
 		if(str[i] == "$")
-			i+= search_var(shell->var.env, shell->var.local, &str[i]);
+			i+= search_count_var(shell->var.env, shell->var.local, &str[i]);
 		if(str[i] != '\0')
 			i++;
 	}
