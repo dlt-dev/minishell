@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:11:06 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/16 17:06:26 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/16 23:49:14 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,21 @@ int	length_name(char *name)
 		i++;
 	}
 	return (i);
+}
+
+int len_number (int nb)
+{
+	int i;
+
+	i = 0;
+	if(nb < 0)
+		return(ERROR);
+	if(nb == 0)
+		return(1);
+	while(nb > 0)
+	{
+		nb = nb/10;
+		i++;
+	}
+	return(i);
 }

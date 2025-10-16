@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:15:26 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/16 17:33:19 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/17 00:38:58 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	lenght_var(t_valist *env, t_valist *local, char *str, int *i)
 	return (count);
 }
 
-int	lenght_single(char *str, int *i)
+int	length_single(char *str, int *i)
 {
 	int	j;
 
@@ -58,6 +58,11 @@ int	lenght_single(char *str, int *i)
 	{
 		j++;
 		(*i)++;
+	}
+	if(str[j] == '\'')
+	{
+		(*i)++;
+		j++;		
 	}
 	return (j);
 }
@@ -72,13 +77,17 @@ int	count_expansion(t_shell *shell, char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] == '\'')
-			count += lenght_single(&str[i], &i);
+			count += length_single(&str[i], &i);
 		else if (str[i] == '$')
 		{
 			i++;
 			if(str[i] == '?')
-				count += 
-			count += lenght_var(shell->var.env, shell->var.local, &str[i], &i);
+			{
+				count += len_number(shell->exit_status);
+				i++;
+			}
+			else
+			count += length_var(shell->var.env, shell->var.local, &str[i], &i);
 		}
 		else
 		{

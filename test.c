@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/16 17:06:26 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/16 23:50:40 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,44 +18,26 @@
 // #define YELL_PS "\033[33;1m"
 // #define BLUE_PS "\033[34;1m"
 
-// void lst_del_one(t_list *node)
-// {
-// 	if(node == NULL)
-// 		return;
-// 	if(node->content != NULL)
-// 		free(node->content);
-// 	free(node);
-// } 
-
-\
-int length_name(char *name)
-{ 
+int len_number (int nb)
+{
 	int i;
 
 	i = 0;
-	if((name[0] < 'A' || name[0] > 'Z') && 
-		(name[0] < 'a' || name[0] > 'z') && (name[0] != '_'))
-			return(0);
-	while(name[i] != '\0')
+	if(nb < 0)
+		return(ERROR);
+	if(nb == 0)
+		return(1);
+	while(nb > 0)
 	{
-		if((name[i] < '0' || name[i] > '9') &&
-		(name[i] < 'A' || name[i] > 'Z') && 
-		(name[i] < 'a' || name[i] > 'z') && (name[i] != '_'))
-			break;
+		nb = nb/10;
 		i++;
-	} 
+	}
 	return(i);
 }
 
 int main(int argc, char **argv)
 { 
-	(void)argc;
-	printf("%d\n", length_name(argv[1]));
-
-
-
-
-	
+	printf("%d", len_number(125));
 }
 
 // void change (t_list *lst)

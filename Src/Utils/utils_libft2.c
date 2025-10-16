@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 13:47:28 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/16 17:34:14 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/16 23:50:58 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,4 @@ int is_str(char c, char *sep)
 void write_str(char *str)
 {
 	write(1, str, ft_strlen(str));
-}
-
-
-char * itoa(int nb)
-{ 
-
-
-
-	
 }
