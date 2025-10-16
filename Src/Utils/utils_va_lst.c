@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 19:10:04 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/16 00:26:02 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:01:25 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ t_valist *var_new(char *name, char *value)
 		return (NULL);
 	node->name = name;
 	node->value = value;
+	node->len_name = ft_strlen(node->name);
 	node->next = NULL;
 	return (node);
 }
 
-t_valist *var_last(t_valist *var)
+static t_valist *var_last(t_valist *var)
 { 
 	if(var == NULL)
 		return(NULL);
@@ -72,24 +73,5 @@ void ft_free_var(t_valist **var)
 		free((*var)->value);
 		free(*var);
 		*var = tmp;
-	}
-}
-
-void print_var_lst(t_valist *var)
-{ 
-	if(var == NULL)
-		return;
-	while(var != NULL)
-	{
-		if(var->name != NULL && var->value != NULL)
-		{
-			printf("NODE\n");
-			printf("VAR NAME: %s\n", var->name);
-			printf("VAR VALUE: %s\n\n", var->value);
-		}
-		else
-			write_str("(null)\n\n");
-			
-		var = var->next;
 	}
 }

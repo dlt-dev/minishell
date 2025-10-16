@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/16 00:22:07 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:12:55 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_valist
 {
 	char *name;
 	char *value;
+	int len_name;
 	struct s_valist *next;
 }t_valist;
 
@@ -76,6 +77,7 @@ typedef struct s_shell
 	t_list *lst;
 	char *rd_line;
 	t_var var;
+	int exit_status;
 }t_shell;
 
 #endif

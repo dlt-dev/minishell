@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/15 18:03:35 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:06:26 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 // } 
 
 \
-int len_name(char *name)
+int length_name(char *name)
 { 
 	int i;
 
@@ -50,7 +50,7 @@ int len_name(char *name)
 int main(int argc, char **argv)
 { 
 	(void)argc;
-	printf("%d\n", len_name(argv[1]));
+	printf("%d\n", length_name(argv[1]));
 
 
 

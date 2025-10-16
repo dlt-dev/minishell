@@ -25,3 +25,47 @@
  * que tu ne penses pas utile a l'heure actuelle mais que tu veux conserver, 
  * si tu penses qu'elles pourront servir plus tard.
  */
+
+
+
+
+
+ // void delone_relink_chain(t_list **lst, t_list *node)
+// {
+// 	t_list *tmp1;
+// 	t_list *tmp2;
+	
+// 	tmp1 = *lst;
+// 	tmp2 = *lst; 
+// 	while(tmp1 != node && tmp1 != NULL)
+// 	{
+// 		tmp2 = tmp1;
+// 		tmp1 = tmp1->next;
+// 	}
+// 	if(tmp1 == NULL)
+// 		return;
+// 	else if(tmp1 == tmp2)
+// 	{ 
+// 		if(tmp1->next == NULL)
+// 		{ 
+// 			lst_del_one(tmp1);
+// 			*lst = NULL;
+// 		}
+// 		else
+// 		*lst = tmp1->next;
+// 		lst_del_one(tmp1);
+// 	}
+// 	else
+// 	{ 
+// 		if(tmp1->next == NULL)
+// 		{ 
+// 			lst_del_one(tmp1);
+// 			tmp2->next = NULL;
+// 		}
+// 		else
+// 		{ 
+// 			tmp2->next = tmp1->next;	
+// 			lst_del_one(tmp1);	
+// 		}
+// 	}
+// }

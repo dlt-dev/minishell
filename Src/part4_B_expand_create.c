@@ -1,41 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_libft2.c                                     :+:      :+:    :+:   */
+/*   part4_B_expand_create.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/11 13:47:28 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/16 17:34:14 by aoesterl         ###   ########.fr       */
+/*   Created: 2025/10/16 13:25:16 by aoesterl          #+#    #+#             */
+/*   Updated: 2025/10/16 17:32:31 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int is_str(char c, char *sep)
-{ 
-	int i;
-	
-	i = 0;
-	while(sep[i] != '\0') 
-	{ 
-		if(c == sep[i])
-			return(IS);
-		i++; 
-	}
-	return(IS_NOT);
-}
 
-void write_str(char *str)
+
+
+
+
+
+
+
+
+int	expand_param(t_shell *shell, t_list *lst)
 {
-	write(1, str, ft_strlen(str));
-}
-
-
-char * itoa(int nb)
-{ 
-
-
-
-	
+	int i;
+	if (lst == NULL)
+		return (ERROR);
+	while (lst != NULL)
+	{
+		if (lst->flag.dollar == DOLLAR)
+		{
+			i = count_expansion(shell, lst->content);
+			// printf("node :\n%s\nsize du la chaine finale %d\n", lst->content,
+			// 	i);
+			// printf("taille de %s: %lu\n", getenv("USER"),
+			// 	strlen(getenv("USER")));
+			create_expansion(); 
+		}
+		lst = lst->next;
+	}
+	return (0);
 }

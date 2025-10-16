@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/16 00:11:48 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:06:26 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ int lexing(char *str, t_list **lst);
 void put_flags (t_list *lst);
 
 //Part4: Expansion
-int len_name(char *name);
+int length_name(char *name);
 int expand_param(t_shell *shell, t_list *lst);
+
 
 #endif
 

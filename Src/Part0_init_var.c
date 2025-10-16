@@ -6,30 +6,11 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 00:00:39 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/16 00:28:18 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/16 17:06:26 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int len_name(char *name)
-{ 
-	int i;
-
-	i = 0;
-	if((name[0] < 'A' || name[0] > 'Z') && 
-		(name[0] < 'a' || name[0] > 'z') && (name[0] != '_'))
-			return(0);
-	while(name[i] != '\0')
-	{
-		if((name[i] < '0' || name[i] > '9') &&
-		(name[i] < 'A' || name[i] > 'Z') && 
-		(name[i] < 'a' || name[i] > 'z') && (name[i] != '_'))
-			break;
-		i++;
-	} 
-	return(i);
-}
 
 void bzero_shell(t_shell *shell)
 { 
@@ -40,21 +21,18 @@ void bzero_shell(t_shell *shell)
 }
 
 int init_env_lst(t_valist **env, char *envp)
-{ 
-	int i;
-	int size_name;
-    int size_value;
+{
+	int len_name;
+    int len_value;
 	char *name;
 	char *value;
 	
-	size_name = len_name(envp);
-    name = ft_strndup(envp, size_name);
-	i = size_name;
-    i++;
+	len_name = length_name(envp);
+    name = ft_strndup(envp, len_name);
 	if(name == NULL)
 		return(ERROR);
-	size_value = ft_strlen(envp) - i; 
-	value = ft_strndup(&envp[i], size_value);
+	len_value = ft_strlen(envp) - (len_name + 1); 
+	value = ft_strndup(&envp[len_name + 1], len_value);
 	if(value == NULL)
 		return(free(name), ERROR);
 	if(var_in_lst(env, name, value) == ERROR)

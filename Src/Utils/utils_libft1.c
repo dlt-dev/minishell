@@ -6,22 +6,11 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 13:51:58 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/11 13:48:14 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/16 16:30:22 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-size_t	ft_strlen(char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-//GOODJOB
 
 char	*ft_strdup(char *s)
 {

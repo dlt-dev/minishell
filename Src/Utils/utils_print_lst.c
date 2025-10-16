@@ -1,0 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_print_lst.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/16 16:26:50 by aoesterl          #+#    #+#             */
+/*   Updated: 2025/10/16 16:27:58 by aoesterl         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+void print_var_lst(t_valist *var)
+{ 
+	if(var == NULL)
+		return;
+	while(var != NULL)
+	{
+		if(var->name != NULL && var->value != NULL)
+		{
+			printf("NODE\n");
+			printf("VAR NAME: %s\n", var->name);
+			printf("VAR VALUE: %s\n\n", var->value);
+		}
+		else
+			write_str("(null)\n\n");
+			
+		var = var->next;
+	}
+}
+
+static void print_flag_lst(t_list *node)
+{ 
+	if(node == NULL)
+		return;
+	printf("type: %d\n", node->flag.type);
+	printf("quote: %d\n", node->flag.quote);
+	printf("dollar: %d\n", node->flag.dollar);
+	printf("redir: %d\n", node->flag.redir);
+	printf("pipe: %d\n", node->flag.pipe);
+	printf("affec_var: %d\n", node->flag.affec_var);
+	printf("error: %d\n\n", node->flag.error);
+}
+
+
+void print_str_lst(t_list *lst)
+{ 
+	if(lst == NULL)
+		return;
+	while(lst != NULL)
+	{
+		if(lst->content != NULL)
+		{
+			printf("NODE:\n%s\n", lst->content);
+			print_flag_lst(lst);
+		}
+		else
+			write_str("(null)\n\n");
+		lst = lst->next;
+	}
+}
+
