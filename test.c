@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/16 23:50:40 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/17 18:30:18 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,54 +15,74 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-// #define YELL_PS "\033[33;1m"
-// #define BLUE_PS "\033[34;1m"
-
-int len_number (int nb)
-{
-	int i;
-
-	i = 0;
-	if(nb < 0)
-		return(ERROR);
-	if(nb == 0)
-		return(1);
-	while(nb > 0)
-	{
-		nb = nb/10;
-		i++;
-	}
-	return(i);
-}
-
-int main(int argc, char **argv)
+typedef struct sl_buffer
 { 
-	printf("%d", len_number(125));
+	char *buffer;
+	size_t lenght;
+	size_t capacity;
+	struct s_buffer *next;
+}t_buffer;
+
+typedef struct s_ptr_buffer
+{
+	t_buffer *head;
+	t_buffer *tail;
+	size_t capacity;
+	int factor;
+}t_lst_buffer;
+
+void init_chunk_buffer(t_lst_buffer *lst_buffer, size_t capacity, int factor)
+{ 
+	*lst_buffer = (t_lst_buffer){0};
+	lst_buffer->capacity = capacity;
+	lst_buffer->factor = factor;
 }
 
-// void change (t_list *lst)
-// {
-// 	int i;
-// 	t_list *tmp;
+t_buffer *new_buffer(size_t capacity, size_t factor)
+{ 
+	t_buffer *node;
+	node = malloc(sizeof(t_buffer));
+	if(node == NULL)
+		return(NULL);
+	node->buffer = malloc(sizeof(char) * capacity * factor);
+	if(node->buffer == NULL)
+		return(NULL);
+	node->next = NULL;
+	return(node);
+} 
 
-// 	tmp = lst;
-// 	i = 0;
-// 	while(i < 3 && lst != NULL)
-// 	{ 
-// 		tmp = tmp->next;
-// 		i++;
-// 	}
-// 	delone_relink_chain(&lst, tmp);
-// }
 
-// int  main()
-// {
-// 	t_list *lst = NULL;
-// 	fill_in_lst(&lst, ft_strdup("bonjour"), 0);
-// 	fill_in_lst(&lst, ft_strdup("je"), 0);
-// 	fill_in_lst(&lst, ft_strdup("suis"), 0);
-// 	fill_in_lst(&lst, ft_strdup("arthur"), 0);
-// 	fill_in_lst(&lst, ft_strdup("aurevoir"), 0);
-// 	change(lst);
-// 	print_str_lst(lst);
-// }
+void first_buffer(t_lst_buffer *lst_buffer, size_t *capacity, size_t factor)
+{
+	t_buffer *node;
+	node = new_buffer(capacity, factor);
+	if(node == NULL)
+		return(NULL);
+	node->lenght = 0;
+	node->capacity = (*capacity) * factor;
+	lst_buffer->head = node;
+	lst_buffer->tail = node;
+	(*capacity) *= factor;
+}
+
+void bfufer_ 
+
+int main()
+{
+	t_lst_buffer lst_buffer;
+	init_chunk_buffer(&lst_buffer, 10, 2);
+	first_buffer(&lst_buffer, lst_buffer.capacity, lst_buffer.factor);
+
+
+
+
+	
+	char *str1 = "bonjour je mappelle michel aehaejwajkewaehaehekja"
+	"dawwakdakjd ddawdawjkldadlkadhj "
+	"dawdawdjadlklj daw dlkawjdalk dajkl dawdawjkldalwdalkjddlk dlda"
+	" jldadj lkjdwladjawlkdj daw dakldalk dj dlkawjdalk 	dawdkadlkadaldja"
+	" dlawjdawldjalkd jdjaw dladjlkdjawlkjdlka";
+	char *str2;
+	
+	
+}
