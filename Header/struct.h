@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/16 17:12:55 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/20 01:21:39 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,28 @@ enum token_type
 	SINGLE,
 	DOUBLE,
 };
+
+typedef struct s_buffer
+{ 
+	char *buffer;
+	size_t length;
+	size_t capacity;
+	struct s_buffer *next;
+}t_buffer;
+
+typedef struct s_ptr_buffer
+{
+	t_buffer *head;
+	t_buffer *tail;
+	size_t capacity;
+	size_t total_len;
+	int factor;
+}t_lst_buffer;
+
+/**
+ * @brief @param buffer_et_lst_buffer sont des structures de utils_chunk_buffer.
+ * Ce sont tous les éléments pour faire un malloc sans avoir besoin de compter.
+ */
 
 typedef struct s_flag
 { 
@@ -45,6 +67,10 @@ typedef struct s_list
 	struct s_list *next;
 }t_list;
 
+/**
+ * @brief @param t_flag, permet de poser tous les flags pour savoir ce qu'il y a
+ * dans chaque node de notre liste de tokens @param t_list.
+ */
 
 typedef struct s_prompt
 { 
@@ -71,6 +97,13 @@ typedef struct s_var
 	t_valist *local;
 }t_var;
 
+/**
+ * @brief @param t_var contient 2 listes: Une liste des variables d'envirronements
+ * et une liste des variables locales au shell. @param t_valist c'est la structure
+ * de chacune des listes de variable: le nom, la valeur et la longueur du nom de
+ * la variable.
+ */
+ 
 typedef struct s_shell
 {
 	t_prompt invite;
@@ -79,5 +112,13 @@ typedef struct s_shell
 	t_var var;
 	int exit_status;
 }t_shell;
+
+/**
+ * @brief @param t_shell contient @param t_prompt @param rd_line (ce qui est tapé)
+ * @param t_var (les va_env et local), @param lst (listes des tokens) et
+ * @param exit_status (#?), pour pouvoir tout transporter quand on veut
+ * 
+ */
+
 
 #endif
