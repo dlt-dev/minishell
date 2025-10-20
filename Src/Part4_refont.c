@@ -6,12 +6,37 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 12:06:17 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/20 17:08:18 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/20 22:55:44 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "minishell.h"
+
+void node_exchange(t_list **lst, t_list *curr_node, t_list *prev_node, t_list *new_node)
+{
+    
+    if(curr_node == NULL || prev_node == NULL || *lst == NULL)
+        return;
+    if(*lst == curr_node)
+    {
+            if(curr_node->next != NULL)
+                new_node->next = curr_node->next;
+            lst_del_one(curr_node);
+            *lst = new_node;
+    }
+    else if(curr_node->next == NULL)
+    {
+        prev_node->next = new_node;
+        lst_del_one(curr_node);
+    }
+    else 
+    {
+        prev_node->next = new_node;
+        new_node->next = curr_node->next;
+        lst_del_one(curr_node);
+    }
+}
 
 int count_var(t_valist *var, t_cb* lst_buffer, char *str, int len_name)
 {
@@ -23,12 +48,11 @@ int count_var(t_valist *var, t_cb* lst_buffer, char *str, int len_name)
         {
 			if(len_name == var->len_name)
 			{
-				if(cb_append_str(lst_buffer, str) == ERROR)
+				if(cb_append_str(lst_buffer, var->value) == ERROR)
                 {
                     free_chunk_buffer(lst_buffer);
                     return(ERROR);
                 }
-                    
 				return(IS);
 			}
         }
@@ -49,7 +73,7 @@ int	length_var(t_shell *shell, t_cb* lst_buffer, char *str)
 	i += len_name;
 	if (len_name == 0)
 	{ 
-		if(cb_append_char(lst_buffer, "$") == ERROR);
+		if(cb_append_char(lst_buffer, '$') == ERROR)
         {
             free_chunk_buffer(lst_buffer);
             free_exit(shell, GEN_ERRNO, NULL);
@@ -58,9 +82,11 @@ int	length_var(t_shell *shell, t_cb* lst_buffer, char *str)
 	}
     check_err = count_var(shell->var.env, lst_buffer, str, len_name);
     if(check_err == ERROR)
+    {
         free_exit(shell, GEN_ERRNO, NULL);
-	else if(check_err == IS_NOT);
-		count_var(shell->var.local, lst_buffer, str, len_name);
+    }
+	if(check_err == IS_NOT)
+        count_var(shell->var.local, lst_buffer, str, len_name);
 	return (i);
 }
 
@@ -93,39 +119,29 @@ int handle_dollar(t_shell* shell, t_cb* lst_buffer, char *str)
 		i += length_var(shell, lst_buffer, &str[i]);
 	return(i);
 }
-/**
- * @brief @param handle_dollar on compte a partir du $ pour savoir quel
- * taille fera l'expansion.
- * si juste apres le $ on a ? : il faut compter la taille de l'exit_code
- * sinon il s'agira d'une expansion de variable: lenght_var
- * @param i: dans le meme temps, on envoie i pour savoir combien de caractere
- * on doit skip dans la chaine analyse.
- * @return int : lenght de l'expansion
- */
-
 
 int handle_double_quotes(t_shell *shell, t_cb* lst_buffer, char *str)
 { 
 	int i;
 
     i = 0;
-    if(cb_append_char(lst_buffer, str[i]) == ERROR);
-        return(ERROR);
-	i++;
+    if(cb_append_char(lst_buffer, str[i]) == ERROR)
+            return(ERROR);
+    i++;
 	while(str[i] != '\0' && str[i] != '\"')
 	{
 		if(str[i] == '$')
 			i += handle_dollar(shell, lst_buffer, &str[i]);
 		else
 		{ 
-			if(cb_append_char(lst_buffer, str[i]) == ERROR);
+			if(cb_append_char(lst_buffer, str[i]) == ERROR)
                 return(ERROR);
 			i++;
 		}
 	}
 	if(str[i] == '\"')
 	{
-		if(cb_append_char(lst_buffer, str[i]) == ERROR);
+		if(cb_append_char(lst_buffer, str[i]) == ERROR)
             return(ERROR);
 		i++;
 	}
@@ -141,13 +157,13 @@ int	handle_single_quotes(t_cb *lst_buffer, char *str)
 	i++;
 	while (str[i] != '\0' && str[i] != '\'')
 	{
-		if(cb_append_char(lst_buffer, str[i]) == ERROR);
+		if(cb_append_char(lst_buffer, str[i]) == ERROR)
             return(ERROR);
 		i++;
 	}
 	if(str[i] == '\'')
 	{
-        if(cb_append_char(lst_buffer, str[i]));
+        if(cb_append_char(lst_buffer, str[i]))
             return(ERROR);
 		i++;	
 	}
@@ -170,25 +186,22 @@ int	expand_in_buffer(t_shell *shell, t_cb *lst_buffer, char *str)
 		else if (str[i] == '$')
 			check_err += handle_dollar(shell, lst_buffer, &str[i]);
 		else
-			i++;
+        {
+            if(cb_append_char(lst_buffer, str[i]) == ERROR)
+                return(ERROR);
+            i++;
+        }
         if(check_err == ERROR)
             return(ERROR);
         i += check_err;
 	}
 	return (0);
 }
-/**
- * @brief @param count_expand count le nombre de caractere que contiendra 
- * la chaine finale apres l'expansion. 
- * @param i fait defiler la chaine actuelle 
- * @param new_str variable retourner pour savoir la taille de la chaine finale
- * @return int 
- */
 
-
-int create_expand_str(t_shell *shell, t_cb *lst_buffer, char *str)
+char *create_expand_str(t_shell *shell, t_cb *lst_buffer, char *str)
 {
     char *new_str;
+    
     if(init_chunk_buffer(lst_buffer, 10, 2) == ERROR)
         return(NULL);
     if(expand_in_buffer(shell, lst_buffer, str) == ERROR)
@@ -200,71 +213,42 @@ int create_expand_str(t_shell *shell, t_cb *lst_buffer, char *str)
 }
 
 
-// int expand_node(t_shell *shell, t_list **lst, char *str)
-// {
-//     char *new_str;
-    
-//     new_str = create_expand_str(shell, &shell->lst_buffer, str);
-//     if(new_str == NULL)
-//         return(ERROR);
-//     free_chunk_buffer(&shell->lst_buffer);
-//     node_exchange(lst, tmp1, tmp2, new_str);
-// }
- 
-int	expand_param(t_shell *shell, t_list **lst)
+t_list *expand_node(t_shell *shell, t_list *curr_node)
 {
     char *new_str;
+    t_list *new_node;
+    
+    new_str = create_expand_str(shell, &shell->lst_buffer, curr_node->content);
+    if(new_str == NULL)
+        return(NULL);
+    new_node = ft_lstnew(new_str);
+    if(new_node == NULL)
+            return(free(new_str), NULL);
+    return(new_node);
+}
+ 
+int	expand_param(t_shell *shell, t_list *lst)
+{
+    t_list *tmp;
     t_list *curr_node;
     t_list *prev_node;
-    t_list *node;
 
-    new_str = NULL;
-    curr_node = *lst;
-    prev_node = *lst;
-	if (*lst == NULL)
-		return (ERROR);
+    curr_node = lst;
+    prev_node = lst;
+	if (lst == NULL)
+		return (0);
 	while (curr_node != NULL)
 	{
 		if (curr_node->flag.dollar == DOLLAR)
-		{
-            new_str = create_expand_str(shell, &shell->lst_buffer, curr_node->content);
-            if(new_str == NULL)
+        {
+            tmp = expand_node(shell, curr_node);
+            if(tmp == NULL)
                 return(ERROR);
-            free_chunk_buffer(&shell->lst_buffer);
-            node = ft_lstnew(new_str);
-            if(node == NULL)
-                return(free(new_str), ERROR);
-            node_exchange(lst, curr_node, prev_node, node);
-		}
+            node_exchange(&shell->lst, curr_node, prev_node, tmp);
+            curr_node = tmp;
+        }
 		prev_node = curr_node;
         curr_node = curr_node->next;
 	}
 	return (0);
-}
-
-
-void node_exchange(t_list **lst, t_list *curr_node, t_list *prev_node, t_list *new_node)
-{
-    t_list *tmp;
-    
-    if(curr_node == NULL || prev_node == NULL || *lst == NULL)
-        return;
-    if(*lst == curr_node)
-    {
-            if(curr_node->next != NULL)
-                new_node = curr_node->next;
-            lst_del_one(curr_node);
-            *lst = new_node;
-    }
-    else if(curr_node->next == NULL)
-    {
-        prev_node->next = new_node;
-        lst_del_one(curr_node);
-    }
-    else 
-    {
-        prev_node->next = new_node;
-        new_node->next = curr_node->next;
-        lst_del_one(curr_node);
-    }
 }

@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 11:50:33 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/20 13:00:16 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/20 20:13:08 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "struct.h"
 
 //create_buffer
-int init_chunk_buffer(t_cb *lst_buffer, size_t capacity, int factor);
+int init_chunk_buffer(t_cb *lst_buffer, size_t capacity, size_t factor);
 t_buffer *new_buffer(size_t capacity);
 int add_back_buffer(t_cb *lst_buffer);
 void free_chunk_buffer(t_cb *lst_buffer);

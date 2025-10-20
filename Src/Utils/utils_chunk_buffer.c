@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 00:57:54 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/20 14:38:29 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/20 20:14:57 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void free_chunk_buffer(t_cb *lst_buffer)
 {
 	t_buffer *tmp;
-	if(lst_buffer->head == NULL || lst_buffer->tail == NULL)	
+	if(lst_buffer->head == NULL && lst_buffer->tail == NULL)	
 		return;
 	tmp = lst_buffer->head;
 	while(lst_buffer->head != NULL)
@@ -63,7 +63,7 @@ int add_back_buffer(t_cb *lst_buffer)
 	return(0);
 }
 
-int init_chunk_buffer(t_cb *lst_buffer, size_t capacity, int factor)
+int init_chunk_buffer(t_cb *lst_buffer, size_t capacity, size_t factor)
 {
 	t_buffer *node;
 	
@@ -72,7 +72,7 @@ int init_chunk_buffer(t_cb *lst_buffer, size_t capacity, int factor)
 		return(ERROR);
 	lst_buffer->capacity = capacity * factor;
 	lst_buffer->factor = factor;
-	node = new_buffer(capacity);
+	node = new_buffer(lst_buffer->capacity);
 	if(node == NULL)
 		return(ERROR);
 	lst_buffer->head = node;

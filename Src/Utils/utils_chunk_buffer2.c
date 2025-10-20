@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 01:00:24 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/20 12:10:31 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/20 21:24:44 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int cb_loop_append_str(t_cb* lst_buffer, char *str)
 {
-	size_t *i;
 	size_t j;
 	t_buffer *curr;
 	
@@ -22,21 +21,18 @@ static int cb_loop_append_str(t_cb* lst_buffer, char *str)
 	while(str[j] != '\0')
 	{
 		curr = lst_buffer->tail;
-		i = &curr->length;
 		while(curr->length < (curr->capacity - 1) && str[j] != '\0')
 		{
-			curr->buffer[*i] = str[j];
-			(*i)++;
+			curr->buffer[curr->length] = str[j];
+			curr->length++;
 			j++;
 			lst_buffer->total_len++;
 		}
-		if(curr->length == (curr->capacity - 1))
-			curr->buffer[*i] = '\0';
+		curr->buffer[curr->length] = '\0';
 		if(str[j] != '\0')
 			if(add_back_buffer(lst_buffer) == ERROR)
 				return(ERROR);
 	}
-	curr->buffer[*i] = '\0';
 	return(0);
 }
 
@@ -91,7 +87,7 @@ char *fusion_all_chunk(t_cb *lst_buffer)
 	while(tmp != NULL)
 	{
 		j = 0;
-		while(j < tmp->length)
+		while(tmp->buffer[j] != '\0')
 		{
 			p[i] = tmp->buffer[j];
 			i++;

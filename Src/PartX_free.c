@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:44:28 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/20 14:46:32 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/20 22:11:57 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ void ft_free_lst(t_list **lst)
 	while(*lst != NULL)
 	{
 		tmp = (*lst)->next;
-		free((*lst)->content);
+		if((*lst)->content != NULL)
+		{
+			free((*lst)->content);
+			(*lst)->content = NULL;
+		}
 		free(*lst);
 		*lst = tmp; 
 	}
