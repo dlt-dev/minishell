@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:44:28 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/16 00:27:34 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/20 14:46:32 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void free_all(t_shell *shell)
 	ft_free_lst(&shell->lst);
 	ft_free_str(&shell->invite.prompt);
 	ft_free_str(&shell->rd_line);
+	free_chunk_buffer(&shell->lst_buffer);
 }
 
 void free_exit(t_shell *shell, int code, char *message)

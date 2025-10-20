@@ -12,9 +12,9 @@ $(SRC_DIR)/Part2_lexing.c $(SRC_DIR)/Part3_put_flag.c $(SRC_DIR)/Part4_A_expand_
 $(SRC_DIR)/part4_B_expand_create.c \
 $(SRC_DIR)/main.c $(SRC_DIR)/PartX_free.c
 
-SRC_UTILS = $(UTILS_DIR)/utils_lenght.c $(UTILS_DIR)/utils_libft1.c \
-$(UTILS_DIR)/utils_libft2.c  $(UTILS_DIR)/utils_lst.c $(UTILS_DIR)/utils_va_lst.c \
-$(UTILS_DIR)/utils_print_lst.c
+SRC_UTILS = $(UTILS_DIR)/utils_chunk_buffer.c $(UTILS_DIR)/utils_chunk_buffer2.c \
+$(UTILS_DIR)/utils_lenght.c $(UTILS_DIR)/utils_libft1.c $(UTILS_DIR)/utils_libft2.c \
+$(UTILS_DIR)/utils_lst.c $(UTILS_DIR)/utils_va_lst.c $(UTILS_DIR)/utils_print_lst.c
 
 #Objet de compilation
 OBJ = $(SRC_UTILS:$(UTILS_DIR)/%.c=$(OBJ_DIR)/%.o) \

@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/20 01:21:39 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/20 14:40:31 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_ptr_buffer
 	size_t capacity;
 	size_t total_len;
 	int factor;
-}t_lst_buffer;
+}t_cb;
 
 /**
  * @brief @param buffer_et_lst_buffer sont des structures de utils_chunk_buffer.
@@ -66,11 +66,6 @@ typedef struct s_list
 	struct s_list *previous;
 	struct s_list *next;
 }t_list;
-
-/**
- * @brief @param t_flag, permet de poser tous les flags pour savoir ce qu'il y a
- * dans chaque node de notre liste de tokens @param t_list.
- */
 
 typedef struct s_prompt
 { 
@@ -107,10 +102,12 @@ typedef struct s_var
 typedef struct s_shell
 {
 	t_prompt invite;
-	t_list *lst;
 	char *rd_line;
+	t_list *lst;
 	t_var var;
+	t_cb lst_buffer;
 	int exit_status;
+	
 }t_shell;
 
 /**

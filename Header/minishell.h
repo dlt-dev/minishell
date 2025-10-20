@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/16 17:06:26 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/20 12:58:13 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include "macro.h"
 #include "struct.h"
 #include "utils.h"
+#include "chunk_buffer.h"
 
 //Part0: init_variable
 int init_variable(t_shell *shell, int argc, char **argv, char **envp);
@@ -38,7 +39,7 @@ void put_flags (t_list *lst);
 
 //Part4: Expansion
 int length_name(char *name);
-int expand_param(t_shell *shell, t_list *lst);
+// int expand_param(t_shell *shell, t_list *lst);
 
 
 #endif

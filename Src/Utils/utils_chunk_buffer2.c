@@ -6,13 +6,13 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 01:00:24 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/20 01:03:41 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/20 12:10:31 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int cb_loop_append_str(t_lst_buffer* lst_buffer, char *str)
+static int cb_loop_append_str(t_cb* lst_buffer, char *str)
 {
 	size_t *i;
 	size_t j;
@@ -40,7 +40,7 @@ static int cb_loop_append_str(t_lst_buffer* lst_buffer, char *str)
 	return(0);
 }
 
-int cb_append_str(t_lst_buffer *lst_buffer, char *str)
+int cb_append_str(t_cb *lst_buffer, char *str)
 {
 	if(lst_buffer->tail == NULL || lst_buffer->head == NULL)
 		return(ERROR);
@@ -54,7 +54,7 @@ int cb_append_str(t_lst_buffer *lst_buffer, char *str)
 	return(0);	
 }
 
-int cb_append_char(t_lst_buffer* lst_buffer, char c)
+int cb_append_char(t_cb* lst_buffer, char c)
 {
 	size_t i;
 	t_buffer *curr;
@@ -76,7 +76,7 @@ int cb_append_char(t_lst_buffer* lst_buffer, char c)
 	return(0);
 }
 
-char *fusion_all_chunk(t_lst_buffer *lst_buffer)
+char *fusion_all_chunk(t_cb *lst_buffer)
 {
 	char *p;
 	t_buffer *tmp;
@@ -104,7 +104,7 @@ char *fusion_all_chunk(t_lst_buffer *lst_buffer)
 	return(p);
 }
 
-void printf_buffer (t_lst_buffer lst_buffer)
+void printf_buffer (t_cb lst_buffer)
 {
 	while(lst_buffer.head != NULL)
 	{

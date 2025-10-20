@@ -6,13 +6,13 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 00:57:54 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/20 01:06:20 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/20 14:38:29 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void free_chunk_buffer(t_lst_buffer *lst_buffer)
+void free_chunk_buffer(t_cb *lst_buffer)
 {
 	t_buffer *tmp;
 	if(lst_buffer->head == NULL || lst_buffer->tail == NULL)	
@@ -48,7 +48,7 @@ t_buffer *new_buffer(size_t capacity)
 	return(node);
 } 
 
-int add_back_buffer(t_lst_buffer *lst_buffer)
+int add_back_buffer(t_cb *lst_buffer)
 {
 	t_buffer *node;
 	
@@ -63,13 +63,13 @@ int add_back_buffer(t_lst_buffer *lst_buffer)
 	return(0);
 }
 
-int init_chunk_buffer(t_lst_buffer *lst_buffer, size_t capacity, int factor)
+int init_chunk_buffer(t_cb *lst_buffer, size_t capacity, int factor)
 {
 	t_buffer *node;
 	
-	if(capacity == 0 || factor == 0)
+	*lst_buffer = (t_cb){0};
+	if(capacity <= 0 || factor <= 0)
 		return(ERROR);
-	*lst_buffer = (t_lst_buffer){0};
 	lst_buffer->capacity = capacity * factor;
 	lst_buffer->factor = factor;
 	node = new_buffer(capacity);
@@ -79,7 +79,13 @@ int init_chunk_buffer(t_lst_buffer *lst_buffer, size_t capacity, int factor)
 	lst_buffer->tail = node;
 	return(0);
 }
-
+/**
+ * @brief 
+ * @param init_chunk: initialise une liste de buffer et créé le premier
+ * @param new_buffer creer un node avec un buffer de taille "capacity"
+ * @param add_back_buffer ajoute le buffer a la fin
+ * 
+ */
 
 // int main()
 // {
@@ -98,7 +104,7 @@ int init_chunk_buffer(t_lst_buffer *lst_buffer, size_t capacity, int factor)
 // 	"Photos : prenez ou importez des photos pour obtenir des tra";
 // 	char *str2;
 	
-// 	t_lst_buffer lst_buffer;
+// 	t_cb lst_buffer;
 // 	init_chunk_buffer(&lst_buffer, 200, 2);
 // 	cb_append_str(&lst_buffer, str1);
 // 	cb_append_str(&lst_buffer, fi);

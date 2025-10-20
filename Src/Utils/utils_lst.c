@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 13:52:12 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/16 16:29:06 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/20 16:03:25 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_list	*ft_lstnew(void *content)
 	node = (t_list *)malloc(sizeof(t_list));
 	if (node == NULL)
 		return (NULL);
+	node->flag = (t_flag){0};
 	node->content = content;
 	node->next = NULL;
 	return (node);
@@ -57,7 +58,6 @@ int fill_in_lst(t_list **lst, char *content, int type)
 { 
 	t_list *node;
 	node = ft_lstnew(content);
-	node->flag = (t_flag){0};
 	node->flag.type = type;
 	if(node == NULL)
 		return(ERROR);
