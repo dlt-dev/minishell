@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 00:57:54 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/20 20:14:57 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/21 00:27:19 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void free_chunk_buffer(t_cb *lst_buffer)
 {
 	t_buffer *tmp;
+	
 	if(lst_buffer->head == NULL && lst_buffer->tail == NULL)	
 		return;
 	tmp = lst_buffer->head;
@@ -40,6 +41,7 @@ t_buffer *new_buffer(size_t capacity)
 	if(node == NULL)
 		return(NULL);
 	node->buffer = malloc(sizeof(char) * capacity);
+	memset(node->buffer, 0, capacity);
 	if(node->buffer == NULL)
 		return(free(node), NULL);
 	node->length = 0;
@@ -48,27 +50,12 @@ t_buffer *new_buffer(size_t capacity)
 	return(node);
 } 
 
-int add_back_buffer(t_cb *lst_buffer)
-{
-	t_buffer *node;
-	
-	if(lst_buffer->head == NULL || lst_buffer->tail == NULL)
-		return(ERROR);
-	lst_buffer->capacity *= lst_buffer->factor;
-	node = new_buffer(lst_buffer->capacity);
-	if(node == NULL)
-		return(ERROR);
-	lst_buffer->tail->next = node;
-	lst_buffer->tail = node;
-	return(0);
-}
-
 int init_chunk_buffer(t_cb *lst_buffer, size_t capacity, size_t factor)
 {
 	t_buffer *node;
 	
 	*lst_buffer = (t_cb){0};
-	if(capacity <= 0 || factor <= 0)
+	if(capacity <= 0 || factor <= 0 || lst_buffer == NULL)
 		return(ERROR);
 	lst_buffer->capacity = capacity * factor;
 	lst_buffer->factor = factor;
@@ -83,33 +70,28 @@ int init_chunk_buffer(t_cb *lst_buffer, size_t capacity, size_t factor)
  * @brief 
  * @param init_chunk: initialise une liste de buffer et créé le premier
  * @param new_buffer creer un node avec un buffer de taille "capacity"
- * @param add_back_buffer ajoute le buffer a la fin
- * 
+ * @param add_back_buffer ajoute le buffer a la fin de la liste
  */
 
-// int main()
+// int main(int argc, char **argv)
 // {
-// 		char *str1 = "bonjour je mappelle michel aehaejwajkewaehaehekja"
-// 	"dawwakdakjd ddawdawjkldadlkadhj "
-// 	"dawdawdjadlklj daw dlkawjdalk dajkl dawdawjkldalwdalkjddlk dlda"
-// 	" jldadj lkjdwladjawlkdj daw dakldalk dj dlkawjdalk 	dawdkadlkadaldja"
-// 	" dlawjdawldjalkd jdjaw dladjlkdjawlkjdlka";
-// 	char *fi = "Traduction de texte : traduisez dans 108 langues en saisissant du texte"
-// 	" Appuyez pour traduire : copiez du texte dans une application, puis appuyez sur" 
-// 	 "l'icône Google Traduction pour le traduire (toutes les langues)"
-// 	"Hors connexion : traduisez sans connexion Internet (59 langues)"
-// 	"Traduction instantanée avec l'appareil photo : traduisez instantanément"
-// 	"le texte figurant dans des images en dirigeant" 
-// 	" l'objectif de votre appareil photo vers celui-ci (94 langues)"
-// 	"Photos : prenez ou importez des photos pour obtenir des tra";
 // 	char *str2;
 	
 // 	t_cb lst_buffer;
 // 	init_chunk_buffer(&lst_buffer, 200, 2);
-// 	cb_append_str(&lst_buffer, str1);
-// 	cb_append_str(&lst_buffer, fi);
+// 	cb_append_str(&lst_buffer, argv[1]);
+// 	cb_append_str(&lst_buffer, argv[2]);
+// 	cb_append_str(&lst_buffer, argv[3]);
+// 	cb_append_str(&lst_buffer, argv[4]);
+
+// 	while(lst_buffer.head != NULL)
+// 	{
+// 		printf("%s\n" , lst_buffer.head->buffer);
+// 		lst_buffer.head = lst_buffer.head->next;
+// 	}
 // 	// printf_buffer(lst_buffer);
-// 	str2 = fusion_all_chunk(&lst_buffer);
-// 	printf("%s\n", str2);
-// 	free(str2);
+// 	// str2 = fusion_all_chunk(&lst_buffer);
+	
+// 	// printf("%s\n", str2);
+// 	// free(str2);
 // }

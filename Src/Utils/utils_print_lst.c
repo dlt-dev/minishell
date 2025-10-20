@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:26:50 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/16 16:27:58 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/21 00:26:44 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,3 +62,16 @@ void print_str_lst(t_list *lst)
 	}
 }
 
+void printf_buffer (t_cb lst_buffer)
+{
+	if(lst_buffer.head == NULL || lst_buffer.tail == NULL)
+		write_str("buffer nill");
+	while(lst_buffer.head != NULL)
+	{
+		printf("NODE:\n");
+		printf("str: %s\n",lst_buffer.head->buffer);
+		printf("length: %lu\n",lst_buffer.head->length);
+		printf("capacity: %lu\n\n",lst_buffer.head->capacity);
+		lst_buffer.head = lst_buffer.head->next;
+	}
+}

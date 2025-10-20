@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/20 22:44:20 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/21 00:54:42 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int main(int argc, char **argv, char **envp)
 		if(lexing(shell.rd_line, &shell.lst) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		put_flags(shell.lst);
-		if(expand_param(&shell, shell.lst) == ERROR)
+		if(expand_shell_param(&shell, shell.lst) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		print_str_lst(shell.lst);
 		// print_var_lst(shell.var.env);

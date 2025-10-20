@@ -6,13 +6,13 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/17 12:25:50 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/21 00:58:44 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int replace_by_tilde(t_prompt *invite, int *len_home)
+static int replace_by_tilde(t_prompt *invite, int *len_home)
 {
 	int i;
 	char *home;
@@ -30,7 +30,7 @@ int replace_by_tilde(t_prompt *invite, int *len_home)
 }
 
 
-int len_prompt(t_prompt *invite, int *len_home)
+static int len_prompt(t_prompt *invite, int *len_home)
 { 
 	int i;
 	
@@ -48,7 +48,7 @@ int len_prompt(t_prompt *invite, int *len_home)
 }
 
 
-char *create_prompt(t_prompt *invite)
+static char *create_prompt(t_prompt *invite)
 {
 	char *p;
 	int len_home; 

@@ -6,32 +6,49 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 01:00:24 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/20 21:24:44 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/21 00:27:16 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int add_back_buffer(t_cb *lst_buffer)
+{
+	t_buffer *node;
+	
+	if(lst_buffer->head == NULL || lst_buffer->tail == NULL)
+		return(ERROR);
+	lst_buffer->capacity *= lst_buffer->factor;
+	node = new_buffer(lst_buffer->capacity);
+	if(node == NULL)
+		return(ERROR);
+	lst_buffer->tail->next = node;
+	lst_buffer->tail = node;
+	return(0);
+}
+
 static int cb_loop_append_str(t_cb* lst_buffer, char *str)
 {
-	size_t j;
+	size_t i;
 	t_buffer *curr;
 	
-	j = 0;
-	while(str[j] != '\0')
+	i = 0;
+	while(str[i] != '\0')
 	{
 		curr = lst_buffer->tail;
-		while(curr->length < (curr->capacity - 1) && str[j] != '\0')
+		while(curr->length < (curr->capacity - 1) && str[i] != '\0')
 		{
-			curr->buffer[curr->length] = str[j];
+			curr->buffer[curr->length] = str[i];
 			curr->length++;
-			j++;
+			i++;
 			lst_buffer->total_len++;
 		}
 		curr->buffer[curr->length] = '\0';
-		if(str[j] != '\0')
+		if(str[i] != '\0')
+		{
 			if(add_back_buffer(lst_buffer) == ERROR)
 				return(ERROR);
+		}
 	}
 	return(0);
 }
@@ -52,7 +69,6 @@ int cb_append_str(t_cb *lst_buffer, char *str)
 
 int cb_append_char(t_cb* lst_buffer, char c)
 {
-	size_t i;
 	t_buffer *curr;
 	
 	if(lst_buffer->head == NULL || lst_buffer->tail == NULL)
@@ -63,12 +79,10 @@ int cb_append_char(t_cb* lst_buffer, char c)
 			return(free_chunk_buffer(lst_buffer), ERROR);
 	}
 	curr = lst_buffer->tail;
-	i = curr->length;
-	curr->buffer[i] = c;
-	i++;
-	curr->length = i;
+	curr->buffer[curr->length] = c;
+	curr->length++;
 	lst_buffer->total_len++;
-	curr->buffer[i] = '\0';
+	curr->buffer[curr->length] = '\0';
 	return(0);
 }
 
@@ -98,16 +112,4 @@ char *fusion_all_chunk(t_cb *lst_buffer)
 	p[i] = '\0';
 	free_chunk_buffer(lst_buffer);
 	return(p);
-}
-
-void printf_buffer (t_cb lst_buffer)
-{
-	while(lst_buffer.head != NULL)
-	{
-		printf("NODE:\n");
-		printf("str: %s\n",lst_buffer.head->buffer);
-		printf("length: %lu\n",lst_buffer.head->length);
-		printf("capacity: %lu\n\n",lst_buffer.head->capacity);
-		lst_buffer.head = lst_buffer.head->next;
-	}
 }

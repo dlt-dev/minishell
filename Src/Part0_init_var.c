@@ -6,13 +6,13 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 00:00:39 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/16 17:06:26 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/21 00:58:19 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void bzero_shell(t_shell *shell)
+static void bzero_shell(t_shell *shell)
 { 
 	*shell = (t_shell){0};
 	shell->invite.color_user = YELL_PS;
@@ -20,7 +20,7 @@ void bzero_shell(t_shell *shell)
 	shell->invite.color_reset = RESET;
 }
 
-int init_env_lst(t_valist **env, char *envp)
+static int init_env_lst(t_valist **env, char *envp)
 {
 	int len_name;
     int len_value;

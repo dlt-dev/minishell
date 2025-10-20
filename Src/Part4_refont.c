@@ -6,37 +6,13 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 12:06:17 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/20 22:55:44 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/21 00:43:59 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "minishell.h"
 
-void node_exchange(t_list **lst, t_list *curr_node, t_list *prev_node, t_list *new_node)
-{
-    
-    if(curr_node == NULL || prev_node == NULL || *lst == NULL)
-        return;
-    if(*lst == curr_node)
-    {
-            if(curr_node->next != NULL)
-                new_node->next = curr_node->next;
-            lst_del_one(curr_node);
-            *lst = new_node;
-    }
-    else if(curr_node->next == NULL)
-    {
-        prev_node->next = new_node;
-        lst_del_one(curr_node);
-    }
-    else 
-    {
-        prev_node->next = new_node;
-        new_node->next = curr_node->next;
-        lst_del_one(curr_node);
-    }
-}
 
 int count_var(t_valist *var, t_cb* lst_buffer, char *str, int len_name)
 {
@@ -227,14 +203,14 @@ t_list *expand_node(t_shell *shell, t_list *curr_node)
     return(new_node);
 }
  
-int	expand_param(t_shell *shell, t_list *lst)
+int	expand_shell_param(t_shell *shell, t_list *lst)
 {
     t_list *tmp;
     t_list *curr_node;
     t_list *prev_node;
 
     curr_node = lst;
-    prev_node = lst;
+    prev_node = NULL;
 	if (lst == NULL)
 		return (0);
 	while (curr_node != NULL)
