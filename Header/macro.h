@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:52:31 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/15 16:44:20 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/22 00:03:19 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 #define ERROR -1
 #define IS_NOT 0
 #define IS 1
+#define THERE_IS 1
+#define THERE_IS_NOT 0
 
 #define NORMAL 0
 
