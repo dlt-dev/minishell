@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/21 01:00:43 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:53:33 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,14 @@ int lexing(char *str, t_list **lst);
 void put_flags (t_list *lst);
 
 //Part4: Expansion
-int length_name(char *name);
-int expand_shell_param(t_shell *shell, t_list *lst);
+int	handle_single_quotes(t_cb *lst_buffer, char *str); 
+int handle_double_quotes(t_shell *shell, t_cb* lst_buffer, char *str);
+int handle_dollar(t_shell* shell, t_cb* lst_buffer, char *str);
+int	expand_shell_param(t_shell *shell, t_list *lst);
+
+//PartX_free.c
+void free_all(t_shell *shell);
+void free_exit(t_shell *shell, int code, char *message);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:26:50 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/21 00:26:44 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/21 19:26:40 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void print_var_lst(t_valist *var)
 		{
 			printf("NODE\n");
 			printf("VAR NAME: %s\n", var->name);
+			printf("VAR LENGHT: %d\n", var->len_name);
 			printf("VAR VALUE: %s\n\n", var->value);
 		}
 		else

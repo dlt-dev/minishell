@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/20 22:03:28 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:45:19 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,21 @@
  * 
  */
 
+
+void lst_add_everywhere(t_list* prev_node, t_list* curr_node )
+{ 
+
+
+
+	
+}
+
+
+
+
+
+
+ 
 int main(int argc, char **argv)
 {
 	char *str2;

@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:40:19 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/21 01:00:34 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:55:39 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 #include <stddef.h>
 #include "struct.h"
 
+//Utils_split.c
+
 //Utils_lenght.c
 size_t	ft_strlen(char *str);
 int	length_name(char *name);
 int len_number (int nb);
-
 
 //utils_libft1.c
 char *ft_strdup(char *s);
@@ -53,10 +54,9 @@ void var_addback(t_valist **var, t_valist *new);
 int var_in_lst(t_valist **var, char *name, char *value);
 void ft_free_var(t_valist **var);
 
-//ParX_free.c
+//utils_free.c
 void ft_free_lst(t_list **lst);
 void ft_free_str(char **str);
-void free_all(t_shell *shell);
-void free_exit(t_shell *shell, int code, char *message);
+void	ft_free_split(char ***tab);
 
 #endif

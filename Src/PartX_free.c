@@ -6,40 +6,12 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:44:28 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/20 22:11:57 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:54:39 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_free_lst(t_list **lst)
-{
-	t_list *tmp;
-	
-	if(*lst == NULL)
-		return;
-	tmp = *lst;
-	while(*lst != NULL)
-	{
-		tmp = (*lst)->next;
-		if((*lst)->content != NULL)
-		{
-			free((*lst)->content);
-			(*lst)->content = NULL;
-		}
-		free(*lst);
-		*lst = tmp; 
-	}
-}
-//GOODJOB
-
-void ft_free_str(char **str)
-{
-	if(*str == NULL)
-		return;
-	free(*str);
-	*str = NULL; 
-}
 void free_all(t_shell *shell)
 { 
 	ft_free_lst(&shell->lst);

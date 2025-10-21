@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 23:12:31 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/21 00:59:20 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/21 14:43:12 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void flag_word(t_flag *flag, char *str)
 			flag->quote = QUOTE;
 		if(str[i] ==  '$')
 				flag->dollar = DOLLAR;
+		i++;
 	}
 }
 
@@ -39,6 +40,7 @@ static void flag_meta(t_flag *flag, char *str)
 			flag->redir = REDIR;
 		if(str[i] == '|')
 			flag->pipe = PIPE;
+		i++;
 	}
 }
 
