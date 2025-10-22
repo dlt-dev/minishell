@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/22 01:05:36 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/22 18:42:22 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,8 @@ typedef struct s_list
 {
 	char *content;
 	t_flag flag;
-	struct s_list *previous;
 	struct s_list *next;
-}t_list;
+}t_token;
 
 typedef struct s_prompt
 { 

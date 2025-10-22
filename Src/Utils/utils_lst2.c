@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:15:44 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/20 23:48:38 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/22 18:20:07 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,3 @@ void node_exchange(t_list **lst, t_list *curr_node, t_list *prev_node, t_list *n
     else 
         switch_middle_node(curr_node, prev_node, new_node);
 }
-

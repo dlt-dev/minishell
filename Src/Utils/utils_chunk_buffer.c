@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 00:57:54 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/21 00:27:19 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/22 16:57:20 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int init_chunk_buffer(t_cb *lst_buffer, size_t capacity, size_t factor)
  * @param add_back_buffer ajoute le buffer a la fin de la liste
  */
 
+ 
 // int main(int argc, char **argv)
 // {
 // 	char *str2;

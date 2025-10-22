@@ -6,13 +6,13 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 13:47:28 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/20 23:44:20 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/22 15:05:21 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int is_str(char c, char *sep)
+int is_char_in_str(char c, char *sep)
 { 
 	int i;
 	

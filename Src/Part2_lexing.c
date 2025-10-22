@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:19:29 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/21 00:05:37 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/22 15:06:36 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int len_word(char *str)
 	char quote;
 	
 	i = 0;
-	while(is_str(str[i], " \t\n|<>") == IS_NOT && str[i] != '\0')
+	while(is_char_in_str(str[i], " \t\n|<>") == IS_NOT && str[i] != '\0')
 	{ 
 		if(str[i] == '\'' || str[i] == '\"')
 		{
@@ -88,9 +88,9 @@ int lexing(char *str, t_list **lst)
 	value = 0;
 	while(str[i] != '\0')
 	{
-		if(is_str(str[i], " \t\n") == IS)
+		if(is_char_in_str(str[i], " \t\n") == IS)
 			size_tok = 1;
-		else if(is_str(str[i], "<>|" ) == IS)
+		else if(is_char_in_str(str[i], "<>|" ) == IS)
 			value = lexing_metachar(&str[i], lst, &size_tok);
 		else 
 			value = lexing_word(&str[i], lst, &size_tok);
