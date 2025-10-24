@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 14:32:11 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/21 16:39:37 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/24 18:54:04 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,10 @@ static int expand_env_or_local(t_shell *shell, t_cb* lst_buffer, int len_name, c
 {
 	int check_failed;
 	
-	check_failed = find_shell_var(shell->var.env, lst_buffer, str, len_name);
-    if(check_failed == ERROR)
-        return(ERROR);
-	else if(check_failed == IS_NOT)
-	{ 
-		check_failed = find_shell_var(shell->var.local, lst_buffer, str, len_name);
-		if(check_failed == ERROR)
-			return(ERROR);
-	}
-	return(0);
+	check_failed = find_shell_var(shell->env, lst_buffer, str, len_name);
+	if (check_failed == ERROR)
+        return (ERROR);
+	return (0);
 }
 
 static int	expand_var(t_shell *shell, t_cb* lst_buffer, char *str)

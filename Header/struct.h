@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/22 18:46:01 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/24 18:13:59 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ enum token_type
 {
 	WORD = 1,
 	META,
-	PIPE, 
-	REDIR,
+	
 	QUOTE,
 	DOLLAR,
-	AFFEC_VAR,
-	SINGLE,
-	DOUBLE,
+
+	PIPE,
+	REDIR,
+
+	REDIR_FILE,
+	CMD
 };
 
 typedef struct s_buffer
@@ -54,9 +56,9 @@ typedef struct s_flag
 	int quote;
 	int dollar;
 	int redir;
+	int redir_file;
 	int pipe;
-	int affec_var;
-	int error;
+	int cmd;
 }t_flag;
 
 typedef struct s_list
@@ -85,11 +87,10 @@ typedef struct s_valist
 	struct s_valist *next;
 }t_valist;
 
-typedef struct s_var
-{
-	t_valist *env;
-	t_valist *local;
-}t_var;
+// typedef struct s_var
+// {
+// 	t_valist *env;
+// }t_var;
 
 /**
  * @brief @param t_var contient 2 listes: Une liste des variables d'envirronements
@@ -103,7 +104,7 @@ typedef struct s_shell
 	t_prompt invite;
 	char *rd_line;
 	t_list *lst;
-	t_var var;
+	t_valist *env;
 	t_cb lst_buffer;
 	int exit_status;
 	

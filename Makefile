@@ -24,7 +24,7 @@ $(SRC_SHELL:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 #Nom de variable
 NAME = minishell
 CC = cc
-FLAG_OBJ = -Wall -Wextra -Werror -g -c
+FLAG_OBJ = -Wall -Wextra -Werror -MMD -MP -g -c
 FLAG_NAME = -o $(NAME)
 RM = rm -rf
 SCRIPT_SHELL = .minirc
@@ -71,6 +71,3 @@ fclean: clean
 re: all
 
 .PHONY: all perfect re clean fclean 
-
-
-
