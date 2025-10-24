@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:40:19 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/22 18:46:01 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/23 16:05:09 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void lst_del_one(t_list *node);
 
 //utils_lst2.c
 void node_exchange(t_list **lst, t_list *curr_node, t_list *prev_node, t_list *new_node);
+void insert_after_node(t_list *curr_node, t_list* new_node);
+void del_one_relink(t_list **lst, t_list *curr_node, t_list* prev_node);
 
 //Utils_print_lst.c
 void print_var_lst(t_valist *var);

@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 00:57:54 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/22 16:57:20 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/23 16:45:44 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ t_buffer *new_buffer(size_t capacity)
 	if(node == NULL)
 		return(NULL);
 	node->buffer = malloc(sizeof(char) * capacity);
-	memset(node->buffer, 0, capacity);
 	if(node->buffer == NULL)
 		return(free(node), NULL);
+	memset(node->buffer, 0, capacity);
 	node->length = 0;
 	node->capacity = capacity;
 	node->next = NULL;

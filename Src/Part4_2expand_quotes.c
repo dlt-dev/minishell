@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 14:56:01 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/21 16:34:53 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/23 18:23:13 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	handle_single_quotes(t_cb *lst_buffer, char *str)
     int i;
     
     i = 0;
-    cb_append_char(lst_buffer, str[i]);
+    if(cb_append_char(lst_buffer, str[i]) == ERROR)
+		return(ERROR); 
 	i++;
 	while (str[i] != '\0' && str[i] != '\'')
 	{

@@ -6,72 +6,11 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 17:17:34 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/22 18:46:01 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/24 12:29:52 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
-//faire une boucle while sur la liste chainee
-//reperer les content qui contiennt des espaces
-//split le node->content en char **
-//mettre chaque char * dans un node
-//supprime l'ancien node et mettre les nodes a l'endroit voulu
-// creer un char **pour recup les mots a split
-
-
-
-
-
-int skip_quotes(char *str)
-{
-	int flag_quotes;
-	int i;
-
-	i = 0;
-	flag_quotes = str[i];
-	i++;
-	while(str[i] != flag_quotes && str[i] != '\0')
-		i++;
-	if(str[i] == flag_quotes)
-		i++;
-	return(i);
-}
-
-int skip_word(char *str)
-{
-	int  i;
-	i = 0;
-	while(is_char_in_str(str[i], " \t\n") == IS_NOT && str[i] != '\0')
-	{
-		if(str[i] == '\"' || str[i] == '\'')
-			i += skip_quotes(&str[i]);
-		else
-			i++;
-	}
-	return(i);
-}
-
-int count_word_hdle_quotes(char *str)
-{
-	int i;
-	int count;
-
-	i = 0;
-	count = 0;
-	while(str[i] != '\0')
-	{
-		while(is_char_in_str(str[i], " \t\n") == IS && str[i] != '\0')
-			i++;
-		if(str[i] != '\0')
-		{
-			i += skip_word(&str[i]);
-			count += 1;
-		}
-	}
-	return(count);
-}
 
 int fill_quotes_in_buffer(t_cb *lst_buffer, char *str)
 {
@@ -190,8 +129,6 @@ void connect_multi_node(t_list **main_lst, t_list *lst)
 	if(*main)
 
 }
-
-void del_one_link_lst(t_list **lst)
 
 int split_param(t_shell *shell, t_list *lst)
 {
