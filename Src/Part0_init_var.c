@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 00:00:39 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/21 19:28:15 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/24 18:02:28 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,6 @@ static int init_env_lst(t_valist **env, char *envp)
 	return(0);
 }
 
-static int init_local_lst(t_valist **local)
-{ 	
-	char *name;
-	char *value;
-
-	name = ft_strdup("IFS");
-	if(name == NULL)
-		return(ERROR);
-	value = ft_strdup(" \t\n");
-	if(value == NULL)
-		return(free(name), ERROR);
-	if(var_in_lst(local, name, value) == ERROR)
-		return(free(name), free(value), ERROR);
-	return(0);
-}
-
 int init_variable(t_shell *shell, int argc, char **argv, char **envp)
 {
 	int i;
@@ -66,11 +50,9 @@ int init_variable(t_shell *shell, int argc, char **argv, char **envp)
 	bzero_shell(shell);
 	while(envp[i] != NULL)	
 	{
-		if(init_env_lst (&shell->var.env, envp[i]) == ERROR)
+		if(init_env_lst (&shell->env, envp[i]) == ERROR)
 			return(ERROR);
 		i++;
 	}
-		if(init_local_lst(&shell->var.local) == ERROR)
-			return(ERROR);
 	return(0);
 }

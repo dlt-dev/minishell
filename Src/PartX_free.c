@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:44:28 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/22 18:46:01 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/24 18:54:56 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void free_exit(t_shell *shell, int code, char *message)
 { 
 	perror(message);
 	free_all(shell);
-	ft_free_var(&shell->var.env);
-	ft_free_var(&shell->var.local);
+	ft_free_var(&shell->env);
 	clear_history();
 	exit(code);
 }
