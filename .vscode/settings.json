@@ -8,11 +8,13 @@
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
     "C_Cpp.workspaceParsingPriority": "high",
     "C_Cpp.default.includePath": [
+        "${workspaceFolder}/Header",
         "${workspaceFolder}/**",
         "/usr/include",
         "/usr/local/include"
     ],
     "C_Cpp.default.browse.path": [
+        "${workspaceFolder}/Header",
         "${workspaceFolder}/**",
         "/usr/include",
         "/usr/local/include"
