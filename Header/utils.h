@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:40:19 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/24 19:02:17 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/27 17:43:04 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void ft_strcat(char *src, char *dest);
 int is_char_in_str(char c, char *sep);
 void write_str(char *str);
 void *ft_memset(void* str, int c, size_t n); 
+void    *ft_memcpy(void *dest, const void *src, size_t n);
 
 
 //utils_lst.c
@@ -43,6 +44,8 @@ void lst_del_one(t_list *node);
 void node_exchange(t_list **lst, t_list *curr_node, t_list *prev_node, t_list *new_node);
 void insert_after_node(t_list *curr_node, t_list* new_node);
 void del_one_relink(t_list **lst, t_list *curr_node, t_list* prev_node);
+int insert_multi_node(t_list *curr_node, t_list *ins_lst);
+int ft_lst_len(t_list *lst);
 
 //Utils_print_lst.c
 void print_var_lst(t_valist *var);

@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:15:44 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/23 18:02:43 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/27 19:14:08 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,40 @@ void del_one_relink(t_list **lst, t_list *curr_node, t_list* prev_node)
 	else
 		return;
 	lst_del_one(curr_node);
+}
+
+int insert_multi_node(t_list *curr_node, t_list *ins_lst)
+{
+    t_list *tmp;
+	int i;
+
+    tmp = ins_lst;
+	if (curr_node == NULL || ins_lst == NULL)
+		return(0);
+	i = ft_lst_len(ins_lst);
+    if(curr_node->next == NULL)
+        curr_node->next = ins_lst;
+    else
+    {
+        while(tmp->next != NULL)
+			tmp =tmp->next;
+        tmp->next = curr_node->next;
+        curr_node->next = ins_lst;
+    }
+	return(i);
+}
+
+int ft_lst_len(t_list *lst)
+{
+    int  i;
+    if(lst == NULL)
+        return(0);
+        
+    i = 0;
+    while(lst != NULL)
+    {
+        lst = lst->next;
+        i++;
+    }
+    return(i);
 }

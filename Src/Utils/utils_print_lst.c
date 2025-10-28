@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:26:50 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/24 18:03:40 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/27 14:56:21 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ static void print_flag_lst(t_list *node)
 	printf("quote: %d\n", node->flag.quote);
 	printf("dollar: %d\n", node->flag.dollar);
 	printf("redir: %d\n", node->flag.redir);
-	printf("pipe: %d\n", node->flag.pipe);;
+	printf("file: %d\n", node->flag.file);
+	printf("cmd: %d\n", node->flag.cmd);
+	printf("pipe: %d\n\n", node->flag.pipe);;
 }
 
 

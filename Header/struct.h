@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/24 18:13:59 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/27 14:48:19 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ enum token_type
 	PIPE,
 	REDIR,
 
-	REDIR_FILE,
+	FILES,
 	CMD
 };
 
@@ -56,7 +56,7 @@ typedef struct s_flag
 	int quote;
 	int dollar;
 	int redir;
-	int redir_file;
+	int file;
 	int pipe;
 	int cmd;
 }t_flag;

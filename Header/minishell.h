@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/24 19:01:47 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/27 19:16:35 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int get_prompt(t_prompt *invite);
 int lexing(char *str, t_list **lst);
 
 //Part3: Put_flag
+void flag_word(t_list*lst);
 void put_flags (t_list *lst);
 
 //Part4: Expansion
@@ -42,6 +43,13 @@ int	handle_single_quotes(t_cb *lst_buffer, char *str);
 int handle_double_quotes(t_shell *shell, t_cb* lst_buffer, char *str);
 int handle_dollar(t_shell* shell, t_cb* lst_buffer, char *str);
 int	expand_shell_param(t_shell *shell, t_list *lst);
+
+//Part5: Word_splitting 
+int split_param(t_shell *shell, t_list *curr_node, t_list *prev_node);
+int count_word_hdle_quotes(char *str);
+char **word_splitting(char *str, int count_word);
+
+
 
 //PartX_free.c
 void free_all(t_shell *shell);
