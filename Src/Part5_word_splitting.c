@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 17:17:34 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/27 19:25:56 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/28 19:44:16 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ int fill_quotes_in_buffer(t_cb *lst_buffer, char *str)
 	return(i);
 }
 
+/**
+ * @brief on retient avec flag_quotes le type de quotes qui est apparu. et 
+ * on parcours ensuite la chaine jusqu'au prochain quotes suivant ou jusqu'a
+ * ce que \0 soit rencontrer
+ * @return i: le nombre d'elements dans les qutes qu'il faut skip.
+ */
+
 int substr_buffer_full(t_cb *lst_buffer, char *str)
 {
 	int i;
@@ -62,6 +69,15 @@ int substr_buffer_full(t_cb *lst_buffer, char *str)
 	return(i);
 }
 
+/**
+ * @brief @param Substr_buffer_full va parcourir le mot et le mettre dans notre buffer 
+ * chunker. On continue tant qu'on ne rencontre pas le \0 ou un espace. Toutefois, si on
+ * espace entre " ".  ca ne doti pas arrerter le mot. c'est pourquoi @param fill_quotes_buffer
+ * va nour permettre de mettre tout ce qu'il y a entre quotes dans un buffer. 
+ * 
+ * @return 
+ */
+
 char *substr_hdle_quotes(char *str, int *i)
 {
 	t_cb lst_buffer;
@@ -74,12 +90,12 @@ char *substr_hdle_quotes(char *str, int *i)
 	if(check_failed == ERROR)
 		return(free_chunk_buffer(&lst_buffer), NULL);
 	*i += check_failed;
+	printf_buffer(lst_buffer);
 	p = fusion_all_chunk(&lst_buffer);
 	if(p == NULL)
 		return(free_chunk_buffer(&lst_buffer), NULL);
 	return(str);
 }
-
 
 char **word_splitting(char *str, int count_word)
 {
@@ -107,5 +123,4 @@ char **word_splitting(char *str, int count_word)
 	tab[j] = NULL;
 	return(tab);
 }
-
 

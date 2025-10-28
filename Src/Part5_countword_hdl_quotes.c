@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:28:36 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/24 12:29:28 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/28 18:50:29 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@ int skip_word(char *str)
 	return(i);
 }
 
+/**
+ * @brief @param skip_word on parcours le mot jusqu'au \0 ou
+ * jusqu'au prochaine espacement, si on rencontre un quotes on
+ * rentre dans @param skip_quotes. les quotes skip les caracteres jusqu'au
+ * \0 ou jusqu'a la quotes la suivante.
+ * @return int 
+ */
+
 int count_word_hdle_quotes(char *str)
 {
 	int i;
@@ -61,3 +69,10 @@ int count_word_hdle_quotes(char *str)
 	}
 	return(count);
 }
+
+/**
+ * @brief @param count_word_hdle_quotes va parcourir la chaine content
+ * de notre node. si un mot est rencontrer on va dans skip word et on fait
+ * +1.
+ * @param str: Chaine de caractere a split
+ */
