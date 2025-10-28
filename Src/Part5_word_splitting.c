@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 17:17:34 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/24 12:29:52 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/27 19:25:56 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int fill_quotes_in_buffer(t_cb *lst_buffer, char *str)
 	int i;
 	int flag_quotes;
 
-	flag_quotes = str[i];
 	i = 0;
+	flag_quotes = str[i];
 	if(cb_append_char(lst_buffer, str[i]) == ERROR)
 		return(ERROR);
 	i++;
@@ -65,7 +65,7 @@ int substr_buffer_full(t_cb *lst_buffer, char *str)
 char *substr_hdle_quotes(char *str, int *i)
 {
 	t_cb lst_buffer;
-	char *str;
+	char *p;
 	int check_failed;
 
 	if(init_chunk_buffer(&lst_buffer, 10, 2) == ERROR)
@@ -74,8 +74,8 @@ char *substr_hdle_quotes(char *str, int *i)
 	if(check_failed == ERROR)
 		return(free_chunk_buffer(&lst_buffer), NULL);
 	*i += check_failed;
-	str = fusion_all_chunk(&lst_buffer);
-	if(str == NULL)
+	p = fusion_all_chunk(&lst_buffer);
+	if(p == NULL)
 		return(free_chunk_buffer(&lst_buffer), NULL);
 	return(str);
 }
@@ -108,49 +108,4 @@ char **word_splitting(char *str, int count_word)
 	return(tab);
 }
 
-t_list *put_tab_in_lst(char **tab)
-{
-	t_list *lst;
-	int i;
 
-	i = 0;
-	lst = NULL;
-	while(tab[i] != NULL)
-	{
-		if(fill_in_lst(lst, tab[i], WORD) == ERROR)
-			return(ft_free_lst(lst), ERROR);
-		i++;
-	}
-	return(lst);
-}
-
-void connect_multi_node(t_list **main_lst, t_list *lst)
-{
-	if(*main)
-
-}
-
-int split_param(t_shell *shell, t_list *lst)
-{
-	t_list *tmp;
-	t_list *curr_node;
-    t_list *prev_node;
-	
-    curr_node = lst;
-    prev_node = NULL;
-	if(lst == NULL)
-		return(0);
-	while(curr_node != NULL)
-	{
-		if(count_word_hdle_quotes(shell, curr_node->content) == 0);
-			create_node(shell, curr_node->content)
-
-
-
-		
-	}
-
-
-
-	
-} 

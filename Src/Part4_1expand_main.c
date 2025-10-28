@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 12:06:17 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/24 19:29:06 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/27 17:09:11 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,22 +79,19 @@ static t_list *create_expand_node(t_shell *shell, t_list *curr_node)
     if(new_str == NULL)
         return(NULL);
     new_node = ft_lstnew(new_str);
-    new_node->flag.type = WORD;
-    new_node->flag.dollar = DOLLAR;
     if(new_node == NULL)
             return(free(new_str), NULL);
+    ft_memcpy(&new_node->flag, &curr_node->flag, sizeof(t_flag));
     return(new_node);
 }
  
-int	expand_shell_param(t_shell *shell, t_list *lst)
+int	expand_shell_param(t_shell *shell, t_list *curr_node)
 {
     t_list *tmp;
-    t_list *curr_node;
     t_list *prev_node;
 
-    curr_node = lst;
     prev_node = NULL;
-	if (lst == NULL)
+	if (curr_node == NULL)
 		return (0);
 	while (curr_node != NULL)
 	{
