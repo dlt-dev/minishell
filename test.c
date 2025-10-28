@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/27 17:40:15 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/28 18:11:47 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,20 @@
 // 	return(i);
 // }
 
-int ft_lst_len(t_list *lst)
-{
-    int  i;
-    if(lst == NULL)
-        return(0);
+// int ft_lst_len(t_list *lst)
+// {
+//     int  i;
+//     if(lst == NULL)
+//         return(0);
         
-    i = 0;
-    while(lst != NULL)
-    {
-        lst = lst->next;
-        i++;
-    }
-    return(i);
-}
+//     i = 0;
+//     while(lst != NULL)
+//     {
+//         lst = lst->next;
+//         i++;
+//     }
+//     return(i);
+// }
 
 int main()
 {
@@ -106,6 +106,7 @@ int main()
     fill_in_lst(&lst2, ok1, WORD);
 	fill_in_lst(&lst2, ok2, WORD);
 	fill_in_lst(&lst2, ok3, WORD);
+    lst = NULL;
     tmp = lst;
     while(i < 2)
     {

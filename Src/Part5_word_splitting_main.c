@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 18:24:23 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/27 19:37:31 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/28 19:56:32 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,14 @@ int lst_splitted(t_list *curr_node, t_list **ins_lst)
 	return(0);
 }
 
+/**
+ * @brief on commence par compter le nombre de word dans notre curr_node->content
+ * s'il y a 2 mots ou plus, il faut faire un @param word_splitting. tab va recup les
+ * differents mots dans un char **. une fois que tab est full, on va mettre les char*
+ * dans une liste chainees @param ins_lst a travers la fonction @param split_in_lst.
+ */
+
+
 void jump_insert_lst(t_shell *shell, t_list **curr_node, t_list **prev_node, t_list *ins_lst)
 {
 	int i;
@@ -79,7 +87,7 @@ int split_param(t_shell *shell, t_list *curr_node, t_list *prev_node)
 	{
 		if(curr_node->flag.cmd == CMD)
 		{
-			step = lst_splitted(curr_node, &ins_lst);
+			step= lst_splitted(curr_node, &ins_lst);
 			if(step == ERROR)
 				return(ERROR);
 			else if(step == CONTINUE)
@@ -99,3 +107,28 @@ int split_param(t_shell *shell, t_list *curr_node, t_list *prev_node)
 	}
 	return(0);	
 }
+
+/**
+ * @brief @param split_param: on parcours la liste chaine.
+ * si on rencontre un node qui a le flag CMD, on est cense faire 
+ * un wordsplitting car les objets FILE ne sont pas touche par le
+ * splitting. @param step va nous permettre de savoir ce qu'il s'est
+ * passer dans @param lst_splitted. Si cette fonction:
+ * - @return ERROR, une erreur s'est produite
+ * - @return 0, ca veut dire que la fonction a bien marche mais qu'il n'y a pas
+ * besoin de split car count_word
+ * - @return CONTINUE, ca veut dire qu'un mot a ete split, a ete mis danns
+ * @param  ins_lst. 
+ * on voit apres que @param ins_lst n'est inserer dans notre liste que si 
+ * step == CONTINUE, donc qu'un word splitting a eu lieu. Ainsi, pour parcourir notre
+ * chaine 3 choses vont se faire:
+ * - Si @param curr_node a un flag file : le previous_node devient le curr_node et
+ * et on passe au node suivant.
+ * - SI @param curr_node a un flag CMD et qu'il n'y a qu'un mot: step n'a pas la valeur
+ * CONTINUE et prev_node devient curr_node et on passe au noeud suivant
+ * - Si @param curr_node a un flag CMD et qu'il y a plusieurs mot: step a la valeur
+ * CONTINUE et la liste est inserer via @param jump_insert_lst. cette derniere fonction
+ * insert la nouvelle liste dans l'ancienne au niveau de @param curr_node et deplace 
+ * les pointeurs curr_node et prev_node a la fin de la nouvelle liste inserer afin de
+ * pouvoir controler les noeuds suivant de notre listes. 
+ */
