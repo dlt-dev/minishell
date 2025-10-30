@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/22 18:46:01 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/29 14:06:48 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-enum token_type
+enum token_type // assigner des token type les redire in ou out???
 {
 	WORD = 1,
-	META,
-	PIPE, 
+	META = 2,
+	PIPE = 3, 
 	REDIR,
 	QUOTE,
 	DOLLAR,
@@ -27,7 +27,7 @@ enum token_type
 };
 
 typedef struct s_buffer
-{ 
+{
 	char *buffer;
 	size_t length;
 	size_t capacity;
@@ -48,21 +48,23 @@ typedef struct s_ptr_buffer
  * Ce sont tous les éléments pour faire un malloc sans avoir besoin de compter.
  */
 
-typedef struct s_flag
-{ 
+typedef struct s_flag///// ??? - utilise enum ou type ?
+//double definition - flag pourrait etre un int dan lequel on entre va ??
+{
 	int type;
 	int quote;
 	int dollar;
 	int redir;
 	int pipe;
-	int affec_var;
-	int error;
+	int affec_var;//?
+	int error;//?
 }t_flag;
 
 typedef struct s_list
 {
 	char *content;
 	t_flag flag;
+	//bool quotted = true / false
 	struct s_list *next;
 }t_list;
 
@@ -97,14 +99,14 @@ typedef struct s_var
  * de chacune des listes de variable: le nom, la valeur et la longueur du nom de
  * la variable.
  */
- 
+
 typedef struct s_shell
 {
 	t_prompt invite;
 	char *rd_line;
 	t_list *lst;
 	t_var var;
-	t_cb lst_buffer;
+	t_cb lst_buffer;/////////////
 	int exit_status;
 	
 }t_shell;

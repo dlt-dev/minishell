@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/23 18:56:01 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/29 11:09:09 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,14 @@ int main(int argc, char **argv, char **envp)
 		if(expand_shell_param(&shell, shell.lst) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		print_str_lst(shell.lst);
+
+
+
+/* 		if(logical_struct(shell.lst) == ERROR)
+			free_exit(est ce que juste lst ou exec aussi ?) */
+
+
+
 		// print_var_lst(shell.var.local);
 		free_all(&shell);
 		// free_exit(&shell, GEN_ERRNO, NULL);
