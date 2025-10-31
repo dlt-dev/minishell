@@ -6,26 +6,47 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 23:12:31 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/27 19:17:21 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/31 15:32:45 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
+
+static void flag_redir_type(t_flag *flag, char *str)
+{ 
+	int i;
+	i = 0;
+	if(str[i] == '>')
+	{ 
+		if(str[i+1] == '>')
+			flag->redir_type = OUTFILE_APPEND;
+		else
+			flag->redir_type = OUTFILE;
+	}
+	if(str[i] == '<')
+	{ 
+		if(str[i+1] == '<')
+			flag->redir_type = HEREDOC;
+		else
+			flag->redir_type = INFILE;
+	}
+	
+}
+
 static void flag_meta(t_flag *flag, char *str)
 {
 	int  i;
 
 	i = 0;
-	while(str[i] != '\0')
-	{
-		if(str[i] == '<' || str[i] == '>')
-			flag->redir = REDIR;
-		if(str[i] == '|')
-			flag->pipe = PIPE;
-		i++;
+	if(str[i] == '<' || str[i] == '>')
+	{ 
+		flag->redir = REDIR;
+		flag_redir_type(flag, str);
 	}
+	if(str[i] == '|')
+		flag->pipe = PIPE;
 }
 
 

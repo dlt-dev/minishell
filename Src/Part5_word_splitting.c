@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 17:17:34 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/28 19:44:16 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/31 14:09:50 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,10 @@ char *substr_hdle_quotes(char *str, int *i)
 	if(check_failed == ERROR)
 		return(free_chunk_buffer(&lst_buffer), NULL);
 	*i += check_failed;
-	printf_buffer(lst_buffer);
 	p = fusion_all_chunk(&lst_buffer);
 	if(p == NULL)
 		return(free_chunk_buffer(&lst_buffer), NULL);
-	return(str);
+	return(p);
 }
 
 char **word_splitting(char *str, int count_word)
