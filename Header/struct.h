@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/27 14:48:19 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/31 16:33:16 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,32 @@
 
 enum token_type
 {
+	//type de token
 	WORD = 1,
-	META,
+	META = 2,
 	
-	QUOTE,
-	DOLLAR,
+	//special character in WORD
+	QUOTE = 3,
+	DOLLAR = 4,
 
-	PIPE,
-	REDIR,
-
-	FILES,
-	CMD
+	// type de word
+	FILES = 5,
+	CMD = 6,
+	DELIMITOR = 7,
+	
+	//type de META
+	PIPE = 8,
+	REDIR = 9,
+	
+	//type de redirection
+	HEREDOC = 10,
+	INFILE = 11,
+	OUTFILE = 12,
+	OUTFILE_APPEND = 13,
+	
 };
+
+
 
 typedef struct s_buffer
 { 
@@ -55,10 +69,10 @@ typedef struct s_flag
 	int type;
 	int quote;
 	int dollar;
-	int redir;
-	int file;
 	int pipe;
-	int cmd;
+	int word_type;
+	int redir;
+	int redir_type;
 }t_flag;
 
 typedef struct s_list

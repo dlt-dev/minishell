@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 12:06:17 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/27 17:09:11 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/31 17:00:29 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static t_list *create_expand_node(t_shell *shell, t_list *curr_node)
  
 int	expand_shell_param(t_shell *shell, t_list *curr_node)
 {
-    t_list *tmp;
+    t_list *new_node;
     t_list *prev_node;
 
     prev_node = NULL;
@@ -97,11 +97,14 @@ int	expand_shell_param(t_shell *shell, t_list *curr_node)
 	{
 		if (curr_node->flag.dollar == DOLLAR)
         {
-            tmp = create_expand_node(shell, curr_node);
-            if(tmp == NULL)
-                return(ERROR);
-            node_exchange(&shell->lst, curr_node, prev_node, tmp);
-            curr_node = tmp;
+            if(curr_node->flag.word_type != DELIMITOR)
+            {
+                new_node = create_expand_node(shell, curr_node);
+                if(new_node == NULL)
+                    return(ERROR);
+                node_exchange(&shell->lst, curr_node, prev_node, new_node);
+                curr_node = new_node;
+            } 
         }
 		prev_node = curr_node;
         curr_node = curr_node->next;

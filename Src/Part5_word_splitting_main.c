@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 18:24:23 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/28 19:56:32 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/31 14:52:32 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int split_param(t_shell *shell, t_list *curr_node, t_list *prev_node)
 		return(0);
 	while(curr_node != NULL)
 	{
-		if(curr_node->flag.cmd == CMD)
+		if(curr_node->flag.word_type == CMD)
 		{
 			step= lst_splitted(curr_node, &ins_lst);
 			if(step == ERROR)

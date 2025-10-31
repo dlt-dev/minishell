@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:31:23 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/27 15:04:32 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/31 15:32:23 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,16 @@ static void flag_file(t_list *lst)
     if(lst->next != NULL)
     {
         if(lst->next->flag.type == WORD)
-            lst->next->flag.file = FILES;
+            lst->next->flag.word_type = FILES;
+    }
+}
+
+static void flag_delimitor(t_list *lst)
+{ 
+    if(lst->next != NULL)
+    {
+        if(lst->next->flag.type == WORD)
+            lst->next->flag.word_type = DELIMITOR;
     }
 }
 
@@ -42,14 +51,14 @@ static void flag_cmd(t_list *lst)
 	{
 		if(lst->flag.type == WORD)
 		{
-			if(lst->flag.file == 0)
-				lst->flag.cmd = CMD;
+			if(lst->flag.word_type == 0)
+				lst->flag.word_type = CMD;
 		}
 		lst = lst->next;
 	}
 }
 
-void flag_word(t_list*lst)
+void flag_word(t_list *lst)
 {
     t_list *tmp;
 
@@ -59,7 +68,12 @@ void flag_word(t_list*lst)
         if(tmp->flag.type == WORD)
             flag_for_expand(&tmp->flag, tmp->content);
         if(tmp->flag.redir == REDIR)
-            flag_file(tmp);
+		{
+			if(tmp->flag.redir_type == HEREDOC)
+				flag_delimitor(tmp);
+			else 
+			 	flag_file(tmp);
+		}
 		tmp = tmp->next;
     }
     flag_cmd(lst);
