@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 17:06:42 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/31 18:59:44 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/01 12:40:58 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ enum redir_type
 typedef struct s_redir // si je rencontre une / des redirection, je la stock ici
 {
 	char *filename;
-	struct  s_redir *next; // si redir multiples
+	int redir_type;
+	struct s_redir *next; // si redir multiples
 }	t_redir;
 
 typedef struct s_exec // stock les commandes entre les pipes

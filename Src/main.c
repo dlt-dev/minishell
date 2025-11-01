@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/31 15:44:55 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/01 14:04:29 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,15 @@ int main(int argc, char **argv, char **envp)
 		// // if(delete_quotes(&shell, shell.lst) == ERROR)
 		// // 	free_exit(&shell, GEN_ERRNO, NULL);
 		// // print_var_lst(shell.env);
+
+		//test / print de la liste de commande
+/* 		if(logical_struct(&shell, shell.lst) == ERROR)
+			free_exit(&shell, GEN_ERRNO, NULL); */
+		
+		logical_struct(&shell, shell.lst);
+		print_cmd_list(shell.cmd_lst);
+
+
 		free_all(&shell);
 		// // free_exit(&shell, GEN_ERRNO, NULL);
 	}

@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/31 16:33:16 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/01 14:10:39 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+#include "exec_struct.h"
 
 enum token_type
 {
@@ -39,8 +41,6 @@ enum token_type
 	OUTFILE_APPEND = 13,
 	
 };
-
-
 
 typedef struct s_buffer
 { 
@@ -118,6 +118,7 @@ typedef struct s_shell
 	t_prompt invite;
 	char *rd_line;
 	t_list *lst;
+	t_exec *cmd_lst; // la liste de commandes + redir a envoyer a l'execution
 	t_valist *env;
 	t_cb lst_buffer;
 	int exit_status;

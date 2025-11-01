@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/31 19:04:58 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/01 14:59:20 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,11 @@ int count_word_hdle_quotes(char *str);
 char **word_splitting(char *str, int count_word);
 
 //Part7 : cmd_struct
-t_exec	*logical_struct(t_shell *shell, t_list *lst_tokens);
+int logical_struct(t_shell *shell, t_list *token);
+void redir_management(t_exec *current, t_list *token, int type);
+void print_syntax_error(t_shell *shell, char *tok_content);
+char *redir_name(int type); // TEST PRINT
+void print_cmd_list(t_exec *head); // TEST PRINT
 
 //PartX_free.c
 void free_all(t_shell *shell);
