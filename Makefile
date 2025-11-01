@@ -11,6 +11,7 @@ SRC_SHELL = $(SRC_DIR)/Part0_init_var.c $(SRC_DIR)/Part1_Prompt.c \
 $(SRC_DIR)/Part2_lexing.c $(SRC_DIR)/Part3_flags_main.c  $(SRC_DIR)/Part3_flag_word.c\
 $(SRC_DIR)/Part4_1expand_main.c $(SRC_DIR)/Part4_3expand_dollar.c $(SRC_DIR)/Part4_2expand_quotes.c\
 $(SRC_DIR)/Part5_word_splitting_main.c $(SRC_DIR)/Part5_countword_hdl_quotes.c $(SRC_DIR)/Part5_word_splitting.c \
+$(SRC_DIR)/Part7_cmd_struct.c $(SRC_DIR)/Part7_redir_struct.c $(SRC_DIR)/Part7_syntax_error.c \
 $(SRC_DIR)/main.c $(SRC_DIR)/PartX_free.c
 
 SRC_UTILS = $(UTILS_DIR)/utils_chunk_buffer.c $(UTILS_DIR)/utils_chunk_buffer2.c \
@@ -71,4 +72,4 @@ fclean: clean
 	$(RM) $(NAME)
 re: all
 
-.PHONY: all perfect re clean fclean 
+.PHONY: all perfect re clean fclean

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/27 19:16:35 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/10/31 19:04:58 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include "struct.h"
 #include "utils.h"
 #include "chunk_buffer.h"
+#include "exec_struct.h"
 
 //Part0: init_variable
 int init_variable(t_shell *shell, int argc, char **argv, char **envp);
@@ -44,12 +45,13 @@ int handle_double_quotes(t_shell *shell, t_cb* lst_buffer, char *str);
 int handle_dollar(t_shell* shell, t_cb* lst_buffer, char *str);
 int	expand_shell_param(t_shell *shell, t_list *lst);
 
-//Part5: Word_splitting 
+//Part5: Word_splitting
 int split_param(t_shell *shell, t_list *curr_node, t_list *prev_node);
 int count_word_hdle_quotes(char *str);
 char **word_splitting(char *str, int count_word);
 
-
+//Part7 : cmd_struct
+t_exec	*logical_struct(t_shell *shell, t_list *lst_tokens);
 
 //PartX_free.c
 void free_all(t_shell *shell);
