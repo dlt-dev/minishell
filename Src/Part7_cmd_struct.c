@@ -6,13 +6,13 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 17:05:43 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/01 15:00:40 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/02 17:18:07 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char *redir_name(int type) // TEST PRINT
+char	*redir_name(int type) // TEST PRINT
 {
 	if (type == 11)
 		return ("INFILE  (<)");
@@ -25,7 +25,7 @@ char *redir_name(int type) // TEST PRINT
 	return ("UNKNOWN");
 }
 
-void print_cmd_list(t_exec *head) // TEST PRINT
+void	print_cmd_list(t_exec *head) // TEST PRINT
 {
 	int i;
 	int idx;
@@ -57,17 +57,21 @@ void print_cmd_list(t_exec *head) // TEST PRINT
 		redir = current->redir;
 		while (redir)
 		{
-			printf("  redir: %s  ->  %s\n", redir_name(redir->redir_type),
-				(redir->filename ? redir->filename : "(null)"));
+			if (redir->filename)
+				printf("  redir: %s  ->  %s\n",
+					redir_name(redir->redir_type), redir->filename);
+			else
+				printf("  redir: %s  ->  (null)\n",
+					redir_name(redir->redir_type));
 			redir = redir->next;
 		}
 		current = current->next;
-		}
 	}
+}
 
-t_exec	*create_new_command()
+t_exec	*create_new_command(void)
 {
-	t_exec *command;
+	t_exec	*command;
 
 	command = malloc(sizeof(t_exec));
 	if (!command)
@@ -80,20 +84,17 @@ t_exec	*create_new_command()
 
 int	add_arg_command(t_exec *current, char *tok_content)
 {
-	int i;
-	int	j;
-	char **new_args;
+	int		i;
+	int		j;
+	char	**new_args;
 
 	i = 0;
 	j = 0;
 	if (!current || !tok_content)
 		return (1);
-
 	if (current->cmds)
-	{
 		while (current->cmds[i])
 			i++;
-	}
 	new_args = malloc(sizeof(char *) * (i + 2));
 	if (!new_args)
 		return (1);
@@ -104,7 +105,6 @@ int	add_arg_command(t_exec *current, char *tok_content)
 	}
 	new_args[i] = ft_strdup(tok_content);
 	new_args[i + 1] = NULL;
-
 	free(current->cmds);
 	current->cmds = new_args;
 	return (0);
@@ -112,7 +112,7 @@ int	add_arg_command(t_exec *current, char *tok_content)
 
 int	is_valid_redir(t_list *token_next)
 {
-	if (!token_next)//fin de liste
+	if (!token_next) // fin de liste
 		return (0);
 	if (token_next->flag.type != WORD)
 		return (0);
@@ -121,7 +121,7 @@ int	is_valid_redir(t_list *token_next)
 
 int	is_valid_pipe(t_list *token_next)
 {
-	if (!token_next)// fin de liste
+	if (!token_next) // fin de liste
 		return (0);
 	if (token_next->flag.pipe == PIPE)
 		return (0);
@@ -129,39 +129,33 @@ int	is_valid_pipe(t_list *token_next)
 }
 
 // faire une fonction manage redir et manage pipe pour etre a la norme :)
-int	logical_struct(t_shell *shell, t_list *token) 
+int	logical_struct(t_shell *shell, t_list *token)
 {
-	t_exec	*head = NULL;
-	t_exec	*current = NULL;
+	t_exec	*head;
+	t_exec	*current;
 
 	if (token && token->flag.pipe == PIPE)
-		return(print_syntax_error(shell, "|"), 0);
+		return (print_syntax_error(shell, "|"), 0);
 	head = create_new_command();
 	current = head;
 	while (token)
 	{
-		if (token->flag.redir == REDIR) // manage redir
+		if (token->flag.redir == REDIR && token->next && is_valid_redir(token->next)) // manage redir
 		{
-			if (!token->next || !is_valid_redir(token->next))
-				return (print_syntax_error(shell, token->content), 0);
 			redir_management(current, token, token->flag.redir_type);
 			token = token->next;
 		}
 		else if (token->flag.type == WORD)
 			add_arg_command(current, token->content);
-
-		else if (token->flag.pipe == PIPE) // manage pipe
+		else if (token->flag.pipe == PIPE && token->next && is_valid_pipe(token->next)) // manage pipe
 		{
-			if (!token->next || !is_valid_pipe(token->next))
-				return (print_syntax_error(shell, token->content), 0);
 			current->next = create_new_command();
 			current = current->next;
 		}
-		else 
+		else
 			return (print_syntax_error(shell, token->content), 0);
 		token = token->next;
 	}
 	shell->cmd_lst = head;
 	return (0);
 }
-
