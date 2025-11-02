@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 17:05:43 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/02 17:18:07 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/02 17:50:15 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,11 +131,11 @@ int	is_valid_pipe(t_list *token_next)
 // faire une fonction manage redir et manage pipe pour etre a la norme :)
 int	logical_struct(t_shell *shell, t_list *token)
 {
-	t_exec	*head;
-	t_exec	*current;
+	t_exec	*head = NULL;
+	t_exec	*current = NULL;
 
 	if (token && token->flag.pipe == PIPE)
-		return (print_syntax_error(shell, "|"), 0);
+		return (print_syntax_error(head, shell, "|"), 0);
 	head = create_new_command();
 	current = head;
 	while (token)
@@ -153,7 +153,7 @@ int	logical_struct(t_shell *shell, t_list *token)
 			current = current->next;
 		}
 		else
-			return (print_syntax_error(shell, token->content), 0);
+			return (print_syntax_error(head, shell, token->content), 0);
 		token = token->next;
 	}
 	shell->cmd_lst = head;

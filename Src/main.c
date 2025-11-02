@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/01 14:04:29 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/02 18:45:59 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,16 @@ int main(int argc, char **argv, char **envp)
 		//test / print de la liste de commande
 /* 		if(logical_struct(&shell, shell.lst) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL); */
+
+			
 		
 		logical_struct(&shell, shell.lst);
-		print_cmd_list(shell.cmd_lst);
+		if (shell.cmd_lst)
+			print_cmd_list(shell.cmd_lst);
+		else
+			printf("une syntaxe error a ete detecte et la liste a ete free\n");
+
+
 
 
 		free_all(&shell);
