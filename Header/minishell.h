@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/02 17:48:56 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/04 12:51:17 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int handle_double_quotes(t_shell *shell, t_cb* lst_buffer, char *str);
 int handle_dollar(t_shell* shell, t_cb* lst_buffer, char *str);
 int	expand_shell_param(t_shell *shell, t_list *lst);
 
-//Part5: Word_splitting
+//Part5: Word_splitting 
 int split_param(t_shell *shell, t_list *curr_node, t_list *prev_node);
 int count_word_hdle_quotes(char *str);
 char **word_splitting(char *str, int count_word);
@@ -56,6 +56,9 @@ void redir_management(t_exec *current, t_list *token, int type);
 void print_syntax_error(t_exec *head, t_shell *shell, char *tok_content);
 char *redir_name(int type); // TEST PRINT
 void print_cmd_list(t_exec *head); // TEST PRINT
+
+// Part6_delete_quotes
+int delete_quotes(t_shell *shell, t_list *lst);
 
 //PartX_free.c
 void free_all(t_shell *shell);

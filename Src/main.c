@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/02 18:45:59 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/04 13:04:56 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,17 @@ int main(int argc, char **argv, char **envp)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		if(split_param(&shell, shell.lst, NULL) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
-		print_str_lst(shell.lst);
-		// // if(delete_quotes(&shell, shell.lst) == ERROR)
-		// // 	free_exit(&shell, GEN_ERRNO, NULL);
-		// // print_var_lst(shell.env);
-
-		//test / print de la liste de commande
-/* 		if(logical_struct(&shell, shell.lst) == ERROR)
-			free_exit(&shell, GEN_ERRNO, NULL); */
-
-			
-		
+		if(delete_quotes(&shell, shell.lst) == ERROR)
+			free_exit(&shell, GEN_ERRNO, NULL);
+		// print_str_lst(shell.lst);
 		logical_struct(&shell, shell.lst);
 		if (shell.cmd_lst)
 			print_cmd_list(shell.cmd_lst);
 		else
 			printf("une syntaxe error a ete detecte et la liste a ete free\n");
-
-
-
-
 		free_all(&shell);
-		// // free_exit(&shell, GEN_ERRNO, NULL);
 	}
 }
 
+/* 		if(logical_struct(&shell, shell.lst) == ERROR)
+			free_exit(&shell, GEN_ERRNO, NULL); */

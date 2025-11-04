@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part7_cmd_struct.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 17:05:43 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/02 19:00:56 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/04 13:08:49 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,9 @@ int	logical_struct(t_shell *shell, t_list *token)
 {
 	t_exec	*head;
 	t_exec	*current;
-
+	
+	if(token == NULL)
+		return(0);
 	if (token && token->flag.pipe == PIPE)
 		return (print_syntax_error(NULL, shell, "|"), 0);
 	head = create_new_command();
