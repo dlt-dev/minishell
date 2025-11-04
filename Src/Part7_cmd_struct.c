@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 17:05:43 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/04 15:27:58 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/04 16:08:55 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	add_arg_command(t_exec *current, char *tok_content)
 	i = 0;
 	j = 0;
 	if (!current || !tok_content)
-		return (1);
+		return (1); 
 	if (current->cmds)
 		while (current->cmds[i])
 			i++;
@@ -110,7 +110,7 @@ int	add_arg_command(t_exec *current, char *tok_content)
 	return (0);
 }
 
-/**
+/**       
  * @brief realloc les add_arg_command avec i +2 , 
  * i correspond a la taille actuelle du tableau de cmd. 
  * on fait i + 2 pour la nouvelle cmd et pour un NULL de fin.
