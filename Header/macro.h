@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:52:31 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/27 19:32:46 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/04 00:38:39 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 #define IS_NOT 0
 #define IS 1
 #define CONTINUE -2
-
-#define NORMAL 0
+#define SYNTAXE_ERR -2 
 
 #endif

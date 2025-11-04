@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:19:29 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/24 19:31:56 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/04 01:01:32 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,13 @@ int lexing(char *str, t_list **lst)
 	int size_tok;
 	
 	i = 0;
-	size_tok = 0;
 	value = 0;
 	while(str[i] != '\0')
 	{
+		size_tok = 0;
 		if(is_char_in_str(str[i], " \t\n") == IS)
 			size_tok = 1;
-		else if(is_char_in_str(str[i], "<>|" ) == IS)
+		else if(is_char_in_str(str[i], "<>|") == IS)
 			value = lexing_metachar(&str[i], lst, &size_tok);
 		else 
 			value = lexing_word(&str[i], lst, &size_tok);

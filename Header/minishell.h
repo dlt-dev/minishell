@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/10/27 19:16:35 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/03 22:39:08 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int split_param(t_shell *shell, t_list *curr_node, t_list *prev_node);
 int count_word_hdle_quotes(char *str);
 char **word_splitting(char *str, int count_word);
 
-
+// Part6_delete_quotes
+int delete_quotes(t_shell *shell, t_list *lst);
 
 //PartX_free.c
 void free_all(t_shell *shell);
