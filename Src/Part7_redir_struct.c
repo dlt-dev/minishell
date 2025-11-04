@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part7_redir_struct.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 15:59:13 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/02 16:40:59 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/04 14:59:15 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ void	redir_management(t_exec *current, t_list *token, int type)
 	if (!current || !token)
 		return ;
 	next_token = token->next;
-	new_redir = create_new_redir(next_token->content, type);
+	new_redir = create_new_redir(next_token->content, type); // malloc failed ? 
 	add_redir_command(current, new_redir);
 }
+/**
+ * @brief @param redir_management va creer la lsite chainee de redirection
+ * @param create_new_redir va creer le node 
+ * @param add_redir_command add back le node 
+ */

@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 17:05:43 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/04 13:08:49 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/04 15:27:58 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	add_arg_command(t_exec *current, char *tok_content)
 			i++;
 	new_args = malloc(sizeof(char *) * (i + 2));
 	if (!new_args)
-		return (1);
+		return (ERROR);
 	while (j < i)
 	{
 		new_args[j] = current->cmds[j];
@@ -109,6 +109,13 @@ int	add_arg_command(t_exec *current, char *tok_content)
 	current->cmds = new_args;
 	return (0);
 }
+
+/**
+ * @brief realloc les add_arg_command avec i +2 , 
+ * i correspond a la taille actuelle du tableau de cmd. 
+ * on fait i + 2 pour la nouvelle cmd et pour un NULL de fin.
+ * @return int 
+ */
 
 int	is_valid_redir(t_list *token_next)
 {
@@ -138,7 +145,9 @@ int	logical_struct(t_shell *shell, t_list *token)
 		return(0);
 	if (token && token->flag.pipe == PIPE)
 		return (print_syntax_error(NULL, shell, "|"), 0);
-	head = create_new_command();
+	head = create_new_command(); 
+	if(head == NULL)
+		return(ERROR); 
 	current = head;
 	while (token)
 	{
@@ -148,11 +157,11 @@ int	logical_struct(t_shell *shell, t_list *token)
 			token = token->next;
 		}
 		else if (token->flag.type == WORD)
-			add_arg_command(current, token->content);
+			add_arg_command(current, token->content); // malloc failed ? 
 		else if (token->flag.pipe == PIPE && token->next && is_valid_pipe(token->next))
 		{
 			//current = (current->next = create_new_command()); // moins claire mais pour la norme
-			current->next = create_new_command();
+			current->next = create_new_command(); //malloc failed 
 			current = current->next;
 		}
 		else
