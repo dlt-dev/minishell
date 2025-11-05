@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:12:55 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/04 19:42:15 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/05 13:02:04 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_redir
 	char			*filename;
 	int				redir_type;
 	struct s_redir	*next;
-	int fd;
+	 
 }	t_redir;
 
 typedef struct s_exec
@@ -33,15 +33,19 @@ typedef struct s_exec
 }	t_exec;
 
 
-int apply_redir_infile(t_redir *redir_node, struct stat *buf)
+int apply_redir_infile(t_redir *redir, struct stat *buf)
 { 
 	int fd;
-	
-	if(IS_)	
-	fd = open(redir_node->filename, O_RDONLY);
+	struct stat buf;
+	if(stat(redir->filename, &buf) == ERROR)
+		return(ERROR);
+	if(S_ISREG(buf.st_mode) == 0 || S_ISLNK(buf->st_mode) == 0)
+			
+	fd = open(redir->filename, O_RDONLY);
 	if(fd == ERROR)
 		perror("")
-
+	dup2(fd, 1)
+	close(fd);
 	
 }
 

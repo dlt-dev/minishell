@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:40:19 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/27 17:43:04 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/05 18:20:43 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int len_number (int nb);
 char *ft_strdup(char *s);
 char *ft_strndup(char *str, int size);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
+int	ft_strcmp(const char *s1, const char *s2);
 void ft_strcat(char *src, char *dest);
 
 //utils_libft2.c
