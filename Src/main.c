@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/04 13:04:56 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/07 16:12:29 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,15 @@ int main(int argc, char **argv, char **envp)
 			print_cmd_list(shell.cmd_lst);
 		else
 			printf("une syntaxe error a ete detecte et la liste a ete free\n");
+
+		// execution
+
+		manage_execution(&shell, shell.env);
+
+
+
+
+
 		free_all(&shell);
 	}
 }
