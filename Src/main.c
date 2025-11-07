@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/07 16:12:29 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/07 19:57:52 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ void printbanner(void)
 		"					\033[1;95m       minishell de Arthur & Jeanne \n"
 		"					\033[36m\n"
 		"					\033[0m\n");
+}
+
+void ft_env(t_valist *env)
+{	
+	while(env != NULL)
+	{ 	
+		write(1, env->name, ft_strlen(env->name));
+		write(1, "=", 1);
+		write(1 , env->value, ft_strlen(env->value));
+		write(1, "\n", 1);
+		env = env->next;
+	}
 }
 
 int main(int argc, char **argv, char **envp)
@@ -57,16 +69,17 @@ int main(int argc, char **argv, char **envp)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		if(delete_quotes(&shell, shell.lst) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
+		ft_env(shell.env);
 		// print_str_lst(shell.lst);
-		logical_struct(&shell, shell.lst);
-		if (shell.cmd_lst)
-			print_cmd_list(shell.cmd_lst);
-		else
-			printf("une syntaxe error a ete detecte et la liste a ete free\n");
+		// logical_struct(&shell, shell.lst);
+		// if (shell.cmd_lst)
+		// 	print_cmd_list(shell.cmd_lst);
+		// else
+		// 	printf("une syntaxe error a ete detecte et la liste a ete free\n");
 
 		// execution
 
-		manage_execution(&shell, shell.env);
+		// manage_execution(&shell, shell.env);
 
 
 
