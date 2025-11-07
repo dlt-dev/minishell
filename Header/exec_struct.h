@@ -6,20 +6,26 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 17:06:42 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/03 15:27:47 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/07 12:01:51 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_STRUCT_H
 # define EXEC_STRUCT_H
 
-enum	e_redir_type
+/* enum	e_redir_type
 {
 	SIMPLE_IN,
 	SIMPLE_OUT,
 	DOUBLE_IN,
 	DOUBLE_OUT,
-};
+}; */
+
+typedef struct s_pipex
+{
+	char	**cmd1;
+	char	**cmd2;
+}	t_pipex;
 
 typedef struct s_redir
 {
