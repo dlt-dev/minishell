@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/02 16:55:45 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/07 13:30:22 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct s_valist
 {
 	char *name;
 	char *value;
-	int len_name;
+	int len_name; // taille de la ligne (?)
 	struct s_valist *next;
 }t_valist;
 

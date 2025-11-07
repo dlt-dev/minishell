@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/04 11:30:40 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/07 13:09:21 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ void redir_management(t_exec *current, t_list *token, int type);
 void print_syntax_error(t_exec *head, t_shell *shell, char *tok_content);
 char *redir_name(int type); // TEST PRINT
 void print_cmd_list(t_exec *head); // TEST PRINT
+
+//Part8 : execution
+
+int	manage_execution(t_shell *shell, t_valist *env);
+
 
 //PartX_free.c
 void free_all(t_shell *shell);
