@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   part8_execution.c                                  :+:      :+:    :+:   */
+/*   part8_execution_redir_manage.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arthurito <arthurito@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:12:55 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/05 13:02:04 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/08 23:09:38 by arthurito        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int apply_redir_infile(t_redir *redir, struct stat *buf)
 		return(ERROR);
 	if(S_ISREG(buf.st_mode) == 0 || S_ISLNK(buf->st_mode) == 0)
 			
-	fd = open(redir->filename, O_RDONLY);
+	fd = (redir->filename, O_RDONLY);
 	if(fd == ERROR)
 		perror("")
 	dup2(fd, 1)

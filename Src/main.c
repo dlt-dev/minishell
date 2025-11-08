@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arthurito <arthurito@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/07 19:57:52 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/08 22:56:04 by arthurito        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ void ft_env(t_valist *env)
 	}
 }
 
+void ft_exit(t_shell *shell)
+{
+	write(1, "exit\n", 5); 
+	free_exit(shell, 0,  NULL);
+}
+
 int main(int argc, char **argv, char **envp)
 { 
 	t_shell shell;
@@ -69,7 +75,8 @@ int main(int argc, char **argv, char **envp)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		if(delete_quotes(&shell, shell.lst) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
-		ft_env(shell.env);
+		ft_exit(&shell);
+		// ft_env(shell.env);
 		// print_str_lst(shell.lst);
 		// logical_struct(&shell, shell.lst);
 		// if (shell.cmd_lst)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arthurito <arthurito@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/07 18:26:09 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/08 23:09:36 by arthurito        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int main(int argc, char **argv)
 // 	int i;
 
 // 	// i = 0; 
-// 	// fd = open("Header", O_RDONLY);
+// 	// fd = ("Header", O_RDONLY);
 // 	// printf("%d", fd);
 // 	// if(fd == ERROR)
 // 	// 	perror("erreur");
