@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:40:19 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/05 18:20:43 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/10 17:47:56 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ t_valist *var_new(char *name, char *value);
 void var_addback(t_valist **var, t_valist *new);
 int var_in_lst(t_valist **var, char *name, char *value);
 void ft_free_var(t_valist **var);
+void del_one_valist(t_valist **lst, t_valist *curr_node, t_valist* prev_node);
+
 
 //utils_free.c
 void ft_free_lst(t_list **lst);
