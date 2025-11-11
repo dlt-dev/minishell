@@ -6,7 +6,7 @@
 #    By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/01 13:52:21 by jdelattr          #+#    #+#              #
-#    Updated: 2025/11/07 16:22:04 by jdelattr         ###   ########.fr        #
+#    Updated: 2025/11/11 22:18:05 by jdelattr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ $(SRC_DIR)/Part4_1expand_main.c $(SRC_DIR)/Part4_3expand_dollar.c $(SRC_DIR)/Par
 $(SRC_DIR)/Part5_word_splitting_main.c $(SRC_DIR)/Part5_countword_hdl_quotes.c $(SRC_DIR)/Part5_word_splitting.c \
 $(SRC_DIR)/Part7_cmd_struct.c $(SRC_DIR)/Part7_redir_struct.c $(SRC_DIR)/Part7_syntax_error.c \
 $(SRC_DIR)/main.c $(SRC_DIR)/Part6_delete_quotes.c \
-$(SRC_DIR)/Part8_execution.c $(SRC_DIR)/PartX_free.c
+$(SRC_DIR)/Part8_execution.c $(SRC_DIR)/Part8_heredoc.c $(SRC_DIR)/Part8_built_in.c $(SRC_DIR)/PartX_free.c
 
 SRC_UTILS = $(UTILS_DIR)/utils_chunk_buffer.c $(UTILS_DIR)/utils_chunk_buffer2.c \
 $(UTILS_DIR)/utils_lenght.c $(UTILS_DIR)/utils_libft1.c $(UTILS_DIR)/utils_libft2.c \

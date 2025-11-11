@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/07 16:31:14 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/11 22:16:22 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #include <readline/history.h>
 #include <fcntl.h>
 #include <signal.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 
 #include <sys/types.h>
@@ -68,10 +70,16 @@ void print_cmd_list(t_exec *head); // TEST PRINT
 
 // Part6_delete_quotes
 int delete_quotes(t_shell *shell, t_list *lst);
-//Part8 : execution
 
+//Part8 : execution
 int	manage_execution(t_shell *shell, t_valist *env);
 
+//Part8_heredoc 
+int handle_heredoc(char *delimit);
+
+//Part8_builtin
+int	is_built_in(char *cmd);
+int	execute_built_in(t_shell *shell, int type, char **args, t_valist *env);
 
 //PartX_free.c
 void free_all(t_shell *shell);

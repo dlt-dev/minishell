@@ -6,20 +6,12 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 17:06:42 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/07 16:11:44 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/11 21:05:06 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_STRUCT_H
 # define EXEC_STRUCT_H
-
-/* enum	e_redir_type
-{
-	SIMPLE_IN,
-	SIMPLE_OUT,
-	DOUBLE_IN,
-	DOUBLE_OUT,
-}; */
 
 typedef struct s_pipex
 {
@@ -40,11 +32,8 @@ typedef struct s_exec
 	struct s_redir	*redir;
 	struct s_exec	*next;
 
-	//int			**fd([0][1])in et out pour chaques cmds - 
-	//par default ca sera stdin et stdout.(0 / 1)
-	//int			**pipe; // [in][out] // tab de 2fd
-	//The output of each command in the pipeline is
-	//connected to the input of the next command via a pipe
+	int fd_in;//je stock les derniers fd de mes open STDIN
+	int fd_out;//je set a -1 par default STDOUT
 
 }	t_exec;
 
