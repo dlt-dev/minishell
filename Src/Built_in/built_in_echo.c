@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_env.c                                     :+:      :+:    :+:   */
+/*   built_in_echo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 17:00:20 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/10 17:02:05 by aoesterl         ###   ########.fr       */
+/*   Created: 2025/11/10 16:55:18 by aoesterl          #+#    #+#             */
+/*   Updated: 2025/11/11 17:36:07 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_env(t_valist *env)
-{	
-	if(env == NULL)
-		return;
-	while(env != NULL)
-	{ 	
-		write(1, env->name, ft_strlen(env->name));
-		write(1, "=", 1);
-		write(1 , env->value, ft_strlen(env->value));
-		write(1, "\n", 1);
-		env = env->next;
+void builtin_echo(char **args)
+{ 
+	int i;
+	int flag_n;
+
+	flag_n = 0;
+	i = 1;
+	while(ft_strcmp(args[i], "-n") == 0)
+	{
+		flag_n = 1;
+		i++;
 	}
+	while(args[i] != NULL)
+	{ 
+		write(1 , args[i], ft_strlen(args[i]));
+		write(1 , " ", 1);
+		i++; 
+	}
+	if(flag_n == 0)
+		write(1, "\n", 1);
 }

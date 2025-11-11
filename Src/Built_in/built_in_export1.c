@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:00:10 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/10 18:23:55 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/11 17:36:23 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int add_affectation(t_shell *shell, t_valist *env, char *str, int len_name)
 	return(0);
 }
  
-int ft_export(t_shell *shell, t_valist *env, char **args)
+int builtin_export(t_shell *shell, t_valist *env, char **args)
 { 
 	int i;	
 	int len_name;

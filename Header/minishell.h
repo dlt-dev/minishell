@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/07 16:31:14 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/11 17:38:24 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 #include "utils.h"
 #include "chunk_buffer.h"
 #include "exec_struct.h"
+#include "built_in.h"
 
 //Part0: init_variable
 int init_variable(t_shell *shell, int argc, char **argv, char **envp);

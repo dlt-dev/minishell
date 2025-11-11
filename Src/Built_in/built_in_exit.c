@@ -6,13 +6,13 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:57:16 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/10 17:01:44 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/11 17:36:17 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_exit(t_shell *shell)
+void builtin_exit(t_shell *shell)
 {
 	free_exit(shell, 0,  "exit");
 }
