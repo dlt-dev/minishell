@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 17:06:42 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/11 21:05:06 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/12 12:48:39 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,3 +38,8 @@ typedef struct s_exec
 }	t_exec;
 
 #endif
+
+/* \1
+\2 
+pour les parties non affichaches
+*/

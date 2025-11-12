@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 17:05:43 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/11 21:23:52 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/12 12:52:45 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_exec	*create_new_command(void)
 	command->cmds = NULL;
 	command->redir = NULL;
 	command->fd_in = STDIN_FILENO;
-	command->fd_out = STDIN_FILENO;
+	command->fd_out = STDOUT_FILENO;
 	command->next = NULL;
 	return (command);
 }
@@ -170,6 +170,9 @@ int	logical_struct(t_shell *shell, t_list *token)
 			return (print_syntax_error(head, shell, token->content), 0);
 		token = token->next;
 	}
+
 	shell->cmd_lst = head;
+
+
 	return (0);
 }

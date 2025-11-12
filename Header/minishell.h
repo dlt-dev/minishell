@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/11 22:16:22 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/12 13:15:02 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ int	execute_built_in(t_shell *shell, int type, char **args, t_valist *env);
 //PartX_free.c
 void free_all(t_shell *shell);
 void free_exit(t_shell *shell, int code, char *message);
+void free_exec(t_exec *cmd);
+
+void free_exec_lst(t_exec **head);
 
 
 #endif

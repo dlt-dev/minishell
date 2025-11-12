@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_va_lst.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 19:10:04 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/16 17:01:25 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/12 15:28:22 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,28 @@ void ft_free_var(t_valist **var)
 		free(*var);
 		*var = tmp;
 	}
+}
+
+void lst_del_valist(t_valist *node)
+{
+	if(node == NULL)
+		return;
+	if(node->name != NULL)
+		free(node->name);
+	if(node->value)
+		free(node->value);
+	free(node);
+}
+
+void del_one_valist(t_valist **lst, t_valist *curr_node, t_valist* prev_node)
+{
+	if(*lst == NULL || curr_node == NULL)
+		return;
+	if(curr_node == *lst)
+		*lst = curr_node->next;
+	else if(prev_node->next != NULL)
+		prev_node->next = curr_node->next;
+	else
+		return;
+	lst_del_valist(curr_node);
 }

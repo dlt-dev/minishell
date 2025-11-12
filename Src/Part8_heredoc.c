@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 19:18:46 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/11 22:03:49 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/12 11:08:23 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ int handle_heredoc(char *delimit)
 	int pipefd[2];
 
 	pipe(pipefd);
+	if (pipe(pipefd) == -1)
+		return (perror("error pipe"), ERROR);
+
 	pid_t pid_heredoc;
 	pid_heredoc = fork();
 	

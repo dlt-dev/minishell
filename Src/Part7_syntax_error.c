@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 12:11:09 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/02 18:41:58 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/12 13:14:51 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void free_tab(char **cmds)
 	free(cmds);
 }
 
-void free_exec_lst(t_exec *cmd)
+void free_exec(t_exec *cmd)
 {
 	t_exec *tmp;
 	t_redir *redir_tmp;
@@ -58,7 +58,7 @@ void	print_syntax_error(t_exec *head, t_shell *shell, char *tok_content)
 	shell->exit_status = 127;
 	if (head)
 	{
-		free_exec_lst(head);
+		free_exec(head);
 		printf("je suis dans print_syntaxe_err()\n");
 	}
 }
