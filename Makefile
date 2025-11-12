@@ -1,49 +1,15 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/11/01 13:52:21 by jdelattr          #+#    #+#              #
-#    Updated: 2025/11/11 22:18:05 by jdelattr         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-#Dossier de compilation
-INC_DIR = Header
-SRC_DIR = Src/
-UTILS_DIR = Src/Utils
-OBJ_DIR = objs
-BIN_DIR = $(HOME)/bin
-
-#Source de compilation
-SRC_SHELL = $(SRC_DIR)/Part0_init_var.c $(SRC_DIR)/Part1_Prompt.c \
-$(SRC_DIR)/Part2_lexing.c $(SRC_DIR)/Part3_flags_main.c  $(SRC_DIR)/Part3_flag_word.c\
-$(SRC_DIR)/Part4_1expand_main.c $(SRC_DIR)/Part4_3expand_dollar.c $(SRC_DIR)/Part4_2expand_quotes.c\
-$(SRC_DIR)/Part5_word_splitting_main.c $(SRC_DIR)/Part5_countword_hdl_quotes.c $(SRC_DIR)/Part5_word_splitting.c \
-$(SRC_DIR)/Part7_cmd_struct.c $(SRC_DIR)/Part7_redir_struct.c $(SRC_DIR)/Part7_syntax_error.c \
-$(SRC_DIR)/main.c $(SRC_DIR)/Part6_delete_quotes.c \
-$(SRC_DIR)/Part8_execution.c $(SRC_DIR)/Part8_heredoc.c $(SRC_DIR)/Part8_built_in.c $(SRC_DIR)/PartX_free.c
-
-SRC_UTILS = $(UTILS_DIR)/utils_chunk_buffer.c $(UTILS_DIR)/utils_chunk_buffer2.c \
-$(UTILS_DIR)/utils_lenght.c $(UTILS_DIR)/utils_libft1.c $(UTILS_DIR)/utils_libft2.c \
-$(UTILS_DIR)/utils_lst.c $(UTILS_DIR)/utils_lst2.c $(UTILS_DIR)/utils_va_lst.c \
-$(UTILS_DIR)/utils_print_lst.c $(UTILS_DIR)/utils_free.c 
-
-#Objet de compilation
-OBJ = $(SRC_UTILS:$(UTILS_DIR)/%.c=$(OBJ_DIR)/%.o) \
-$(SRC_SHELL:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-
-#Nom de variable
+#Nom du programme
 NAME = minishell
-CC = cc
-FLAG_OBJ = -Wall -Wextra -Werror -MMD -MP -g -c
-FLAG_NAME = -o $(NAME)
-RM = rm -rf
-SCRIPT_SHELL = .minirc
 
-#Couleur de compilation
+#Library
+LIBRARY = -lreadline
+
+#Compilation : Compilateur et Flags
+CC = cc
+CC_FLAG = -Wall -Wextra -Werror -g -c
+OPT_NAME = -o $(NAME)
+
+#Compilation : Couleurs et message
 RED = \033[31;1;3m
 GREEN = \033[32;1;3m
 YEL = \033[33;1;3m
@@ -51,21 +17,72 @@ CYAN = \033[36;1;3m
 RESET = \033[m
 MESSAGE = Compilation de
 
+#Clean
+RM = rm -rf
+
+#Make install Rules
+SCRIPT_SHELL = .minirc
+BIN_DIR = $(HOME)/bin
+
+#Dossier de compilation
+SRC_DIR = Src
+OBJ_DIR = objs
+INC_DIR = Header
+
+#Sous dossiers
+SUBS_DIR = Utils Built_in Part0_Init Part1_Prompt Part2_Lexing Part3_Flags \
+Part4_Expand Part5_Word_splitting Part6_Delete_quotes Part7_Cmd_struct \
+Part8_Execution PartX_Free
+
+#Fichiers sources
+  #Sources parties
+  SRC_PART0 = Part0_init_var.c
+  SRC_PART1 = Part1_Prompt.c
+  SRC_PART2 = Part2_lexing.c
+  SRC_PART3 = Part3_flags_main.c Part3_flag_word.c
+  SRC_PART4 = Part4_1expand_main.c Part4_3expand_dollar.c Part4_2expand_quotes.c
+  SRC_PART5 = Part5_word_splitting_main.c Part5_countword_hdl_quotes.c Part5_word_splitting.c
+  SRC_PART6 = Part6_delete_quotes.c 
+  SRC_PART7 = Part7_cmd_struct.c Part7_redir_struct.c Part7_syntax_error.c
+  SRC_PART8 = Part8_execution.c Part8_built_in.c Part8_heredoc.c
+  SRC_PARTX = PartX_free.c
+  SRC_MAIN  = main.c
+  #Sources utiles
+  SRC_UTILS = utils_chunk_buffer.c utils_chunk_buffer2.c utils_lenght.c utils_libft1.c \
+  utils_libft2.c utils_lst.c utils_lst2.c utils_va_lst.c utils_print_lst.c utils_free.c 
+  #Sources Built_in
+  SRC_BUILTIN = built_in_cd.c built_in_echo.c built_in_env.c built_in_exit.c \
+  built_in_export1.c built_in_export2.c built_in_pwd.c built_in_unset.c \
+
+#Tous les sources
+  ALL_SRC=$(SRC_MAIN) \
+  $(addprefix Utils/, $(SRC_UTILS)) \
+  $(addprefix Part0_Init/, $(SRC_PART0)) \
+  $(addprefix Part1_Prompt/, $(SRC_PART1)) \
+  $(addprefix Part2_Lexing/, $(SRC_PART2)) \
+  $(addprefix Part3_Flags/, $(SRC_PART3)) \
+  $(addprefix Part4_Expand/, $(SRC_PART4)) \
+  $(addprefix Part5_Word_splitting/, $(SRC_PART5)) \
+  $(addprefix Part6_Delete_quotes/, $(SRC_PART6)) \
+  $(addprefix Part7_Cmd_struct/, $(SRC_PART7)) \
+  $(addprefix Part8_Execution/, $(SRC_PART8)) \
+  $(addprefix PartX_Free/, $(SRC_PARTX)) \
+  $(addprefix Built_in/, $(SRC_BUILTIN)) 
+
+OBJ = $(addprefix $(OBJ_DIR)/, $(ALL_SRC:.c=.o))
+
 all: $(NAME)
 $(NAME): $(OBJ)
 	@echo "$(YEL)the nature elements is linking !$(RESET)"
-	$(CC) $(FLAG_NAME) $(OBJ) -lreadline
+	$(CC) $(OPT_NAME) $(OBJ) $(LIBRARY)
 	@echo "$(YEL)You found a shell on the beach ! Open it !$(RESET)"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	mkdir -p $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@echo "$(GREEN)$(MESSAGE) $< $(RESET)"
-	$(CC) $(FLAG_OBJ) $< -I$(INC_DIR) -o $@
+	$(CC) $(CC_FLAG) $< -I$(INC_DIR) -o $@
 
-$(OBJ_DIR)/%.o: $(UTILS_DIR)/%.c
-	mkdir -p $(OBJ_DIR)
-	@echo "$(GREEN)$(MESSAGE) $< $(RESET)"
-	$(CC) $(FLAG_OBJ) $< -I$(INC_DIR) -o $@
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SUBS_DIR))
 
 install: $(BIN_DIR)/$(NAME)
 
@@ -84,4 +101,4 @@ fclean: clean
 	$(RM) $(NAME)
 re: all
 
-.PHONY: all perfect re clean fclean 
+.PHONY: all install re clean fclean 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part5_word_splitting_main.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arthurito <arthurito@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 18:24:23 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/31 14:52:32 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/08 22:51:41 by arthurito        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_list *split_in_lst(char **tab, t_list *curr_node)
 		tmp = ft_lstnew(tab[i]);
 		if(tmp == NULL)
 			return(ft_free_lst(&lst), NULL);
-		memcpy(&tmp->flag, &curr_node->flag, sizeof(t_flag));
+		ft_memcpy(&tmp->flag, &curr_node->flag, sizeof(t_flag));
 		ft_lstadd_back(&lst, tmp);
 		i++;
 	}

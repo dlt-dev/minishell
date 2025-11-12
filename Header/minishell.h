@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/12 13:15:02 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/12 15:53:43 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 #include "utils.h"
 #include "chunk_buffer.h"
 #include "exec_struct.h"
+#include "built_in.h"
 
 //Part0: init_variable
 int init_variable(t_shell *shell, int argc, char **argv, char **envp);
@@ -70,6 +71,10 @@ void print_cmd_list(t_exec *head); // TEST PRINT
 
 // Part6_delete_quotes
 int delete_quotes(t_shell *shell, t_list *lst);
+//Part8 : execution
+
+int	manage_execution(t_shell *shell, t_valist *env);
+
 
 //Part8 : execution
 int	manage_execution(t_shell *shell, t_valist *env);

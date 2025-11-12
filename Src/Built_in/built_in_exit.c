@@ -1,12 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Part8_fork_process.c                               :+:      :+:    :+:   */
+/*   built_in_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/04 11:28:30 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/04 11:28:33 by jdelattr         ###   ########.fr       */
+/*   Created: 2025/11/10 16:57:16 by aoesterl          #+#    #+#             */
+/*   Updated: 2025/11/11 17:36:17 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
+
+void builtin_exit(t_shell *shell)
+{
+	free_exit(shell, 0,  "exit");
+}

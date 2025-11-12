@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   built_in_echo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/12 16:01:43 by aoesterl         ###   ########.fr       */
+/*   Created: 2025/11/10 16:55:18 by aoesterl          #+#    #+#             */
+/*   Updated: 2025/11/11 17:36:07 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Header/minishell.h"
-#include <unistd.h> 
-#include <stdlib.h>
-#include <stdio.h>
-#include <errno.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <sys/wait.h>
+#include "minishell.h"
 
+void builtin_echo(char **args)
+{ 
+	int i;
+	int flag_n;
+
+	flag_n = 0;
+	i = 1;
+	while(ft_strcmp(args[i], "-n") == 0)
+	{
+		flag_n = 1;
+		i++;
+	}
+	while(args[i] != NULL)
+	{ 
+		write(1 , args[i], ft_strlen(args[i]));
+		write(1 , " ", 1);
+		i++; 
+	}
+	if(flag_n == 0)
+		write(1, "\n", 1);
+}

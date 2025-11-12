@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PartX_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:44:28 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/12 14:47:04 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/12 16:00:22 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ void free_all(t_shell *shell)
 
 void free_exit(t_shell *shell, int code, char *message)
 { 
-	perror(message);
+	if(message != NULL)
+		perror(message);
 	free_all(shell);
 	ft_free_var(&shell->env);
-	clear_history();
+	// clear_history();
 	exit(code);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/12 14:40:02 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/12 16:24:47 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ int main(int argc, char **argv, char **envp)
 		if(shell.rd_line == NULL)
 			free_exit(&shell, GEN_ERRNO, NULL);
 
-		if (*shell.rd_line == '\0')
+		/*if (*shell.rd_line == '\0')
 		{
 			free(shell.rd_line);
 			shell.rd_line = NULL;
 			continue;//passe au if () suivant
-		}
-		/* 
-		if(*shell.rd_line != '\0')
-			add_history(shell.rd_line); */
+		}*/
+		
+		// if(*shell.rd_line != '\0')
+		// 	add_history(shell.rd_line);
 		add_history(shell.rd_line);
 		
 		if(lexing(shell.rd_line, &shell.lst) == ERROR)
@@ -67,6 +67,7 @@ int main(int argc, char **argv, char **envp)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		if(delete_quotes(&shell, shell.lst) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
+		// ft_env(shell.env);
 		// print_str_lst(shell.lst);
 		logical_struct(&shell, shell.lst);
 		if (shell.cmd_lst)
