@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/07 16:12:11 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/12 19:35:52 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,18 +102,6 @@ typedef struct s_valist
 	int len_name; // taille de la ligne (?)
 	struct s_valist *next;
 }t_valist;
-
-// typedef struct s_var
-// {
-// 	t_valist *env;
-// }t_var;
-
-/**
- * @brief @param t_var contient 2 listes: Une liste des variables d'envirronements
- * et une liste des variables locales au shell. @param t_valist c'est la structure
- * de chacune des listes de variable: le nom, la valeur et la longueur du nom de
- * la variable.
- */
  
 typedef struct s_shell
 {

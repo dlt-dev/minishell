@@ -1,8 +1,6 @@
 {
     "files.associations": {
-        "*.c": "c",
-        "*.h": "c",
-        "ranges": "c"
+        "minishell.h": "c"
     },
     "C_Cpp.autocomplete": "Default",
     "C_Cpp.intelliSenseEngine": "Default",
