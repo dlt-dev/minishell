@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/13 16:03:29 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/13 16:30:28 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ void print_syntax_error(t_shell *shell, char *tok_content); // changement
 char *redir_name(int type); // TEST PRINT
 void print_cmd_list(t_exec *head); // TEST PRINT
 
-//retry_part7
+// Part6_delete_quotes
+int delete_quotes(t_shell *shell, t_list *lst);
+
+// Part7_Cmd_struct
 void	print_cmd_list(t_exec *head); // TEST PRINT
 char	*redir_name(int type); // TEST PRINT
 int	add_arg_command(t_exec *current, char *cmd);
@@ -83,14 +86,12 @@ void free_exec(t_exec *cmd);
 void free_tab(char **cmds);
 
 //Part8 : execution
-int	manage_execution(t_shell *shell, t_valist *env);
 
-//Part8_heredoc 
-int handle_heredoc(char *delimit);
-
-//Part8_builtin
-int	is_built_in(char *cmd);
-int	execute_built_in(t_shell *shell, int type, char **args, t_valist *env);
+int	manage_execution(t_shell *shell, t_valist *env); // execution
+int	check_all_redir(t_shell *shell); // open_dir
+int handle_heredoc(char *delimit); // heredoc
+int	is_built_in(char *cmd); // built_in
+int	execute_built_in(t_shell *shell, int type, char **args, t_valist *env); // built_in
 
 //PartX_free.c
 void free_all(t_shell *shell);
