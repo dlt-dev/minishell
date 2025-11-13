@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_env.c                                     :+:      :+:    :+:   */
+/*   test1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 17:00:20 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/13 18:25:16 by aoesterl         ###   ########.fr       */
+/*   Created: 2025/11/13 17:55:59 by aoesterl          #+#    #+#             */
+/*   Updated: 2025/11/13 17:56:39 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void builtin_env(t_valist *env, int fd_out)
-{	
-	if(env == NULL)
-		return;
-	while(env != NULL)
-	{ 	
-		write(fd_out, env->name, ft_strlen(env->name));
-		write(fd_out, "=", 1);
-		write(fd_out , env->value, ft_strlen(env->value));
-		write(fd_out, "\n", 1);
-		env = env->next;
-	}
+int main()
+{
+	
+
+
 }
