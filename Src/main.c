@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/13 14:51:28 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/13 16:31:04 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,35 +45,19 @@ int main(int argc, char **argv, char **envp)
 		shell.rd_line = readline(shell.invite.prompt);
 		if(shell.rd_line == NULL)
 			free_exit(&shell, GEN_ERRNO, NULL);
-
-		/*if (*shell.rd_line == '\0')
-		{
-			free(shell.rd_line);
-			shell.rd_line = NULL;
-			continue;//passe au if () suivant
-		}*/
-		
-		// if(*shell.rd_line != '\0')
-		// 	add_history(shell.rd_line);
-		add_history(shell.rd_line);
-		
+		if(*shell.rd_line != '\0')
+			add_history(shell.rd_line);
 		if(lexing(shell.rd_line, &shell.lst) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		put_flags(shell.lst);
-		// print_str_lst(shell.lst);
 		if(expand_shell_param(&shell, shell.lst) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		if(split_param(&shell, shell.lst, NULL) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		if(delete_quotes(&shell, shell.lst) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
-		// ft_env(shell.env);
-		// print_str_lst(shell.lst);
-		logical_struct(&shell, shell.lst);
-		if(logical_struct(&shell, shell.lst) == ERROR)
+		if(logical_struct(&shell, NULL, shell.lst) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
-		
-		
 		if (shell.cmd_lst)
 			print_cmd_list(shell.cmd_lst);
 		//else

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Part7_syntax_error.c                               :+:      :+:    :+:   */
+/*   retry _syntaxe_err.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/27 12:11:09 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/12 13:14:51 by jdelattr         ###   ########.fr       */
+/*   Created: 2025/11/13 15:12:29 by aoesterl          #+#    #+#             */
+/*   Updated: 2025/11/13 15:12:50 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void free_exec(t_exec *cmd)
 	while (cmd)
 	{
 		tmp = cmd->next;
-		while (cmd->redir)
+		while (cmd->redir != NULL)
 		{
 			redir_tmp = cmd->redir->next;
 			free(cmd->redir->filename);
@@ -52,13 +52,8 @@ void free_exec(t_exec *cmd)
 	}
 }
 
-void	print_syntax_error(t_exec *head, t_shell *shell, char *tok_content)
+void	print_syntax_error(t_shell *shell, char *tok_content)
 {
 	printf("syntax error near unexpected token '%s'\n", tok_content);
 	shell->exit_status = 127;
-	if (head)
-	{
-		free_exec(head);
-		printf("je suis dans print_syntaxe_err()\n");
-	}
 }
