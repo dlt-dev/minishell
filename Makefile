@@ -44,7 +44,7 @@ Part8_Execution PartX_Free
   SRC_PART5 = Part5_word_splitting_main.c Part5_countword_hdl_quotes.c Part5_word_splitting.c
   SRC_PART6 = Part6_delete_quotes.c 
   SRC_PART7 = Part7_cmd_struct.c Part7_redir_struct.c Part7_syntax_error.c
-  SRC_PART8 = Part8_execution.c Part8_built_in.c Part8_heredoc.c
+  SRC_PART8 = Part8_execution.c Part8_built_in.c Part8_heredoc.c Part8_open_redir.c
   SRC_PARTX = PartX_free.c
   SRC_MAIN  = main.c
   #Sources utiles

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/12 15:53:43 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/13 15:25:12 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,8 @@ int delete_quotes(t_shell *shell, t_list *lst);
 
 int	manage_execution(t_shell *shell, t_valist *env);
 
-
-//Part8 : execution
-int	manage_execution(t_shell *shell, t_valist *env);
+//Part8 :open_redir
+int	check_all_redir(t_shell *shell);
 
 //Part8_heredoc 
 int handle_heredoc(char *delimit);

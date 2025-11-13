@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   Part8_built_in.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 19:54:50 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/12 16:11:57 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/13 15:07:32 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/////////////////////////////////////
+/// @fonctions built_in.c ///
+////////////////////////////////////
 
 enum	e_builtin_type
 {
@@ -40,7 +44,6 @@ int	is_built_in(char *cmd) // return l'enum du builtin
 		return (6);
 	if (ft_strncmp(cmd, "exit", ft_strlen("exit")) == 0)
 		return (7);
-
 	else
 		return (NO_BUILT_IN);
 }
