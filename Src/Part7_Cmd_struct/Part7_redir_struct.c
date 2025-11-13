@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Part7_redir_struct.c                               :+:      :+:    :+:   */
+/*   try_redir_struct.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/30 15:59:13 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/12 19:41:00 by aoesterl         ###   ########.fr       */
+/*   Created: 2025/11/13 15:13:58 by aoesterl          #+#    #+#             */
+/*   Updated: 2025/11/13 15:16:22 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,46 +17,39 @@ t_redir	*create_new_redir(char *filename, int type) // si plusieurs redir a la s
 	t_redir	*new;
 
 	new = malloc(sizeof(t_redir));
-	if (!new)
+	if (new == NULL)
 		return (NULL);
 	new->redir_type = type;
 	new->filename = ft_strdup(filename);
+	if(filename == NULL)
+		return(free(new), NULL);
 	new->next = NULL;
 	return (new);
 }
 
-void	add_redir_command(t_exec *current, t_redir *redir)
-{
-	t_redir	*tmp;
 
-	tmp = NULL;
-	if (!current || !redir)
-		return ;
-	if (!current->redir)
+void add_redir_command(t_exec *current, t_redir *redir)
+{
+	t_redir *tmp;
+
+	tmp = current->redir;
+	if (current->redir == NULL)
 	{
 		current->redir = redir;
 		return ;
 	}
-	tmp = current->redir;
-	while (tmp->next)
+	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = redir;
 }
 
-// assigne le type de redir et file le filename dans la nod commande correspondante
-void	redir_management(t_exec *current, t_list *token, int type)
+int	redir_management(t_exec *current, t_list *token, int type)
 {
-	t_list	*next_token;
 	t_redir	*new_redir;
 
-	if (!current || !token)
-		return ;
-	next_token = token->next;
-	new_redir = create_new_redir(next_token->content, type); // malloc failed ? 
+	new_redir = create_new_redir(token->next->content, type);
+	if(new_redir == NULL)
+		return(ERROR);
 	add_redir_command(current, new_redir);
+	return(0);
 }
-/**
- * @brief @param redir_management va creer la lsite chainee de redirection
- * @param create_new_redir va creer le node 
- * @param add_redir_command add back le node 
- */

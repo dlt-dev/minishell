@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/12 15:53:43 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/13 16:03:29 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,25 @@ int split_param(t_shell *shell, t_list *curr_node, t_list *prev_node);
 int count_word_hdle_quotes(char *str);
 char **word_splitting(char *str, int count_word);
 
+// Part6_delete_quotes
+int delete_quotes(t_shell *shell, t_list *lst);
+
 //Part7 : cmd_struct
-int logical_struct(t_shell *shell, t_list *token);
-void redir_management(t_exec *current, t_list *token, int type);
-void print_syntax_error(t_exec *head, t_shell *shell, char *tok_content);
+// int logical_struct(t_shell *shell, t_list *token);
+int redir_management(t_exec *current, t_list *token, int type); //changement
+void print_syntax_error(t_shell *shell, char *tok_content); // changement
 char *redir_name(int type); // TEST PRINT
 void print_cmd_list(t_exec *head); // TEST PRINT
 
-// Part6_delete_quotes
-int delete_quotes(t_shell *shell, t_list *lst);
-//Part8 : execution
-
-int	manage_execution(t_shell *shell, t_valist *env);
-
+//retry_part7
+void	print_cmd_list(t_exec *head); // TEST PRINT
+char	*redir_name(int type); // TEST PRINT
+int	add_arg_command(t_exec *current, char *cmd);
+int	logical_struct(t_shell *shell, t_exec *current, t_list *token);
+int	redir_management(t_exec *current, t_list *token, int type);
+void	print_syntax_error(t_shell *shell, char *tok_content);
+void free_exec(t_exec *cmd);
+void free_tab(char **cmds);
 
 //Part8 : execution
 int	manage_execution(t_shell *shell, t_valist *env);
@@ -90,7 +96,6 @@ int	execute_built_in(t_shell *shell, int type, char **args, t_valist *env);
 void free_all(t_shell *shell);
 void free_exit(t_shell *shell, int code, char *message);
 void free_exec(t_exec *cmd);
-
 void free_exec_lst(t_exec **head);
 
 

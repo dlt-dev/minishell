@@ -34,6 +34,8 @@ SUBS_DIR = Utils Built_in Part0_Init Part1_Prompt Part2_Lexing Part3_Flags \
 Part4_Expand Part5_Word_splitting Part6_Delete_quotes Part7_Cmd_struct \
 Part8_Execution PartX_Free
 
+#Part7_Cmd_struct
+
 #Fichiers sources
   #Sources parties
   SRC_PART0 = Part0_init_var.c
@@ -43,7 +45,8 @@ Part8_Execution PartX_Free
   SRC_PART4 = Part4_1expand_main.c Part4_3expand_dollar.c Part4_2expand_quotes.c
   SRC_PART5 = Part5_word_splitting_main.c Part5_countword_hdl_quotes.c Part5_word_splitting.c
   SRC_PART6 = Part6_delete_quotes.c 
-  SRC_PART7 = Part7_cmd_struct.c Part7_redir_struct.c Part7_syntax_error.c
+#   SRC_PART7 = Part7_cmd_struct.c Part7_redir_struct.c Part7_syntax_error.c
+  SRC_PART7 = Part7_cmd_struc.c Part7_main_tree_struct.c Part7_print_tree.c Part7_redir_struct.c Part7_syntaxe_err.c
   SRC_PART8 = Part8_execution.c Part8_built_in.c Part8_heredoc.c
   SRC_PARTX = PartX_free.c
   SRC_MAIN  = main.c
@@ -68,7 +71,7 @@ Part8_Execution PartX_Free
   $(addprefix Part8_Execution/, $(SRC_PART8)) \
   $(addprefix PartX_Free/, $(SRC_PARTX)) \
   $(addprefix Built_in/, $(SRC_BUILTIN)) 
-
+#   $(addprefix Part7_Cmd_struct/, $(SRC_PART7))
 OBJ = $(addprefix $(OBJ_DIR)/, $(ALL_SRC:.c=.o))
 
 all: $(NAME)
