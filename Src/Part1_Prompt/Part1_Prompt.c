@@ -6,18 +6,18 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/24 18:55:30 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/14 15:26:53 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int replace_by_tilde(t_prompt *invite, int *len_home)
+static int replace_by_tilde(t_valist *env , t_prompt *invite, int *len_home)
 {
 	int i;
 	char *home;
 	
-	home = getenv("HOME");
+	home = getenv_intern(env ,"HOME");
 	if(home == NULL)
 		return(1);
 	i = ft_strlen(home);
@@ -30,7 +30,7 @@ static int replace_by_tilde(t_prompt *invite, int *len_home)
 }
 
 
-static int len_prompt(t_prompt *invite, int *len_home)
+static int len_prompt(t_valist *env, t_prompt *invite, int *len_home)
 { 
 	int i;
 	
@@ -39,7 +39,7 @@ static int len_prompt(t_prompt *invite, int *len_home)
 	i += ft_strlen(invite->user);
 	i += ft_strlen(" ");
 	i += ft_strlen(invite->color_cwd);
-	if(replace_by_tilde(invite, len_home) == 0)
+	if(replace_by_tilde(env , invite, len_home) == 0)
 		i+= ft_strlen("~");
 	i += ft_strlen(invite->cwd + *len_home);
 	i += ft_strlen(invite->color_reset);
@@ -48,13 +48,13 @@ static int len_prompt(t_prompt *invite, int *len_home)
 }
 
 
-static char *create_prompt(t_prompt *invite)
+static char *create_prompt(t_valist *env ,t_prompt *invite)
 {
 	char *p;
 	int len_home; 
 	
 	len_home= 0;
-	p = malloc(sizeof(char ) * (len_prompt(invite, &len_home) + 1));
+	p = malloc(sizeof(char ) * (len_prompt(env , invite, &len_home) + 1));
 	if(p == NULL)
 		return(NULL);
 	p[0] = '\0';
@@ -70,15 +70,15 @@ static char *create_prompt(t_prompt *invite)
 	return(p);	
 }
 
-int get_prompt(t_prompt *invite)
+int get_prompt(t_valist *env, t_prompt *invite)
 {
-	invite->user = getenv("USER");
+	invite->user = getenv_intern(env , "USER");
 	if(invite->user == NULL || *invite->user == '\0')
 		invite->user = "Unknown";
 	invite->cwd = getcwd(NULL, 0);
 	if(invite->cwd == NULL)
 		return(ERROR);
-	invite->prompt = create_prompt(invite);
+	invite->prompt = create_prompt(env , invite);
 	free(invite->cwd);
 	invite->cwd = NULL;
 	if(invite->prompt == NULL)

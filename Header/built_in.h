@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 17:33:42 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/13 20:42:26 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/14 15:22:55 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "struct.h"
 
-
+char* getenv_intern(t_valist* env, char *pattern);
 int builtin_cd(t_shell *shell, char **argv);
 int builtin_echo(char **args, int fd_out);
 void builtin_env(t_valist *env, int fd_out);

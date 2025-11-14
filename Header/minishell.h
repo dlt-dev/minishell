@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/13 19:29:28 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/14 15:26:39 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 int init_variable(t_shell *shell, int argc, char **argv, char **envp);
 
 //Part1: Prompt
-int get_prompt(t_prompt *invite);
+int get_prompt(t_valist *env , t_prompt *invite);
 
 //Part2: lexing
 int lexing(char *str, t_list **lst);
