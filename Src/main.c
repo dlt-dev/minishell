@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/14 15:24:16 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/14 19:40:27 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int main(int argc, char **argv, char **envp)
 		free_exit(&shell, GEN_ERRNO, NULL);
 	while(1)
 	{
-		if(get_prompt(shell.env, &shell.invite) == ERROR)
+		if(get_prompt(&shell, shell.env, &shell.invite) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		shell.rd_line = readline(shell.invite.prompt);
 		if(shell.rd_line == NULL)
@@ -58,8 +58,8 @@ int main(int argc, char **argv, char **envp)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		if(logical_struct(&shell, NULL, shell.lst) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
-		if (shell.cmd_lst)
-			print_cmd_list(shell.cmd_lst);
+		// if (shell.cmd_lst)
+		// 	print_cmd_list(shell.cmd_lst);
 		//else
 			//printf("une syntaxe error a ete detecte et la liste a ete free\n");
 

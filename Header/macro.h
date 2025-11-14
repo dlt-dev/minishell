@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:52:31 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/12 20:00:44 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/14 18:07:11 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #	define MACRO_H
 
 // Couleur macro makefile
-#define RED "\033[31;1;3m"
-#define GREEN "\033[32;1;3m"
 #define YELL "\033[33;1;3m"
 #define CYAN "\033[36;1;3m"
 #define RESET "\001\033[m\002"
@@ -23,6 +21,8 @@
 //Couleur macro prompt
 #define YELL_PS "\001\033[33;1m\002"
 #define BLUE_PS "\001\033[34;1m\002"
+#define GREEN "\001\033[32;1;3m\002"
+#define RED "\001\033[31;1;3m\002"
 
 // Erreur macro
 #define GEN_ERRNO 1

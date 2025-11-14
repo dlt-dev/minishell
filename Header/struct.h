@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/13 20:15:44 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/14 18:14:30 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,12 @@ typedef struct s_list
 }t_list;
 
 typedef struct s_prompt
-{ 
+{
 	char *user;
 	char *cwd;
 	char *prompt;
 
+	char *color_exit;
 	char *color_user;
 	char *color_cwd;
 	char *color_reset;

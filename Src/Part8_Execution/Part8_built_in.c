@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 19:54:50 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/14 15:18:19 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:03:01 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,20 @@ int	execute_built_in(t_shell *shell, int type, char **args, t_valist *env)
 {
 	int fd_out = shell->cmd_lst->fd_out;
 	
-	if (type == ECHO) // echo with option -n
-		builtin_echo(args, fd_out);
-	if (type == CD) // with only a relative or absolute path
-		builtin_cd(shell, args);
-	if (type == PWD) // no opt
-		builtin_pwd(fd_out);
-	if (type == EXPORT) // no opt mais plusieurs args
-		builtin_export(shell, env, args);
-	if (type == UNSET) // no opt
-		builtin_unset(shell, env, args); //ft_unset(shell, env, args);
-	if (type == ENV) // no opt
-		builtin_env(env, fd_out);
-	if (type == EXIT) // no opt
+	if (type == ECHO)
+		shell->exit_status = builtin_echo(args, fd_out);
+	if (type == CD)
+		shell->exit_status = builtin_cd(shell, args);
+	if (type == PWD)
+		shell->exit_status = builtin_pwd(fd_out);
+	if (type == EXPORT)
+		shell->exit_status = builtin_export(shell, env, args);
+	if (type == UNSET)
+		shell->exit_status = builtin_unset(shell, env, args); //ft_unset(shell, env, args);
+	if (type == ENV) 
+		shell->exit_status = builtin_env(env, fd_out);
+	if (type == EXIT)
 		builtin_exit(shell); //(args) si args est ce que j'execute qm ???
-	//else
 	return (1);
 	
 }
