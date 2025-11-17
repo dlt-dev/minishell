@@ -1,0 +1,11 @@
+h
+Header
+Makefile
+minishell
+objs
+outfile
+part8_execution(redir test).c
+signaux.c
+Src
+test.c
+test_exec.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_libft1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 13:51:58 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/05 18:20:27 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/14 20:07:45 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void ft_strcat(char *src, char *dest)
 {
 	int i;
 	int j;
+
 	if(src == NULL || dest == NULL)
 		return;
 	j = 0; 
