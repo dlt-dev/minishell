@@ -47,13 +47,14 @@ Part8_Execution PartX_Free
   SRC_PART6 = Part6_delete_quotes.c  
   SRC_PART7 = Part7_cmd_struc.c Part7_main_tree_struct.c Part7_print_tree.c \
   Part7_redir_struct.c Part7_syntaxe_err.c
-  SRC_PART8 = Part8_execution.c Part8_built_in.c Part8_heredoc.c Part8_open_redir.c
+  SRC_PART8 = Part8_execution.c Part8_built_in.c Part8_heredoc.c Part8_open_redir.c \
+  Part8_exec_fork_one.c
   SRC_PARTX = PartX_free.c
   SRC_MAIN  = main.c
   #Sources utiles
   SRC_UTILS = utils_chunk_buffer.c utils_chunk_buffer2.c utils_lenght.c utils_libft1.c \
   utils_libft2.c utils_lst.c utils_lst2.c utils_va_lst.c utils_print_lst.c utils_free.c \
-  utils_libft3.c utils_error.c utils_exec1.c utils_exec2.c 
+  utils_libft3.c utils_error.c utils_exec1.c utils_exec2.c utils_exec3.c
   #Sources Built_in
   SRC_BUILTIN = built_in_cd.c built_in_echo.c built_in_env.c built_in_exit.c \
   built_in_export1.c built_in_export2.c built_in_pwd.c built_in_unset.c \

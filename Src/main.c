@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/17 16:30:49 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/17 19:36:52 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,15 @@ int main(int argc, char **argv, char **envp)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		if(logical_struct(&shell, NULL, shell.lst) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
-		if (shell.cmd_lst)
-			print_cmd_list(shell.cmd_lst);
+		// if (shell.cmd_lst)
+		print_cmd_list(shell.cmd_lst);
 
 
-		//printf("variable path")
-		//else
-			//printf("une syntaxe error a ete detecte et la liste a ete free\n");
+		// //printf("variable path")
+		// //else
+		// 	//printf("une syntaxe error a ete detecte et la liste a ete free\n");
 
-		// execution
+		// // execution
 		
 		manage_execution(&shell, shell.env);
 
