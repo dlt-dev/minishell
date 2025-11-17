@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_libft1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 13:51:58 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/14 20:07:45 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/17 17:59:19 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ char	*ft_strdup(char *s)
 	size_t	lenght;
 	char	*m;
 	int		i;
-
+	
+	if(s == NULL)
+		return(NULL);
 	i = 0;
 	lenght = ft_strlen(s);
 	m = malloc(sizeof(char) * (lenght + 1));

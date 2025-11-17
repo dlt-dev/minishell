@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_cd.c                                      :+:      :+:    :+:   */
+/*   utils_manage_valist.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 16:56:31 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/17 18:05:37 by aoesterl         ###   ########.fr       */
+/*   Created: 2025/11/17 17:52:37 by aoesterl          #+#    #+#             */
+/*   Updated: 2025/11/17 18:01:37 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ char* getenv_intern(t_valist* env, char *name)
 	}
 	return(NULL);
 }
-
 
 int set_env_intern(t_shell *shell, char *name, char *value)
 {
@@ -50,61 +49,3 @@ int set_env_intern(t_shell *shell, char *name, char *value)
 	var_addback(&shell->env, tmp);
 	return(0);
 }
-
-int cd_only(t_shell *shell)
-{ 
-	char *str;
-	char *msg;
-
-	msg = "minishell: cd: HOME not set\n";
-	str = getenv_intern(shell->env, "HOME");
-	if(str == NULL)
-	{ 
-		write (2 , msg, ft_strlen(msg));
-		return(GEN_ERRNO);
-	}
-	else
-	{ 
-		if(chdir(str) == ERROR)
-		{
-			print_error_message("cd" , str); 
-			return(GEN_ERRNO);
-		}
-	}
-	return(0);
-}
-
-int too_much_arg(void)
-{ 
-	char *msg;
-	msg = "minishell: cd: too many arguments\n";
-	write(1, msg, ft_strlen(msg));
-	return(GEN_ERRNO);
-}
-
-int builtin_cd(t_shell* shell, char **argv)
-{
-	int i;
-	// char *new_pwd;
-	
-	// new_pwd = getcwd(NULL, 0);
-	// if(new_pwd == NULL)
-	// 	return();
-	i = 1;
-	while(argv[i] != NULL)
-		i++;
-	if(i == 1)
-		return(cd_only(shell));
-	if(i > 2)
-		return(too_much_arg());
-	if(chdir(argv[1]) == ERROR)
-	{
-		perror(argv[1]);	
-		return(GEN_ERRNO);
-	}
-	else
-		
-	return(0);
-}
-
-
