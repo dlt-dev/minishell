@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:40:19 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/14 17:00:51 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/15 21:48:13 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 #include <stddef.h>
 #include "struct.h"
+
+
+//utils_error
+void print_error_message(char * fonction, char * arg); 
 
 //Utils_lenght.c
 size_t	ft_strlen(const char *str);

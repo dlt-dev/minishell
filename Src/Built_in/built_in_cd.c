@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:56:31 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/13 20:18:31 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/15 21:54:50 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,40 +26,38 @@ char* getenv_intern(t_valist* env, char *pattern)
 int cd_only(t_shell *shell)
 { 
 	char *str;
+	char *msg;
 
+	msg = "minishell : cd : HOME not set\n";
 	str = getenv_intern(shell->env, "HOME");
 	if(str == NULL)
 	{ 
-		printf("minishell : cd : HOME not set");
+		write (2 , msg, ft_strlen(msg));
 		return(GEN_ERRNO);
 	}
 	else
 	{ 
 		if(chdir(str) == ERROR)
-		{ 
-			perror(str); 
+		{
+			print_error_message("cd" , str); 
 			return(GEN_ERRNO);
 		}
-		else
-			printf("%s\n", getcwd(NULL, 0));
 	}
 	return(0);
 }
 
 int too_much_arg(void)
 { 
-	char *message;
-	message = "too many arguments";
-	write(1, message, ft_strlen(message));
+	char *msg;
+	msg = "minishell: cd : too many arguments\n";
+	write(1, msg, ft_strlen(msg));
 	return(GEN_ERRNO);
 }
 
 int builtin_cd(t_shell* shell, char **argv)
 {
 	int i;
-	char *message;
-
-	message = "too many arguments";
+	
 	i = 1;
 	while(argv[i] != NULL)
 		i++;
@@ -72,8 +70,6 @@ int builtin_cd(t_shell* shell, char **argv)
 		perror(argv[1]);	
 		return(GEN_ERRNO);
 	}
-	else
-		printf("%s\n", getcwd(NULL, 0));
 	return(0);
 }
 

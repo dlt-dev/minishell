@@ -53,7 +53,7 @@ Part8_Execution PartX_Free
   #Sources utiles
   SRC_UTILS = utils_chunk_buffer.c utils_chunk_buffer2.c utils_lenght.c utils_libft1.c \
   utils_libft2.c utils_lst.c utils_lst2.c utils_va_lst.c utils_print_lst.c utils_free.c \
-  utils_libft3.c
+  utils_libft3.c utils_error.c
 
   #Sources Built_in
   SRC_BUILTIN = built_in_cd.c built_in_echo.c built_in_env.c built_in_exit.c \

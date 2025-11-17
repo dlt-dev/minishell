@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/14 19:32:44 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/15 18:20:12 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static int len_prompt(t_shell *shell, t_valist *env, int *len_home, char *exit_s
 	i = 0;
 	invite->color_exit = color_of_exit(shell);
 	i += ft_strlen(invite->color_exit);
-	i += ft_strlen("->");
-	i += ft_strlen(exit_status); 
+	i += ft_strlen(exit_status);
+	i += ft_strlen("-> ");
 	i += ft_strlen(invite->color_user);
 	i += ft_strlen(invite->user);
 	i += ft_strlen(" ");

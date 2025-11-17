@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 16:27:16 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/14 17:19:50 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/15 17:33:04 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ int	manage_execution(t_shell *shell, t_valist *env) // , char **cmds
 {
 	// ac = nb de cmds
 	(void)env;
-	int i;
-	i = 0;
 	t_exec *cmd_list = shell->cmd_lst;
 	// t_exec *current = cmd_list;
 

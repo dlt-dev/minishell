@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test1.c                                            :+:      :+:    :+:   */
+/*   utils_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/13 17:55:59 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/15 19:00:41 by aoesterl         ###   ########.fr       */
+/*   Created: 2025/11/15 19:01:40 by aoesterl          #+#    #+#             */
+/*   Updated: 2025/11/15 21:53:16 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell.h" 
 
-void print_error_message(char * fonction)
+void print_error_message(char * fonction, char *arg)
 {
     char *error;
     char *minishell;
@@ -21,12 +21,12 @@ void print_error_message(char * fonction)
     error = strerror(errno);
     write(2, minishell, ft_strlen(minishell));
     write(2, fonction, ft_strlen(fonction));
-    write(2 , ": ", 2);
-    write(2 , error, ft_strlen(error)); 
-}
-
-int main()
-{
-    print_error_message("cd"); 
-
+    write(2, ": ", 2);
+    if(arg != NULL)
+    {
+        write(2, arg, ft_strlen(arg));
+        write(2, ": ", 2);
+    }
+    write(2 , error, ft_strlen(error));
+    write(2 , "\n", 1);
 }
