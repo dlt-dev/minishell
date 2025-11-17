@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/12 19:35:52 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/14 18:14:30 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ enum	e_token_type
 	INFILE = 11,
 	OUTFILE = 12,
 	OUTFILE_APPEND = 13,
-	
 };
 
 
@@ -85,11 +84,12 @@ typedef struct s_list
 }t_list;
 
 typedef struct s_prompt
-{ 
+{
 	char *user;
 	char *cwd;
 	char *prompt;
 
+	char *color_exit;
 	char *color_user;
 	char *color_cwd;
 	char *color_reset;
@@ -112,7 +112,6 @@ typedef struct s_shell
 	t_valist *env;
 	t_cb lst_buffer;
 	int exit_status;
-	
 }t_shell;
 
 /**

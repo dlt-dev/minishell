@@ -1,43 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   utils_libft3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/14 16:57:03 by aoesterl         ###   ########.fr       */
+/*   Created: 2025/11/14 16:59:40 by aoesterl          #+#    #+#             */
+/*   Updated: 2025/11/14 17:01:14 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Header/minishell.h"
-#include <unistd.h> 
-#include <stdlib.h>
-#include <stdio.h>
-#include <errno.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <sys/wait.h>
-
-
-int len_number(int nb)
-{ 
-	int i;
-
-	i = 0;
-	if(nb == 0)
-		return(1);
-	while(nb != 0)
-	{ 
-		nb /= 10;
-		i++;
-	}
-	return(i);
-	
-}
+#include "minishell.h"
 
 char	*ft_itoa(int n)
 {
@@ -65,18 +38,4 @@ char	*ft_itoa(int n)
 		len--;
 	}
 	return (p);
-}
-
-
-
-int main()
-{ 
-	char *str;
-	t_cb lst_buffer;
-
-	init_chunk_buffer(&lst_buffer, 10, 2);
-	str = ft_itoa(127);
-	if(str == NULL)
-		return(ERROR);
-	printf("%s", str);
 }

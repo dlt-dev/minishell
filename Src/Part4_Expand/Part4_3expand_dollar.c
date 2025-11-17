@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 14:32:11 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/24 18:54:04 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/14 17:22:53 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,19 @@ static int	expand_var(t_shell *shell, t_cb* lst_buffer, char *str)
 	return (i);
 }
 
+static int expand_exit_status(t_shell *shell, t_cb *lst_buffer)
+{ 
+	char *str;
+	str  = ft_itoa(shell->exit_status);
+	if(str == NULL)
+		return(ERROR);
+	if(cb_append_str(lst_buffer, str) == ERROR)
+		return(free(str),ERROR);
+	free(str);
+	return(0);
+}
+
+
 int handle_dollar(t_shell* shell, t_cb* lst_buffer, char *str)
 {
     int i;
@@ -71,7 +84,9 @@ int handle_dollar(t_shell* shell, t_cb* lst_buffer, char *str)
 	if(str[i] == '?')
 	{
 		i++;
-		// count += len_number(shell->exit_status); //
+		if(expand_exit_status(shell, lst_buffer) == ERROR)
+			return(ERROR);
+		return(i);
 	}
 	check_failed = expand_var(shell, lst_buffer, &str[i]);
 	if(check_failed == ERROR)

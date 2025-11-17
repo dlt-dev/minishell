@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:09:58 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/11 17:36:34 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/14 17:15:25 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,17 @@ void find_env_to_unset(t_shell *shell, t_valist *env, char *name)
 }
 
 
-void builtin_unset(t_shell *shell, t_valist *env, char **args)
+int builtin_unset(t_shell *shell, t_valist *env, char **args)
 {
 	int i;
 
 	i = 1;
 	if(env == NULL)
-		return;
+		return(0);
 	while(args[i] != NULL)
 	{
 		find_env_to_unset(shell, env, args[i]);
 		i++;
 	}
+	return(0);
 }

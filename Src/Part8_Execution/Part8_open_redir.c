@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part8_open_redir.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:02:44 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/13 15:55:46 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/17 15:27:05 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	open_outfile(t_exec *current, t_redir *redir, int redir_type)
 
 	if (redir_type == OUTFILE)
 		fd_out = open(redir->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (redir_type == OUTFILE)
+	if (redir_type == OUTFILE_APPEND)
 		fd_out = open(redir->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd_out < 0)
 	{

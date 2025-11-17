@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:40:19 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/12 15:58:33 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/15 21:48:13 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 #include <stddef.h>
 #include "struct.h"
+
+
+//utils_error
+void print_error_message(char * fonction, char * arg); 
 
 //Utils_lenght.c
 size_t	ft_strlen(const char *str);
@@ -34,6 +38,8 @@ void write_str(char *str);
 void *ft_memset(void* str, int c, size_t n); 
 void    *ft_memcpy(void *dest, const void *src, size_t n);
 
+//utils_libft3.c
+char	*ft_itoa(int n);
 
 //utils_lst.c
 t_list	*ft_lstnew(void *content);
@@ -47,6 +53,7 @@ void insert_after_node(t_list *curr_node, t_list* new_node);
 void del_one_relink(t_list **lst, t_list *curr_node, t_list* prev_node);
 int insert_multi_node(t_list *curr_node, t_list *ins_lst);
 int ft_lst_len(t_list *lst);
+
 
 //Utils_print_lst.c
 void print_var_lst(t_valist *var);

@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:00:10 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/11 17:36:23 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/15 17:34:24 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ int add_affectation(t_shell *shell, t_valist *env, char *str, int len_name)
 	t_valist *node;
 	char *name;
 	char *value;
-	int i;
 
-	i = 0;
 	name = ft_strndup(str, len_name);
 	if(name == NULL)
 		return(ERROR);

@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_env.c                                     :+:      :+:    :+:   */
+/*   test1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 17:00:20 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/14 17:09:45 by aoesterl         ###   ########.fr       */
+/*   Created: 2025/11/13 17:55:59 by aoesterl          #+#    #+#             */
+/*   Updated: 2025/11/15 19:00:41 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int builtin_env(t_valist *env, int fd_out)
-{	
-	if(env == NULL)
-		return(0);
-	while(env != NULL)
-	{ 	
-		write(fd_out, env->name, ft_strlen(env->name));
-		write(fd_out, "=", 1);
-		write(fd_out , env->value, ft_strlen(env->value));
-		write(fd_out, "\n", 1);
-		env = env->next;
-	}
-	return(0);
+void print_error_message(char * fonction)
+{
+    char *error;
+    char *minishell;
+
+    minishell = "minishell: ";
+    error = strerror(errno);
+    write(2, minishell, ft_strlen(minishell));
+    write(2, fonction, ft_strlen(fonction));
+    write(2 , ": ", 2);
+    write(2 , error, ft_strlen(error)); 
+}
+
+int main()
+{
+    print_error_message("cd"); 
+
 }
