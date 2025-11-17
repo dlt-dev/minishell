@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:40:19 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/15 21:48:13 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/17 16:29:36 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,17 @@ void ft_free_var(t_valist **var);
 void lst_del_valist(t_valist *node);
 void del_one_valist(t_valist **lst, t_valist *curr_node, t_valist* prev_node);
 
-
-
 //utils_free.c
 void ft_free_lst(t_list **lst);
 void ft_free_str(char **str);
 void	ft_free_split(char ***tab);
+
+//utils_exec_1
+void	ft_putstr(char *s);
+char	*ft_strcpy(char *dst, const char *src);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+
+//utils_exec_2
+char	**ft_split(char const *s, char c);
 
 #endif

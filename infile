@@ -1,0 +1,17 @@
+total 164
+drwxr-xr-x  7 jdelattr 2025_paris   4096 Nov 17 16:20 .
+drwxr-xr-x 12 jdelattr 2025_paris    248 Nov 13 16:57 ..
+drwxr-xr-x  8 jdelattr 2025_paris    163 Nov 13 16:57 .git
+-rw-r--r--  1 jdelattr 2025_paris     35 Nov 13 16:57 .gitignore
+drwxr-xr-x  2 jdelattr 2025_paris    132 Nov 13 16:57 Header
+-rw-r--r--  1 jdelattr 2025_paris      0 Nov 17 16:20 infile
+-rw-r--r--  1 jdelattr 2025_paris   3315 Nov 14 16:10 Makefile
+-rwxr-xr-x  1 jdelattr 2025_paris 124184 Nov 17 16:19 minishell
+drwxr-xr-x 14 jdelattr 2025_paris   4096 Nov 14 19:25 objs
+-rw-r--r--  1 jdelattr 2025_paris    104 Nov 14 20:44 outfile
+-rw-r--r--  1 jdelattr 2025_paris   2370 Nov 13 16:57 part8_execution(redir test).c
+-rw-r--r--  1 jdelattr 2025_paris   1704 Nov 13 16:57 signaux.c
+drwxr-xr-x 14 jdelattr 2025_paris   4096 Nov 13 16:57 Src
+-rw-r--r--  1 jdelattr 2025_paris   1149 Nov 13 16:57 test.c
+-rw-r--r--  1 jdelattr 2025_paris   1404 Nov 13 16:57 test_exec.c
+drwxr-xr-x  2 jdelattr 2025_paris     46 Nov 13 16:57 .vscode
