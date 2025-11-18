@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:56:31 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/17 18:05:37 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/18 02:16:29 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,28 +82,47 @@ int too_much_arg(void)
 	return(GEN_ERRNO);
 }
 
-int builtin_cd(t_shell* shell, char **argv)
+int set_new_pwd(t_shell *shell, char* str)
+{
+	char *new_pwd;
+
+	new_pwd = getcwd(NULL, 0);
+	if(new_pwd != NULL)
+	{
+		if(set_env_intern(shell, "PWD", new_pwd) == ERROR)
+			return(free(new_pwd), ERROR);
+	}
+	if(new_pwd == NULL)
+	{
+		print_error_message("cd", str);
+		return(ERROR);
+		// new_pwd = getenv_intern(shell->env, "PWD");
+		// if(old_pwd == NULL)
+	}
+	return(0);
+}
+
+int builtin_cd(t_shell* shell, char **args)
 {
 	int i;
-	// char *new_pwd;
 	
-	// new_pwd = getcwd(NULL, 0);
-	// if(new_pwd == NULL)
-	// 	return();
 	i = 1;
-	while(argv[i] != NULL)
+	while(args[i] != NULL)
 		i++;
 	if(i == 1)
 		return(cd_only(shell));
 	if(i > 2)
 		return(too_much_arg());
-	if(chdir(argv[1]) == ERROR)
+	if(chdir(args[1]) == ERROR)
 	{
-		perror(argv[1]);	
+		perror(args[1]);	
 		return(GEN_ERRNO);
 	}
 	else
-		
+	{
+		if(set_new_pwd(shell, args[1]) == ERROR)
+			return(GEN_ERRNO);
+	}
 	return(0);
 }
 
