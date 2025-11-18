@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:52:31 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/15 18:11:28 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/18 17:12:33 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@
 #define CONTINUE -2
 #define SYNTAXE_ERR -2 
 #define MALLOC_FAILED -1
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/14 18:14:30 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/18 17:06:47 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,13 @@ typedef struct s_valist
 	struct s_valist *next;
 }t_valist;
  
+typedef struct s_signal
+{ 
+	struct sigaction sig_int;
+	struct sigaction sig_eof;
+	struct sigaction sig_quit;
+} t_signal;
+
 typedef struct s_shell
 {
 	t_prompt invite;
@@ -111,6 +118,7 @@ typedef struct s_shell
 	t_exec *cmd_lst; // la liste de commandes + redir a envoyer a l'execution
 	t_valist *env;
 	t_cb lst_buffer;
+	t_signal signal;
 	int exit_status;
 }t_shell;
 

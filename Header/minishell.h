@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/17 15:27:42 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/18 16:45:25 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <string.h>
-
+#include <signal.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
