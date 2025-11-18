@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:40:19 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/17 19:07:27 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/17 20:04:48 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c);
 
 //utils_exec_3
-char	**env_list_to_envp(t_valist *env_list, int count);
+char	**env_list_to_envp(t_valist *env_list);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part0_init_var.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 00:00:39 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/14 19:32:08 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/18 13:31:13 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void bzero_shell(t_shell *shell)
 	shell->invite.color_user = YELL_PS;
 	shell->invite.color_cwd = BLUE_PS;
 	shell->invite.color_reset = RESET;
+	shell->prev_fd = -1;
 }
 
 static int init_env_lst(t_valist **env, char *envp)

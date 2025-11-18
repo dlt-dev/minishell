@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/17 19:12:25 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/18 13:04:29 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,10 @@ int	check_all_redir(t_shell *shell); // open_dir
 int handle_heredoc(char *delimit); // heredoc
 int	is_built_in(char *cmd); // built_in
 int	execute_built_in(t_shell *shell, int type, char **args, t_valist *env); // built_in
-int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env, int count);
+int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env);
 char	*find_my_cmd_path(char *my_cmd, char **envp);
 int	path_not_found(void);
+void	ft_free_tab(char **tab);
 
 
 //PartX_free.c
@@ -103,6 +104,5 @@ void free_all(t_shell *shell);
 void free_exit(t_shell *shell, int code, char *message);
 void free_exec(t_exec *cmd);
 void free_exec_lst(t_exec **head);
-
 
 #endif

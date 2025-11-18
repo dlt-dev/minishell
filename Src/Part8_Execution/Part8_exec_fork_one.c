@@ -6,42 +6,55 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 17:59:57 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/17 19:47:48 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/18 17:42:16 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	ft_free_tab(char **tab)
+{
+	int	i;
 
-int	routine_child(t_shell *shell, char **cmd, char **env_tab)
+	if (tab)
+	{
+		i = 0;
+		while (tab[i])
+		{
+			free(tab[i]);
+			i++;
+		}
+	}
+	free(tab);
+}
+
+int	routine_child(t_shell *shell, char **cmd, t_valist *env)
 {
 	int		fd_in;
 	int		fd_out;
 	char	*my_cmd_path;
+	char	**env_tab_exe;
 	
-	//print_char_tab(env_tab_exe);
+	//print_char_tab(env_tab_exe); TEST PRINT
 
-
-	//fd in et out
-	printf("je suis la 3\n");
-	fd_in = shell->cmd_lst->fd_in; //open(shell.cmd_lst->fd_in, O_RDONLY);
+	fd_in = shell->cmd_lst->fd_in;
 	fd_out = shell->cmd_lst->fd_out;
-	//check_error_one(fd1, cmd1, av, fd_pipe); NORMALEMENT DEJA CHECK avant
-	printf("je suis la 4\n");
-	//print_char_tab(cmd);
-	my_cmd_path = find_my_cmd_path(cmd[0], env_tab);
-	
-	printf("my cmd path = %s\n", my_cmd_path);
+	env_tab_exe = env_list_to_envp(env);
 
-	printf("je suis la 5\n");
+	//print_char_tab(cmd); TEST PRINT
+
+ 	if (access(cmd[0], X_OK) == 0)
+		execve(cmd[0], cmd, env_tab_exe);
+	
+	my_cmd_path = find_my_cmd_path(cmd[0], env_tab_exe);
+	
 	if (!my_cmd_path || my_cmd_path[0] == '\0')
 	{
-		//ft_free_tab(cmd1);
+		ft_free_tab(env_tab_exe);
 		close(fd_out);
 		close(fd_in);
 		path_not_found();
 	}
-
 	if (fd_in != STDIN_FILENO)
 	{
 		dup2(fd_in, STDIN_FILENO);
@@ -52,32 +65,23 @@ int	routine_child(t_shell *shell, char **cmd, char **env_tab)
 		dup2(fd_out, STDOUT_FILENO);
 		close(fd_out);
 	}
-	// if(exec faled) -> free tout
-	execve(my_cmd_path, cmd, env_tab);
+	execve(my_cmd_path, cmd, env_tab_exe);
 	perror("execve");
-
-	// free la memoire ??
 	exit(1);
-	//return (0);
 }
 
-int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env, int count)
+int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env)
 {
 	pid_t	child;
-	char	**env_tab;
 
-	env_tab = env_list_to_envp(env, count);
-	
 	child = fork();
 	if (child < 0)
-		perror("fork: ");
+		return(perror("fork: "), ERROR);
 	if (child == 0)
 	{
-		printf("je suis la 2\n");
-		routine_child(shell, cmd, env_tab);
+		routine_child(shell, cmd, env);
 	}
-	int status = 0;
-	waitpid(child, &status, 0);
-	return (child);
-	//return (0);
+	//int status = 0;
+	waitpid(child, 0, 0);//&status, 0);
+	return (0);
 }
