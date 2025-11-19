@@ -1,6 +1,8 @@
 	
-	
-int apply_rediredtion()
+#include "minishell.h"
+
+
+int apply_rediredtion(t_shell *shell, t_exec *current, int pipe_fd[2])
 {
 	int	prev_fd;
 
