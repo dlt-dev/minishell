@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/18 13:33:04 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/19 11:43:23 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ enum	e_token_type
 	OUTFILE = 12,
 	OUTFILE_APPEND = 13,
 };
-
-
 
 typedef struct s_buffer
 { 
@@ -113,7 +111,7 @@ typedef struct s_shell
 	t_cb lst_buffer;
 	int exit_status;
 
-	int	prev_fd; // stock le prev fd ()
+	int	prev_fd; // stock le prev fd () pour stdin de la commande suivante
 
 }t_shell;
 
