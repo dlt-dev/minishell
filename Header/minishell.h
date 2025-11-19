@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/18 16:45:25 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/19 15:39:32 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ void free_exit(t_shell *shell, int code, char *message);
 void free_exec(t_exec *cmd);
 void free_exec_lst(t_exec **head);
 
+extern volatile sig_atomic_t flag_signal;
 
 #endif

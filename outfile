@@ -9,3 +9,9 @@ signaux.c
 Src
 test.c
 test_exec.c
+
+
+
+
+
+si jamais je suis dans readline ca faitle prompt a nouveau, si je ne suis aps dans readline, ca ne fait pas le prompt a nouveau

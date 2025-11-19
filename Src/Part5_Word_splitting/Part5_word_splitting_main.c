@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part5_word_splitting_main.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthurito <arthurito@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 18:24:23 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/08 22:51:41 by arthurito        ###   ########.fr       */
+/*   Updated: 2025/11/19 13:32:51 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int split_param(t_shell *shell, t_list *curr_node, t_list *prev_node)
 {
 	t_list *ins_lst;
 	int step;
-	
+
 	ins_lst = NULL;
 	if(curr_node == NULL)
 		return(0);

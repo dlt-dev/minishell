@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/18 18:58:37 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/19 15:41:55 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@
 
 volatile sig_atomic_t flag_signal = 0;
 
-
-
 void handle_sig_int(int sig)
 {
 	(void)sig; 
@@ -133,12 +131,9 @@ int main(int argc, char **argv, char **envp)
 	{
 		if(get_prompt(&shell, shell.env, &shell.invite) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
-		if(flag_signal == 0)	
-			shell.rd_line = readline(shell.invite.prompt);
+		shell.rd_line = readline(shell.invite.prompt);
 		if(shell.rd_line == NULL)
 			free_exit(&shell, GEN_ERRNO, NULL);
-		if(flag_signal != 0)
-			flag_signal = 0;
 		if(*shell.rd_line != '\0')
 			add_history(shell.rd_line);
 		if(lexing(shell.rd_line, &shell.lst) == ERROR)

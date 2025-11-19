@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:02:44 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/17 15:27:05 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/19 15:39:16 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	open_heredoc(t_exec *current, t_redir *redir)
 	return (0);
 }
 
-int	check_cmd_redir(t_exec *current, t_redir *redir)
+int	check_cmd_redir( t_exec *current, t_redir *redir)
 {
 	while (redir != NULL)
 	{
