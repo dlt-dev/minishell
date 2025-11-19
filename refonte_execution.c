@@ -1,52 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Part8_execution.c                                  :+:      :+:    :+:   */
+/*   refonte_execution.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/03 16:27:16 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/19 17:54:54 by jdelattr         ###   ########.fr       */
+/*   Created: 2025/11/19 17:10:20 by jdelattr          #+#    #+#             */
+/*   Updated: 2025/11/19 17:13:12 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/////////////////////////////////////
-/// @fonctions fork_process.c ///
-////////////////////////////////////
-
-void	print_char_tab(char **tab) //TEST
-{
-	int	i;
-
-	i = 0;
-	if (!tab)
-	{
-		printf("(null)\n");
-		return ;
-	}
-	printf("mon char **\n");
-	while (tab[i])
-	{
-		printf("%s\n", tab[i]);
-		i++;
-	}
-}
-
-void	test_print_fd(t_exec *cmd_list) // TEST
-{
-	int i;
-
-	i = 0;
-	while (cmd_list != NULL)
-	{
-		printf("cmd[%d] ->> cmd fd_in = %d | fd_out = %d\n", i, cmd_list->fd_in,
-			cmd_list->fd_out);
-		i++;
-		cmd_list = cmd_list->next;
-	}
-}
 
 int	ft_lstexec_size(t_exec *lst)
 {
@@ -111,6 +75,7 @@ char	*find_my_cmd_path(char *my_cmd, char **envp)
 	ft_free_tab(paths);
 	return (NULL);
 }
+
 
 int routine_pipe(t_shell *shell,t_exec *current, char **cmd, t_valist *env, int pipe_fd[2])
 {
@@ -214,12 +179,11 @@ int exec_fork_pipe(t_shell *shell,t_exec *current, char **cmd, t_valist *env, in
 	
 	if (child < 0)
 		return (perror("fork: "), ERROR);
-		
 	if(child > 0)
 	{ 
-		close(shell->prev_fd);
+		close(pipe_fd[0]);
 		return(child);
-	} 
+	}
 	if (child == 0)
 	{
 		if (is_built_in(current->cmds[0]) != 0) // cas built in
@@ -229,6 +193,7 @@ int exec_fork_pipe(t_shell *shell,t_exec *current, char **cmd, t_valist *env, in
 		}
 		routine_pipe(shell, current, cmd, env, pipe_fd); // routine execve()
 	}
+	close(pipe_fd[0]);
 	//waitpid(child, 0, 0);
 	return (child);
 }
@@ -285,9 +250,9 @@ int	manage_execution(t_shell *shell, t_valist *env) // nombre de commande , char
 			if(shell->prev_fd != -1)
 				close(shell->prev_fd);
 			shell->prev_fd = pipe_fd[0];
-			close(pipe_fd[1]);
+			
 		}
-		waitpid(pid, 0, 0); // attends TOUT les processus - doit lancer wait(evec stutus et pid du dernier enfant)
+		//waitpid(pid, 0, 0); // attends TOUT les processus - doit lancer wait(evec stutus et pid du dernier enfant)
 /* 		while (waitpid(-1, 0, 0) != ERROR)
 		{
 			continue ;
@@ -298,141 +263,3 @@ int	manage_execution(t_shell *shell, t_valist *env) // nombre de commande , char
 	}
 	return (0);
 }
-
-		//waitpid_verify_status(pid)
-		// waitpid(-1, 0 ,0); 
-
-
-int waitpid_verify_status (pid_t pid)
-{ 
-	int status;
-		
-	waitpid(pid, &status, 0);
-	if(WIFEXITED(status) != 0)
-		return(WEXITSTATUS(status));
-	if(WIFSIGNALED(status) != 0)
-		return(WTERMSIG(status) + 128);
-	return(0);
-}
-
-
-
-/* int	manage_execution(t_shell *shell, t_valist *env) // nombre de commande , char **cmds
-{
-	int i;
-	i = 0;
-	t_exec *cmd_list = shell->cmd_lst;
-	t_exec *current = cmd_list;
-	int command_nb = ft_lstexec_size(cmd_list);
-
-	int	prev_fd = -1;
-	pid_t	pid;
-	int pipe_fd[2];
-	
-	//if (!cmd_list->cmds) // si la liste est vide (segfault :())
-	//	return (0);
-
-	if (check_all_redir(shell) == ERROR) // CHECK REDIR ET FIND LES FD SI BESOIN
-		return (ERROR);
-
-	test_print_fd(cmd_list); // TEST PRINT
-
-	if (command_nb == 1) // CAS DE LA COMMANDE UNIQUE
-	{
-		if (cmd_list->cmds[0] && (is_built_in(cmd_list->cmds[0]) != 0)) // BUILT IN
-		{
-			if (execute_built_in(shell, is_built_in(cmd_list->cmds[0]), cmd_list->cmds, env) == ERROR)
-				return (ERROR);
-		}
-		if (cmd_list->cmds[0] && (is_built_in(cmd_list->cmds[0]) == 0)) // EXECVE
-		{
-			if (exec_fork_one(shell, cmd_list->cmds, env) == ERROR)
-				return (ERROR);
-		}
-	}
-	
-
-	else if (command_nb > 1) // CAS COMMANDE MULTPLES (PIPES)
-	{
-		while (current->next != NULL)
-		{
-			
-			pipe(pipe_fd);
-			pid = fork();
-
-			
-
-			if (pid == 0)
-			{
-				close(pipe_fd[0]);
-				//routine_child(pipe[], )
-				// STDIN
-
-				//if (current->fd_in != 0)
-				//dup2(current->fd_in, STDOUT_FILENO);
-
-				if (shell->prev_fd == -1 && current->fd_in != STDIN_FILENO)
-					dup2(current->fd_in, STDIN_FILENO);
-				else if (prev_fd != -1)
-					dup2(prev_fd, STDIN_FILENO);
-
-				close(current->fd_in);
-				close(prev_fd);
-
-				// STDOUT
-				if (current->fd_out != 1) // npipe
-					dup2(current->fd_out, STDOUT_FILENO);
-				else if (current->next)
-					dup2(pipe_fd[1], STDOUT_FILENO);
-	
-				close(pipe_fd[1]);
-				close(current->fd_out);
-				
-
-				//int		fd_in;
-				//int		fd_out;
-				char	*my_cmd_path;
-				char	**env_tab_exe;
-				char	**cmd = current->cmds;
-				//print_char_tab(env_tab_exe); TEST PRINT
-
-				//fd_in = shell->cmd_lst->fd_in;
-				//fd_out = shell->cmd_lst->fd_out;
-				env_tab_exe = env_list_to_envp(env);
-
-				//print_char_tab(cmd); TEST PRINT
-
-				if (access(cmd[0], X_OK) == 0)
-					execve(cmd[0], cmd, env_tab_exe);
-				
-				my_cmd_path = find_my_cmd_path(cmd[0], env_tab_exe);
-				
-				if (!my_cmd_path || my_cmd_path[0] == '\0')
-				{
-					ft_free_tab(env_tab_exe);
-					//close(fd_out);
-					//close(fd_in);
-					path_not_found();
-				}
-	
-				execve(my_cmd_path, cmd, env_tab_exe);
-				perror("execve");
-				exit(8000);
-				//...
-				// find my cmd paths
-
-				//execve(...);
-
-			}
-			//if (current->next)
-			close(pipe_fd[1]);
-			if(prev_fd != -1)
-				close(prev_fd);
-			prev_fd = pipe_fd[0];
-
-			current = current->next;
-		}
-		waitpid(pid, 0, 0);
-	}
-	return (0);
-} */
