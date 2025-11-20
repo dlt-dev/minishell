@@ -5,10 +5,11 @@
 
 
 
-int handle_simple_command ()
+int	handle_simple_command (t_shell *shell, t_valist *env) // CAS DE LA COMMANDE UNIQUE
 { 
-	if (command_nb == 1) // CAS DE LA COMMANDE UNIQUE
-	{
+		t_exec *cmd_list;
+
+		cmd_list = shell->cmd_lst;
 		if (cmd_list->cmds[0] && (is_built_in(cmd_list->cmds[0]) != 0)) // BUILT IN
 		{
 			if (execute_built_in(shell, is_built_in(cmd_list->cmds[0]), cmd_list->cmds, env) == ERROR)
@@ -19,13 +20,8 @@ int handle_simple_command ()
 			if (exec_fork_one(shell, cmd_list->cmds, env) == ERROR)
 				return (ERROR);
 		}
-	}
+		return (0);
 }
-
-
-
-
-
 
 int	manage_execution(t_shell *shell, t_valist *env) // nombre de commande , char **cmds
 {
@@ -72,7 +68,6 @@ int	manage_execution(t_shell *shell, t_valist *env) // nombre de commande , char
 			if(shell->prev_fd != -1)
 				close(shell->prev_fd);
 			shell->prev_fd = pipe_fd[0];
-			
 		}
 		//waitpid(pid, 0, 0); // attends TOUT les processus - doit lancer wait(evec stutus et pid du dernier enfant)
 /* 		while (waitpid(-1, 0, 0) != ERROR)

@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 16:27:16 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/19 17:54:54 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/20 12:45:31 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,71 +233,86 @@ int exec_fork_pipe(t_shell *shell,t_exec *current, char **cmd, t_valist *env, in
 	return (child);
 }
 
+int	handle_pipe_command(t_shell *shell, t_valist *env)
+{
+	int pipe_fd[2];
+	pid_t pid;
+	t_exec *current;
+
+	int i = 0; // TEST PRINT
+
+	current = shell->cmd_lst;
+	printf("pipe routine\n"); // TEST PRINT
+	while (current)
+	{
+		if (pipe(pipe_fd) < 0) // cree un pipe pour chaques commandes
+			return (perror("pipe"), ERROR);
+
+		printf("execute command [%d]\n", i); // TEST PRINT
+
+		pid = exec_fork_pipe(shell, current, current->cmds, env, pipe_fd);
+		if (pid == ERROR)
+			return (ERROR);
+		current = current->next;
+		i++; // TEST PRINT
+		if(shell->prev_fd != -1)
+			close(shell->prev_fd);
+		shell->prev_fd = pipe_fd[0];
+		close(pipe_fd[1]);
+	}
+	waitpid(pid, 0, 0); // attends TOUT les processus - doit lancer wait(evec stutus et pid du dernier enfant)
+	//waitpid(-1, 0, 0);
+	return (0);
+}
+
+int	handle_simple_command(t_shell *shell, t_valist *env) // CAS DE LA COMMANDE UNIQUE
+{
+	t_exec *cmd_list;
+
+	cmd_list = shell->cmd_lst;
+	if (cmd_list->cmds[0] && (is_built_in(cmd_list->cmds[0]) != 0)) // BUILT IN
+	{
+		if (execute_built_in(shell, is_built_in(cmd_list->cmds[0]), cmd_list->cmds, env) == ERROR)
+			return (ERROR);
+	}
+	else if (cmd_list->cmds[0] && (is_built_in(cmd_list->cmds[0]) == 0)) // EXECVE
+	{
+		if (exec_fork_one(shell, cmd_list->cmds, env) == ERROR)
+			return (ERROR);
+	}
+	return (0);
+}
+
 int	manage_execution(t_shell *shell, t_valist *env) // nombre de commande , char **cmds
 {
-	int i;
-	i = 0;
-	t_exec *cmd_list = shell->cmd_lst;
-	t_exec *current = cmd_list;
-	int command_nb = ft_lstexec_size(cmd_list);
-	printf("commande_nb = %d\n", command_nb);
-	//int	prev_fd = -1;
-	//pid_t	pid;
-	int pipe_fd[2];
+	t_exec *cmd_list;
+	int command_nb;
+
+	cmd_list = shell->cmd_lst;
+	command_nb = ft_lstexec_size(cmd_list);
 	
 	//if (!cmd_list->cmds) // si la liste est vide (segfault :())
 	//	return (0);
-	printf("prev_fd = %d\n", shell->prev_fd);
 
-	if (check_all_redir(shell) == ERROR) // CHECK REDIR ET FIND LES FD SI BESOIN
+	printf("commande_nb = %d\n", command_nb);// TEST PRINT
+	printf("prev_fd = %d\n", shell->prev_fd);// TEST PRINT
+
+	if (check_all_redir(shell) == ERROR) // CHECK REDIR ET FIND LES FD SI BESOIN -> struct exec
 		return (ERROR);
 
 	test_print_fd(cmd_list); // TEST PRINT
 
-	if (command_nb == 1) // CAS DE LA C OMMANDE UNIQUE
+	if (command_nb == 1) // CAS DE LA COMMANDE UNIQUE
 	{
-		printf("builtin / cmd unique\n");
-		if (cmd_list->cmds[0] && (is_built_in(cmd_list->cmds[0]) != 0)) // BUILT IN
-		{
-			if (execute_built_in(shell, is_built_in(cmd_list->cmds[0]), cmd_list->cmds, env) == ERROR)
-				return (ERROR);
-		}
-		else if (cmd_list->cmds[0] && (is_built_in(cmd_list->cmds[0]) == 0)) // EXECVE
-		{
-			if (exec_fork_one(shell, cmd_list->cmds, env) == ERROR)
-				return (ERROR);
-		}
+		handle_simple_command(shell, env);
 	}
 	else if (command_nb > 1) // CAS COMMANDE MULTPLES (PIPES)
 	{
-		pid_t pid; 
-		printf("pipe routine\n");
-		while (current)
-		{
-			if (pipe(pipe_fd) < 0)
-				return (perror("pipe"), ERROR);
-			printf("execute command [%d]\n", i);
-			pid = exec_fork_pipe(shell, current, current->cmds, env, pipe_fd);
-			if (pid == ERROR)
-				return (ERROR);
-			current = current->next;
-			i++;
-			if(shell->prev_fd != -1)
-				close(shell->prev_fd);
-			shell->prev_fd = pipe_fd[0];
-			close(pipe_fd[1]);
-		}
-		waitpid(pid, 0, 0); // attends TOUT les processus - doit lancer wait(evec stutus et pid du dernier enfant)
-/* 		while (waitpid(-1, 0, 0) != ERROR)
-		{
-			continue ;
-		} */
-		//waitpid(-1, 0, 0);
-
-
+		handle_pipe_command(shell, env);
 	}
 	return (0);
 }
+
 
 		//waitpid_verify_status(pid)
 		// waitpid(-1, 0 ,0); 
