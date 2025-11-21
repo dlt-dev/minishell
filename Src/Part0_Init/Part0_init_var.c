@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 00:00:39 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/18 13:31:13 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/21 16:11:40 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ static void bzero_shell(t_shell *shell)
 static int init_env_lst(t_valist **env, char *envp)
 {
 	int len_name;
-    int len_value;
+	int len_value;
 	char *name;
 	char *value;
 	
 	len_name = length_name(envp);
-    name = ft_strndup(envp, len_name);
+	name = ft_strndup(envp, len_name);
 	if(name == NULL)
 		return(ERROR);
 	len_value = ft_strlen(envp) - (len_name + 1); 

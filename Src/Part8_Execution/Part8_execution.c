@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 16:27:16 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/21 14:47:53 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/21 17:24:28 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ int routine_pipe(t_shell *shell,t_exec *current, char **cmd, t_valist *env, int 
 	if (!my_cmd_path || my_cmd_path[0] == '\0')
 	{
 		ft_free_tab(env_tab_exe);
+		free_exit(shell, 127, "pas de commande trouvee");
 		//close(fd_out);
 		//close(fd_in);
 		path_not_found();
@@ -199,6 +200,8 @@ int	routine_builtin_pipe(t_shell *shell, t_exec *current, char **cmd, t_valist *
 	close(pipe_fd[1]);
 	
 	execute_built_in(shell, is_built_in(cmd[0]), cmd , env);
+	
+	free_all(shell);
 	printf("j'ai execute mon builtin\n");
 	exit(1);//fin du fork()
 }
@@ -278,6 +281,9 @@ int	handle_pipe_command(t_shell *shell, t_valist *env)
 		pid = exec_fork_pipe(shell, current, current->cmds, env, pipe_fd);
 		if (pid == ERROR)
 			return (ERROR);
+//
+		close(pipe_fd[1]); /////!!!!\\\\ dans le parent, close l,ecriture du pipe /////////////////
+//
 		current = current->next;
 		i++; // TEST PRINT
 		if(shell->prev_fd != -1)
@@ -327,7 +333,7 @@ int	manage_execution(t_shell *shell, t_valist *env) // nombre de commande , char
 
 	test_print_fd(cmd_list); // TEST PRINT
 		
-	if (!cmd_list || !cmd_list->cmds) // ADD POR EVITER SEGFAULT REDIR UNIQUE
+	if (!cmd_list || !cmd_list->cmds) //!!\\ ADD POuR EVITER SEGFAULT REDIR UNIQUE
 		return (ERROR);
 		
 	if (command_nb == 1) // CAS DE LA COMMANDE UNIQUE
@@ -345,6 +351,9 @@ int	manage_execution(t_shell *shell, t_valist *env) // nombre de commande , char
 	}
 	return (0);
 }
+
+
+
 
 		//waitpid_verify_status(pid)
 		// waitpid(-1, 0 ,0); 

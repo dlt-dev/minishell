@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 17:59:57 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/20 16:59:47 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/21 17:39:38 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	routine_child(t_shell *shell, char **cmd, t_valist *env)
 
 	//print_char_tab(cmd); TEST PRINT
 
- 	if (access(cmd[0], X_OK) == 0)
-		execve(cmd[0], cmd, env_tab_exe);
 	
 	my_cmd_path = find_my_cmd_path(cmd[0], env_tab_exe);
 	
@@ -53,7 +51,7 @@ int	routine_child(t_shell *shell, char **cmd, t_valist *env)
 		ft_free_tab(env_tab_exe);
 		close(fd_out);
 		close(fd_in);
-		path_not_found();
+		free_exit(shell, 127, "pas de commande trouvee");
 	}
 	if (fd_in != STDIN_FILENO)
 	{
@@ -65,8 +63,13 @@ int	routine_child(t_shell *shell, char **cmd, t_valist *env)
 		dup2(fd_out, STDOUT_FILENO);
 		close(fd_out);
 	}
+ 	if (access(cmd[0], X_OK) == 0)
+		execve(cmd[0], cmd, env_tab_exe);
 	execve(my_cmd_path, cmd, env_tab_exe);
 	perror("execve");
+	free_exit(shell, 1, "pas de commande trouvee");
+	free_all(shell);
+
 	exit(1);
 }
 

@@ -37,42 +37,42 @@ Part8_Execution PartX_Free
 #Part7_Cmd_struct
 
 #Fichiers sources
-  #Sources parties
-  SRC_PART0 = Part0_init_var.c
-  SRC_PART1 = Part1_Prompt.c
-  SRC_PART2 = Part2_lexing.c
-  SRC_PART3 = Part3_flags_main.c Part3_flag_word.c
-  SRC_PART4 = Part4_1expand_main.c Part4_3expand_dollar.c Part4_2expand_quotes.c
-  SRC_PART5 = Part5_word_splitting_main.c Part5_countword_hdl_quotes.c Part5_word_splitting.c
-  SRC_PART6 = Part6_delete_quotes.c  
-  SRC_PART7 = Part7_cmd_struc.c Part7_main_tree_struct.c Part7_print_tree.c \
-  Part7_redir_struct.c Part7_syntaxe_err.c
-  SRC_PART8 = Part8_execution.c Part8_built_in.c Part8_heredoc.c Part8_open_redir.c \
-  Part8_exec_fork_one.c
-  SRC_PARTX = PartX_free.c
-  SRC_MAIN  = main.c
-  #Sources utiles
-  SRC_UTILS = utils_chunk_buffer.c utils_chunk_buffer2.c utils_lenght.c utils_libft1.c \
-  utils_libft2.c utils_lst.c utils_lst2.c utils_va_lst.c utils_print_lst.c utils_free.c \
-  utils_libft3.c utils_error.c utils_exec1.c utils_exec2.c utils_exec3.c
-  #Sources Built_in
-  SRC_BUILTIN = built_in_cd.c built_in_echo.c built_in_env.c built_in_exit.c \
-  built_in_export1.c built_in_export2.c built_in_pwd.c built_in_unset.c \
+	#Sources parties
+	SRC_PART0 = Part0_init_var.c
+	SRC_PART1 = Part1_Prompt.c
+	SRC_PART2 = Part2_lexing.c
+	SRC_PART3 = Part3_flags_main.c Part3_flag_word.c
+	SRC_PART4 = Part4_1expand_main.c Part4_3expand_dollar.c Part4_2expand_quotes.c
+	SRC_PART5 = Part5_word_splitting_main.c Part5_countword_hdl_quotes.c Part5_word_splitting.c
+	SRC_PART6 = Part6_delete_quotes.c  
+	SRC_PART7 = Part7_cmd_struc.c Part7_main_tree_struct.c Part7_print_tree.c \
+	Part7_redir_struct.c Part7_syntaxe_err.c
+	SRC_PART8 = Part8_execution.c Part8_built_in.c Part8_heredoc.c Part8_open_redir.c \
+	Part8_exec_fork_one.c
+	SRC_PARTX = PartX_free.c
+	SRC_MAIN  = main.c
+	#Sources utiles
+	SRC_UTILS = utils_chunk_buffer.c utils_chunk_buffer2.c utils_lenght.c utils_libft1.c \
+	utils_libft2.c utils_lst.c utils_lst2.c utils_va_lst.c utils_print_lst.c utils_free.c \
+	utils_libft3.c utils_error.c utils_exec1.c utils_exec2.c utils_exec3.c
+	#Sources Built_in
+	SRC_BUILTIN = built_in_cd.c built_in_echo.c built_in_env.c built_in_exit.c \
+	built_in_export1.c built_in_export2.c built_in_pwd.c built_in_unset.c \
 
 #Tous les sources
-  ALL_SRC=$(SRC_MAIN) \
-  $(addprefix Utils/, $(SRC_UTILS)) \
-  $(addprefix Part0_Init/, $(SRC_PART0)) \
-  $(addprefix Part1_Prompt/, $(SRC_PART1)) \
-  $(addprefix Part2_Lexing/, $(SRC_PART2)) \
-  $(addprefix Part3_Flags/, $(SRC_PART3)) \
-  $(addprefix Part4_Expand/, $(SRC_PART4)) \
-  $(addprefix Part5_Word_splitting/, $(SRC_PART5)) \
-  $(addprefix Part6_Delete_quotes/, $(SRC_PART6)) \
-  $(addprefix Part7_Cmd_struct/, $(SRC_PART7)) \
-  $(addprefix Part8_Execution/, $(SRC_PART8)) \
-  $(addprefix PartX_Free/, $(SRC_PARTX)) \
-  $(addprefix Built_in/, $(SRC_BUILTIN)) 
+	ALL_SRC=$(SRC_MAIN) \
+	$(addprefix Utils/, $(SRC_UTILS)) \
+	$(addprefix Part0_Init/, $(SRC_PART0)) \
+	$(addprefix Part1_Prompt/, $(SRC_PART1)) \
+	$(addprefix Part2_Lexing/, $(SRC_PART2)) \
+	$(addprefix Part3_Flags/, $(SRC_PART3)) \
+	$(addprefix Part4_Expand/, $(SRC_PART4)) \
+	$(addprefix Part5_Word_splitting/, $(SRC_PART5)) \
+	$(addprefix Part6_Delete_quotes/, $(SRC_PART6)) \
+	$(addprefix Part7_Cmd_struct/, $(SRC_PART7)) \
+	$(addprefix Part8_Execution/, $(SRC_PART8)) \
+	$(addprefix PartX_Free/, $(SRC_PARTX)) \
+	$(addprefix Built_in/, $(SRC_BUILTIN)) 
 #   $(addprefix Part7_Cmd_struct/, $(SRC_PART7))
 OBJ = $(addprefix $(OBJ_DIR)/, $(ALL_SRC:.c=.o))
 
@@ -90,6 +90,9 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SUBS_DIR))
 
 install: $(BIN_DIR)/$(NAME)
+
+exec: $(NAME)
+	valgrind -s --leak-check=full --show-leak-kinds=all --suppressions=readline.supp --track-fds=yes ./minishell
 
 $(BIN_DIR)/$(NAME): $(NAME)
 	mkdir -p $(BIN_DIR)

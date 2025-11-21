@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:02:44 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/20 18:16:57 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/21 16:03:36 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,16 @@ int	close_all_redir(t_exec *commands)
 	t_exec *current;
 	current = commands;
 
-	while (commands)
+/* 	if (!current || !current->cmds || !current->redir) //!!\\ ADD POuR EVITER SEGFAULT REDIR UNIQUE
+		return (0); */
+
+	while (current)
 	{
-		close(current->fd_in);
-		close(current->fd_out);
-		commands = commands->next;
+		if (current->fd_in != STDIN_FILENO)
+			close(current->fd_in);
+		if (current->fd_out != STDOUT_FILENO)
+			close(current->fd_out);
+		current = current->next;
 	}
 	return (0);
 }
@@ -113,3 +118,4 @@ int	check_all_redir(t_shell *shell) // pour chaques nodes cmd, je check toutes l
 	}
 	return (0);
 }
+
