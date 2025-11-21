@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   retry_main_tree_struct.c                           :+:      :+:    :+:   */
+/*   Part7_main_tree_struct.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:18:43 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/13 16:06:49 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/21 14:18:49 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 int	is_valid_redir(t_list *token_next)
 {
@@ -35,6 +34,7 @@ t_exec	*create_new_command(void)
 {
 	t_exec	*command;
 
+	
 	command = malloc(sizeof(t_exec));
 	if (!command)
 		return (NULL);
@@ -58,7 +58,7 @@ int loop_create_tree(t_shell* shell, t_exec* current, t_list *token)
 		}
 		else if (token->flag.type == WORD)
 		{ 
-				if(add_arg_command(current, token->content) == ERROR)
+			if(add_arg_command(current, token->content) == ERROR)
 				return(ERROR);
 		}
 		else if (token->flag.pipe == PIPE && token->next && is_valid_pipe(token->next))
@@ -86,6 +86,8 @@ int	logical_struct(t_shell *shell, t_exec *current, t_list *token)
 	shell->cmd_lst = create_new_command(); 
 	if(shell->cmd_lst == NULL)
 		return(ERROR); 
+/* 	if(shell->cmd_lst->cmds == NULL)
+		return(ERROR); */
 	current = shell->cmd_lst;
 	value = loop_create_tree(shell, current, token);
 	if(value == SYNTAXE_ERR)

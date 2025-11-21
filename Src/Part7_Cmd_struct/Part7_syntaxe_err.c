@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   retry _syntaxe_err.c                               :+:      :+:    :+:   */
+/*   Part7_syntaxe_err.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:12:29 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/13 15:12:50 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/20 16:48:46 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ void free_exec(t_exec *cmd)
 void	print_syntax_error(t_shell *shell, char *tok_content)
 {
 	printf("syntax error near unexpected token '%s'\n", tok_content);
-	shell->exit_status = 127;
+	shell->exit_status = 2;
 }

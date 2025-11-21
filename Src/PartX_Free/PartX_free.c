@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PartX_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:44:28 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/12 16:00:22 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/21 14:29:45 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void free_all(t_shell *shell)
 { 
+	//close_all_redir(shell->cmd_lst);
 	ft_free_lst(&shell->lst);
 	ft_free_str(&shell->invite.prompt);
 	ft_free_str(&shell->rd_line);

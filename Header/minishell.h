@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/18 13:04:29 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/20 18:07:38 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,9 @@ char	*find_my_cmd_path(char *my_cmd, char **envp);
 int	path_not_found(void);
 void	ft_free_tab(char **tab);
 
+int	wait_and_status(t_shell *shell, pid_t last_pid);
+
+int	close_all_redir(t_exec *commands);
 
 //PartX_free.c
 void free_all(t_shell *shell);

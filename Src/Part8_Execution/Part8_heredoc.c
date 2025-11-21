@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 19:18:46 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/12 11:08:23 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/21 14:28:05 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int routine_heredoc(char *delimit, int pipefd[2])
 	exit(0);
 }
 
-
 int handle_heredoc(char *delimit)
 {	
 	int pipefd[2];
@@ -57,5 +56,3 @@ int handle_heredoc(char *delimit)
 	close(pipefd[1]);
 	return(pipefd[0]);
 }
-
-

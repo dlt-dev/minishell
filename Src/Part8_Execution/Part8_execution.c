@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 16:27:16 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/20 12:45:31 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/21 14:47:53 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,13 +224,38 @@ int exec_fork_pipe(t_shell *shell,t_exec *current, char **cmd, t_valist *env, in
 	{
 		if (is_built_in(current->cmds[0]) != 0) // cas built in
 		{
-			printf("fork builtin routine\n");
+			printf("fork builtin routine\n"); 
 			routine_builtin_pipe(shell, current, cmd, env, pipe_fd);
 		}
 		routine_pipe(shell, current, cmd, env, pipe_fd); // routine execve()
 	}
+	
 	//waitpid(child, 0, 0);
 	return (child);
+}
+
+int waitpid_verify_status (pid_t pid)
+{ 
+	int status;
+		
+	waitpid(pid, &status, 0);
+	if(WIFEXITED(status) != 0)
+		return(WEXITSTATUS(status));
+	if(WIFSIGNALED(status) != 0)
+		return(WTERMSIG(status) - 128);
+	return(0);
+}
+
+int	wait_and_status(t_shell *shell, pid_t last_pid)
+{
+	//int status;
+	//pid_t pid_childs;
+
+	//waitpid(last_pid, &status, 0);
+	shell->exit_status = waitpid_verify_status(last_pid);
+	while (waitpid(-1, 0, 0) != ERROR)
+		continue ;
+	return (0);
 }
 
 int	handle_pipe_command(t_shell *shell, t_valist *env)
@@ -260,8 +285,9 @@ int	handle_pipe_command(t_shell *shell, t_valist *env)
 		shell->prev_fd = pipe_fd[0];
 		close(pipe_fd[1]);
 	}
-	waitpid(pid, 0, 0); // attends TOUT les processus - doit lancer wait(evec stutus et pid du dernier enfant)
-	//waitpid(-1, 0, 0);
+	wait_and_status(shell, pid);
+	printf("exit_status = %d\n", shell->exit_status);
+	//waitpid(pid, 0, 0);
 	return (0);
 }
 
@@ -270,6 +296,8 @@ int	handle_simple_command(t_shell *shell, t_valist *env) // CAS DE LA COMMANDE U
 	t_exec *cmd_list;
 
 	cmd_list = shell->cmd_lst;
+	if(cmd_list == NULL)
+		return(ERROR);
 	if (cmd_list->cmds[0] && (is_built_in(cmd_list->cmds[0]) != 0)) // BUILT IN
 	{
 		if (execute_built_in(shell, is_built_in(cmd_list->cmds[0]), cmd_list->cmds, env) == ERROR)
@@ -290,9 +318,6 @@ int	manage_execution(t_shell *shell, t_valist *env) // nombre de commande , char
 
 	cmd_list = shell->cmd_lst;
 	command_nb = ft_lstexec_size(cmd_list);
-	
-	//if (!cmd_list->cmds) // si la liste est vide (segfault :())
-	//	return (0);
 
 	printf("commande_nb = %d\n", command_nb);// TEST PRINT
 	printf("prev_fd = %d\n", shell->prev_fd);// TEST PRINT
@@ -301,36 +326,28 @@ int	manage_execution(t_shell *shell, t_valist *env) // nombre de commande , char
 		return (ERROR);
 
 	test_print_fd(cmd_list); // TEST PRINT
-
+		
+	if (!cmd_list || !cmd_list->cmds) // ADD POR EVITER SEGFAULT REDIR UNIQUE
+		return (ERROR);
+		
 	if (command_nb == 1) // CAS DE LA COMMANDE UNIQUE
 	{
-		handle_simple_command(shell, env);
+		if(handle_simple_command(shell, env) == ERROR)
+		{
+			//close_all_redir()
+			return(ERROR); 
+		}
 	}
 	else if (command_nb > 1) // CAS COMMANDE MULTPLES (PIPES)
 	{
-		handle_pipe_command(shell, env);
+		if (handle_pipe_command(shell, env) == ERROR)
+			return (ERROR);
 	}
 	return (0);
 }
 
-
 		//waitpid_verify_status(pid)
 		// waitpid(-1, 0 ,0); 
-
-
-int waitpid_verify_status (pid_t pid)
-{ 
-	int status;
-		
-	waitpid(pid, &status, 0);
-	if(WIFEXITED(status) != 0)
-		return(WEXITSTATUS(status));
-	if(WIFSIGNALED(status) != 0)
-		return(WTERMSIG(status) + 128);
-	return(0);
-}
-
-
 
 /* int	manage_execution(t_shell *shell, t_valist *env) // nombre de commande , char **cmds
 {
@@ -365,7 +382,6 @@ int waitpid_verify_status (pid_t pid)
 				return (ERROR);
 		}
 	}
-	
 
 	else if (command_nb > 1) // CAS COMMANDE MULTPLES (PIPES)
 	{

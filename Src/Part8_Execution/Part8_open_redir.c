@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part8_open_redir.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:02:44 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/17 15:27:05 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/20 18:16:57 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,20 @@
 /////////////////////////////////////
 /// @fonctions open_and_find_redir.c ///
 ////////////////////////////////////
+
+int	close_all_redir(t_exec *commands)
+{
+	t_exec *current;
+	current = commands;
+
+	while (commands)
+	{
+		close(current->fd_in);
+		close(current->fd_out);
+		commands = commands->next;
+	}
+	return (0);
+}
 
 int	open_infile(t_exec *current, t_redir *redir)
 {
