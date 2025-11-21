@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:57:16 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/11 17:36:17 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/21 20:23:46 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void builtin_exit(t_shell *shell)
 {
-	free_exit(shell, 0,  "exit");
+	free_exit(shell, shell->exit_status,  "exit");
 }

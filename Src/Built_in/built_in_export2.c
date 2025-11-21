@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_export2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:06:38 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/15 21:50:04 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/21 20:29:44 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int is_an_affectation(char *str, int *len_name)
 	int i;
 	char *msg; 
 
-	msg = "minishell: export: \'%s\': not a valid identifier\n"; 
+	msg = "minishell: export: not a valid identifier\n"; 
 	*len_name = length_name(str);
 	i = 0;
 	if(is_a_valid_name(str) == ERROR) // not a valid identifier

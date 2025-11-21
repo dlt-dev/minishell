@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/20 18:07:38 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/21 19:57:11 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ int	redir_management(t_exec *current, t_list *token, int type);
 void	print_syntax_error(t_shell *shell, char *tok_content);
 void free_exec(t_exec *cmd);
 void free_tab(char **cmds);
-
-//Part8 : execution
+/* 
+// Part8 : execution
 
 int	manage_execution(t_shell *shell, t_valist *env); // execution
 int	check_all_redir(t_shell *shell); // open_dir
@@ -100,7 +100,27 @@ void	ft_free_tab(char **tab);
 
 int	wait_and_status(t_shell *shell, pid_t last_pid);
 
+int	close_all_redir(t_exec *commands); */
+
+//test
+int	manage_execution(t_shell *shell, t_valist *env); // nombre de commande , char **cmds
+int	check_all_redir(t_shell *shell);
+int	execute_built_in(t_shell *shell, int type, char **args, t_valist *env);
+int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env);
+int exec_fork_pipe(t_shell *shell,t_exec *current, char **cmd, t_valist *env, int pipe_fd[2]);
+int handle_heredoc(char *delimit);
+int apply_redir_pipe(t_shell *shell, t_exec *current, int pipe_fd[2]);
+int do_execve(t_shell *shell, char **cmd, t_valist *env);
+void	test_print_fd(t_exec *cmd_list); // TEST
+void	print_char_tab(char **tab); //TEST
+void	ft_free_tab(char **tab);
+int	ft_lstexec_size(t_exec *lst);
+int	path_not_found(void);
+char *find_my_cmd_path(char *my_cmd, char **envp, int *check);
+int exist_and_access(char *my_path);
+int	is_built_in(char *cmd); // return l'enum du builtin
 int	close_all_redir(t_exec *commands);
+
 
 //PartX_free.c
 void free_all(t_shell *shell);

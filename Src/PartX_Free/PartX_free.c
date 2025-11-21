@@ -6,11 +6,30 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:44:28 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/21 16:13:17 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/21 19:13:27 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	close_all_redir(t_exec *commands)
+{
+	t_exec *current;
+	current = commands;
+
+/* 	if (!current || !current->cmds || !current->redir) //!!\\ ADD POuR EVITER SEGFAULT REDIR UNIQUE
+		return (0); */
+
+	while (current)
+	{
+		if (current->fd_in != STDIN_FILENO)
+			close(current->fd_in);
+		if (current->fd_out != STDOUT_FILENO)
+			close(current->fd_out);
+		current = current->next;
+	}
+	return (0);
+}
 
 void free_all(t_shell *shell)
 { 
