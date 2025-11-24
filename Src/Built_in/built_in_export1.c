@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_export1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:00:10 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/15 17:34:24 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/24 17:14:55 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ int builtin_export(t_shell *shell, t_valist *env, char **args)
 	int ret;
 	
 	i = 0;
+	if(args[1] == NULL)
+	{ 
+		builtin_env(env, shell->cmd_lst->fd_out, 1);
+		return(0);
+	}
 	while(args[i] != NULL)
 	{
 		ret = is_an_affectation(args[i], &len_name);
@@ -68,6 +73,7 @@ int builtin_export(t_shell *shell, t_valist *env, char **args)
 		}
 		i++;
 	}
+	shell->exit_status = 0;
 	return(0);	
 }
 

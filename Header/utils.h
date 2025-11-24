@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:40:19 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/17 20:04:48 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/24 18:17:21 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void    *ft_memcpy(void *dest, const void *src, size_t n);
 
 //utils_libft3.c
 char	*ft_itoa(int n);
+int	ft_atoi(const char *s);
 
 //utils_lst.c
 t_list	*ft_lstnew(void *content);

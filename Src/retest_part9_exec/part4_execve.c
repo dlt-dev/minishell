@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 12:36:39 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/21 19:11:14 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/24 16:48:10 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int do_execve(t_shell *shell, char **cmd, t_valist *env)
 	check = 0;
 	check = exist_and_access(cmd[0]);
 	if(check == CMD_NO_PERMISSION)
-		return(CMD_NO_PERMISSION);
+		return(ft_free_tab(env_tab_exe), CMD_NO_PERMISSION);
 	if(check == 0)
 	{
 		if(execve(cmd[0], cmd, env_tab_exe) == ERROR)

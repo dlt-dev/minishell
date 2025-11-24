@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part6_delete_quotes.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:33:51 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/04 13:11:27 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/24 16:26:52 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ t_list *delete_quotes_node(t_list *node)
 
 int check_and_delete_quotes(t_shell *shell, t_list **new_node, t_list *prev_node, t_list *lst)
 {
+	
 	if(checker_close_quotes(lst->content) == ERROR)
 	{
 		printf(GREEN"OUUPS, les quotes étaient ouvertent, j'ai tout free\n"RESET);
@@ -125,6 +126,7 @@ int delete_quotes(t_shell *shell, t_list *lst)
 {
 	t_list *new_node;
 	t_list *prev_node;
+	int check_failed;
 	
 	prev_node = NULL;
 	if(lst == NULL)
@@ -133,9 +135,13 @@ int delete_quotes(t_shell *shell, t_list *lst)
 	{
 		if(lst->flag.quote == QUOTE)
 		{
-			if(check_and_delete_quotes(shell, &new_node, prev_node, lst) == SYNTAXE_ERR)
+			new_node = NULL;
+			check_failed = check_and_delete_quotes(shell, &new_node, prev_node, lst);
+			if(check_failed == SYNTAXE_ERR)
 				return(free_all(shell), 0);
-			if(lst->flag.word_type != DELIMITOR)
+			if(check_failed == ERROR)
+				return(ERROR);
+			if(new_node != NULL)
 				lst = new_node;
 		}
 		prev_node = lst;

@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/21 19:57:11 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/24 16:33:16 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ char *find_my_cmd_path(char *my_cmd, char **envp, int *check);
 int exist_and_access(char *my_path);
 int	is_built_in(char *cmd); // return l'enum du builtin
 int	close_all_redir(t_exec *commands);
+int	wait_and_status(t_shell *shell, pid_t last_pid);
 
 
 //PartX_free.c

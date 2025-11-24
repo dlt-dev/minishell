@@ -9,7 +9,7 @@ int waitpid_verify_status (pid_t pid)
 	if(WIFEXITED(status) != 0)
 		return(WEXITSTATUS(status));
 	if(WIFSIGNALED(status) != 0)
-		return(WTERMSIG(status) - 128);
+		return(WTERMSIG(status) + 128);
 	return(0);
 }
 
@@ -58,15 +58,39 @@ int	handle_pipe_command(t_shell *shell, t_exec *current, t_valist *env)
 		if (pid == ERROR)
 			return (close(pipe_fd[0]), close(pipe_fd[1]), ERROR);
 		current = current->next;
-		if(shell->prev_fd != -1)
-			close(shell->prev_fd);
-		shell->prev_fd = pipe_fd[0];
-		close(pipe_fd[1]);
-		
 	}
 	wait_and_status(shell, pid);
+	close(pipe_fd[0]);
 	return (0);
 }
+
+// int	handle_pipe_command(t_shell *shell, t_exec *current, t_valist *env)
+// {
+// 	int pipe_fd[2];
+// 	pid_t pid;
+
+// 	// int i = 0; // TEST PRINT
+// 	// printf("pipe routine\n"); // TEST PRINT
+// 	while (current)
+// 	{
+// 		//close(pipe_fd[0]);
+// 		if (pipe(pipe_fd) == ERROR) // cree un pipe pour chaques commandes
+// 			return (perror("pipe"), ERROR);
+// 		// printf("execute command [%d]\n", i); // TEST PRINT
+// 		// i++; // TEST PRINT
+// 		pid = exec_fork_pipe(shell, current, current->cmds, env, pipe_fd);
+// 		if (pid == ERROR)
+// 			return (close(pipe_fd[0]), close(pipe_fd[1]), ERROR);
+// 		current = current->next;
+// 		if(shell->prev_fd != -1)
+// 			close(shell->prev_fd);
+// 		shell->prev_fd = pipe_fd[0];
+// 		close(pipe_fd[1]);
+		
+// 	}
+// 	wait_and_status(shell, pid);
+// 	return (0);
+// }
 
 int	manage_execution(t_shell *shell, t_valist *env) // nombre de commande , char **cmds
 {

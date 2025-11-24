@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:21:20 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/21 19:09:01 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/24 16:32:32 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env)
 		routine_child(shell, cmd, env);
 	}
 	//int status = 0;
-	waitpid(child, 0, 0);//&status, 0);
+	wait_and_status(shell, child);//&status, 0);
 	return (0);
 }

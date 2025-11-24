@@ -6,13 +6,64 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:57:16 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/21 20:23:46 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/24 18:51:36 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void builtin_exit(t_shell *shell)
+int check_number(char *str)
+{ 
+	int i;
+
+	i = 0;
+	if (str[0] == '\0')
+		return(ERROR);
+
+	if(str[0] == '-' || str[0] == '+')
+	{
+		i++;
+		if(str[i] == '\0')
+			return(ERROR);
+	}
+	while(str[i] != '\0')
+	{
+		if(str[i] < '0' || str[i] > '9')
+			return(ERROR);
+		i++;
+	}
+	return(0);
+}
+
+void builtin_exit(t_shell *shell, char **args)
 {
-	free_exit(shell, shell->exit_status,  "exit");
+	int i;
+
+	i = 0;
+
+	while(args[i] != NULL)
+		i++;
+
+
+	if (i == 1)
+		free_exit(shell, shell->exit_status, "exit");	
+	if(check_number(args[1]) == ERROR)
+	{ 
+		write_str("minishell: exit: numeric argument required\n");
+		free_exit(shell, 2 , NULL);
+	}
+	else
+	{
+		shell->exit_status = (ft_atoi(args[1]));
+		write_str("exit\n");
+		free_exit(shell, shell->exit_status, NULL);
+	}
+
+	if (i > 2)
+	{ 
+		write_str("minishell: exit: too many arguments");
+		shell->exit_status = GEN_ERRNO;
+		
+	}
+
 }
