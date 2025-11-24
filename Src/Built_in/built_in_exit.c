@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:57:16 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/24 18:51:36 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/24 20:32:43 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,27 @@ int check_number(char *str)
 	return(0);
 }
 
-void builtin_exit(t_shell *shell, char **args)
+void builtin_exit(t_shell *shell, char **args, int print_flag)
 {
 	int i;
 
 	i = 0;
-
 	while(args[i] != NULL)
 		i++;
-
-
-	if (i == 1)
-		free_exit(shell, shell->exit_status, "exit");	
+	if (i == 1 && print_flag == 0)
+		free_exit(shell, 0, "exit");
+	if (i == 1 && print_flag == 1)
+		free_exit(shell, 0, 0);
 	if(check_number(args[1]) == ERROR)
 	{ 
 		write_str("minishell: exit: numeric argument required\n");
 		free_exit(shell, 2 , NULL);
+	}
+	if (i > 2)
+	{ 
+		write_str("minishell: exit: too many arguments\n");
+		shell->exit_status = GEN_ERRNO;
+		
 	}
 	else
 	{
@@ -58,12 +63,4 @@ void builtin_exit(t_shell *shell, char **args)
 		write_str("exit\n");
 		free_exit(shell, shell->exit_status, NULL);
 	}
-
-	if (i > 2)
-	{ 
-		write_str("minishell: exit: too many arguments");
-		shell->exit_status = GEN_ERRNO;
-		
-	}
-
 }

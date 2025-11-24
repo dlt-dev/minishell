@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 19:54:50 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/24 18:58:36 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/24 20:07:46 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,9 @@ int	is_built_in(char *cmd) // return l'enum du builtin
 		return (NO_BUILT_IN);
 }
 
-int	execute_built_in(t_shell *shell, int type, char **args, t_valist *env)
+int	execute_built_in(t_shell *shell, int type, char **args, int print_flag)
 {
-	
+
 	int fd_out = shell->cmd_lst->fd_out;
 	
 	if (type == ECHO)
@@ -123,12 +123,12 @@ int	execute_built_in(t_shell *shell, int type, char **args, t_valist *env)
 	if (type == PWD)
 		shell->exit_status = builtin_pwd(fd_out);
 	if (type == EXPORT)
-		shell->exit_status = builtin_export(shell, env, args);
+		shell->exit_status = builtin_export(shell, shell->env, args);
 	if (type == UNSET)
-		shell->exit_status = builtin_unset(shell, env, args); //ft_unset(shell, env, args);
+		shell->exit_status = builtin_unset(shell, shell->env, args); //ft_unset(shell, env, args);
 	if (type == ENV) 
-		shell->exit_status = builtin_env(env, fd_out, 0);
+		shell->exit_status = builtin_env(shell->env, fd_out, 0);
 	if (type == EXIT)
-		builtin_exit(shell, args); //(args) si args est ce que j'execute qm ???
+		builtin_exit(shell, args, print_flag); //(args) si args est ce que j'execute qm ???
 	return (1);
 }

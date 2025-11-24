@@ -29,7 +29,7 @@ int	handle_simple_command(t_shell *shell, t_exec *cmd_lst, t_valist *env) // CAS
 {
 	if (cmd_lst->cmds[0] && (is_built_in(cmd_lst->cmds[0]) != 0)) // BUILT IN
 	{
-		if (execute_built_in(shell, is_built_in(cmd_lst->cmds[0]), cmd_lst->cmds, env) == ERROR)
+		if (execute_built_in(shell, is_built_in(cmd_lst->cmds[0]), cmd_lst->cmds, 0) == ERROR)
 			return (ERROR);
 	}
 	else if (cmd_lst->cmds[0] && (is_built_in(cmd_lst->cmds[0]) == 0)) // EXECVE

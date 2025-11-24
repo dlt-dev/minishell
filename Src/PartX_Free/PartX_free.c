@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:44:28 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/21 19:13:27 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/24 20:29:57 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void free_all(t_shell *shell)
 
 void free_exit(t_shell *shell, int code, char *message)
 {
+
 	if(message != NULL)
 		perror(message);
 	free_all(shell);

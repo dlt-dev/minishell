@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/24 16:33:16 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/24 20:30:16 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	close_all_redir(t_exec *commands); */
 //test
 int	manage_execution(t_shell *shell, t_valist *env); // nombre de commande , char **cmds
 int	check_all_redir(t_shell *shell);
-int	execute_built_in(t_shell *shell, int type, char **args, t_valist *env);
+int	execute_built_in(t_shell *shell, int type, char **args, int print_flag);
 int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env);
 int exec_fork_pipe(t_shell *shell,t_exec *current, char **cmd, t_valist *env, int pipe_fd[2]);
 int handle_heredoc(char *delimit);

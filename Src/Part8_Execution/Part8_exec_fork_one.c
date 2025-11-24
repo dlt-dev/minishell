@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 17:59:57 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/21 17:39:38 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/24 19:49:26 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	routine_child(t_shell *shell, char **cmd, t_valist *env)
 	free_all(shell);
 
 	exit(1);
+	
 }
 
 int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env)

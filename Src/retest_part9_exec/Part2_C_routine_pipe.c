@@ -6,17 +6,17 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 15:47:46 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/24 16:09:40 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/24 20:38:00 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	routine_builtin_pipe(t_shell *shell, t_exec *current, char **cmd, t_valist *env, int pipe_fd[2])
+int	routine_builtin_pipe(t_shell *shell, t_exec *current, char **cmd, int pipe_fd[2])
 {
 	if(apply_redir_pipe(shell, current, pipe_fd) == GEN_ERRNO)
 		free_exit(shell, GEN_ERRNO, cmd[0]);
-	if(execute_built_in(shell, is_built_in(cmd[0]), cmd , env) == ERROR)
+	if(execute_built_in(shell, is_built_in(cmd[0]), cmd , 1) == ERROR)
 		free_exit(shell, GEN_ERRNO, cmd[0]);
 	printf("j'ai execute mon builtin\n");
 	free_exit(shell, shell->exit_status, NULL);//fin du fork()
@@ -54,7 +54,7 @@ int exec_fork_pipe(t_shell *shell,t_exec *current, char **cmd, t_valist *env, in
 		if (is_built_in(current->cmds[0]) != 0) // cas built in
 		{
 			printf("fork builtin routine\n");
-			routine_builtin_pipe(shell, current, cmd, env, pipe_fd);
+			routine_builtin_pipe(shell, current, cmd, pipe_fd);
 		}
 		routine_pipe(shell, current, cmd, env, pipe_fd); // routine execve()
 	}
