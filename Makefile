@@ -32,11 +32,7 @@ INC_DIR = Header
 #Sous dossiers
 SUBS_DIR = Utils Built_in Part0_Init Part1_Prompt Part2_Lexing Part3_Flags \
 Part4_Expand Part5_Word_splitting Part6_Delete_quotes Part7_Cmd_struct \
-PartX_Free retest_part9_exec
-
-# 
-# Part8_Execution 
-#Part7_Cmd_struct
+PartX_Free Part8_Execution
 
 #Fichiers sources
 	#Sources parties
@@ -46,13 +42,21 @@ PartX_Free retest_part9_exec
 	SRC_PART3 = Part3_flags_main.c Part3_flag_word.c
 	SRC_PART4 = Part4_1expand_main.c Part4_3expand_dollar.c Part4_2expand_quotes.c
 	SRC_PART5 = Part5_word_splitting_main.c Part5_countword_hdl_quotes.c Part5_word_splitting.c
-	SRC_PART6 = Part6_delete_quotes.c  
-	SRC_PART7 = Part7_cmd_struc.c Part7_main_tree_struct.c Part7_print_tree.c \
+	SRC_PART6 = Part6_delete_quotes.c Part6_delete_quotes_utils.c
+	SRC_PART7 = Part7_cmd_struc.c Part7_main_tree_struct.c PartX_print_tree.c \
 	Part7_redir_struct.c Part7_syntaxe_err.c
-	SRC_PART9 = Part1_exec_main.c Part2_A_exec_built_in.c Part2_C_routine_pipe.c  \
-	Part3_apply_redirection.c PartX_print_execution.c \
-	Part1_refonte_open_redir.c Part2_B_routine_simple_cmd.c Part2_refonte_heredoc.c \
-	part4_execve.c refonte_utils_execution.c
+
+	SRC_PART8 = Part1_exec_main.c \
+				Part1_open_redir.c \
+				Part2_A_exec_built_in.c \
+				Part2_B_routine_simple_cmd.c \
+				Part2_C_routine_pipe.c \
+				Part2_refonte_heredoc.c \
+				Part3_apply_redirection.c \
+				part4_execve.c \
+				PartX_print_execution.c \
+				utils_execution.c
+
 	SRC_PARTX = PartX_free.c
 	SRC_MAIN  = main.c
 	#Sources utiles
@@ -62,7 +66,6 @@ PartX_Free retest_part9_exec
 	#Sources Built_in
 	SRC_BUILTIN = built_in_cd.c built_in_echo.c built_in_env.c built_in_exit.c \
 	built_in_export1.c built_in_export2.c built_in_pwd.c built_in_unset.c
-
 
 #Tous les sources
 	ALL_SRC=$(SRC_MAIN) \
@@ -75,15 +78,13 @@ PartX_Free retest_part9_exec
 	$(addprefix Part5_Word_splitting/, $(SRC_PART5)) \
 	$(addprefix Part6_Delete_quotes/, $(SRC_PART6)) \
 	$(addprefix Part7_Cmd_struct/, $(SRC_PART7)) \
-	$(addprefix retest_part9_exec/, $(SRC_PART9)) \
+	$(addprefix Part8_Execution/, $(SRC_PART8)) \
 	$(addprefix PartX_Free/, $(SRC_PARTX)) \
 	$(addprefix Built_in/, $(SRC_BUILTIN))
 OBJ = $(addprefix $(OBJ_DIR)/, $(ALL_SRC:.c=.o))
 
-#	$(addprefix Part8_Execution/, $(SRC_PART8)) \
-#	$(addprefix Part8_Execution/, $(SRC_PART8)) \
-
 all: $(NAME)
+
 $(NAME): $(OBJ)
 	@echo "$(YEL)the nature elements is linking !$(RESET)"
 	$(CC) $(OPT_NAME) $(OBJ) $(LIBRARY)
@@ -109,14 +110,16 @@ $(BIN_DIR)/$(NAME): $(NAME)
 	@echo "$(CYAN)				$(SCRIPT_SHELL) dans le bin pour sourcer le PATH"
 	@echo "			Assurez vous que la variable PATH contienne le chemin \
 	$(BIN_DIR)$(RESET)"
+
 clean:
 	$(RM) $(OBJ_DIR)
 	$(RM) $(BIN_DIR)
+
 fclean: clean
 	$(RM) $(NAME)
-re: all
+
+re:
+	make fclean
+	make all
 
 .PHONY: all install re clean fclean 
-
-#	SRC_PART8 = Part8_execution.c Part8_built_in.c Part8_heredoc.c Part8_open_redir.c \
-#	Part8_exec_fork_one.c

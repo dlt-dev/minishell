@@ -6,15 +6,15 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:12:29 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/20 16:48:46 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/25 18:23:41 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void free_tab(char **cmds)
+void	free_tab(char **cmds)
 {
-	int i;
+	int	i;
 
 	if (!cmds)
 		return ;
@@ -28,10 +28,10 @@ void free_tab(char **cmds)
 	free(cmds);
 }
 
-void free_exec(t_exec *cmd)
+void	free_exec(t_exec *cmd)
 {
-	t_exec *tmp;
-	t_redir *redir_tmp;
+	t_exec	*tmp;
+	t_redir	*redir_tmp;
 
 	tmp = NULL;
 	redir_tmp = NULL;
@@ -43,11 +43,11 @@ void free_exec(t_exec *cmd)
 			redir_tmp = cmd->redir->next;
 			free(cmd->redir->filename);
 			free(cmd->redir);
-			cmd->redir = redir_tmp; // redir suivante
+			cmd->redir = redir_tmp;
 		}
 		free_tab(cmd->cmds);
 		free(cmd);
-		cmd = tmp; // je passe head a la node suivante
+		cmd = tmp;
 		printf("je suis dans free_exec()\n");
 	}
 }

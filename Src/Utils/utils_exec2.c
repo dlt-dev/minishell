@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 15:41:16 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/14 15:41:41 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/25 21:14:51 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static char	**ft_fillsplit(char **split, char const *s, char c)
 		while (s[i] && s[i] == c)
 			i++;
 		start = i;
-		while (s[i] && s [i] != c)
+		while (s[i] && s[i] != c)
 			i++;
 		if (i > start)
 		{
@@ -93,8 +93,8 @@ static char	**ft_fillsplit(char **split, char const *s, char c)
 
 char	**ft_split(char const *s, char c)
 {
-	char	**split;
-	int		wordcount;
+	char **split;
+	int wordcount;
 
 	wordcount = ft_count(s, c);
 	split = ft_allocsplit(wordcount);

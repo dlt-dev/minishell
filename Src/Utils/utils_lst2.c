@@ -3,109 +3,109 @@
 /*                                                        :::      ::::::::   */
 /*   utils_lst2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:15:44 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/27 19:14:08 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/25 15:53:41 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-static void switch_first_node(t_list **lst, t_list *curr_node, t_list *new_node)
+static void	switch_first_node(t_list **lst, t_list *curr_node, t_list *new_node)
 {
-    if(curr_node->next != NULL)
-        new_node->next = curr_node->next;
-    lst_del_one(curr_node);
-    *lst = new_node;   
+	if (curr_node->next != NULL)
+		new_node->next = curr_node->next;
+	lst_del_one(curr_node);
+	*lst = new_node;
 }
 
-static void switch_last_node(t_list *curr_node, t_list *prev_node, t_list *new_node)
+static void	switch_last_node(t_list *curr_node, t_list *prev_node,
+		t_list *new_node)
 {
-    prev_node->next = new_node;
-    lst_del_one(curr_node);
+	prev_node->next = new_node;
+	lst_del_one(curr_node);
 }
 
-static void switch_middle_node(t_list *curr_node, t_list *prev_node, t_list*new_node)
+static void	switch_middle_node(t_list *curr_node, t_list *prev_node,
+		t_list *new_node)
 {
-    prev_node->next = new_node;
-    new_node->next = curr_node->next;
-    lst_del_one(curr_node);
+	prev_node->next = new_node;
+	new_node->next = curr_node->next;
+	lst_del_one(curr_node);
 }
 
-void node_exchange(t_list **lst, t_list *curr_node, t_list *prev_node, t_list *new_node)
+void	node_exchange(t_list **lst, t_list *curr_node, t_list *prev_node,
+		t_list *new_node)
 {
-    
-    if(curr_node == NULL || *lst == NULL)
-        return;
-    if(*lst == curr_node)
-        switch_first_node(lst, curr_node, new_node);
-    else if(curr_node->next == NULL)
-        switch_last_node(curr_node, prev_node, new_node);
-    else 
-        switch_middle_node(curr_node, prev_node, new_node);
+	if (curr_node == NULL || *lst == NULL)
+		return ;
+	if (*lst == curr_node)
+		switch_first_node(lst, curr_node, new_node);
+	else if (curr_node->next == NULL)
+		switch_last_node(curr_node, prev_node, new_node);
+	else
+		switch_middle_node(curr_node, prev_node, new_node);
 }
 
-
-void insert_after_node(t_list *curr_node, t_list* new_node)
+void	insert_after_node(t_list *curr_node, t_list *new_node)
 {
-	if(curr_node == NULL || new_node == NULL)
-		return;
-	if(curr_node->next == NULL)
+	if (curr_node == NULL || new_node == NULL)
+		return ;
+	if (curr_node->next == NULL)
 		curr_node->next = new_node;
 	else
 	{
 		new_node->next = curr_node->next;
-		curr_node->next = new_node;	
+		curr_node->next = new_node;
 	}
 }
 
-void del_one_relink(t_list **lst, t_list *curr_node, t_list* prev_node)
+void	del_one_relink(t_list **lst, t_list *curr_node, t_list *prev_node)
 {
-	if(*lst == NULL || curr_node == NULL)
-		return;
-	if(curr_node == *lst)
+	if (*lst == NULL || curr_node == NULL)
+		return ;
+	if (curr_node == *lst)
 		*lst = curr_node->next;
-	else if(prev_node->next != NULL)
+	else if (prev_node->next != NULL)
 		prev_node->next = curr_node->next;
 	else
-		return;
+		return ;
 	lst_del_one(curr_node);
 }
 
-int insert_multi_node(t_list *curr_node, t_list *ins_lst)
+int	insert_multi_node(t_list *curr_node, t_list *ins_lst)
 {
-    t_list *tmp;
-	int i;
+	t_list	*tmp;
+	int		i;
 
-    tmp = ins_lst;
+	tmp = ins_lst;
 	if (curr_node == NULL || ins_lst == NULL)
-		return(0);
+		return (0);
 	i = ft_lst_len(ins_lst);
-    if(curr_node->next == NULL)
-        curr_node->next = ins_lst;
-    else
-    {
-        while(tmp->next != NULL)
-			tmp =tmp->next;
-        tmp->next = curr_node->next;
-        curr_node->next = ins_lst;
-    }
-	return(i);
+	if (curr_node->next == NULL)
+		curr_node->next = ins_lst;
+	else
+	{
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = curr_node->next;
+		curr_node->next = ins_lst;
+	}
+	return (i);
 }
 
-int ft_lst_len(t_list *lst)
+int	ft_lst_len(t_list *lst)
 {
-    int  i;
-    if(lst == NULL)
-        return(0);
-        
-    i = 0;
-    while(lst != NULL)
-    {
-        lst = lst->next;
-        i++;
-    }
-    return(i);
+	int i;
+	if (lst == NULL)
+		return (0);
+
+	i = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }

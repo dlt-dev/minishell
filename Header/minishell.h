@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/24 20:30:16 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/25 21:33:00 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ char **word_splitting(char *str, int count_word);
 
 // Part6_delete_quotes
 int delete_quotes(t_shell *shell, t_list *lst);
+int	chck_dlt_quotes(t_shell *shell, t_list **new_n, t_list *prev_n, t_list *lst);
+t_list	*delete_quotes_node(t_list *node);
+char	*delete_quotes_str(t_list *node);
+int	buffer_delete_quotes(t_cb *lst_buffer, char *str);
+int	checker_close_quotes(char *str);
 
 //Part7 : cmd_struct
 // int logical_struct(t_shell *shell, t_list *token);
@@ -107,7 +112,7 @@ int	manage_execution(t_shell *shell, t_valist *env); // nombre de commande , cha
 int	check_all_redir(t_shell *shell);
 int	execute_built_in(t_shell *shell, int type, char **args, int print_flag);
 int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env);
-int exec_fork_pipe(t_shell *shell,t_exec *current, char **cmd, t_valist *env, int pipe_fd[2]);
+int exec_fork_pipe(t_shell *shell,t_exec *current, char **cmd, int pipe_fd[2]);
 int handle_heredoc(char *delimit);
 int apply_redir_pipe(t_shell *shell, t_exec *current, int pipe_fd[2]);
 int do_execve(t_shell *shell, char **cmd, t_valist *env);

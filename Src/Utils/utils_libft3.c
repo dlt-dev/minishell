@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 16:59:40 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/24 18:16:59 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/25 21:15:57 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_itoa(int n)
 
 	nb_cast = (long)n;
 	len = len_number(nb_cast);
-	p = malloc(sizeof(char) * (len +1));
+	p = malloc(sizeof(char) * (len + 1));
 	if (p == NULL)
 		return (NULL);
 	p[len] = '\0';
@@ -52,11 +52,11 @@ int	ft_atoi(const char *s)
 	while (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13))
 	{
 		i++;
-	}	
+	}
 	if (s[i] == '-' || s[i] == '+')
 	{
 		if (s[i] == '-')
-		signe = signe * -1;
+			signe = signe * -1;
 		i++;
 	}
 	while (s[i] != '\0' && s[i] >= '0' && s[i] <= '9')

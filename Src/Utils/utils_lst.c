@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 13:52:12 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/22 18:46:01 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/25 21:16:06 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_list	*ft_lstnew(void *content)
 	node->next = NULL;
 	return (node);
 }
-//GOODJOB
+// GOODJOB
 
 static t_list	*ft_lstlast(t_list *lst)
 {
@@ -36,14 +36,14 @@ static t_list	*ft_lstlast(t_list *lst)
 	}
 	return (lst);
 }
-//GOODJOB
+// GOODJOB
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*last;
 
 	if (lst == NULL)
-		return;
+		return ;
 	if (*lst == NULL)
 	{
 		*lst = new;
@@ -52,38 +52,36 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	last = ft_lstlast(*lst);
 	last->next = new;
 }
-//GOODJOB
+// GOODJOB
 
-int fill_in_lst(t_list **lst, char *content, int type)
-{ 
-	t_list *node;
+int	fill_in_lst(t_list **lst, char *content, int type)
+{
+	t_list	*node;
+
 	node = ft_lstnew(content);
 	node->flag.type = type;
-	if(node == NULL)
-		return(ERROR);
+	if (node == NULL)
+		return (ERROR);
 	ft_lstadd_back(lst, node);
-	return(0);
+	return (0);
 }
-//GOODJOB
+// GOODJOB
 
-
-void lst_del_one(t_list *node)
+void	lst_del_one(t_list *node)
 {
-	if(node == NULL)
-		return;
-	if(node->content != NULL)
+	if (node == NULL)
+		return ;
+	if (node->content != NULL)
 		free(node->content);
 	free(node);
-} 
-
-
+}
 
 /**
  * @param print_str_lst print chaque element de la chaine;
  * @param fill_in_lst creer un node et le met en back de la liste
  * @param main pour tester si tu veux
  */
- 
+
 // int main()
 // {
 // 	t_list *lst;
@@ -91,7 +89,7 @@ void lst_del_one(t_list *node)
 
 // 	char *a = ft_ft_strndup("arthur", 6);
 // 	char *b = ft_ft_strndup("oscar", 5);
-// 	char *c = ft_ft_strndup("papa",  4); 
+// 	char *c = ft_ft_strndup("papa",  4);
 // 	char *d = NULL;
 // 	fill_in_lst(&lst, a);
 // 	fill_in_lst(&lst, b);

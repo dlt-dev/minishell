@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Part7_print_tree.c                                 :+:      :+:    :+:   */
+/*   PartX_print_tree.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:59:42 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/21 17:43:26 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/25 20:03:29 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-char	*redir_name(int type) // TEST PRINT
+char	*redir_name(int type)
 {
 	if (type == 11)
 		return ("INFILE  (<)");
@@ -26,7 +25,7 @@ char	*redir_name(int type) // TEST PRINT
 	return ("UNKNOWN");
 }
 
-void	print_cmd_list(t_exec *head) // TEST PRINT
+void	print_cmd_list(t_exec *head)
 {
 	int i;
 	int idx;
@@ -59,8 +58,8 @@ void	print_cmd_list(t_exec *head) // TEST PRINT
 		while (redir)
 		{
 			if (redir->filename)
-				printf("  redir: %s  ->  %s\n",
-					redir_name(redir->redir_type), redir->filename);
+				printf("  redir: %s  ->  %s\n", redir_name(redir->redir_type),
+					redir->filename);
 			else
 				printf("  redir: %s  ->  (null)\n",
 					redir_name(redir->redir_type));

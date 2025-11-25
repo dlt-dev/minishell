@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   try_redir_struct.c                                 :+:      :+:    :+:   */
+/*   Part7_redir_struct.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:13:58 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/13 15:16:22 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/25 21:21:44 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_redir	*create_new_redir(char *filename, int type) // si plusieurs redir a la suite
+t_redir	*create_new_redir(char *filename, int type)
 {
 	t_redir	*new;
 
@@ -21,16 +21,15 @@ t_redir	*create_new_redir(char *filename, int type) // si plusieurs redir a la s
 		return (NULL);
 	new->redir_type = type;
 	new->filename = ft_strdup(filename);
-	if(filename == NULL)
-		return(free(new), NULL);
+	if (filename == NULL)
+		return (free(new), NULL);
 	new->next = NULL;
 	return (new);
 }
 
-
-void add_redir_command(t_exec *current, t_redir *redir)
+void	add_redir_command(t_exec *current, t_redir *redir)
 {
-	t_redir *tmp;
+	t_redir	*tmp;
 
 	tmp = current->redir;
 	if (current->redir == NULL)
@@ -48,8 +47,8 @@ int	redir_management(t_exec *current, t_list *token, int type)
 	t_redir	*new_redir;
 
 	new_redir = create_new_redir(token->next->content, type);
-	if(new_redir == NULL)
-		return(ERROR);
+	if (new_redir == NULL)
+		return (ERROR);
 	add_redir_command(current, new_redir);
-	return(0);
+	return (0);
 }

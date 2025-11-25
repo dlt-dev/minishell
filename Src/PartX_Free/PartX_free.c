@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:44:28 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/24 20:29:57 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/25 21:20:27 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 int	close_all_redir(t_exec *commands)
 {
-	t_exec *current;
+	t_exec	*current;
+
 	current = commands;
-
-/* 	if (!current || !current->cmds || !current->redir) //!!\\ ADD POuR EVITER SEGFAULT REDIR UNIQUE
-		return (0); */
-
 	while (current)
 	{
 		if (current->fd_in != STDIN_FILENO)
@@ -31,37 +28,35 @@ int	close_all_redir(t_exec *commands)
 	return (0);
 }
 
-void free_all(t_shell *shell)
-{ 
+void	free_all(t_shell *shell)
+{
 	close_all_redir(shell->cmd_lst);
 	ft_free_lst(&shell->lst);
 	ft_free_str(&shell->invite.prompt);
 	ft_free_str(&shell->rd_line);
 	free_exec_lst(&shell->cmd_lst);
 	free_chunk_buffer(&shell->lst_buffer);
-	shell->prev_fd = -1; // reinit le prev_fd pour la commande suivante
+	shell->prev_fd = -1;
 }
 
-void free_exit(t_shell *shell, int code, char *message)
+void	free_exit(t_shell *shell, int code, char *message)
 {
-
-	if(message != NULL)
+	if (message != NULL)
 		perror(message);
 	free_all(shell);
 	ft_free_var(&shell->env);
-	// clear_history();
 	exit(code);
 }
 
 /**
- * @brief 
- * @param free_exit aura pour objectif de tout free et 
+ * @brief
+ * @param free_exit aura pour objectif de tout free et
  * d'exit avec le bon code. pour l'instant j'envoie lst a
  * free mais peut etre qu'il y aura plus tard une plus grosse
  * structure contenant t_list lst et on remplacera le parametre lst
  * plus tard par cette structure.
- * @param ft_free_lst ATTENTION: le pointeur lst n'est pas remis a 
- * NULL apres ft_free_lst, il faudra donc metttre lst = NULL apres 
+ * @param ft_free_lst ATTENTION: le pointeur lst n'est pas remis a
+ * NULL apres ft_free_lst, il faudra donc metttre lst = NULL apres
  * un @param ft_free_lst, pour etre sur de ne plus acceder a lst
  * (mais a priori si free_exit est appele il n'y a pas de probleme)
  */
