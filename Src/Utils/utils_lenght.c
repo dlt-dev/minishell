@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_lenght.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:11:06 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/14 17:01:03 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/26 13:41:04 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,19 @@ int	length_name(char *name)
 	return (i);
 }
 
-int len_number (int nb)
+int	len_number(int nb)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	if(nb < 0)
-		return(ERROR);
-	if(nb == 0)
-		return(1);
-	while(nb > 0)
+	if (nb < 0)
+		return (ERROR);
+	if (nb == 0)
+		return (1);
+	while (nb > 0)
 	{
-		nb = nb/10;
+		nb = nb / 10;
 		i++;
 	}
-	return(i);
+	return (i);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_struct.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 17:06:42 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/14 11:13:10 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 17:37:55 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,25 @@
 
 typedef struct s_pipex
 {
-	char	**cmd1;
-	char	**cmd2;
-}	t_pipex;
+	char			**cmd1;
+	char			**cmd2;
+}					t_pipex;
 
 typedef struct s_redir
 {
 	char			*filename;
 	int				redir_type;
 	struct s_redir	*next;
-}	t_redir;
+}					t_redir;
 
 typedef struct s_exec
 {
 	char			**cmds;
 	struct s_redir	*redir;
 	struct s_exec	*next;
+	int				fd_in;
+	int				fd_out;
 
-	int fd_in;//je stock les derniers fd de mes open STDIN
-	int fd_out;//je set a -1 par default STDOUT
-
-}	t_exec;
+}					t_exec;
 
 #endif

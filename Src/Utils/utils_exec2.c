@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 15:41:16 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/14 15:41:41 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:07:21 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static char	**ft_fillsplit(char **split, char const *s, char c)
 		while (s[i] && s[i] == c)
 			i++;
 		start = i;
-		while (s[i] && s [i] != c)
+		while (s[i] && s[i] != c)
 			i++;
 		if (i > start)
 		{

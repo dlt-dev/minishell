@@ -3,81 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   utils_chunk_buffer.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 00:57:54 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/27 15:46:29 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/25 21:14:00 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void free_chunk_buffer(t_cb *lst_buffer)
+void	free_chunk_buffer(t_cb *lst_buffer)
 {
-	t_buffer *tmp;
-	
-	if(lst_buffer->head == NULL && lst_buffer->tail == NULL)	
-		return;
+	t_buffer	*tmp;
+
+	if (lst_buffer->head == NULL && lst_buffer->tail == NULL)
+		return ;
 	tmp = lst_buffer->head;
-	while(lst_buffer->head != NULL)
+	while (lst_buffer->head != NULL)
 	{
-		lst_buffer->head = lst_buffer->head->next; 
+		lst_buffer->head = lst_buffer->head->next;
 		free(tmp->buffer);
 		free(tmp);
 		tmp = lst_buffer->head;
 	}
 	lst_buffer->head = NULL;
 	lst_buffer->tail = NULL;
-	
 }
 
-t_buffer *new_buffer(size_t capacity)
-{ 
-	t_buffer *node;
-	
-	if(capacity == 0)
-		return(NULL);
+t_buffer	*new_buffer(size_t capacity)
+{
+	t_buffer	*node;
+
+	if (capacity == 0)
+		return (NULL);
 	node = malloc(sizeof(t_buffer));
-	if(node == NULL)
-		return(NULL);
+	if (node == NULL)
+		return (NULL);
 	node->buffer = malloc(sizeof(char) * capacity);
-	if(node->buffer == NULL)
-		return(free(node), NULL);
+	if (node->buffer == NULL)
+		return (free(node), NULL);
 	ft_memset(node->buffer, 0, capacity);
 	node->length = 0;
 	node->capacity = capacity;
 	node->next = NULL;
-	return(node);
-} 
+	return (node);
+}
 
-int init_chunk_buffer(t_cb *lst_buffer, size_t capacity, size_t factor)
+int	init_chunk_buffer(t_cb *lst_buffer, size_t capacity, size_t factor)
 {
-	t_buffer *node;
-	
+	t_buffer	*node;
+
 	*lst_buffer = (t_cb){0};
-	if(capacity <= 0 || factor <= 0 || lst_buffer == NULL)
-		return(ERROR);
+	if (capacity <= 0 || factor <= 0 || lst_buffer == NULL)
+		return (ERROR);
 	lst_buffer->capacity = capacity * factor;
 	lst_buffer->factor = factor;
 	node = new_buffer(lst_buffer->capacity);
-	if(node == NULL)
-		return(ERROR);
+	if (node == NULL)
+		return (ERROR);
 	lst_buffer->head = node;
 	lst_buffer->tail = node;
-	return(0);
+	return (0);
 }
 /**
- * @brief 
+ * @brief
  * @param init_chunk: initialise une liste de buffer et créé le premier
  * @param new_buffer creer un node avec un buffer de taille "capacity"
  * @param add_back_buffer ajoute le buffer a la fin de la liste
  */
 
- 
 // int main(int argc, char **argv)
 // {
 // 	char *str2;
-	
+
 // 	t_cb lst_buffer;
 // 	init_chunk_buffer(&lst_buffer, 200, 2);
 // 	cb_append_str(&lst_buffer, argv[1]);
@@ -92,7 +90,7 @@ int init_chunk_buffer(t_cb *lst_buffer, size_t capacity, size_t factor)
 // 	}
 // 	// printf_buffer(lst_buffer);
 // 	// str2 = fusion_all_chunk(&lst_buffer);
-	
+
 // 	// printf("%s\n", str2);
 // 	// free(str2);
 // }

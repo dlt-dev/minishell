@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_pwd.c                                     :+:      :+:    :+:   */
+/*   main_signaux.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 17:00:14 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/25 14:48:12 by jdelattr         ###   ########.fr       */
+/*   Created: 2025/11/26 15:57:33 by jdelattr          #+#    #+#             */
+/*   Updated: 2025/11/26 16:40:09 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	builtin_pwd(int fd_out)
-{
-	char	*path;
 
-	path = getcwd(NULL, 0);
-	if (path == NULL)
-		return (GEN_ERRNO);
-	write(fd_out, path, ft_strlen(path));
-	write(fd_out, "\n", 1);
-	free(path);
-	return (0);
+
+/* 	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+
+
+struct sigaction sa;
+
+// 1. Définir le handler
+sa.sa_handler = handle_sigint;
+
+// 2. Initialiser le masque de signaux bloqués (aucun ici)
+sigemptyset(&sa.sa_mask);
+
+// 3. Pas de flags spéciaux (0 par défaut)
+sa.sa_flags = 0;
+
+// Applique cette configuration pour le signal SIGINT (Ctrl+C)
+sigaction(SIGINT, &sa, NULL); */
+
+
+
+void	handle_sigint()
+{
+
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_libft1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 13:51:58 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/14 20:07:45 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:12:45 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,24 @@ char	*ft_strdup(char *s)
 	return (m);
 }
 
-char *ft_strndup(char *str, int size)
+char	*ft_strndup(char *str, int size)
 {
-	int i;
-	char *p;
-	
+	int		i;
+	char	*p;
+
 	i = 0;
-	if(str == NULL)
-		return(NULL);
+	if (str == NULL)
+		return (NULL);
 	p = malloc(sizeof(char) * size + 1);
-	if( p == NULL)
-		return(NULL);
-	while(i < size)
-	{ 
+	if (p == NULL)
+		return (NULL);
+	while (i < size)
+	{
 		p[i] = str[i];
 		i++;
 	}
 	p[i] = '\0';
-	return(p);
+	return (p);
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
@@ -74,22 +74,22 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-void ft_strcat(char *src, char *dest)
+void	ft_strcat(char *src, char *dest)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
-	if(src == NULL || dest == NULL)
-		return;
-	j = 0; 
+	if (src == NULL || dest == NULL)
+		return ;
+	j = 0;
 	i = 0;
-	while(dest[i] != '\0')
+	while (dest[i] != '\0')
 		i++;
-	while(src[j] != '\0')
-	{ 
+	while (src[j] != '\0')
+	{
 		dest[i] = src[j];
 		j++;
-		i++; 
+		i++;
 	}
 	dest[i] = '\0';
 }
