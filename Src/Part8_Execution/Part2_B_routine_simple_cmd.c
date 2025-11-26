@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:21:20 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/25 20:05:15 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 15:14:04 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	routine_child(t_shell *shell, char **cmd, t_valist *env)
 	// print_char_tab(cmd); TEST PRINT
 	if (redir_one_command(shell) == GEN_ERRNO)
 		free_exit(shell, GEN_ERRNO, cmd[0]);
-	exit_status = do_execve(shell, cmd, env);
+	exit_status = do_execve(cmd, env);
 	free_exit(shell, exit_status, cmd[0]);
 	return (0);
 }

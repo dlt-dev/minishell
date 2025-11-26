@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 16:59:40 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/25 21:15:57 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 13:59:53 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,20 @@ int	ft_atoi(const char *s)
 		i++;
 	}
 	return (result * signe);
+}
+
+void	ft_free_tab(char **tab)
+{
+	int	i;
+
+	if (tab)
+	{
+		i = 0;
+		while (tab[i])
+		{
+			free(tab[i]);
+			i++;
+		}
+	}
+	free(tab);
 }

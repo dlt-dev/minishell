@@ -6,34 +6,11 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 19:10:04 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/25 21:16:21 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 13:45:08 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_valist	*var_new(char *name, char *value)
-{
-	t_valist	*node;
-
-	node = malloc(sizeof(t_valist));
-	if (node == NULL)
-		return (NULL);
-	node->name = name;
-	node->value = value;
-	node->len_name = ft_strlen(node->name);
-	node->next = NULL;
-	return (node);
-}
-
-static t_valist	*var_last(t_valist *var)
-{
-	if (var == NULL)
-		return (NULL);
-	while (var->next != NULL)
-		var = var->next;
-	return (var);
-}
 
 void	var_addback(t_valist **var, t_valist *new)
 {

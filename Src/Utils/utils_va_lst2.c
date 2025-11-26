@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_struct.h                                      :+:      :+:    :+:   */
+/*   utils_va_lst2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/26 17:06:42 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/26 14:14:56 by jdelattr         ###   ########.fr       */
+/*   Created: 2025/11/26 13:44:22 by jdelattr          #+#    #+#             */
+/*   Updated: 2025/11/26 14:57:47 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_STRUCT_H
-# define EXEC_STRUCT_H
+#include "minishell.h"
 
-typedef struct s_pipex
+t_valist	*var_new(char *name, char *value)
 {
-	char			**cmd1;
-	char			**cmd2;
-}					t_pipex;
+	t_valist	*node;
 
-typedef struct s_redir
+	node = malloc(sizeof(t_valist));
+	if (node == NULL)
+		return (NULL);
+	node->name = name;
+	node->value = value;
+	node->len_name = ft_strlen(node->name);
+	node->next = NULL;
+	return (node);
+}
+
+t_valist	*var_last(t_valist *var)
 {
-	char			*filename;
-	int				redir_type;
-	struct s_redir	*next;
-}					t_redir;
-
-typedef struct s_exec
-{
-	char			**cmds;
-	struct s_redir	*redir;
-	struct s_exec	*next;
-	int				fd_in;
-	int				fd_out;
-
-}					t_exec;
-
-#endif
+	if (var == NULL)
+		return (NULL);
+	while (var->next != NULL)
+		var = var->next;
+	return (var);
+}

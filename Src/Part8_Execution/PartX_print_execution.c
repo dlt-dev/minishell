@@ -6,13 +6,13 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 14:02:40 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/25 21:21:14 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 14:06:39 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_char_tab(char **tab) // TEST
+void	print_char_tab(char **tab)
 {
 	int i;
 
@@ -30,7 +30,7 @@ void	print_char_tab(char **tab) // TEST
 	}
 }
 
-void	test_print_fd(t_exec *cmd_list) // TEST
+void	test_print_fd(t_exec *cmd_list)
 {
 	int i;
 

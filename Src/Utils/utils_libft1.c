@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 13:51:58 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/25 21:15:18 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 13:43:20 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ int	ft_strcmp(const char *s1, const char *s2)
 
 void	ft_strcat(char *src, char *dest)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	if (src == NULL || dest == NULL)
 		return ;

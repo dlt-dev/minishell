@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 18:51:00 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/25 21:15:03 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 13:42:53 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_free_lst(t_list **lst)
 		*lst = tmp;
 	}
 }
+
 void	free_redir_list(t_redir **head)
 {
 	t_redir	*cur;
@@ -78,7 +79,6 @@ void	free_exec_lst(t_exec **head)
 	}
 	*head = NULL;
 }
-// GOODJOB
 
 void	ft_free_str(char **str)
 {
@@ -90,7 +90,7 @@ void	ft_free_str(char **str)
 
 void	ft_free_split(char ***tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (*tab == NULL)

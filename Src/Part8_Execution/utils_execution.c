@@ -6,27 +6,11 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:24:17 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/25 20:35:26 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 13:59:20 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_free_tab(char **tab)
-{
-	int	i;
-
-	if (tab)
-	{
-		i = 0;
-		while (tab[i])
-		{
-			free(tab[i]);
-			i++;
-		}
-	}
-	free(tab);
-}
 
 int	ft_lstexec_size(t_exec *lst)
 {
@@ -44,7 +28,7 @@ int	ft_lstexec_size(t_exec *lst)
 int	path_not_found(void)
 {
 	ft_putstr("\033[31mpath not found\n\033[0m");
-	exit(127); // return ou perror
+	exit(127);
 }
 
 char	**split_tab_paths(char **envp)
@@ -98,6 +82,7 @@ char	*find_my_cmd_path(char *my_cmd, char **envp, int *check)
 	}
 	return (ft_free_tab(paths), NULL);
 }
+
 /* char	*find_my_cmd_path(char *my_cmd, char **envp, int *check)
 {
 	int		i;

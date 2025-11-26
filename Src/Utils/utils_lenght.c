@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:11:06 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/25 21:15:10 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 13:41:04 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	length_name(char *name)
 
 int	len_number(int nb)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (nb < 0)

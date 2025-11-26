@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   chunk_buffer.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 11:50:33 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/20 20:13:08 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/26 14:14:31 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHUNK_BUFFER_H
-    #define CHUNK_BUFFER_H
-    
-#include <stddef.h>
-#include "struct.h"
+# define CHUNK_BUFFER_H
 
-//create_buffer
-int init_chunk_buffer(t_cb *lst_buffer, size_t capacity, size_t factor);
-t_buffer *new_buffer(size_t capacity);
-int add_back_buffer(t_cb *lst_buffer);
-void free_chunk_buffer(t_cb *lst_buffer);
+# include "struct.h"
+# include <stddef.h>
 
-//management_buffer
-void printf_buffer (t_cb lst_buffer);
-char *fusion_all_chunk(t_cb *lst_buffer);
-int cb_append_char(t_cb* lst_buffer, char c);
-int cb_append_str(t_cb *lst_buffer, char *str);
+// create_buffer
+int			init_chunk_buffer(t_cb *lst_buffer, size_t capacity, size_t factor);
+t_buffer	*new_buffer(size_t capacity);
+int			add_back_buffer(t_cb *lst_buffer);
+void		free_chunk_buffer(t_cb *lst_buffer);
 
-#endif 
+// management_buffer
+void		printf_buffer(t_cb lst_buffer);
+char		*fusion_all_chunk(t_cb *lst_buffer);
+int			cb_append_char(t_cb *lst_buffer, char c);
+int			cb_append_str(t_cb *lst_buffer, char *str);
+
+#endif
