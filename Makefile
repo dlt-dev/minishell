@@ -61,9 +61,9 @@ PartX_Free Part8_Execution
 	SRC_MAIN  = main.c
 	#Sources utiles
 	SRC_UTILS = utils_chunk_buffer.c utils_chunk_buffer2.c utils_lenght.c utils_libft1.c \
-	utils_libft2.c utils_lst.c utils_lst2.c utils_va_lst.c utils_print_lst.c utils_free.c \
-	utils_libft3.c utils_error.c utils_exec1.c utils_exec2.c utils_exec3.c utils_lst3.c \
-	utils_va_lst2.c
+	utils_libft2.c utils_lst.c utils_lst2.c utils_print_lst.c utils_free.c \
+	utils_libft3.c utils_error.c utils_exec1.c utils_exec2.c  utils_lst3.c utils_va_lst.c \
+	utils_va_lst2.c utils_va_lst3.c
 	#Sources Built_in
 	SRC_BUILTIN = built_in_cd.c built_in_echo.c built_in_env.c built_in_exit.c \
 	built_in_export1.c built_in_export2.c built_in_pwd.c built_in_unset.c
@@ -83,6 +83,9 @@ PartX_Free Part8_Execution
 	$(addprefix PartX_Free/, $(SRC_PARTX)) \
 	$(addprefix Built_in/, $(SRC_BUILTIN))
 OBJ = $(addprefix $(OBJ_DIR)/, $(ALL_SRC:.c=.o))
+
+#	$(addprefix Part8_Execution/, $(SRC_PART8)) \
+#	$(addprefix Part8_Execution/, $(SRC_PART8)) \
 
 all: $(NAME)
 
@@ -124,3 +127,6 @@ re:
 	make all
 
 .PHONY: all install re clean fclean 
+
+#	SRC_PART8 = Part8_execution.c Part8_built_in.c Part8_heredoc.c Part8_open_redir.c \
+#	Part8_exec_fork_one.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_libft2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 13:47:28 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/25 21:15:23 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:12:55 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	is_char_in_str(char c, char *sep)
 	return (IS_NOT);
 }
 
-void	write_str(char *str)
+void write_str_fd(char *str, int fd)
 {
-	write(1, str, ft_strlen(str));
+	write(fd, str, ft_strlen(str));
 }
 
 void	*ft_memset(void *str, int c, size_t n)

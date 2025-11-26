@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/26 17:25:22 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 17:40:41 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,9 @@ char	*redir_name(int type); // TEST PRINT
 void	print_cmd_list(t_exec *head); // TEST PRINT
 
 // Part6_delete_quotes
-int		delete_quotes(t_shell *shell, t_list *lst);
+int delete_quotes(t_shell *shell, t_list *lst);
+char *delete_quotes_str(t_list *node);
+
 
 // Part7_Cmd_struct
 void	print_cmd_list(t_exec *head); // TEST PRINT

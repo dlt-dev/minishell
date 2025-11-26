@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part7_main_tree_struct.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:18:43 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 17:26:41 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 17:55:09 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_exec	*create_new_command(void)
 {
 	t_exec	*command;
 
+	
 	command = malloc(sizeof(t_exec));
 	if (!command)
 		return (NULL);

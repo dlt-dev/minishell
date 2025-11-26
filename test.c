@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 17:29:21 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:06:14 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 // #include "Header/minishell.h"
 // #include <unistd.h> 
@@ -128,3 +129,39 @@
 // 	retour = handle_heredoc(argv[1], &signal);
 // 	printf("l'exit est  : %d", retour);
 // }
+int main()
+{
+	pid_t pid;
+	pid = fork();
+
+	if (pid > 0)
+	{
+		printf("je suis le pere\n");
+	}
+}
+
+int waitpid_verify_status (pid_t pid)
+{ 
+	int status;
+		
+	waitpid(pid, &status, 0);
+	if(WIFEXITED(status) != 0)
+		return(WEXITSTATUS(status));
+	if(WIFSIGNALED(status) != 0)
+		return(WTERMSIG(status) + 128);
+	return(0);
+}
+
+int	wait_and_status(pid_t last_pid)
+{
+	int status;
+	pid_t pid_childs;
+	pid_t last_pid;
+
+	waitpid(last_pid, &status, 0);
+	shel
+
+	while ( waitpid(-1, 0, 0) != ERROR)
+		continue ;
+	return (status);
+}

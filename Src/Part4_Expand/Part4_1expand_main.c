@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part4_1expand_main.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 12:06:17 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 17:26:01 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:30:39 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,34 +53,36 @@ static int	fill_expand_in_buffer(t_shell *shell, t_cb *lst_buffer, char *str)
 	return (0);
 }
 
-static char	*create_expand_str(t_shell *shell, t_cb *lst_buffer, char *str)
+char *create_expand_str(t_shell *shell, char *str)
 {
-	char	*new_str;
-
-	new_str = NULL;
-	if (init_chunk_buffer(lst_buffer, 10, 2) == ERROR)
-		return (NULL);
-	if (fill_expand_in_buffer(shell, lst_buffer, str) == ERROR)
-		return (NULL);
-	new_str = fusion_all_chunk(lst_buffer);
-	if (new_str == NULL)
-		return (NULL);
-	return (new_str);
+    char *new_str;
+    t_cb lst_buffer;
+    
+    new_str = NULL;
+    if(init_chunk_buffer(&lst_buffer, 10, 2) == ERROR)
+        return(NULL);
+    if(fill_expand_in_buffer(shell, &lst_buffer, str) == ERROR)
+        return(NULL);
+    new_str = fusion_all_chunk(&lst_buffer);
+    free_chunk_buffer(&lst_buffer);
+    if(new_str == NULL)
+        return(NULL);
+    return(new_str);
 }
 
 static t_list	*create_expand_node(t_shell *shell, t_list *curr_node)
 {
-	char	*new_str;
-	t_list	*new_node;
-
-	new_str = create_expand_str(shell, &shell->lst_buffer, curr_node->content);
-	if (new_str == NULL)
-		return (NULL);
-	new_node = ft_lstnew(new_str);
-	if (new_node == NULL)
-		return (free(new_str), NULL);
-	ft_memcpy(&new_node->flag, &curr_node->flag, sizeof(t_flag));
-	return (new_node);
+    char *new_str;
+    t_list *new_node;
+    
+    new_str = create_expand_str(shell, curr_node->content);
+    if(new_str == NULL)
+        return(NULL);
+    new_node = ft_lstnew(new_str);
+    if(new_node == NULL)
+            return(free(new_str), NULL);
+    ft_memcpy(&new_node->flag, &curr_node->flag, sizeof(t_flag));
+    return(new_node);
 }
 
 int	expand_shell_param(t_shell *shell, t_list *curr_node)

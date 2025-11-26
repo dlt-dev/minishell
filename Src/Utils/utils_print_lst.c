@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_print_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:26:50 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 13:38:17 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:13:44 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	print_var_lst(t_valist *var)
 			printf("VAR VALUE: %s\n\n", var->value);
 		}
 		else
-			write_str("(null)\n\n");
+			write_str_fd("(null)\n\n", 1);
+			
 		var = var->next;
 	}
 }
@@ -56,16 +57,16 @@ void	print_str_lst(t_list *lst)
 			print_flag_lst(lst);
 		}
 		else
-			write_str("(null)\n\n");
+			write_str_fd("(null)\n\n", 1);
 		lst = lst->next;
 	}
 }
 
 void	printf_buffer(t_cb lst_buffer)
 {
-	if (lst_buffer.head == NULL || lst_buffer.tail == NULL)
-		write_str("buffer nill");
-	while (lst_buffer.head != NULL)
+	if(lst_buffer.head == NULL || lst_buffer.tail == NULL)
+		write_str_fd("buffer nill", 1);
+	while(lst_buffer.head != NULL)
 	{
 		printf("NODE:\n");
 		printf("str: %s\n", lst_buffer.head->buffer);

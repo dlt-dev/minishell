@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:40:19 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 14:57:13 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:17:35 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void			ft_strcat(char *src, char *dest);
 
 // utils_libft2.c
 int				is_char_in_str(char c, char *sep);
-void			write_str(char *str);
+void write_str_fd(char *str, int fd);
 void			*ft_memset(void *str, int c, size_t n);
 void			*ft_memcpy(void *dest, const void *src, size_t n);
 

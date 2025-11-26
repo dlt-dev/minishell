@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 17:28:34 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:04:57 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 
 void printbanner(void)
 {
-	write_str(
+	write_str_fd(
 		"					\033[1;33m        \\   |   /        \n"
 		"					\033[1;33m          .-*-.\n"
 		"					\033[1;33m     ☼  (  SUN  )  ☼    \033[95mWELCOME :)\n"
@@ -49,7 +49,7 @@ void printbanner(void)
 		"					\033[1;93m######*############### 🐚 #####*###########\n"
 		"					\033[1;95m       minishell de Arthur & Jeanne \n"
 		"					\033[36m\n"
-		"					\033[0m\n");
+		"					\033[0m\n", 1);
 }
 
 int main(int argc, char **argv, char **envp)

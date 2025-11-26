@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 18:12:59 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/25 21:14:58 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:10:36 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static char	*create_str_var(t_valist *current)
 	int		len_val;
 	char	*str;
 
-	len_name = strlen(current->name);
-	len_val = strlen(current->value);
+	len_name = ft_strlen(current->name);
+	len_val = ft_strlen(current->value);
 	str = malloc(len_name + 1 + len_val + 1);
 	if (str == NULL)
 		return (NULL);

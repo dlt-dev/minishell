@@ -1,35 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_error.c                                      :+:      :+:    :+:   */
+/*   refonte_print_execution.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/15 19:01:40 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 18:06:59 by aoesterl         ###   ########.fr       */
+/*   Created: 2025/11/20 14:02:40 by aoesterl          #+#    #+#             */
+/*   Updated: 2025/11/20 14:02:41 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_error_message(char *fonction, char *arg)
+void	print_char_tab(char **tab) //TEST
 {
-	char	*error;
-	char	*minishell;
+	int	i;
 
-	minishell = "minishell: ";
-	error = strerror(errno);
-	write(2, minishell, ft_strlen(minishell));
-	if (fonction != NULL)
+	i = 0;
+	if (!tab)
 	{
-		write(2, fonction, ft_strlen(fonction));
-		write(2, ": ", 2);
+		printf("(null)\n");
+		return ;
 	}
-	if (arg != NULL)
+	printf("mon char **\n");
+	while (tab[i])
 	{
-		write(2, arg, ft_strlen(arg));
-		write(2, ": ", 2);
+		printf("%s\n", tab[i]);
+		i++;
 	}
-	write(2, error, ft_strlen(error));
-	write(2, "\n", 1);
+}
+
+void	test_print_fd(t_exec *cmd_list) // TEST
+{
+	int i;
+
+	i = 0;
+	while (cmd_list != NULL)
+	{
+		printf("cmd[%d] ->> cmd fd_in = %d | fd_out = %d\n", i, cmd_list->fd_in,
+			cmd_list->fd_out);
+		i++;
+		cmd_list = cmd_list->next;
+	}
 }
