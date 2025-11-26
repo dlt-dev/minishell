@@ -6,15 +6,15 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 11:50:33 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 14:14:31 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 17:21:25 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHUNK_BUFFER_H
 # define CHUNK_BUFFER_H
 
-# include "struct.h"
-# include <stddef.h>
+#include "struct.h"
+#include <stddef.h>
 
 // create_buffer
 int			init_chunk_buffer(t_cb *lst_buffer, size_t capacity, size_t factor);

@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 19:18:46 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/25 20:06:00 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 17:27:27 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,25 @@ int	routine_heredoc(char *delimit, int pipefd[2])
 	exit(0);
 }
 
-int	handle_heredoc(char *delimit)
-{
-	int		pipefd[2];
-	pid_t	pid_heredoc;
+
+int handle_heredoc(char *delimit) // envoye le fd_in ici recuperer le code de sortie suelement apres le waitpid ou si probleme de pipe, ou autre
+{	
+	int pipefd[2];
 
 	pipe(pipefd);
 	if (pipe(pipefd) == -1)
-		return (ERROR);
+		return (perror("error pipe"), ERROR);
+
+	pid_t pid_heredoc;
+	
+	// if(flag_signal == 1)
+	// 	return(ERROR);
 	pid_heredoc = fork();
-	if (pid_heredoc == ERROR)
-		return (close(pipefd[1]), close(pipefd[0]), GEN_ERRNO);
-	if (pid_heredoc == 0)
+	if(pid_heredoc == ERROR)
+		return(ERROR);
+	if(pid_heredoc == 0)
 	{
+		
 		routine_heredoc(delimit, pipefd);
 	}
 	waitpid(pid_heredoc, NULL, 0);

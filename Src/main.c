@@ -6,12 +6,33 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/21 20:18:19 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 17:28:34 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
- 
+
+// volatile sig_atomic_t flag_signal = 0;
+
+// void handle_sig_int(int sig)
+// {
+// 	(void)sig; 
+// 	flag_signal = 1;
+// 	write(1, "\n", 1);
+// 	rl_replace_line("", 0); // vide la ligne en cours
+//     rl_on_new_line();       // force readline à passer à une nouvelle ligne
+//     rl_redisplay(); // reaffiche le prompt 
+// }
+
+// void init_signal(t_signal *signal)
+// { 
+// 	*signal = (t_signal) {0};
+// 	signal->sig_int.sa_handler = handle_sig_int;
+// 	sigemptyset(&signal->sig_int.sa_mask);
+// 	sigaction(SIGINT, &signal->sig_int, NULL);
+// }
+
+
 void printbanner(void)
 {
 	write_str(
@@ -36,6 +57,7 @@ int main(int argc, char **argv, char **envp)
 	t_shell shell;
 	
 	printbanner();
+	// init_signal(&shell.signal);
 	if(init_variable(&shell, argc, argv, envp) == ERROR)
 		free_exit(&shell, GEN_ERRNO, NULL);
 	while(1)
@@ -74,4 +96,3 @@ int main(int argc, char **argv, char **envp)
 		free_all(&shell);
 	}
 }
-
