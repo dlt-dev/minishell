@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part2_B_routine_simple_cmd.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:21:20 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 15:14:04 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/26 20:33:31 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,26 @@ int	redir_one_command(t_shell *shell)
 	}
 	if (fd_out != STDOUT_FILENO)
 	{
-		if (dup2(fd_out, STDOUT_FILENO) == ERROR)
-			return (GEN_ERRNO);
-		close(fd_out);
+		if(dup2(fd_out, STDOUT_FILENO) == ERROR)
+			return(GEN_ERRNO);
+		close(fd_out);	
 	}
-	return (0);
+	return(0); 
 }
 
-int	routine_child(t_shell *shell, char **cmd, t_valist *env)
-{
-	int	exit_status;
 
-	// print_char_tab(env_tab_exe); TEST PRINT
-	// print_char_tab(cmd); TEST PRINT
-	if (redir_one_command(shell) == GEN_ERRNO)
+
+void	routine_child(t_shell *shell, char **cmd, t_valist *env)
+{	
+	int exit_status;
+	
+	//print_char_tab(env_tab_exe); TEST PRINT
+	//print_char_tab(cmd); TEST PRINT
+	
+	if(redir_one_command(shell) == GEN_ERRNO)
 		free_exit(shell, GEN_ERRNO, cmd[0]);
 	exit_status = do_execve(cmd, env);
-	free_exit(shell, exit_status, cmd[0]);
-	return (0);
+	free_exit(shell, exit_status,  cmd[0]);
 }
 
 int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env)
@@ -58,7 +60,6 @@ int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env)
 	{
 		routine_child(shell, cmd, env);
 	}
-	// int status = 0;
-	wait_and_status(shell, child); //&status, 0);
-	return (0);
+	wait_and_status(shell, child);
+	return(0);
 }
