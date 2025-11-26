@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part7_print_tree.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:59:42 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/14 15:08:27 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/21 17:43:26 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,45 +28,44 @@ char	*redir_name(int type) // TEST PRINT
 
 void	print_cmd_list(t_exec *head) // TEST PRINT
 {
-	(void) head;
-	// int i;
-	// int idx;
-	// t_redir *redir;
-	// t_exec *current;
+	int i;
+	int idx;
+	t_redir *redir;
+	t_exec *current;
 
-	// if (!head)
-	// {
-	// 	printf("print_cmd_list: no commands\n");
-	// 	return ;
-	// }
-	// idx = 0;
-	// current = head;
+	if (!head)
+	{
+		printf("print_cmd_list: no commands\n");
+		return ;
+	}
+	idx = 0;
+	current = head;
 
-	// while (current)
-	// {
-	// 	printf("Command [%d]:\n", idx++);
-	// 	if (current->cmds && current->cmds[0])
-	// 	{
-	// 		i = 0;
-	// 		while (current->cmds[i])
-	// 		{
-	// 			printf("  argv[%d]: %s\n", i, current->cmds[i]);
-	// 			i++;
-	// 		}
-	// 	}
-	// 	else
-	// 		printf("  (no args)\n");
-	// 	redir = current->redir;
-	// 	while (redir)
-	// 	{
-	// 		if (redir->filename)
-	// 			printf("  redir: %s  ->  %s\n",
-	// 				redir_name(redir->redir_type), redir->filename);
-	// 		else
-	// 			printf("  redir: %s  ->  (null)\n",
-	// 				redir_name(redir->redir_type));
-	// 		redir = redir->next;
-	// 	}
-	// 	current = current->next;
-	// }
+	while (current)
+	{
+		printf("Command [%d]:\n", idx++);
+		if (current->cmds && current->cmds[0])
+		{
+			i = 0;
+			while (current->cmds[i])
+			{
+				printf("  argv[%d]: %s\n", i, current->cmds[i]);
+				i++;
+			}
+		}
+		else
+			printf("  (no args)\n");
+		redir = current->redir;
+		while (redir)
+		{
+			if (redir->filename)
+				printf("  redir: %s  ->  %s\n",
+					redir_name(redir->redir_type), redir->filename);
+			else
+				printf("  redir: %s  ->  (null)\n",
+					redir_name(redir->redir_type));
+			redir = redir->next;
+		}
+		current = current->next;
+	}
 }

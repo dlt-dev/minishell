@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/17 16:30:49 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/25 17:47:36 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
  
 void printbanner(void)
 {
-	write_str(
+	write_str_fd(
 		"					\033[1;33m        \\   |   /        \n"
 		"					\033[1;33m          .-*-.\n"
 		"					\033[1;33m     ☼  (  SUN  )  ☼    \033[95mWELCOME :)\n"
@@ -28,7 +28,7 @@ void printbanner(void)
 		"					\033[1;93m######*############### 🐚 #####*###########\n"
 		"					\033[1;95m       minishell de Arthur & Jeanne \n"
 		"					\033[36m\n"
-		"					\033[0m\n");
+		"					\033[0m\n", 1);
 }
 
 int main(int argc, char **argv, char **envp)
@@ -62,15 +62,15 @@ int main(int argc, char **argv, char **envp)
 			print_cmd_list(shell.cmd_lst);
 
 
-		//printf("variable path")
-		//else
-			//printf("une syntaxe error a ete detecte et la liste a ete free\n");
+		// //printf("variable path")
+		// //else
+		// 	//printf("une syntaxe error a ete detecte et la liste a ete free\n");
 
-		// execution
-		
-		manage_execution(&shell, shell.env);
-
-
+		// // execution
+		if(check_all_redir(&shell) == ERROR)
+			free_all(&shell);
+		else
+			manage_execution(&shell, shell.env);
 		free_all(&shell);
 	}
 }

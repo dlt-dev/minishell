@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/14 16:57:03 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:59:45 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,61 +22,39 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 
-
-int len_number(int nb)
-{ 
-	int i;
-
-	i = 0;
-	if(nb == 0)
-		return(1);
-	while(nb != 0)
-	{ 
-		nb /= 10;
-		i++;
-	}
-	return(i);
-	
-}
-
-char	*ft_itoa(int n)
-{
-	long	nb_cast;
-	char	*p;
-	int		len;
-
-	nb_cast = (long)n;
-	len = len_number(nb_cast);
-	p = malloc(sizeof(char) * (len +1));
-	if (p == NULL)
-		return (NULL);
-	p[len] = '\0';
-	if (nb_cast == 0)
-		p[0] = '0';
-	if (nb_cast < 0)
-	{
-		nb_cast = -nb_cast;
-		p[0] = '-';
-	}
-	while (nb_cast > 0)
-	{
-		p[len - 1] = (nb_cast % 10 + '0');
-		nb_cast = nb_cast / 10;
-		len--;
-	}
-	return (p);
-}
-
-
-
 int main()
-{ 
-	char *str;
-	t_cb lst_buffer;
+{
+	pid_t pid;
+	pid = fork();
 
-	init_chunk_buffer(&lst_buffer, 10, 2);
-	str = ft_itoa(127);
-	if(str == NULL)
-		return(ERROR);
-	printf("%s", str);
+	if (pid > 0)
+	{
+		printf("je suis le pere\n");
+	}
+}
+
+int waitpid_verify_status (pid_t pid)
+{ 
+	int status;
+		
+	waitpid(pid, &status, 0);
+	if(WIFEXITED(status) != 0)
+		return(WEXITSTATUS(status));
+	if(WIFSIGNALED(status) != 0)
+		return(WTERMSIG(status) + 128);
+	return(0);
+}
+
+int	wait_and_status(pid_t last_pid)
+{
+	int status;
+	pid_t pid_childs;
+	pid_t last_pid;
+
+	waitpid(last_pid, &status, 0);
+	shel
+
+	while ( waitpid(-1, 0, 0) != ERROR)
+		continue ;
+	return (status);
 }

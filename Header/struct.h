@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/14 18:14:30 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/20 12:29:48 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ enum	e_token_type
 	OUTFILE = 12,
 	OUTFILE_APPEND = 13,
 };
-
-
 
 typedef struct s_buffer
 { 
@@ -112,6 +110,9 @@ typedef struct s_shell
 	t_valist *env;
 	t_cb lst_buffer;
 	int exit_status;
+
+	int	prev_fd; // stock le prev fd () pour stdin de la commande suivante
+
 }t_shell;
 
 /**
@@ -120,6 +121,5 @@ typedef struct s_shell
  * @param exit_status (#?), pour pouvoir tout transporter quand on veut
  * 
  */
-
 
 #endif

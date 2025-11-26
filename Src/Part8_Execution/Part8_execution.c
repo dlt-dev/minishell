@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part8_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 16:27:16 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/18 02:48:19 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/21 17:24:28 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@
 /// @fonctions fork_process.c ///
 ////////////////////////////////////
 
-void	print_char_tab(char **tab)
+void	print_char_tab(char **tab) //TEST
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	if (!tab)
 	{
 		printf("(null)\n");
-		return;
+		return ;
 	}
 	printf("mon char **\n");
 	while (tab[i])
@@ -35,7 +36,7 @@ void	print_char_tab(char **tab)
 
 void	test_print_fd(t_exec *cmd_list) // TEST
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (cmd_list != NULL)
@@ -60,65 +61,11 @@ int	ft_lstexec_size(t_exec *lst)
 	return (count);
 }
 
-
-/* void	check_error_one(int fd1, char **cmd1, char**av, int fd_pipe[2])
-{
-	if (fd1 < 0)
-	{
-		ft_free_tab(cmd1);
-		perror(av[1]);
-		close(fd_pipe[1]);
-		exit(1);
-	}
-	close(fd_pipe[0]);
-	if (!cmd1[0] || cmd1[0][0] == '\0')
-	{
-		ft_free_tab(cmd1);
-		close(fd_pipe[1]);
-		close(fd1);
-		cmd_not_found();
-	}
-} */
-
-void	ft_free_tab(char **tab)
-{
-	int	i;
-
-	if (tab)
-	{
-		i = 0;
-		while (tab[i])
-		{
-			free(tab[i]);
-			i++;
-		}
-	}
-	free(tab);
-}
-
 int	path_not_found(void)
 {
 	ft_putstr("\033[31mpath not found\n\033[0m");
-	exit(127);//return ou perror
+	exit(127); // return ou perror
 }
-
-/* char	**split_tab_paths(char **env)
-{
-	//int		i;
-	char	**paths;
-
-	//i = 0;
-	if (!env)
-		return (NULL);
-	while (env->next && ft_strncmp(env->name, "PATH", 4) != 0)//(envp[i] && ft_strncmp(envp[i], "PATH=", 5) != 0)
-		env = env->next;
-
-	paths = ft_split(env->value, ':');
-	if (!paths)
-		return (NULL);
-	return (paths);
-} */
-
 
 char	**split_tab_paths(char **envp)
 {
@@ -126,48 +73,15 @@ char	**split_tab_paths(char **envp)
 	char	**paths;
 
 	i = 0;
-	printf("je suis dans le split\n");
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5) != 0)
 		i++;
 	if (!envp[i])
 		return (NULL);
 	paths = ft_split(envp[i] + 5, ':');
-	print_char_tab(paths);
 	if (!paths)
 		return (NULL);
 	return (paths);
 }
-
-
-/* char	*find_my_cmd_path(char *my_cmd, char **env)
-{
-	int		i;
-	char	*my_path;
-	char	**paths;
-
-	my_path = NULL;
-	paths = split_tab_paths(env);
-	i = 0;
-	while (paths[i])
-	{
-		my_path = malloc(ft_strlen(paths[i]) + 1 + ft_strlen(my_cmd) + 1);
-		if (!my_path)
-			return (NULL);
-
-		ft_strcpy(my_path, paths[i]);//copie paths 1 2 3 ... dans my_path
-		ft_strcat(my_path, "/");//cat /
-		ft_strcat(my_path, my_cmd);// cat my_cmd a la suite
-		if (access(my_path, X_OK) == 0)//SI JE TROUVE UN CHEMIN JE RETOURNE LE BON
-		{
-			ft_free_tab(paths);
-			return (my_path);
-		}
-		free(my_path);
-		i++;
-	}
-	ft_free_tab(paths);
-	return (NULL);
-} */
 
 char	*find_my_cmd_path(char *my_cmd, char **envp)
 {
@@ -178,12 +92,9 @@ char	*find_my_cmd_path(char *my_cmd, char **envp)
 	my_path = NULL;
 	paths = split_tab_paths(envp);
 	i = 0;
-	if (!paths)
-		printf("c'est ici j'ai ");
-
 	while (paths[i])
 	{
-		my_path = malloc((ft_strlen(paths[i]) + 1 + ft_strlen(my_cmd) + 1) * sizeof(char));
+		my_path = malloc(ft_strlen(paths[i]) + 1 + ft_strlen(my_cmd) + 1);
 		if (!my_path)
 			return (NULL);
 		my_path = ft_strcpy(my_path, paths[i]);
@@ -201,249 +112,367 @@ char	*find_my_cmd_path(char *my_cmd, char **envp)
 	return (NULL);
 }
 
-
-
-int	ft_lstvalist_size(t_valist *lst)
+int routine_pipe(t_shell *shell,t_exec *current, char **cmd, t_valist *env, int pipe_fd[2])
 {
-	int	count;
-
-	count = 0;
-	while (lst != NULL)
-	{
-		count++;
-		lst = lst->next;
-	}
-	return (count);
-}
-
-char **env_list_to_envp(t_valist *env_list)
-{
-	int count = ft_lstvalist_size(env_list);
-
-	char **env = malloc(sizeof(char *) * (count + 1));
-
-	if (!env)
-		return NULL;
-
-	int i = 0;
-	while (env_list)
-	{
-		int len_name = strlen(env_list->name);
-		int len_val = strlen(env_list->value);
-
-		int total = len_name + 1 + len_val;
-
-		env[i] = malloc(total + 1);
-
-		if (!env[i])
-			return NULL; // FREE ?
-
-		ft_memcpy(env[i], env_list->name, len_name);
-		env[i][len_name] = '=';
-		ft_memcpy(env[i] + len_name + 1, env_list->value, len_val);
-
-		env[i][total] = '\0';
-
-		env_list = env_list->next;
-		i++;
-	}
-	env[i] = NULL;
-	return env;
-}
-
-int	routine_child(t_shell *shell, char **cmd, t_valist *env)
-{
-	int		fd_in;
-	int		fd_out;
+	// !! il me faut le fd in et ou de LA cmd
 	char	*my_cmd_path;
-	char	**env_tab_exe = env_list_to_envp(env);
-	//print_char_tab(env_tab_exe);
+	char	**env_tab_exe;
+	int	prev_fd = shell->prev_fd;
 
+	env_tab_exe = env_list_to_envp(env);
 
-	//fd in et out
-	printf("je suis la 3\n");
-	fd_in = shell->cmd_lst->fd_in; //open(shell.cmd_lst->fd_in, O_RDONLY);
-	fd_out = shell->cmd_lst->fd_out;
-	//check_error_one(fd1, cmd1, av, fd_pipe); NORMALEMENT DEJA CHECK avant
-	printf("je suis la 4\n");
-	//print_char_tab(cmd);
-	my_cmd_path = find_my_cmd_path(cmd[0], env_tab_exe);
+ 	if (access(cmd[0], X_OK) == 0)
+		execve(cmd[0], cmd, env_tab_exe);
 	
-	printf("my cmd path = %s\n", my_cmd_path);
-
-	printf("je suis la 5\n");
+	my_cmd_path = find_my_cmd_path(cmd[0], env_tab_exe);
 	if (!my_cmd_path || my_cmd_path[0] == '\0')
 	{
-		//ft_free_tab(cmd1);
-		close(fd_out);
-		close(fd_in);
+		ft_free_tab(env_tab_exe);
+		free_exit(shell, 127, "pas de commande trouvee");
+		//close(fd_out);
+		//close(fd_in);
 		path_not_found();
 	}
 
-	if (fd_in != STDIN_FILENO)
+	// IN
+	if (current->fd_in != STDIN_FILENO)
 	{
-		dup2(fd_in, STDIN_FILENO);
-		close(fd_in);
+		dup2(current->fd_in, STDIN_FILENO);
+		close(current->fd_in);
 	}
-	if (fd_out != STDOUT_FILENO)
+	else if (prev_fd != -1)
 	{
-		dup2(fd_out, STDOUT_FILENO);
-		close(fd_out);
+		dup2(prev_fd, STDIN_FILENO);
+		close(prev_fd);
 	}
-	// if(exec faled) -> free tout
+	// OUT
+	if (current->fd_out != STDOUT_FILENO)
+	{
+		dup2(current->fd_out, STDOUT_FILENO);
+		close(current->fd_out);
+	}
+/* 	else if (!current->next) // si pb pour les redirs de la derniere commmande .
+	{
+		
+	} */
+	else if (current->next) 
+	{
+		dup2(pipe_fd[1], STDOUT_FILENO);
+	}
+
+	close(pipe_fd[0]);
+	close(pipe_fd[1]);
+	
 	execve(my_cmd_path, cmd, env_tab_exe);
 	perror("execve");
-
-	// free la memoir ??
 	exit(1);
-	//return (0);
+
 }
 
-int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env)
+int	routine_builtin_pipe(t_shell *shell, t_exec *current, char **cmd, t_valist *env, int pipe_fd[2])
 {
-	pid_t	child;
+	int	prev_fd;
+
+	prev_fd = shell->prev_fd;
+	// IN
+	if (current->fd_in != STDIN_FILENO)
+	{
+		dup2(current->fd_in, STDIN_FILENO);
+		close(current->fd_in);
+	}
+	else if (prev_fd != -1)
+	{
+		dup2(prev_fd, STDIN_FILENO);
+		close(prev_fd);
+	}
+	// OUT
+	if (current->fd_out != STDOUT_FILENO)
+	{
+		dup2(current->fd_out, STDOUT_FILENO);
+		close(current->fd_out);
+	}
+	else if (current->next) 
+	{
+		dup2(pipe_fd[1], STDOUT_FILENO);
+	}
+
+	close(pipe_fd[0]);
+	close(pipe_fd[1]);
+	
+	execute_built_in(shell, is_built_in(cmd[0]), cmd , env);
+	
+	free_all(shell);
+	printf("j'ai execute mon builtin\n");
+	exit(1);//fin du fork()
+}
+
+int exec_fork_pipe(t_shell *shell,t_exec *current, char **cmd, t_valist *env, int pipe_fd[2])
+{
+	pid_t child;
+
+	// check si j'ai affaire a un built in
+	// lance routine_built_in() si c'est le cas
 
 	child = fork();
+	
 	if (child < 0)
-		perror("fork: ");
+		return (perror("fork: "), ERROR);
+		
+	if(child > 0)
+	{ 
+		close(shell->prev_fd);
+		return(child);
+	} 
 	if (child == 0)
 	{
-		printf("je suis la 2\n");
-		routine_child(shell, cmd, env);
-		fprintf(stderr, "je suis la 20\n");
-		
+		if (is_built_in(current->cmds[0]) != 0) // cas built in
+		{
+			printf("fork builtin routine\n"); 
+			routine_builtin_pipe(shell, current, cmd, env, pipe_fd);
+		}
+		routine_pipe(shell, current, cmd, env, pipe_fd); // routine execve()
 	}
-	int status = 0;
-	waitpid(child, &status, 0);
-
+	
+	//waitpid(child, 0, 0);
 	return (child);
-	//return (0);
 }
 
+int waitpid_verify_status (pid_t pid)
+{ 
+	int status;
+		
+	waitpid(pid, &status, 0);
+	if(WIFEXITED(status) != 0)
+		return(WEXITSTATUS(status));
+	if(WIFSIGNALED(status) != 0)
+		return(WTERMSIG(status) - 128);
+	return(0);
+}
 
+int	wait_and_status(t_shell *shell, pid_t last_pid)
+{
+	//int status;
+	//pid_t pid_childs;
+
+	//waitpid(last_pid, &status, 0);
+	shell->exit_status = waitpid_verify_status(last_pid);
+	while (waitpid(-1, 0, 0) != ERROR)
+		continue ;
+	return (0);
+}
+
+int	handle_pipe_command(t_shell *shell, t_valist *env)
+{
+	int pipe_fd[2];
+	pid_t pid;
+	t_exec *current;
+
+	int i = 0; // TEST PRINT
+
+	current = shell->cmd_lst;
+	printf("pipe routine\n"); // TEST PRINT
+	while (current)
+	{
+		if (pipe(pipe_fd) < 0) // cree un pipe pour chaques commandes
+			return (perror("pipe"), ERROR);
+
+		printf("execute command [%d]\n", i); // TEST PRINT
+
+		pid = exec_fork_pipe(shell, current, current->cmds, env, pipe_fd);
+		if (pid == ERROR)
+			return (ERROR);
+//
+		close(pipe_fd[1]); /////!!!!\\\\ dans le parent, close l,ecriture du pipe /////////////////
+//
+		current = current->next;
+		i++; // TEST PRINT
+		if(shell->prev_fd != -1)
+			close(shell->prev_fd);
+		shell->prev_fd = pipe_fd[0];
+		close(pipe_fd[1]);
+	}
+	wait_and_status(shell, pid);
+	printf("exit_status = %d\n", shell->exit_status);
+	//waitpid(pid, 0, 0);
+	return (0);
+}
+
+int	handle_simple_command(t_shell *shell, t_valist *env) // CAS DE LA COMMANDE UNIQUE
+{
+	t_exec *cmd_list;
+
+	cmd_list = shell->cmd_lst;
+	if(cmd_list == NULL)
+		return(ERROR);
+	if (cmd_list->cmds[0] && (is_built_in(cmd_list->cmds[0]) != 0)) // BUILT IN
+	{
+		if (execute_built_in(shell, is_built_in(cmd_list->cmds[0]), cmd_list->cmds, env) == ERROR)
+			return (ERROR);
+	}
+	else if (cmd_list->cmds[0] && (is_built_in(cmd_list->cmds[0]) == 0)) // EXECVE
+	{
+		if (exec_fork_one(shell, cmd_list->cmds, env) == ERROR)
+			return (ERROR);
+	}
+	return (0);
+}
 
 int	manage_execution(t_shell *shell, t_valist *env) // nombre de commande , char **cmds
 {
-	// ac = nb de cmds
-	(void)env;
+	t_exec *cmd_list;
+	int command_nb;
+
+	cmd_list = shell->cmd_lst;
+	command_nb = ft_lstexec_size(cmd_list);
+
+	printf("commande_nb = %d\n", command_nb);// TEST PRINT
+	printf("prev_fd = %d\n", shell->prev_fd);// TEST PRINT
+
+	if (check_all_redir(shell) == ERROR) // CHECK REDIR ET FIND LES FD SI BESOIN -> struct exec
+		return (ERROR);
+
+	test_print_fd(cmd_list); // TEST PRINT
+		
+	if (!cmd_list || !cmd_list->cmds) //!!\\ ADD POuR EVITER SEGFAULT REDIR UNIQUE
+		return (ERROR);
+		
+	if (command_nb == 1) // CAS DE LA COMMANDE UNIQUE
+	{
+		if(handle_simple_command(shell, env) == ERROR)
+		{
+			//close_all_redir()
+			return(ERROR); 
+		}
+	}
+	else if (command_nb > 1) // CAS COMMANDE MULTPLES (PIPES)
+	{
+		if (handle_pipe_command(shell, env) == ERROR)
+			return (ERROR);
+	}
+	return (0);
+}
+
+
+
+
+		//waitpid_verify_status(pid)
+		// waitpid(-1, 0 ,0); 
+
+/* int	manage_execution(t_shell *shell, t_valist *env) // nombre de commande , char **cmds
+{
+	int i;
+	i = 0;
 	t_exec *cmd_list = shell->cmd_lst;
 	t_exec *current = cmd_list;
 	int command_nb = ft_lstexec_size(cmd_list);
-	pid_t child;
-/* 	if (!cmd_list->cmds) // si la liste est vide
-		return (0); */
 
-	if (check_all_redir(shell) == ERROR)
-		return (ERROR);
+	int	prev_fd = -1;
+	pid_t	pid;
+	int pipe_fd[2];
 	
-	test_print_fd(cmd_list); // TEST
+	//if (!cmd_list->cmds) // si la liste est vide (segfault :())
+	//	return (0);
 
-	//printf("avant conversion");
-	//char **env_tab = env_list_to_envp(env);
-	//printf("avant print");
-	//print_char_tab(env_tab);
+	if (check_all_redir(shell) == ERROR) // CHECK REDIR ET FIND LES FD SI BESOIN
+		return (ERROR);
 
-	if (command_nb == 1)
+	test_print_fd(cmd_list); // TEST PRINT
+
+	if (command_nb == 1) // CAS DE LA COMMANDE UNIQUE
 	{
-		if (cmd_list->cmds[0] && (is_built_in(cmd_list->cmds[0]) != 0))
+		if (cmd_list->cmds[0] && (is_built_in(cmd_list->cmds[0]) != 0)) // BUILT IN
 		{
 			if (execute_built_in(shell, is_built_in(cmd_list->cmds[0]), cmd_list->cmds, env) == ERROR)
 				return (ERROR);
 		}
-		if (cmd_list->cmds[0] && (is_built_in(cmd_list->cmds[0]) == 0))
+		if (cmd_list->cmds[0] && (is_built_in(cmd_list->cmds[0]) == 0)) // EXECVE
 		{
-			printf("je suis la 1\n");
-			child = exec_fork_one(shell, cmd_list->cmds, env);
-			waitpid(child, 0, 0);
-/* 			if (exec_fork_one(shell, cmd_list->cmds, env) != 0)
-				return (ERROR); */
+			if (exec_fork_one(shell, cmd_list->cmds, env) == ERROR)
+				return (ERROR);
 		}
 	}
-	else if (command_nb > 1)
+
+	else if (command_nb > 1) // CAS COMMANDE MULTPLES (PIPES)
 	{
-		//cree tous les pipes
 		while (current->next != NULL)
 		{
-			//ICI JE TROUVE LES BONNES REDIR POUR APPELER PIPEX
+			
+			pipe(pipe_fd);
+			pid = fork();
 
-			//pipex.cmd_left = current->cmds;
-			//pipex.cmd_right = current->next->cmds;
+			
 
-			//pipex(&shell, env);
-
-			//get_left_cmd();
-			//get_right_cmd();
-
-			//execute_cmd(cmd_list, env);
-		}
-	}
-	return (0);
-}
-
-/* int	manage_execution(t_shell *shell, t_valist *env) // , char **cmds
-{
-	// ac = nb de cmds
-	(void)env;
-	t_exec *cmd_list = shell->cmd_lst;
-	// t_exec *current = cmd_list;
-
-	check_all_redir(shell);
-	test_print_fd(cmd_list);
-
-	if (cmd_list == NULL)
-	{
-		return (0); // pas de commande - liste vide
-		printf("pas de commande");
-	}
-	
-		if (check_all_redir(shell) != 0)
-			return (1);
-
-	else if (cmd_list->next == NULL && cmd_list->cmds && cmd_list->cmds[0]
-		&& is_built_in(cmd_list->cmds[0]) != 0)
-	{
-		printf("built_in type = %d\n", is_built_in(cmd_list->cmds[0]));
-		execute_built_in(shell, is_built_in(cmd_list->cmds[0]), cmd_list->cmds, env); //, cmd_list->cmds); + PASSER ENV ? OU SHELL DIRECT
-	}
-
-		else // j'ai plrs commandes et des pipes (fork() les process)
-		{
-			while (current->next != NULL)
+			if (pid == 0)
 			{
-				//ICI JE TROUVE LES BONNES REDIR POUR APPELER PIPEX
+				close(pipe_fd[0]);
+				//routine_child(pipe[], )
+				// STDIN
 
-				pipex.cmd_left = current->cmds;
-				pipex.cmd_right = current->next->cmds;
+				//if (current->fd_in != 0)
+				//dup2(current->fd_in, STDOUT_FILENO);
 
-				pipex(&shell, env);
+				if (shell->prev_fd == -1 && current->fd_in != STDIN_FILENO)
+					dup2(current->fd_in, STDIN_FILENO);
+				else if (prev_fd != -1)
+					dup2(prev_fd, STDIN_FILENO);
 
-				//get_left_cmd();
-				//get_right_cmd();
+				close(current->fd_in);
+				close(prev_fd);
 
-				//execute_cmd(cmd_list, env);
+				// STDOUT
+				if (current->fd_out != 1) // npipe
+					dup2(current->fd_out, STDOUT_FILENO);
+				else if (current->next)
+					dup2(pipe_fd[1], STDOUT_FILENO);
+	
+				close(pipe_fd[1]);
+				close(current->fd_out);
+				
+
+				//int		fd_in;
+				//int		fd_out;
+				char	*my_cmd_path;
+				char	**env_tab_exe;
+				char	**cmd = current->cmds;
+				//print_char_tab(env_tab_exe); TEST PRINT
+
+				//fd_in = shell->cmd_lst->fd_in;
+				//fd_out = shell->cmd_lst->fd_out;
+				env_tab_exe = env_list_to_envp(env);
+
+				//print_char_tab(cmd); TEST PRINT
+
+				if (access(cmd[0], X_OK) == 0)
+					execve(cmd[0], cmd, env_tab_exe);
+				
+				my_cmd_path = find_my_cmd_path(cmd[0], env_tab_exe);
+				
+				if (!my_cmd_path || my_cmd_path[0] == '\0')
+				{
+					ft_free_tab(env_tab_exe);
+					//close(fd_out);
+					//close(fd_in);
+					path_not_found();
+				}
+	
+				execve(my_cmd_path, cmd, env_tab_exe);
+				perror("execve");
+				exit(8000);
+				//...
+				// find my cmd paths
+
+				//execve(...);
+
 			}
+			//if (current->next)
+			close(pipe_fd[1]);
+			if(prev_fd != -1)
+				close(prev_fd);
+			prev_fd = pipe_fd[0];
+
+			current = current->next;
 		}
+		waitpid(pid, 0, 0);
+	}
 	return (0);
 } */
-
-
-
-/* 	if (count == 1)
-	{
-		if (is_built_in())
-		{
-			//execute built in
-		}
-		if (!is_built_in())
-		{
-			//fork la commande unique
-		}
-	}
-	else if (count > 1)
-	{
-		//agis sur les paires de commandes
-		// creee le pipe et applique les redirections
-		//
-		
-	}
-	return (ERROR); */

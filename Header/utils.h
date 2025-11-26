@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:40:19 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/17 16:29:36 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/25 17:46:58 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ void ft_strcat(char *src, char *dest);
 
 //utils_libft2.c
 int is_char_in_str(char c, char *sep);
-void write_str(char *str);
+void write_str_fd(char *str, int fd);
 void *ft_memset(void* str, int c, size_t n); 
 void    *ft_memcpy(void *dest, const void *src, size_t n);
 
 //utils_libft3.c
 char	*ft_itoa(int n);
+int	ft_atoi(const char *s);
 
 //utils_lst.c
 t_list	*ft_lstnew(void *content);
@@ -79,5 +80,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 //utils_exec_2
 char	**ft_split(char const *s, char c);
+
+//utils_exec_3
+char	**env_list_to_envp(t_valist *env_list);
 
 #endif

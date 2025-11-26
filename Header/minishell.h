@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/17 15:27:42 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/25 19:19:55 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ int	handle_single_quotes(t_cb *lst_buffer, char *str);
 int handle_double_quotes(t_shell *shell, t_cb* lst_buffer, char *str);
 int handle_dollar(t_shell* shell, t_cb* lst_buffer, char *str);
 int	expand_shell_param(t_shell *shell, t_list *lst);
+char *create_expand_str(t_shell *shell, char *str);
+
+
 
 //Part5: Word_splitting 
 int split_param(t_shell *shell, t_list *curr_node, t_list *prev_node);
@@ -75,6 +78,8 @@ void print_cmd_list(t_exec *head); // TEST PRINT
 
 // Part6_delete_quotes
 int delete_quotes(t_shell *shell, t_list *lst);
+char *delete_quotes_str(t_list *node);
+
 
 // Part7_Cmd_struct
 void	print_cmd_list(t_exec *head); // TEST PRINT
@@ -85,20 +90,50 @@ int	redir_management(t_exec *current, t_list *token, int type);
 void	print_syntax_error(t_shell *shell, char *tok_content);
 void free_exec(t_exec *cmd);
 void free_tab(char **cmds);
-
-//Part8 : execution
+/* 
+// Part8 : execution
 
 int	manage_execution(t_shell *shell, t_valist *env); // execution
 int	check_all_redir(t_shell *shell); // open_dir
 int handle_heredoc(char *delimit); // heredoc
 int	is_built_in(char *cmd); // built_in
 int	execute_built_in(t_shell *shell, int type, char **args, t_valist *env); // built_in
+int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env);
+char	*find_my_cmd_path(char *my_cmd, char **envp);
+int	path_not_found(void);
+void	ft_free_tab(char **tab);
+
+int	wait_and_status(t_shell *shell, pid_t last_pid);
+
+int	close_all_redir(t_exec *commands); */
+
+int	check_all_redir(t_shell *shell);
+
+
+//test
+int	manage_execution(t_shell *shell, t_valist *env); // nombre de commande , char **cmds
+int	execute_built_in(t_shell *shell, int type, char **args, t_valist *env);
+int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env);
+int exec_fork_pipe(t_shell *shell,t_exec *current, char **cmd, t_valist *env, int pipe_fd[2]);
+int handle_heredoc(t_shell *shell, char *delimit);
+int apply_redir_pipe(t_shell *shell, t_exec *current, int pipe_fd[2]);
+int do_execve(char **cmd, t_valist *env);
+void	test_print_fd(t_exec *cmd_list); // TEST
+void	print_char_tab(char **tab); //TEST
+void	ft_free_tab(char **tab);
+int	ft_lstexec_size(t_exec *lst);
+int	path_not_found(void);
+char *find_my_cmd_path(char *my_cmd, char **envp, int *check);
+int exist_and_access(char *my_path);
+int	is_built_in(char *cmd); // return l'enum du builtin
+int	close_all_redir(t_exec *commands);
+int	wait_and_status(t_shell *shell, pid_t last_pid);
+
 
 //PartX_free.c
 void free_all(t_shell *shell);
 void free_exit(t_shell *shell, int code, char *message);
 void free_exec(t_exec *cmd);
 void free_exec_lst(t_exec **head);
-
 
 #endif

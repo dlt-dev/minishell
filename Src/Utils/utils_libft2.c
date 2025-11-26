@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 13:47:28 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/27 15:45:38 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/25 17:46:21 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int is_char_in_str(char c, char *sep)
 	return(IS_NOT);
 }
 
-void write_str(char *str)
+void write_str_fd(char *str, int fd)
 {
-	write(1, str, ft_strlen(str));
+	write(fd, str, ft_strlen(str));
 }
 
 void *ft_memset(void* str, int c, size_t n)

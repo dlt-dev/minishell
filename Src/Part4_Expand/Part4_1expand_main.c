@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 12:06:17 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/10/31 17:00:29 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/24 21:10:58 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,18 @@ static int  fill_expand_in_buffer(t_shell *shell, t_cb *lst_buffer, char *str)
 	return (0);
 }
 
-static char *create_expand_str(t_shell *shell, t_cb *lst_buffer, char *str)
+char *create_expand_str(t_shell *shell, char *str)
 {
     char *new_str;
+    t_cb lst_buffer;
     
     new_str = NULL;
-    if(init_chunk_buffer(lst_buffer, 10, 2) == ERROR)
+    if(init_chunk_buffer(&lst_buffer, 10, 2) == ERROR)
         return(NULL);
-    if(fill_expand_in_buffer(shell, lst_buffer, str) == ERROR)
+    if(fill_expand_in_buffer(shell, &lst_buffer, str) == ERROR)
         return(NULL);
-    new_str = fusion_all_chunk(lst_buffer);
+    new_str = fusion_all_chunk(&lst_buffer);
+    free_chunk_buffer(&lst_buffer);
     if(new_str == NULL)
         return(NULL);
     return(new_str);
@@ -75,7 +77,7 @@ static t_list *create_expand_node(t_shell *shell, t_list *curr_node)
     char *new_str;
     t_list *new_node;
     
-    new_str = create_expand_str(shell, &shell->lst_buffer, curr_node->content);
+    new_str = create_expand_str(shell, curr_node->content);
     if(new_str == NULL)
         return(NULL);
     new_node = ft_lstnew(new_str);

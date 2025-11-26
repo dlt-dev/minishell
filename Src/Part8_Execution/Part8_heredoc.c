@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 19:18:46 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/12 11:08:23 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/21 19:28:30 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int routine_heredoc(char *delimit, int pipefd[2])
 	exit(0);
 }
 
-
 int handle_heredoc(char *delimit)
 {	
 	int pipefd[2];
@@ -58,4 +57,47 @@ int handle_heredoc(char *delimit)
 	return(pipefd[0]);
 }
 
+// int routine_heredoc(char *delimit, int pipefd[2])
+// { 
+// 	char *str;
+	
+// 	close(pipefd[0]);
+// 	while(1)
+// 	{
+// 		str = readline(">");
+// 		if(str == NULL)
+// 			break;
+// 		if(ft_strlen(str) == ft_strlen(delimit) && ft_strcmp(str, delimit) == 0)
+// 		{
+// 			free(str);
+// 			break;	
+// 		}
+// 		write(pipefd[1], str, ft_strlen(str));
+// 		write(pipefd[1], "\n", 1);
+// 		free(str);
+// 	}
+// 	close(pipefd[1]);
+// 	exit(0);
+// }
 
+
+// int handle_heredoc(char *delimit)
+// {	
+// 	int pipefd[2];
+
+// 	pipe(pipefd);
+// 	if (pipe(pipefd) == -1)
+// 		return (ERROR);
+// 	pid_t pid_heredoc;
+// 	pid_heredoc = fork();
+	
+// 	if(pid_heredoc == ERROR)
+// 		return(close(pipefd[1]), close(pipefd[0]), GEN_ERRNO);
+// 	if(pid_heredoc == 0)
+// 	{ 
+// 		routine_heredoc(delimit, pipefd);
+// 	}
+// 	waitpid(pid_heredoc, NULL, 0);
+// 	close(pipefd[1]);
+// 	return(pipefd[0]);
+// }
