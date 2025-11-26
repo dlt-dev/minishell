@@ -5,23 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/26 19:45:02 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 19:45:10 by aoesterl         ###   ########.fr       */
+/*   Created: 2025/11/25 21:25:50 by jdelattr          #+#    #+#             */
+/*   Updated: 2025/11/26 20:30:48 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int waitpid_verify_status (pid_t pid)
-{ 
-	int status;
-		
+int	waitpid_verify_status(pid_t pid)
+{
+	int	status;
+
 	waitpid(pid, &status, 0);
-	if(WIFEXITED(status) != 0)
-		return(WEXITSTATUS(status));
-	if(WIFSIGNALED(status) != 0)
-		return(WTERMSIG(status) + 128);
-	return(0);
+	if (WIFEXITED(status) != 0)
+		return (WEXITSTATUS(status));
+	if (WIFSIGNALED(status) != 0)
+		return (WTERMSIG(status) + 128);
+	return (0);
 }
 
 int	wait_and_status(t_shell *shell, pid_t last_pid)
@@ -32,11 +32,12 @@ int	wait_and_status(t_shell *shell, pid_t last_pid)
 	return (0);
 }
 
-int	handle_simple_command(t_shell *shell, t_exec *cmd_lst, t_valist *env) // CAS DE LA COMMANDE UNIQUE
+int	handle_simple_command(t_shell *shell, t_exec *cmd_lst, t_valist *env)
 {
 	if (cmd_lst->cmds[0] && (is_built_in(cmd_lst->cmds[0]) != 0))
 	{
-		if (execute_built_in(shell, is_built_in(cmd_lst->cmds[0]), cmd_lst->cmds, env) == ERROR)
+		if (execute_built_in(shell, is_built_in(cmd_lst->cmds[0]),
+				cmd_lst->cmds, 0) == ERROR)
 			return (ERROR);
 	}
 	else if (cmd_lst->cmds[0] && (is_built_in(cmd_lst->cmds[0]) == 0))
@@ -47,7 +48,7 @@ int	handle_simple_command(t_shell *shell, t_exec *cmd_lst, t_valist *env) // CAS
 	return (0);
 }
 
-int	handle_pipe_command(t_shell *shell, t_exec *current, t_valist *env)
+int	handle_pipe_command(t_shell *shell, t_exec *current)
 {
 	int pipe_fd[2];
 	pid_t pid;
@@ -60,7 +61,7 @@ int	handle_pipe_command(t_shell *shell, t_exec *current, t_valist *env)
 				close(shell->prev_fd);
 			return (ERROR);
 		}
-		pid = exec_fork_pipe(shell, current, current->cmds, env, pipe_fd);
+		pid = exec_fork_pipe(shell, current, current->cmds, pipe_fd);
 		if (pid == ERROR)
 			return (close(pipe_fd[0]), close(pipe_fd[1]), ERROR);
 		current = current->next;
@@ -72,20 +73,25 @@ int	handle_pipe_command(t_shell *shell, t_exec *current, t_valist *env)
 
 int	manage_execution(t_shell *shell, t_valist *env)
 {
-	int command_nb;
-	command_nb = ft_lstexec_size(shell->cmd_lst);
+	int	command_nb;
+	int	check_failed;
 
-	if (!shell->cmd_lst || !shell->cmd_lst->cmds) 
+	command_nb = ft_lstexec_size(shell->cmd_lst);
+	if (!shell->cmd_lst || !shell->cmd_lst->cmds)
 		return (0);
+	// printf("commande_nb = %d\n", command_nb); // TEST PRINT
+	// printf("prev_fd = %d\n", shell->prev_fd); // TEST PRINT
+	// test_print_fd(shell->cmd_lst);            //  TESTPRINT
 	if (command_nb == 1)
 	{
-		if(handle_simple_command(shell, shell->cmd_lst, env) == ERROR)
-			return(ERROR);
+		check_failed = handle_simple_command(shell, shell->cmd_lst, env);
+		if (check_failed == ERROR)
+			return (ERROR);
 	}
 	else if (command_nb > 1)
 	{
-		if(handle_pipe_command(shell, shell->cmd_lst, env) == ERROR)
-			return(ERROR);
+		if (handle_pipe_command(shell, shell->cmd_lst) == ERROR)
+			return (ERROR);
 	}
 	return (0);
 }

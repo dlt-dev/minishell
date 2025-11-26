@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/26 17:40:41 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/26 20:59:12 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int		handle_single_quotes(t_cb *lst_buffer, char *str);
 int		handle_double_quotes(t_shell *shell, t_cb *lst_buffer, char *str);
 int		handle_dollar(t_shell *shell, t_cb *lst_buffer, char *str);
 int		expand_shell_param(t_shell *shell, t_list *lst);
+char *create_expand_str(t_shell *shell, char *str); 
+
 
 // Part5: Word_splitting
 int		split_param(t_shell *shell, t_list *curr_node, t_list *prev_node);
@@ -95,7 +97,7 @@ int		execute_built_in(t_shell *shell, int type, char **args, int print_flag);
 int		exec_fork_one(t_shell *shell, char **cmd, t_valist *env);
 int		exec_fork_pipe(t_shell *shell, t_exec *current, char **cmd,
 			int pipe_fd[2]);
-int		handle_heredoc(char *delimit);
+int		handle_heredoc(t_shell *, char *delimit);
 int		apply_redir_pipe(t_shell *shell, t_exec *current, int pipe_fd[2]);
 int		do_execve(char **cmd, t_valist *env);
 void	test_print_fd(t_exec *cmd_list); // TEST

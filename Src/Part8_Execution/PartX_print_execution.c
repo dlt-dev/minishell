@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   refonte_print_execution.c                          :+:      :+:    :+:   */
+/*   PartX_print_execution.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 14:02:40 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/20 14:02:41 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/26 20:48:52 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_char_tab(char **tab) //TEST
+void	print_char_tab(char **tab)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	if (!tab)
@@ -30,7 +30,7 @@ void	print_char_tab(char **tab) //TEST
 	}
 }
 
-void	test_print_fd(t_exec *cmd_list) // TEST
+void	test_print_fd(t_exec *cmd_list)
 {
 	int i;
 

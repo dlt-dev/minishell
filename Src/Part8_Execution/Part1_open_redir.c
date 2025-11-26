@@ -6,12 +6,11 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:02:44 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/26 20:09:04 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/26 21:02:22 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 int	open_infile(t_exec *current, t_redir *redir)
 {
@@ -48,7 +47,7 @@ int	open_heredoc(t_shell *shell, t_exec *current, t_redir *redir)
 
 	fd_in = handle_heredoc(shell, redir->filename);
 	if (fd_in == ERROR)
-		return (print_error_message("heredoc_failed", NULL), GEN_ERRNO);
+		return (print_error_message("heredoc", NULL), GEN_ERRNO);
 	if (current->fd_in != STDIN_FILENO)
 		close(current->fd_in);
 	current->fd_in = fd_in;
@@ -91,6 +90,3 @@ int	check_all_redir(t_shell *shell) // pour chaques nodes cmd, je check toutes l
 	}
 	return (0);
 }
-
-
-// clean maintenant 
