@@ -1,21 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Part1_open_redir.c                                 :+:      :+:    :+:   */
+/*   main_open_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:02:44 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/27 12:34:27 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/27 19:07:43 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int is_not_a_dir (t_redir *redir)
+{ 
+	struct stat st;
+
+	st = (struct stat){0}; 
+	stat(redir->filename, &st);
+	if(S_ISDIR(st.st_mode) != 0)
+	{ 
+		write_str_fd("minishell: ", 2);
+		write_str_fd(redir->filename, 2);
+		write_str_fd(" : Is a directory\n", 2);
+		return(ERROR);
+	}
+	return(0);
+}
+
 int	open_infile(t_exec *current, t_redir *redir)
 {
 	int	fd_in;
-
+	if(is_not_a_dir(redir) == ERROR)
+		return(GEN_ERRNO);
 	fd_in = open(redir->filename, O_RDONLY);
 	if (fd_in == ERROR)
 		return (print_error_message(NULL, redir->filename), GEN_ERRNO);
@@ -28,7 +45,8 @@ int	open_infile(t_exec *current, t_redir *redir)
 int	open_outfile(t_exec *current, t_redir *redir, int redir_type)
 {
 	int	fd_out;
-
+	if(is_not_a_dir(redir) == ERROR)
+		return(GEN_ERRNO);
 	if (redir_type == OUTFILE)
 		fd_out = open(redir->filename, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (redir_type == OUTFILE_APPEND)
