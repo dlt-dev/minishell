@@ -32,7 +32,7 @@ INC_DIR = Header
 #Sous dossiers
 SUBS_DIR = Utils Built_in Part0_Init Part1_Prompt Part2_Lexing Part3_Flags \
 Part4_Expand Part5_Word_splitting Part6_Delete_quotes Part7_Cmd_struct \
-PartX_Free Part8_Execution
+PartX_Free Part8_Open_fd Part9_Execution
 
 #Fichiers sources
 	#Sources parties
@@ -45,18 +45,10 @@ PartX_Free Part8_Execution
 	SRC_PART6 = Part6_delete_quotes.c Part6_delete_quotes_utils.c
 	SRC_PART7 = Part7_cmd_struc.c Part7_main_tree_struct.c PartX_print_tree.c \
 	Part7_redir_struct.c Part7_syntaxe_err.c
-
-	SRC_PART8 = Part1_exec_main.c \
-				Part1_open_redir.c \
-				Part2_A_exec_built_in.c \
-				Part2_B_routine_simple_cmd.c \
-				Part2_C_routine_pipe.c \
-				Part2_refonte_heredoc.c \
-				Part3_apply_redirection.c \
-				part4_execve.c \
-				PartX_print_execution.c \
-				utils_execution.c
-
+	SRC_PART8 = main_open_fd.c redir_heredoc.c type_of_herdoc.c
+	SRC_PART9 = Part1_exec_main.c Part2_A_exec_built_in.c Part2_B_routine_simple_cmd.c \
+	Part2_C_routine_pipe.c Part3_apply_redirection.c part4_execve.c PartX_print_execution.c \
+	utils_execution.c
 	SRC_PARTX = PartX_free.c
 	SRC_MAIN  = main.c
 	#Sources utiles
@@ -79,7 +71,8 @@ PartX_Free Part8_Execution
 	$(addprefix Part5_Word_splitting/, $(SRC_PART5)) \
 	$(addprefix Part6_Delete_quotes/, $(SRC_PART6)) \
 	$(addprefix Part7_Cmd_struct/, $(SRC_PART7)) \
-	$(addprefix Part8_Execution/, $(SRC_PART8)) \
+	$(addprefix Part8_Open_fd/, $(SRC_PART8)) \
+	$(addprefix Part9_Execution/, $(SRC_PART9)) \
 	$(addprefix PartX_Free/, $(SRC_PARTX)) \
 	$(addprefix Built_in/, $(SRC_BUILTIN))
 OBJ = $(addprefix $(OBJ_DIR)/, $(ALL_SRC:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/26 20:59:12 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/27 13:16:16 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ int		handle_single_quotes(t_cb *lst_buffer, char *str);
 int		handle_double_quotes(t_shell *shell, t_cb *lst_buffer, char *str);
 int		handle_dollar(t_shell *shell, t_cb *lst_buffer, char *str);
 int		expand_shell_param(t_shell *shell, t_list *lst);
-char *create_expand_str(t_shell *shell, char *str); 
-
+char	*create_expand_str(t_shell *shell, char *str);
 
 // Part5: Word_splitting
 int		split_param(t_shell *shell, t_list *curr_node, t_list *prev_node);
@@ -75,9 +74,8 @@ char	*redir_name(int type); // TEST PRINT
 void	print_cmd_list(t_exec *head); // TEST PRINT
 
 // Part6_delete_quotes
-int delete_quotes(t_shell *shell, t_list *lst);
-char *delete_quotes_str(t_list *node);
-
+int		delete_quotes(t_shell *shell, t_list *lst);
+char	*delete_quotes_str(t_list *node);
 
 // Part7_Cmd_struct
 void	print_cmd_list(t_exec *head); // TEST PRINT
@@ -89,15 +87,20 @@ void	print_syntax_error(t_shell *shell, char *tok_content);
 void	free_exec(t_exec *cmd);
 void	free_tab(char **cmds);
 
-// Part8 : execution
+// Part8_Open_fd
+int		check_all_redir(t_shell *shell);
+int		handle_heredoc(t_shell *shell, char *delimit);
+int		here_doc_no_expand(char *delimit, int pipefd[2]);
+int		here_doc_expand(t_shell *shell, char *delimit, int pipefd[2]);
+
+// Part9 : execution
 
 int		manage_execution(t_shell *shell, t_valist *env);
-int		check_all_redir(t_shell *shell);
 int		execute_built_in(t_shell *shell, int type, char **args, int print_flag);
 int		exec_fork_one(t_shell *shell, char **cmd, t_valist *env);
 int		exec_fork_pipe(t_shell *shell, t_exec *current, char **cmd,
 			int pipe_fd[2]);
-int		handle_heredoc(t_shell *, char *delimit);
+int		handle_heredoc(t_shell *shell, char *delimit);
 int		apply_redir_pipe(t_shell *shell, t_exec *current, int pipe_fd[2]);
 int		do_execve(char **cmd, t_valist *env);
 void	test_print_fd(t_exec *cmd_list); // TEST

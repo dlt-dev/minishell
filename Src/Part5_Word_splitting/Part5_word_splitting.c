@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part5_word_splitting.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 17:17:34 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/25 21:06:03 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/27 12:33:40 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ int	substr_buffer_full(t_cb *lst_buffer, char *str)
 
 /**
 
-	* @brief @param Substr_buffer_full va parcourir le mot et 
+	* @brief @param Substr_buffer_full va parcourir le mot et
 	le mettre dans notre buffer
 
 	* chunker. On continue tant qu'on ne rencontre pas le \0 ou un espace.
 	Toutefois,
 	si on
 
-	* espace entre " ".  ca ne doti pas arrerter le mot. c'est 
+	* espace entre " ".  ca ne doti pas arrerter le mot. c'est
 	pourquoi @param fill_quotes_buffer
  * va nour permettre de mettre tout ce qu'il y a entre quotes dans un buffer.
  *

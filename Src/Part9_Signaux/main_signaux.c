@@ -3,22 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main_signaux.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 15:57:33 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/26 16:40:09 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/27 12:36:16 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-
 /* 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 
 
-struct sigaction sa;
+struct sigaction	sa;
 
 // 1. Définir le handler
 sa.sa_handler = handle_sigint;
@@ -32,9 +30,6 @@ sa.sa_flags = 0;
 // Applique cette configuration pour le signal SIGINT (Ctrl+C)
 sigaction(SIGINT, &sa, NULL); */
 
-
-
-void	handle_sigint()
-{
-
-}
+// void	handle_sigint(void)
+// {
+// }

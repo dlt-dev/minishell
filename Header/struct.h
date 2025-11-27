@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 17:41:05 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/27 12:32:21 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ typedef struct s_shell
 }					t_shell;
 
 /**
- * @brief @param t_shell contient @param t_prompt 
+ * @brief @param t_shell contient @param t_prompt
  * @param rd_line (ce qui est tapé)
  * @param t_var (les va_env et local), @param lst (listes des tokens) et
  * @param exit_status (#?), pour pouvoir tout transporter quand on veut

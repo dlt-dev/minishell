@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 19:54:50 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/26 20:19:16 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/27 12:49:24 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ enum	e_builtin_type
 	EXIT,
 };
 
-int	is_built_in(char *cmd) // return l'enum du builtin
+int	is_built_in(char *cmd)
 {
 	if (ft_strcmp(cmd, "echo") == 0)
 		return (ECHO);

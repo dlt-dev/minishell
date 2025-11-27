@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:26:50 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 18:13:44 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/27 12:35:43 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	print_var_lst(t_valist *var)
 		}
 		else
 			write_str_fd("(null)\n\n", 1);
-			
 		var = var->next;
 	}
 }
@@ -64,9 +63,9 @@ void	print_str_lst(t_list *lst)
 
 void	printf_buffer(t_cb lst_buffer)
 {
-	if(lst_buffer.head == NULL || lst_buffer.tail == NULL)
+	if (lst_buffer.head == NULL || lst_buffer.tail == NULL)
 		write_str_fd("buffer nill", 1);
-	while(lst_buffer.head != NULL)
+	while (lst_buffer.head != NULL)
 	{
 		printf("NODE:\n");
 		printf("str: %s\n", lst_buffer.head->buffer);

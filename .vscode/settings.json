@@ -2,7 +2,8 @@
     "files.associations": {
         "minishell.h": "c",
         "types.h": "c",
-        "sstream": "c"
+        "sstream": "c",
+        "readline.h": "c"
     },
     "C_Cpp.autocomplete": "Default",
     "C_Cpp.intelliSenseEngine": "Default",

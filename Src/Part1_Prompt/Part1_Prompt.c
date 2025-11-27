@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 17:48:57 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/27 12:33:07 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,13 @@ int	get_prompt(t_shell *shell, t_valist *env, t_prompt *invite)
 	if (invite->user == NULL || *invite->user == '\0')
 		invite->user = "Unknown";
 	invite->cwd = getcwd(NULL, 0);
-	if(invite->cwd == NULL)
+	if (invite->cwd == NULL)
 	{
 		invite->cwd = ft_strdup("no_where");
-		if(invite->cwd == NULL)
-			return(ERROR);	
+		if (invite->cwd == NULL)
+			return (ERROR);
 	}
-	invite->prompt = create_prompt(shell, env , invite);
+	invite->prompt = create_prompt(shell, env, invite);
 	free(invite->cwd);
 	invite->cwd = NULL;
 	if (invite->prompt == NULL)

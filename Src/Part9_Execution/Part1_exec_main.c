@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 21:25:50 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/26 20:30:48 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/27 12:49:00 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ int	handle_simple_command(t_shell *shell, t_exec *cmd_lst, t_valist *env)
 
 int	handle_pipe_command(t_shell *shell, t_exec *current)
 {
-	int pipe_fd[2];
-	pid_t pid;
+	int		pipe_fd[2];
+	pid_t	pid;
 
 	while (current)
 	{
 		if (pipe(pipe_fd) == ERROR)
 		{
-			if(shell->prev_fd != -1)
+			if (shell->prev_fd != -1)
 				close(shell->prev_fd);
 			return (ERROR);
 		}
@@ -79,9 +79,6 @@ int	manage_execution(t_shell *shell, t_valist *env)
 	command_nb = ft_lstexec_size(shell->cmd_lst);
 	if (!shell->cmd_lst || !shell->cmd_lst->cmds)
 		return (0);
-	// printf("commande_nb = %d\n", command_nb); // TEST PRINT
-	// printf("prev_fd = %d\n", shell->prev_fd); // TEST PRINT
-	// test_print_fd(shell->cmd_lst);            //  TESTPRINT
 	if (command_nb == 1)
 	{
 		check_failed = handle_simple_command(shell, shell->cmd_lst, env);
@@ -95,3 +92,6 @@ int	manage_execution(t_shell *shell, t_valist *env)
 	}
 	return (0);
 }
+// printf("commande_nb = %d\n", command_nb); // TEST PRINT
+// printf("prev_fd = %d\n", shell->prev_fd); // TEST PRINT
+// test_print_fd(shell->cmd_lst);            //  TESTPRINT

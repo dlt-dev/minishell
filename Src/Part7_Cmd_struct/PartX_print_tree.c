@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PartX_print_tree.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:59:42 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/25 20:03:29 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/27 12:34:06 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ char	*redir_name(int type)
 
 void	print_cmd_list(t_exec *head)
 {
-	int i;
-	int idx;
-	t_redir *redir;
-	t_exec *current;
+	int		i;
+	int		idx;
+	t_redir	*redir;
+	t_exec	*current;
 
 	if (!head)
 	{
@@ -39,7 +39,6 @@ void	print_cmd_list(t_exec *head)
 	}
 	idx = 0;
 	current = head;
-
 	while (current)
 	{
 		printf("Command [%d]:\n", idx++);

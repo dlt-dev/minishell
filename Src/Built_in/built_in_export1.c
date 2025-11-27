@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:00:10 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 17:48:14 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/27 12:32:48 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	builtin_export(t_shell *shell, t_valist *env, char **args)
  * 3 valeurs de retour possible :
  * - si le retour de @param is_an_affecation est ERROR, ca veut dire que le nom
 
-	* de l'affectation etait mauvais et on le signale via 
+	* de l'affectation etait mauvais et on le signale via
 	le message "not_a_valid_identifier".
  * - si le retour de @param is_an_affecation est IS_NOT,
 	ce n'est pas une affectation,

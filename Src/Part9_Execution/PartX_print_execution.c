@@ -1,32 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test1.c                                            :+:      :+:    :+:   */
+/*   PartX_print_execution.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/13 17:55:59 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/15 19:00:41 by aoesterl         ###   ########.fr       */
+/*   Created: 2025/11/20 14:02:40 by aoesterl          #+#    #+#             */
+/*   Updated: 2025/11/27 12:34:55 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void print_error_message(char * fonction)
+void	print_char_tab(char **tab)
 {
-    char *error;
-    char *minishell;
+	int	i;
 
-    minishell = "minishell: ";
-    error = strerror(errno);
-    write(2, minishell, ft_strlen(minishell));
-    write(2, fonction, ft_strlen(fonction));
-    write(2 , ": ", 2);
-    write(2 , error, ft_strlen(error)); 
+	i = 0;
+	if (!tab)
+	{
+		printf("(null)\n");
+		return ;
+	}
+	printf("mon char **\n");
+	while (tab[i])
+	{
+		printf("%s\n", tab[i]);
+		i++;
+	}
 }
 
-int main()
+void	test_print_fd(t_exec *cmd_list)
 {
-    print_error_message("cd"); 
+	int	i;
 
+	i = 0;
+	while (cmd_list != NULL)
+	{
+		printf("cmd[%d] ->> cmd fd_in = %d | fd_out = %d\n", i, cmd_list->fd_in,
+			cmd_list->fd_out);
+		i++;
+		cmd_list = cmd_list->next;
+	}
 }

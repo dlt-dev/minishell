@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:02:44 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/26 21:02:22 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/27 12:34:27 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,17 @@ int	check_cmd_redir(t_shell *shell, t_exec *current, t_redir *redir)
 	return (0);
 }
 
-int	check_all_redir(t_shell *shell) // pour chaques nodes cmd, je check toutes les redirs et trouve in et out
+int	check_all_redir(t_shell *shell)
 {
-	t_exec *current;
+	t_exec	*current;
+
 	current = shell->cmd_lst;
 	while (current != NULL)
 	{
-		if(check_cmd_redir(shell, current, current->redir) == GEN_ERRNO)
-		{ 
-			shell->exit_status = GEN_ERRNO; 
-			return(ERROR);
+		if (check_cmd_redir(shell, current, current->redir) == GEN_ERRNO)
+		{
+			shell->exit_status = GEN_ERRNO;
+			return (ERROR);
 		}
 		current = current->next;
 	}

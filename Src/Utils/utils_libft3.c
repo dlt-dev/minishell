@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 16:59:40 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 18:13:19 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/27 13:01:44 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,27 @@ void	ft_free_tab(char **tab)
 		}
 	}
 	free(tab);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	long	nb;
+	char	result;
+
+	nb = (long)n;
+	if (nb < 0)
+	{
+		nb = -nb;
+		write(fd, "-", 1);
+	}
+	if (nb >= 10)
+	{
+		ft_putnbr_fd(nb / 10, fd);
+		ft_putnbr_fd(nb % 10, fd);
+	}
+	if (nb < 10)
+	{
+		result = nb + '0';
+		write(fd, &result, 1);
+	}
 }
