@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part2_C_routine_pipe.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 15:47:46 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/27 12:34:40 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/27 16:46:57 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,10 @@ int	exec_fork_pipe(t_shell *shell, t_exec *current, char **cmd, int pipe_fd[2])
 	}
 	if (child == 0)
 	{
+		signal(SIGQUIT, SIG_DFL);
+		signal(SIGINT, SIG_DFL);
 		if (is_built_in(current->cmds[0]) != 0)
-		{
-			printf("fork builtin routine\n");
 			routine_builtin_pipe(shell, current, cmd, pipe_fd);
-		}
 		routine_pipe(shell, current, cmd, pipe_fd);
 	}
 	return (0);

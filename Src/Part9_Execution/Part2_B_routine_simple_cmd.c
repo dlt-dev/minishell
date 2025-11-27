@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part2_B_routine_simple_cmd.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:21:20 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/27 12:49:42 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/27 16:41:28 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env)
 		return (ERROR);
 	if (child == 0)
 	{
+		signal(SIGQUIT, SIG_DFL);
+		signal(SIGINT, SIG_DFL);
 		routine_child(shell, cmd, env);
 	}
 	wait_and_status(shell, child);

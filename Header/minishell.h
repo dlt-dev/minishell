@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/27 13:16:16 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/27 15:26:05 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,7 @@ void	free_all(t_shell *shell);
 void	free_exit(t_shell *shell, int code, char *message);
 void	free_exec(t_exec *cmd);
 void	free_exec_lst(t_exec **head);
+
+extern volatile sig_atomic_t flag_signal; 
 
 #endif

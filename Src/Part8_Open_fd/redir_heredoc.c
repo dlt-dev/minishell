@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 19:18:46 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/27 13:02:59 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/27 16:47:34 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	handle_heredoc(t_shell *shell, char *delimit)
 		return (close(pipefd[1]), close(pipefd[0]), GEN_ERRNO);
 	if (pid_heredoc == 0)
 	{
+		signal(SIGINT, SIG_DFL);
 		routine_heredoc(shell, delimit, pipefd);
 	}
 	if (pid_heredoc > 0)

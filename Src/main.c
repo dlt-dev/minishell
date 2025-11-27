@@ -3,34 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/27 12:42:23 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/27 18:50:28 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// volatile sig_atomic_t flag_signal = 0;
 
-// void handle_sig_int(int sig)
-// {
-// 	(void)sig;
-// 	flag_signal = 1;
-// 	write(1, "\n", 1);
-// 	rl_replace_line("", 0); // vide la ligne en cours
-//     rl_on_new_line();       // force readline à passer à une nouvelle ligne
-//     rl_redisplay(); // reaffiche le prompt
-// }
-
-// void init_signal(t_signal *signal)
-// {
-// 	*signal = (t_signal) {0};
-// 	signal->sig_int.sa_handler = handle_sig_int;
-// 	sigemptyset(&signal->sig_int.sa_mask);
-// 	sigaction(SIGINT, &signal->sig_int, NULL);
-// }
 
 void	printbanner(void)
 {
@@ -51,19 +33,46 @@ void	printbanner(void)
 		1);
 }
 
+
+volatile sig_atomic_t flag_signal = 0;
+
+void handle_sigint(int sig)
+{
+	flag_signal = sig + 128;
+	write(1 , "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line(); 
+	rl_redisplay();
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
+	
+	struct sigaction sigint;
+	struct sigaction sigquit;
+	
+	sigint = (struct sigaction){0};
+	sigquit = (struct sigaction){0};
+
+	sigint.sa_handler = handle_sigint;
+	sigquit.sa_handler = SIG_IGN;
+
+	sigaction(SIGQUIT, &sigquit, NULL);
+	sigaction(SIGINT, &sigint, NULL);
 
 	printbanner();
-	// init_signal(&shell.signal);
 	if (init_variable(&shell, argc, argv, envp) == ERROR)
 		free_exit(&shell, GEN_ERRNO, NULL);
 	while (1)
 	{
+
 		if (get_prompt(&shell, shell.env, &shell.invite) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
+
 		shell.rd_line = readline(shell.invite.prompt);
+		
+
 		if (shell.rd_line == NULL)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		if (*shell.rd_line != '\0')

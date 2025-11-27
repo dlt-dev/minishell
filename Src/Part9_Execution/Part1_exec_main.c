@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part1_exec_main.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 21:25:50 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/27 12:49:00 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/27 18:42:45 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ int	waitpid_verify_status(pid_t pid)
 	if (WIFEXITED(status) != 0)
 		return (WEXITSTATUS(status));
 	if (WIFSIGNALED(status) != 0)
+	{ 
+		if (WCOREDUMP(status))
+			write_str_fd("Quit (core dumped)\n", 2);
 		return (WTERMSIG(status) + 128);
+	} 
 	return (0);
 }
 
