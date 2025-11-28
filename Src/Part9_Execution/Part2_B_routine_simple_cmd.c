@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:21:20 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/28 16:00:15 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/28 16:27:28 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ void	routine_child(t_shell *shell, char **cmd, t_valist *env)
 	}
 	else
 	{ 
-		perror(cmd[0]);
+		write_str_fd(cmd[0], STDERR_FILENO);
+		free_exit(shell, exit_status, " : Command not found\n");
+		// perror(cmd[0]);
 		free_exit(shell, exit_status, NULL);
 	}
 }

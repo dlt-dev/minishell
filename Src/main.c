@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/28 16:14:04 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/28 17:12:16 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		if (get_prompt(&shell, shell.env, &shell.invite) == ERROR)
-		free_exit(&shell, GEN_ERRNO, NULL);
+			free_exit(&shell, GEN_ERRNO, NULL);
 		shell.rd_line = readline(shell.invite.prompt);
 		if(flag_signal == SIGINT + 128)
 		{ 
