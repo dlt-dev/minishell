@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part1_exec_main.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 21:25:50 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/27 18:42:45 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/28 16:10:19 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ int	waitpid_verify_status(pid_t pid)
 {
 	int	status;
 
-	waitpid(pid, &status, 0);
+	if (waitpid(pid, &status, 0) < 0)
+		return (perror("Waitpid: "), 1);
 	if (WIFEXITED(status) != 0)
 		return (WEXITSTATUS(status));
 	if (WIFSIGNALED(status) != 0)
 	{ 
-		if (WCOREDUMP(status))
+		if (WTERMSIG(status) == SIGQUIT)
 			write_str_fd("Quit (core dumped)\n", 2);
 		return (WTERMSIG(status) + 128);
 	} 
@@ -33,6 +34,10 @@ int	wait_and_status(t_shell *shell, pid_t last_pid)
 	shell->exit_status = waitpid_verify_status(last_pid);
 	while (waitpid(-1, 0, 0) != ERROR)
 		continue ;
+	if(shell->exit_status > 128)
+		write(1, "\n", 1);
+	shell->sigint.sa_handler = handle_sigint;
+	sigaction(SIGINT, &shell->sigint, NULL);
 	return (0);
 }
 

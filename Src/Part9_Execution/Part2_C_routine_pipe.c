@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part2_C_routine_pipe.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 15:47:46 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/27 16:46:57 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/28 15:58:45 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,22 @@ void	routine_pipe(t_shell *shell, t_exec *current, char **cmd,
 	if (apply_redir_pipe(shell, current, pipe_fd) == GEN_ERRNO)
 		free_exit(shell, GEN_ERRNO, cmd[0]);
 	exit_status = do_execve(cmd, shell->env);
-	free_exit(shell, exit_status, cmd[0]);
+	if(exit_status == CMD_NOT_FOUND)
+	{
+		write_str_fd(cmd[0], STDERR_FILENO);
+		free_exit(shell, exit_status, " : Command not found\n");
+		
+	}
+	if(exit_status == CMD_NO_PERMISSION)
+	{
+		write_str_fd(cmd[0], STDERR_FILENO);
+		free_exit(shell, exit_status, " : Permission denied\n");
+	}
+	else
+	{ 
+		perror(cmd[0]);
+		free_exit(shell, exit_status, NULL);
+	}
 }
 
 int	exec_fork_pipe(t_shell *shell, t_exec *current, char **cmd, int pipe_fd[2])
@@ -43,6 +58,8 @@ int	exec_fork_pipe(t_shell *shell, t_exec *current, char **cmd, int pipe_fd[2])
 		return (ERROR);
 	if (child > 0)
 	{
+		shell->sigint.sa_handler = SIG_IGN;
+		sigaction(SIGINT, &shell->sigint, NULL);
 		if (shell->prev_fd != -1)
 			close(shell->prev_fd);
 		close(pipe_fd[1]);
@@ -51,8 +68,8 @@ int	exec_fork_pipe(t_shell *shell, t_exec *current, char **cmd, int pipe_fd[2])
 	}
 	if (child == 0)
 	{
-		signal(SIGQUIT, SIG_DFL);
-		signal(SIGINT, SIG_DFL);
+		shell->sigint.sa_handler = SIG_DFL;
+		sigaction(SIGINT, &shell->sigint, NULL);
 		if (is_built_in(current->cmds[0]) != 0)
 			routine_builtin_pipe(shell, current, cmd, pipe_fd);
 		routine_pipe(shell, current, cmd, pipe_fd);

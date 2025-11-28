@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/27 15:14:47 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/28 15:44:22 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "minishell.h"
 # include <stdlib.h>
 #include <signal.h>
+#define _POSIX_C_SOURCE 200809L
 
 enum				e_token_type
 {
@@ -104,7 +105,10 @@ typedef struct s_shell
 	t_cb			lst_buffer;
 	int				exit_status;
 	int				prev_fd;
-	struct sigaction signal;
+	//struct sigaction signal;
+	struct sigaction sigint;
+
+	
 }					t_shell;
 
 /**

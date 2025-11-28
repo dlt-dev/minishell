@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:40:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/27 18:22:23 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/28 15:05:13 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,48 +92,54 @@
 // 	return (0);
 // }
 
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <signal.h>
-#include <unistd.h>
-#include <stdio.h>
+// #include <readline/readline.h>
+// #include <readline/history.h>
+// #include <signal.h>
+// #include <unistd.h>
+// #include <stdio.h>
 
-volatile sig_atomic_t g_sig = 0;
+// volatile sig_atomic_t g_sig = 0;
 
-void handle_sigint(int sig)
-{
-    g_sig = 128 + sig;
+// void handle_sigint(int sig)
+// {
+//     g_sig = 128 + sig;
+// }
+
+// char *ms_readline(char *prompt)
+// {
+// 	char *line = readline(prompt);
+// 	printf("Hello\n");
+// 	while (g_sig == SIGINT + 128)
+// 	{
+// 		g_sig = 0;
+// 		free(line);
+// 		rl_pending_input = '\n';
+// 		line = readline(NULL);
+// 		free(line);
+// 		line = readline(prompt);
+// 	}
+// 	return (line);
+// }
+
+// int main()
+// {
+// 	signal(SIGINT, &handle_sigint);
+// 	rl_getc_function = getc;
+//     char *line = ms_readline("line>");
+// 	while (line)
+// 	{
+// 		write(STDOUT_FILENO, line, strlen(line));
+// 		write(STDOUT_FILENO, "\n", 1);
+// 		free(line);
+// 		line = ms_readline("line>");
+// 	}
+// 	return (0);
+// }
+
+
+int main ()
+{ 
+	while(1)
+		continue;
+	
 }
-
-char *ms_readline(char *prompt)
-{
-	char *line = readline(prompt);
-	printf("Hello\n");
-	while (g_sig == SIGINT + 128)
-	{
-		g_sig = 0;
-		free(line);
-		rl_pending_input = '\n';
-		line = readline(NULL);
-		free(line);
-		line = readline(prompt);
-	}
-	return (line);
-}
-
-int main()
-{
-	signal(SIGINT, &handle_sigint);
-	rl_getc_function = getc;
-    char *line = ms_readline("line>");
-	while (line)
-	{
-		write(STDOUT_FILENO, line, strlen(line));
-		write(STDOUT_FILENO, "\n", 1);
-		free(line);
-		line = ms_readline("line>");
-	}
-	return (0);
-}
-
-

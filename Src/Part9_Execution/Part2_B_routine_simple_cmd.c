@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part2_B_routine_simple_cmd.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:21:20 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/27 16:41:28 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/28 16:00:15 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,22 @@ void	routine_child(t_shell *shell, char **cmd, t_valist *env)
 	if (redir_one_command(shell) == GEN_ERRNO)
 		free_exit(shell, GEN_ERRNO, cmd[0]);
 	exit_status = do_execve(cmd, env);
-	free_exit(shell, exit_status, cmd[0]);
+	if(exit_status == CMD_NOT_FOUND)
+	{
+		write_str_fd(cmd[0], STDERR_FILENO);
+		free_exit(shell, exit_status, " : Command not found\n");
+		
+	}
+	if(exit_status == CMD_NO_PERMISSION)
+	{
+		write_str_fd(cmd[0], STDERR_FILENO);
+		free_exit(shell, exit_status, " : Permission denied\n");
+	}
+	else
+	{ 
+		perror(cmd[0]);
+		free_exit(shell, exit_status, NULL);
+	}
 }
 
 int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env)
@@ -53,10 +68,13 @@ int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env)
 		return (ERROR);
 	if (child == 0)
 	{
-		signal(SIGQUIT, SIG_DFL);
-		signal(SIGINT, SIG_DFL);
+		// signal(SIGQUIT, SIG_DFL);
+		shell->sigint.sa_handler = SIG_DFL;
+		sigaction(SIGINT, &shell->sigint, NULL);
 		routine_child(shell, cmd, env);
 	}
+	shell->sigint.sa_handler = SIG_IGN;
+	sigaction(SIGINT, &shell->sigint, NULL);
 	wait_and_status(shell, child);
 	return (0);
 }

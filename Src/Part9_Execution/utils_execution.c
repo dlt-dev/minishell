@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:24:17 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/27 12:52:17 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/28 14:00:32 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ char	*find_my_cmd_path(char *my_cmd, char **envp, int *check)
 	char	**paths;
 
 	paths = split_tab_paths(envp);
+	if (paths == NULL)
+		return (NULL);
 	i = 0;
 	while (paths[i] != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:57:16 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 17:47:36 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/28 16:02:37 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	builtin_exit(t_shell *shell, char **args, int print_flag)
 	while (args[i] != NULL)
 		i++;
 	if (i == 1 && print_flag == 0)
-		free_exit(shell, 0, "exit");
+		free_exit(shell, 0, "exit\n");
 	if (i == 1 && print_flag == 1)
 		free_exit(shell, 0, 0);
 	if (check_number(args[1]) == ERROR)
