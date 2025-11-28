@@ -40,7 +40,8 @@ PartX_Free Part8_Open_fd Part9_Execution
 	SRC_PART1 = Part1_Prompt.c
 	SRC_PART2 = Part2_lexing.c
 	SRC_PART3 = Part3_flags_main.c Part3_flag_word.c
-	SRC_PART4 = Part4_1expand_main.c Part4_3expand_dollar.c Part4_2expand_quotes.c
+	SRC_PART4 = Part4_1expand_main.c Part4_3expand_dollar.c Part4_2expand_quotes.c \
+	Part4_expand_main_2.c
 	SRC_PART5 = Part5_word_splitting_main.c Part5_countword_hdl_quotes.c Part5_word_splitting.c
 	SRC_PART6 = Part6_delete_quotes.c Part6_delete_quotes_utils.c
 	SRC_PART7 = Part7_cmd_struc.c Part7_main_tree_struct.c PartX_print_tree.c \
@@ -76,9 +77,6 @@ PartX_Free Part8_Open_fd Part9_Execution
 	$(addprefix PartX_Free/, $(SRC_PARTX)) \
 	$(addprefix Built_in/, $(SRC_BUILTIN))
 OBJ = $(addprefix $(OBJ_DIR)/, $(ALL_SRC:.c=.o))
-
-#	$(addprefix Part8_Execution/, $(SRC_PART8)) \
-#	$(addprefix Part8_Execution/, $(SRC_PART8)) \
 
 all: $(NAME)
 

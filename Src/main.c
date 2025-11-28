@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/28 17:12:16 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/28 18:10:39 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,10 @@ int	main(int argc, char **argv, char **envp)
 		if (lexing(shell.rd_line, &shell.lst) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		put_flags(shell.lst);
-		if (expand_shell_param(&shell, shell.lst) == ERROR)
+
+		if (main_expand(&shell, shell.lst) == ERROR)// appeler main_expand()
 			free_exit(&shell, GEN_ERRNO, NULL);
+
 		if (split_param(&shell, shell.lst, NULL) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		if (delete_quotes(&shell, shell.lst) == ERROR)

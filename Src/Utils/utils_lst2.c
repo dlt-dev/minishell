@@ -6,7 +6,7 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:15:44 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 13:36:21 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/28 21:32:44 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,12 @@ void	insert_after_node(t_list *curr_node, t_list *new_node)
 
 void	del_one_relink(t_list **lst, t_list *curr_node, t_list *prev_node)
 {
-	if (*lst == NULL || curr_node == NULL)
+	if (!lst || !*lst || !curr_node)
 		return ;
 	if (curr_node == *lst)
 		*lst = curr_node->next;
-	else if (prev_node->next != NULL)
-		prev_node->next = curr_node->next;
 	else
-		return ;
+		prev_node->next = curr_node->next;
 	lst_del_one(curr_node);
 }
 

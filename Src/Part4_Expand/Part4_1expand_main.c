@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part4_1expand_main.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 12:06:17 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/27 12:33:24 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/28 19:32:16 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static t_list	*create_expand_node(t_shell *shell, t_list *curr_node)
 	return (new_node);
 }
 
-int	expand_shell_param(t_shell *shell, t_list *curr_node)
+int	expand_shell_param(t_shell *shell, t_list *curr_node) //appeler le main a la place
 {
 	t_list	*new_node;
 	t_list	*prev_node;
