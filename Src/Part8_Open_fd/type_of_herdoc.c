@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 12:59:57 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/27 13:15:27 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/28 19:47:41 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,14 @@ int	here_doc_expand(t_shell *shell, char *delimit, int pipefd[2])
 	i = 1;
 	while (1)
 	{
+		flag_signal = 0;
 		str = readline(">");
+		if(str == NULL && flag_signal == SIGINT + 128)
+		{ 
+			if(str != NULL)
+				free(str);
+			return(SIGINT + 128);
+		}
 		if (str == NULL)
 			return (here_doc_message(i, delimit), 0);
 		if (ft_strcmp(str, delimit) == 0)
@@ -84,7 +91,15 @@ int	here_doc_no_expand(char *delimit, int pipefd[2])
 		return (GEN_ERRNO);
 	while (1)
 	{
+		flag_signal = 0;
 		str = readline(">");
+		if(str == NULL && flag_signal == SIGINT + 128)
+		{ 
+			if(str != NULL)
+				free(str);
+			free(new_delimit);
+			return(SIGINT + 128);
+		}
 		if (str == NULL)
 			return (here_doc_message(i, new_delimit), free(new_delimit),
 				close(pipefd[1]), 0);

@@ -6,9 +6,10 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/28 18:25:57 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/28 21:56:50 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef STRUCT_H
 # define STRUCT_H
@@ -107,6 +108,9 @@ typedef struct s_shell
 	int				prev_fd;
 	//struct sigaction signal;
 	struct sigaction sigint;
+	struct sigaction sigquit;
+
+	
 }					t_shell;
 
 /**

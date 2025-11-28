@@ -6,9 +6,10 @@
 /*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/28 18:10:39 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/28 21:56:09 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -36,43 +37,21 @@ void	printbanner(void)
 
 volatile sig_atomic_t flag_signal = 0;
 
-void handle_sigint(int sig)
-{
-	flag_signal = sig + 128;
-	write(STDOUT_FILENO, "\n", 1);
-	rl_replace_line("", 0);
-    rl_on_new_line();
-	rl_redisplay();
-} 
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
-	
-	struct sigaction sigquit;
-
-	sigquit = (struct sigaction){0};
-	shell.sigint = (struct sigaction){0};
-
-	shell.sigint.sa_handler = handle_sigint;
-	sigquit.sa_handler = SIG_IGN;
-
-	sigaction(SIGQUIT, &sigquit, NULL);
-	sigaction(SIGINT, &shell.sigint, NULL);
 
 	printbanner();
 	if (init_variable(&shell, argc, argv, envp) == ERROR)
 		free_exit(&shell, GEN_ERRNO, NULL);
+	handle_shell_sig (&shell);
 	while (1)
 	{
 		if (get_prompt(&shell, shell.env, &shell.invite) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		shell.rd_line = readline(shell.invite.prompt);
-		if(flag_signal == SIGINT + 128)
-		{ 
-			shell.exit_status = flag_signal;
-			flag_signal = 0;
-		}
+		sig_update_exit_status(&shell);
+		
 		if (shell.rd_line == NULL)
 			free_exit(&shell, shell.exit_status, NULL);
 		if (*shell.rd_line != '\0')
