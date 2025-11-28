@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:21:20 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/28 16:27:28 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/28 18:20:11 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,10 @@ int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env)
 		return (ERROR);
 	if (child == 0)
 	{
-		// signal(SIGQUIT, SIG_DFL);
-		shell->sigint.sa_handler = SIG_DFL;
-		sigaction(SIGINT, &shell->sigint, NULL);
+		set_default_sig(shell);
 		routine_child(shell, cmd, env);
 	}
-	shell->sigint.sa_handler = SIG_IGN;
-	sigaction(SIGINT, &shell->sigint, NULL);
+	set_ignore_sig(shell);
 	wait_and_status(shell, child);
 	return (0);
 }

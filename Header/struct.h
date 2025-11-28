@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/28 15:44:22 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/28 18:10:37 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ typedef struct s_shell
 	int				prev_fd;
 	//struct sigaction signal;
 	struct sigaction sigint;
+	struct sigaction sigquit;
 
 	
 }					t_shell;

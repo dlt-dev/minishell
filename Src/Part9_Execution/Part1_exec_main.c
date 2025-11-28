@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 21:25:50 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/28 16:10:19 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/28 18:30:06 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	waitpid_verify_status(pid_t pid)
 	if (WIFSIGNALED(status) != 0)
 	{ 
 		if (WTERMSIG(status) == SIGQUIT)
-			write_str_fd("Quit (core dumped)\n", 2);
+			write_str_fd("Quit (core dumped)", 2);
 		return (WTERMSIG(status) + 128);
 	} 
 	return (0);
@@ -36,8 +36,7 @@ int	wait_and_status(t_shell *shell, pid_t last_pid)
 		continue ;
 	if(shell->exit_status > 128)
 		write(1, "\n", 1);
-	shell->sigint.sa_handler = handle_sigint;
-	sigaction(SIGINT, &shell->sigint, NULL);
+	handle_shell_sig(shell);
 	return (0);
 }
 

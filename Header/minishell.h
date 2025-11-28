@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/28 16:01:02 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/28 18:59:02 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,13 @@ void	free_all(t_shell *shell);
 void	free_exit(t_shell *shell, int code, char *message);
 void	free_exec(t_exec *cmd);
 void	free_exec_lst(t_exec **head);
+
+//PartZ_Signaux
+void handle_shell_sig (t_shell *shell);
+void set_ignore_sig (t_shell *shell);
+void set_default_sig(t_shell *shell);
+void sig_update_exit_status(t_shell *shell);
+void set_heredoc_sig (t_shell *shell);
 
 extern volatile sig_atomic_t flag_signal; 
 
