@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part4_1expand_main.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 12:06:17 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/28 21:53:20 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/29 20:36:35 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ char	*create_expand_str(t_shell *shell, char *str)
 	if (fill_expand_in_buffer(shell, &lst_buffer, str) == ERROR)
 		return (NULL);
 	new_str = fusion_all_chunk(&lst_buffer);
-	free_chunk_buffer(&lst_buffer);
 	if (new_str == NULL)
 		return (NULL);
 	return (new_str);
