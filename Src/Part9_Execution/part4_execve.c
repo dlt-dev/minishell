@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 12:36:39 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/28 14:15:04 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/30 04:49:52 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ int	exec_env_path(char **env_tab_exe, char **cmd)
 
 	my_cmd_path = find_my_cmd_path(cmd[0], env_tab_exe, &check);
 	if (my_cmd_path == NULL)
-		return (CMD_NOT_FOUND);
+		return(failed_exec_message(cmd[0], ": Command not found\n"), CMD_NOT_FOUND);
 	else if (check == CMD_NO_PERMISSION)
-		return (free(my_cmd_path), CMD_NO_PERMISSION);
+		return (free(my_cmd_path), failed_exec_message(cmd[0], ": Permission denied\n"), CMD_NO_PERMISSION);
 	else
 	{
 		if (execve(my_cmd_path, cmd, env_tab_exe) == ERROR)
-			return (free(my_cmd_path), GEN_ERRNO);
+			return (free(my_cmd_path), failed_exec_message(cmd[0], ": execve failed\n"), GEN_ERRNO);
 	}
 	return (0);
 }
@@ -49,14 +49,21 @@ int	exec_env_path(char **env_tab_exe, char **cmd)
 int	exec_relativ_path(char **env_tab_exe, char **cmd)
 {
 	int	check;
+	struct stat	st;
 
-	check = exist_and_access(cmd[0]);
+	check = exist_and_access(cmd[0], &st);
+	if(S_ISDIR(st.st_mode) != 0)
+		return(failed_exec_message(cmd[0], ": Is a directory\n"), IS_A_DIR);
+	if(check == CMD_NOT_FOUND)
+		return(failed_exec_message(cmd[0], ": Command not found\n"), CMD_NOT_FOUND);
+	if(check == CMD_NO_PERMISSION)
+		return(failed_exec_message(cmd[0], ": Permission denied\n"), CMD_NO_PERMISSION);
 	if (check == 0)
 	{
 		if (execve(cmd[0], cmd, env_tab_exe) == ERROR)
-			return (GEN_ERRNO);
+			return (failed_exec_message(cmd[0], ": execve failed\n"), GEN_ERRNO);
 	}
-	return (check);
+	return (0);
 }
 
 int	do_execve(char **cmd, t_valist *env)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signaux.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 17:42:35 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/28 21:56:15 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/30 03:01:46 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,3 +72,5 @@ void set_heredoc_sig (t_shell *shell)
 	sigaction(SIGQUIT, &shell->sigquit, NULL);
 	sigaction(SIGINT, &shell->sigint, NULL);
 }
+
+// probleme : cd  tty , cmd_path, erreur message d'acces

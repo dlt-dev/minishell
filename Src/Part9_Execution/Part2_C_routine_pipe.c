@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 15:47:46 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/28 18:19:29 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/30 04:02:23 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,7 @@ void	routine_pipe(t_shell *shell, t_exec *current, char **cmd,
 	if (apply_redir_pipe(shell, current, pipe_fd) == GEN_ERRNO)
 		free_exit(shell, GEN_ERRNO, cmd[0]);
 	exit_status = do_execve(cmd, shell->env);
-	if(exit_status == CMD_NOT_FOUND)
-	{
-		write_str_fd(cmd[0], STDERR_FILENO);
-		free_exit(shell, exit_status, " : Command not found\n");
-		
-	}
-	if(exit_status == CMD_NO_PERMISSION)
-	{
-		write_str_fd(cmd[0], STDERR_FILENO);
-		free_exit(shell, exit_status, " : Permission denied\n");
-	}
-	else
-	{ 
-		perror(cmd[0]);
-		free_exit(shell, exit_status, NULL);
-	}
+	free_exit(shell, exit_status, NULL);
 }
 
 int	exec_fork_pipe(t_shell *shell, t_exec *current, char **cmd, int pipe_fd[2])

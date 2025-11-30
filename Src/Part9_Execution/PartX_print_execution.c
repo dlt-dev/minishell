@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 14:02:40 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/27 12:34:55 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/30 04:10:29 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,12 @@ void	test_print_fd(t_exec *cmd_list)
 		i++;
 		cmd_list = cmd_list->next;
 	}
+}
+
+void failed_exec_message (char *cmd, char * message)
+{
+	write_str_fd("minishell: ", 2);
+	write_str_fd(cmd, 2);
+	write_str_fd(message, 2);
+	
 }

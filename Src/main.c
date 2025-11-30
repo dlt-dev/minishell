@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/28 21:56:09 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/30 02:51:02 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	main(int argc, char **argv, char **envp)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		shell.rd_line = readline(shell.invite.prompt);
 		sig_update_exit_status(&shell);
-		
 		if (shell.rd_line == NULL)
 			free_exit(&shell, shell.exit_status, NULL);
 		if (*shell.rd_line != '\0')

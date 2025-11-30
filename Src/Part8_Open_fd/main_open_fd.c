@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:02:44 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/27 19:07:43 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/30 04:13:45 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int is_not_a_dir (t_redir *redir)
 	{ 
 		write_str_fd("minishell: ", 2);
 		write_str_fd(redir->filename, 2);
-		write_str_fd(" : Is a directory\n", 2);
+		write_str_fd(": Is a directory\n", 2);
 		return(ERROR);
 	}
 	return(0);
@@ -105,6 +105,8 @@ int	check_all_redir(t_shell *shell)
 			shell->exit_status = GEN_ERRNO;
 			return (ERROR);
 		}
+		else
+			shell->exit_status = 0;
 		current = current->next;
 	}
 	return (0);

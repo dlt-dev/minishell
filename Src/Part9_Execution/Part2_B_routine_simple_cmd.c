@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:21:20 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/28 18:20:11 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/30 04:31:24 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,7 @@ void	routine_child(t_shell *shell, char **cmd, t_valist *env)
 	if (redir_one_command(shell) == GEN_ERRNO)
 		free_exit(shell, GEN_ERRNO, cmd[0]);
 	exit_status = do_execve(cmd, env);
-	if(exit_status == CMD_NOT_FOUND)
-	{
-		write_str_fd(cmd[0], STDERR_FILENO);
-		free_exit(shell, exit_status, " : Command not found\n");
-		
-	}
-	if(exit_status == CMD_NO_PERMISSION)
-	{
-		write_str_fd(cmd[0], STDERR_FILENO);
-		free_exit(shell, exit_status, " : Permission denied\n");
-	}
-	else
-	{ 
-		write_str_fd(cmd[0], STDERR_FILENO);
-		free_exit(shell, exit_status, " : Command not found\n");
-		// perror(cmd[0]);
 		free_exit(shell, exit_status, NULL);
-	}
 }
 
 int	exec_fork_one(t_shell *shell, char **cmd, t_valist *env)

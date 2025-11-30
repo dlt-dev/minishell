@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/28 21:54:34 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/11/30 04:50:24 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,14 @@ void	print_char_tab(char **tab); // TEST
 int		ft_lstexec_size(t_exec *lst);
 int		path_not_found(void);
 char	*find_my_cmd_path(char *my_cmd, char **envp, int *check);
-int		exist_and_access(char *my_path);
+int	exist_and_access(char *my_path, struct stat *st);
+
 int		is_built_in(char *cmd);
 int		close_all_redir(t_exec *commands);
 int		wait_and_status(t_shell *shell, pid_t last_pid);
+void failed_exec_message (char *cmd, char * message);
+
+
 
 // PartX_free.c
 void	free_all(t_shell *shell);

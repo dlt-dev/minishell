@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:52:31 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 17:38:27 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/11/30 03:55:07 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@
 # define MALLOC_FAILED -1
 # define CMD_NO_PERMISSION 126
 # define CMD_NOT_FOUND 127
+# define IS_A_DIR 126
 
 #endif
