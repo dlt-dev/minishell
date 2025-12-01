@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:12:29 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/01 13:46:15 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:52:24 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ void	free_exec(t_exec *cmd)
 
 void	print_syntax_error(t_shell *shell, char *tok_content)
 {
-	printf("syntax error near unexpected token '%s'\n", tok_content);
+	write_str_fd("minishell: ", 2);
+	write_str_fd("syntax error near unexpected token `", 2);
+	write_str_fd(tok_content, 2);
+	write_str_fd("'",2);
+	write_str_fd("\n", 2);
 	shell->exit_status = 2;
 }

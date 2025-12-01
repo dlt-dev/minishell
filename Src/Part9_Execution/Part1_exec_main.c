@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 21:25:50 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/28 18:30:06 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:46:38 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,20 @@ int	waitpid_verify_status(pid_t pid)
 
 int	wait_and_status(t_shell *shell, pid_t last_pid)
 {
+	int flag_n;
+	int status;
+
+	status = 0;
+	flag_n = 0;
 	shell->exit_status = waitpid_verify_status(last_pid);
-	while (waitpid(-1, 0, 0) != ERROR)
-		continue ;
-	if(shell->exit_status > 128)
+	while (waitpid(-1, &status, 0) != ERROR)
+	{ 
+		if(WIFSIGNALED(status) != 0)
+			flag_n = 1;
+	}
+	if(shell->exit_status == SIGINT + 128)
+		flag_n = 1;
+	if(flag_n == 1)
 		write(1, "\n", 1);
 	handle_shell_sig(shell);
 	return (0);
