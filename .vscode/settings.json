@@ -3,7 +3,9 @@
         "minishell.h": "c",
         "types.h": "c",
         "sstream": "c",
-        "readline.h": "c"
+        "readline.h": "c",
+        "utils.h": "c",
+        "errno.h": "c"
     },
     "C_Cpp.autocomplete": "Default",
     "C_Cpp.intelliSenseEngine": "Default",

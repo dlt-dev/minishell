@@ -30,14 +30,14 @@ OBJ_DIR = objs
 INC_DIR = Header
 
 #Sous dossiers
-SUBS_DIR = Utils Built_in Part0_Init Part1_Prompt Part2_Lexing Part3_Flags \
+SUBS_DIR = Utils Built_in Part0_Init Part1_Shell_mode Part2_Lexing Part3_Flags \
 Part4_Expand Part5_Word_splitting Part6_Delete_quotes Part7_Cmd_struct \
-PartX_Free Part8_Open_fd Part9_Execution PartZ_Signaux
+PartX_Free Part8_Open_fd Part9_Execution PartZ_Signaux get_next_line
 
 #Fichiers sources
 	#Sources parties
 	SRC_PART0 = Part0_init_var.c
-	SRC_PART1 = Part1_Prompt.c
+	SRC_PART1 = Part1_Prompt.c interactive.c non_interactive.c
 	SRC_PART2 = Part2_lexing.c
 	SRC_PART3 = Part3_flags_main.c Part3_flag_word.c
 	SRC_PART4 = Part4_1expand_main.c Part4_3expand_dollar.c Part4_2expand_quotes.c \
@@ -61,12 +61,14 @@ PartX_Free Part8_Open_fd Part9_Execution PartZ_Signaux
 #Sources Built_in
 	SRC_BUILTIN = built_in_cd.c built_in_echo.c built_in_env.c built_in_exit.c \
 	built_in_export1.c built_in_export2.c built_in_pwd.c built_in_unset.c
+#sources GNL
+	SRC_GNL = get_next_line_utils.c get_next_line.c
 
 #Tous les sources
 	ALL_SRC=$(SRC_MAIN) \
 	$(addprefix Utils/, $(SRC_UTILS)) \
 	$(addprefix Part0_Init/, $(SRC_PART0)) \
-	$(addprefix Part1_Prompt/, $(SRC_PART1)) \
+	$(addprefix Part1_Shell_mode/, $(SRC_PART1)) \
 	$(addprefix Part2_Lexing/, $(SRC_PART2)) \
 	$(addprefix Part3_Flags/, $(SRC_PART3)) \
 	$(addprefix Part4_Expand/, $(SRC_PART4)) \
@@ -77,7 +79,8 @@ PartX_Free Part8_Open_fd Part9_Execution PartZ_Signaux
 	$(addprefix Part9_Execution/, $(SRC_PART9)) \
 	$(addprefix PartX_Free/, $(SRC_PARTX)) \
 	$(addprefix PartZ_Signaux/, $(SRC_PARTZ)) \
-	$(addprefix Built_in/, $(SRC_BUILTIN))
+	$(addprefix Built_in/, $(SRC_BUILTIN)) \
+	$(addprefix get_next_line/, $(SRC_GNL))
 OBJ = $(addprefix $(OBJ_DIR)/, $(ALL_SRC:.c=.o))
 
 all: $(NAME)

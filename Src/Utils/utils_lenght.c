@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_lenght.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:11:06 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 13:41:04 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/12/01 02:22:42 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *str)
 {
 	size_t	i;
 
+	if(str == NULL)
+		return(0);
 	i = 0;
 	while (str[i])
 		i++;

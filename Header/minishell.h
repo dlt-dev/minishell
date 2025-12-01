@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/30 04:50:24 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/01 01:27:52 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "macro.h"
 # include "struct.h"
 # include "utils.h"
+# include "get_next_line.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <readline/history.h>
@@ -41,6 +42,9 @@ int		init_variable(t_shell *shell, int argc, char **argv, char **envp);
 
 // Part1: Prompt
 int		get_prompt(t_shell *shell, t_valist *env, t_prompt *invite);
+void interactive_mode(t_shell *shell); 
+int non_interactive_shell(t_shell *shell);
+
 
 // Part2: lexing
 int		lexing(char *str, t_list **lst);
