@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/01 01:27:52 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/01 16:22:42 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,8 @@ int		do_execve(char **cmd, t_valist *env);
 void	test_print_fd(t_exec *cmd_list); // TEST
 void	print_char_tab(char **tab); // TEST
 int		ft_lstexec_size(t_exec *lst);
-int		path_not_found(void);
 char	*find_my_cmd_path(char *my_cmd, char **envp, int *check);
-int	exist_and_access(char *my_path, struct stat *st);
+int	exist_and_access(char *my_path, struct stat *st, int *check);
 
 int		is_built_in(char *cmd);
 int		close_all_redir(t_exec *commands);

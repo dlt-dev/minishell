@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 16:59:40 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/27 13:01:44 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/01 15:56:30 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,21 @@ void	ft_putnbr_fd(int n, int fd)
 		result = nb + '0';
 		write(fd, &result, 1);
 	}
+}
+
+
+char	*ft_strchr(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	if (str == NULL)
+		return (NULL);
+	while (str[i] != '\0')
+	{
+		if (str[i] == c)
+			return (&str[i]);
+		i++;
+	}
+	return (NULL);
 }

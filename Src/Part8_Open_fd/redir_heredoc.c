@@ -6,13 +6,13 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 19:18:46 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/28 19:27:45 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/01 16:52:48 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	routine_heredoc(t_shell *shell, char *delimit, int pipefd[2])
+void	routine_child_heredoc(t_shell *shell, char *delimit, int pipefd[2])
 {
 	int	check;
 
@@ -25,28 +25,53 @@ void	routine_heredoc(t_shell *shell, char *delimit, int pipefd[2])
 	free_exit(shell, check, NULL);
 }
 
+int routine_parent_heredoc(t_shell *shell, pid_t pid_heredoc, int pipefd[2])
+{ 
+	set_ignore_sig(shell);
+	close(pipefd[1]);
+	wait_and_status(shell, pid_heredoc);
+	if(shell->exit_status != 0)
+		return(ERROR);
+	return(0);
+}
+
 int	handle_heredoc(t_shell *shell, char *delimit)
 {
 	int		pipefd[2];
 	pid_t	pid_heredoc;
 
 	if (pipe(pipefd) == -1)
+	{ 
+		shell->exit_status = GEN_ERRNO;
 		return (ERROR);
+	}
 	pid_heredoc = fork();
 	if (pid_heredoc == ERROR)
-		return (close(pipefd[1]), close(pipefd[0]), GEN_ERRNO);
+	{ 
+		shell->exit_status = GEN_ERRNO;
+		return (close(pipefd[1]), close(pipefd[0]), ERROR);
+	}
 	if (pid_heredoc == 0)
 	{
 		set_heredoc_sig(shell);
-		routine_heredoc(shell, delimit, pipefd);
+		routine_child_heredoc(shell, delimit, pipefd);
 	}
+
 	if (pid_heredoc > 0)
 	{
-		set_ignore_sig(shell);
-		close(pipefd[1]);
-		wait_and_status(shell, pid_heredoc);
+		if(routine_parent_heredoc(shell, pid_heredoc, pipefd) == ERROR)
+			return(ERROR);
 	}
 	return (pipefd[0]);
 }
 
 // clean maintenant
+
+	// if (pid_heredoc > 0)
+	// {
+	// 	set_ignore_sig(shell);
+	// 	close(pipefd[1]);
+	// 	wait_and_status(shell, pid_heredoc);
+	// 	if(shell->exit_status != 0)
+	// 		return(ERROR);
+	// }

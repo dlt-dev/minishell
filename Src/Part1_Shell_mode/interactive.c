@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 01:26:48 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/01 02:53:37 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/01 13:42:58 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void interactive_mode(t_shell *shell)
         shell->rd_line = readline(shell->invite.prompt);
     else
     {
-        shell->rd_line = readline("bash");
+        shell->rd_line = get_next_line(STDIN_FILENO);
     }
     sig_update_exit_status(shell);
     if (shell->rd_line == NULL)

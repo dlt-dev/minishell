@@ -6,42 +6,28 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 12:36:39 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/30 04:49:52 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/01 16:36:28 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*ft_strchr(char *str, char c)
-{
-	int	i;
-
-	i = 0;
-	if (str == NULL)
-		return (NULL);
-	while (str[i] != '\0')
-	{
-		if (str[i] == c)
-			return (&str[i]);
-		i++;
-	}
-	return (NULL);
-}
 
 int	exec_env_path(char **env_tab_exe, char **cmd)
 {
 	int		check;
 	char	*my_cmd_path;
 
+	check = CMD_NOT_FOUND;
 	my_cmd_path = find_my_cmd_path(cmd[0], env_tab_exe, &check);
-	if (my_cmd_path == NULL)
-		return(failed_exec_message(cmd[0], ": Command not found\n"), CMD_NOT_FOUND);
-	else if (check == CMD_NO_PERMISSION)
+	if (check == CMD_NO_PERMISSION)
 		return (free(my_cmd_path), failed_exec_message(cmd[0], ": Permission denied\n"), CMD_NO_PERMISSION);
+	else if (my_cmd_path == NULL)
+		return(failed_exec_message(cmd[0], ": Command not found\n"), CMD_NOT_FOUND);
 	else
 	{
+			printf("je suis passe env path");
 		if (execve(my_cmd_path, cmd, env_tab_exe) == ERROR)
-			return (free(my_cmd_path), failed_exec_message(cmd[0], ": execve failed\n"), GEN_ERRNO);
+			return (free(my_cmd_path), failed_exec_message(cmd[0], ": execve failed\n"), 0);
 	}
 	return (0);
 }
@@ -51,17 +37,19 @@ int	exec_relativ_path(char **env_tab_exe, char **cmd)
 	int	check;
 	struct stat	st;
 
-	check = exist_and_access(cmd[0], &st);
+	check = CMD_NOT_FOUND;
+	check = exist_and_access(cmd[0], &st, &check);
 	if(S_ISDIR(st.st_mode) != 0)
 		return(failed_exec_message(cmd[0], ": Is a directory\n"), IS_A_DIR);
 	if(check == CMD_NOT_FOUND)
 		return(failed_exec_message(cmd[0], ": Command not found\n"), CMD_NOT_FOUND);
 	if(check == CMD_NO_PERMISSION)
 		return(failed_exec_message(cmd[0], ": Permission denied\n"), CMD_NO_PERMISSION);
+	printf("je suis passe relative path");
 	if (check == 0)
 	{
 		if (execve(cmd[0], cmd, env_tab_exe) == ERROR)
-			return (failed_exec_message(cmd[0], ": execve failed\n"), GEN_ERRNO);
+			return (failed_exec_message(cmd[0], ": execve failed\n"), 0);
 	}
 	return (0);
 }

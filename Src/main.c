@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/01 01:41:36 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/01 13:46:37 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ int	main(int argc, char **argv, char **envp)
 			free_exit(&shell, GEN_ERRNO, NULL);
 		if (logical_struct(&shell, NULL, shell.lst) == ERROR)
 			free_exit(&shell, GEN_ERRNO, NULL);
-		if (shell.cmd_lst)
-			print_cmd_list(shell.cmd_lst);
+		//if (shell.cmd_lst)
+			//print_cmd_list(shell.cmd_lst);
 		if (check_all_redir(&shell) == ERROR)
 			free_all(&shell);
 		else
