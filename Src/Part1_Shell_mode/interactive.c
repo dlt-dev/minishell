@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   interactive.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 01:26:48 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/02 14:38:56 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 14:52:10 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	interactive_shell(t_shell *shell)
 	}
 	else
 	{
-		shell->rd_line = get_next_line(STDIN_FILENO);	
+		shell->rd_line = get_next_line(STDIN_FILENO);
 	}
 	sig_update_exit_status(shell);
 	if (shell->rd_line == NULL)

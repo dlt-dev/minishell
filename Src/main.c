@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/02 14:43:42 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:45:08 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	execution(t_shell *shell)
 		return (ERROR);
 	if (check_all_redir(shell) == ERROR)
 		free_all(shell);
+	// print_cmd_list(shell->cmd_lst);
 	else
 		manage_execution(shell, shell->env);
 	return (0);
@@ -74,7 +75,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
 
-	if(isatty(0) == 1 && isatty(1) == 1)
+	if (isatty(0) == 1 && isatty(1) == 1)
 		printbanner();
 	if (init_variable(&shell, argc, argv, envp) == ERROR)
 		free_exit(&shell, GEN_ERRNO, NULL);

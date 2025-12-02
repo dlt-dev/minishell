@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part2_C_routine_pipe.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 15:47:46 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/02 02:13:16 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:46:25 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,14 @@ void	routine_pipe(t_shell *shell, t_exec *current, char **cmd,
 int	exec_fork_pipe(t_shell *shell, t_exec *current, char **cmd, int pipe_fd[2])
 {
 	pid_t	child;
+	static int i;
 
-	child = fork();
+	printf("%d AHHHH\n" ,i);
+	i++;
+	print_cmd_list(current);
+	test_print_fd(current);
+	write(1, "\n", 1);
+	child = fork(); 
 	if (child == ERROR)
 		return (ERROR);
 	if (child > 0)
@@ -51,6 +57,7 @@ int	exec_fork_pipe(t_shell *shell, t_exec *current, char **cmd, int pipe_fd[2])
 	}
 	if (child == 0)
 	{
+
 		set_default_sig(shell);
 		if (is_built_in(current->cmds[0]) != 0)
 			routine_builtin_pipe(shell, current, cmd, pipe_fd);
