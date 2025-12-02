@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/02 12:55:39 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/12/02 14:43:42 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	printbanner(void)
 		"\033[1;95m       minishell de Arthur & Jeanne \n"
 		"\033[36m\n"
 		"\033[0m\n",
-		1);
+		2);
 }
 
 volatile sig_atomic_t	g_flag_signal = 0;
@@ -74,7 +74,8 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
 
-	printbanner();
+	if(isatty(0) == 1 && isatty(1) == 1)
+		printbanner();
 	if (init_variable(&shell, argc, argv, envp) == ERROR)
 		free_exit(&shell, GEN_ERRNO, NULL);
 	handle_shell_sig(&shell);
