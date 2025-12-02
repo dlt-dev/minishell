@@ -46,12 +46,12 @@ PartX_Free Part8_Open_fd Part9_Execution PartZ_Signaux get_next_line
 	SRC_PART6 = Part6_delete_quotes.c Part6_delete_quotes_utils.c
 	SRC_PART7 = Part7_cmd_struc.c Part7_main_tree_struct.c PartX_print_tree.c \
 	Part7_redir_struct.c Part7_syntaxe_err.c
-	SRC_PART8 = main_open_fd.c redir_heredoc.c type_of_herdoc.c
+	SRC_PART8 = main_open_fd.c redir_heredoc.c type_of_heredoc.c
 	SRC_PART9 = Part1_exec_main.c Part2_A_exec_built_in.c Part2_B_routine_simple_cmd.c \
-	Part2_C_routine_pipe.c Part3_apply_redirection.c part4_execve.c PartX_print_execution.c \
-	utils_execution.c
+	Part2_C_routine_pipe.c Part3_apply_redirection.c Part4_execve.c PartX_debug_exec.c \
+	Part4_utils_execution.c Part5_waitpid.c
 	SRC_PARTX = PartX_free.c
-	SRC_PARTZ = signaux.c
+	SRC_PARTZ = signaux.c heredoc_sig.c
 	SRC_MAIN  = main.c
 #Sources utiles
 	SRC_UTILS = utils_chunk_buffer.c utils_chunk_buffer2.c utils_lenght.c utils_libft1.c \
@@ -59,8 +59,8 @@ PartX_Free Part8_Open_fd Part9_Execution PartZ_Signaux get_next_line
 	utils_libft3.c utils_error.c utils_exec1.c utils_exec2.c  utils_lst3.c utils_va_lst.c \
 	utils_va_lst2.c utils_va_lst3.c
 #Sources Built_in
-	SRC_BUILTIN = built_in_cd.c built_in_echo.c built_in_env.c built_in_exit.c \
-	built_in_export1.c built_in_export2.c built_in_pwd.c built_in_unset.c
+	SRC_BUILTIN = built_in_cd.c built_in_cd2.c built_in_echo.c built_in_env.c \
+	built_in_exit.c 	built_in_export1.c built_in_export2.c built_in_pwd.c built_in_unset.c 
 #sources GNL
 	SRC_GNL = get_next_line_utils.c get_next_line.c
 

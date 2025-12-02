@@ -6,10 +6,9 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/01 16:22:42 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 04:09:13 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -34,17 +33,13 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-void handle_sigint(int sig);
-
-
 // Part0: init_variable
 int		init_variable(t_shell *shell, int argc, char **argv, char **envp);
 
 // Part1: Prompt
 int		get_prompt(t_shell *shell, t_valist *env, t_prompt *invite);
-void interactive_mode(t_shell *shell); 
-int non_interactive_shell(t_shell *shell);
-
+void	interactive_shell(t_shell *shell);
+int		non_interactive_shell(t_shell *shell);
 
 // Part2: lexing
 int		lexing(char *str, t_list **lst);
@@ -103,41 +98,46 @@ int		here_doc_no_expand(char *delimit, int pipefd[2]);
 int		here_doc_expand(t_shell *shell, char *delimit, int pipefd[2]);
 
 // Part9 : execution
-
+	//Part1_exec_main.c
 int		manage_execution(t_shell *shell, t_valist *env);
+	//Part2_A_exec_built_in.c
+int		is_built_in(char *cmd);
 int		execute_built_in(t_shell *shell, int type, char **args, int print_flag);
+	//Part2_B_routine_simple_cmd.c
 int		exec_fork_one(t_shell *shell, char **cmd, t_valist *env);
+	//Part2_C_routine_pipe.c
 int		exec_fork_pipe(t_shell *shell, t_exec *current, char **cmd,
 			int pipe_fd[2]);
-int		handle_heredoc(t_shell *shell, char *delimit);
+	//Part3_apply_redirection.c
 int		apply_redir_pipe(t_shell *shell, t_exec *current, int pipe_fd[2]);
+	//part4_execve.c
 int		do_execve(char **cmd, t_valist *env);
-void	test_print_fd(t_exec *cmd_list); // TEST
-void	print_char_tab(char **tab); // TEST
+	//Part4_utils_execution.c
+int		exist_and_access(char *my_path, struct stat *st, int *check);
 int		ft_lstexec_size(t_exec *lst);
 char	*find_my_cmd_path(char *my_cmd, char **envp, int *check);
-int	exist_and_access(char *my_path, struct stat *st, int *check);
-
-int		is_built_in(char *cmd);
-int		close_all_redir(t_exec *commands);
+	//Part5_waitpid.c
 int		wait_and_status(t_shell *shell, pid_t last_pid);
-void failed_exec_message (char *cmd, char * message);
-
-
+	// PartX_debug_exec.c
+void	test_print_fd(t_exec *cmd_list); // TEST
+void	print_char_tab(char **tab); // TEST
 
 // PartX_free.c
+int		close_all_redir(t_exec *commands);
 void	free_all(t_shell *shell);
 void	free_exit(t_shell *shell, int code, char *message);
 void	free_exec(t_exec *cmd);
 void	free_exec_lst(t_exec **head);
 
 //PartZ_Signaux
-void handle_shell_sig (t_shell *shell);
-void set_ignore_sig (t_shell *shell);
-void set_default_sig(t_shell *shell);
-void sig_update_exit_status(t_shell *shell);
-void set_heredoc_sig (t_shell *shell);
+	//parent_and_child_shell_sig
+void	handle_shell_sig(t_shell *shell);
+void	sig_update_exit_status(t_shell *shell);
+void	set_ignore_sig(t_shell *shell);
+void	set_default_sig(t_shell *shell);
+	//heredoc
+void	set_heredoc_sig(t_shell *shell);
 
-extern volatile sig_atomic_t flag_signal; 
+extern volatile sig_atomic_t	flag_signal;
 
 #endif

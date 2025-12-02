@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 00:00:39 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/01 03:09:36 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 02:33:37 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static void	bzero_shell(t_shell *shell)
 {
 	*shell = (t_shell){0};
-	if(isatty(0) == 1 && isatty(1) == 1)
+	if (isatty(0) == 1 && isatty(1) == 1)
 	{
 		shell->invite.color_user = YELL_PS;
 		shell->invite.color_cwd = BLUE_PS;
 		shell->invite.color_reset = RESET;
 	}
-	else 
+	else
 	{
 		shell->invite.color_user = NULL;
 		shell->invite.color_cwd = NULL;

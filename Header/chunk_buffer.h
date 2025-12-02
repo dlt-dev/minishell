@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 11:50:33 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/27 12:32:08 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 03:56:06 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,23 @@
 
 # include "struct.h"
 # include <stddef.h>
+
+typedef struct s_buffer
+{
+	char			*buffer;
+	size_t			length;
+	size_t			capacity;
+	struct s_buffer	*next;
+}					t_buffer;
+
+typedef struct s_ptr_buffer
+{
+	t_buffer		*head;
+	t_buffer		*tail;
+	size_t			capacity;
+	size_t			total_len;
+	int				factor;
+}					t_cb;
 
 // create_buffer
 int			init_chunk_buffer(t_cb *lst_buffer, size_t capacity, size_t factor);

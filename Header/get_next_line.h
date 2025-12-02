@@ -6,14 +6,14 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 17:18:03 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/01 01:39:39 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 03:57:47 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#include "minishell.h"
+# include "minishell.h"
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>

@@ -6,14 +6,11 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/01 13:46:37 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 04:20:59 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
-
-
 
 void	printbanner(void)
 {
@@ -34,8 +31,44 @@ void	printbanner(void)
 		1);
 }
 
-
 volatile sig_atomic_t flag_signal = 0;
+
+int shell_mode(t_shell *shell)
+{
+		if (isatty(0) == 0)
+		{
+			if (non_interactive_shell(shell) == ERROR)
+				return(ERROR);
+		}
+		else 
+			interactive_shell(shell);
+	return(0);
+}
+
+int command_line_processing(t_shell *shell)
+{
+	if (lexing(shell->rd_line, &shell->lst) == ERROR)
+		return(ERROR);
+	put_flags(shell->lst);
+	if (main_expand(shell, shell->lst) == ERROR)
+		return(ERROR);
+	if (split_param(shell, shell->lst, NULL) == ERROR)
+		return(ERROR);
+	if (delete_quotes(shell, shell->lst) == ERROR)
+		return(ERROR);
+	return(0);	
+}
+
+int execution(t_shell *shell)
+{
+	if (logical_struct(shell, NULL, shell->lst) == ERROR)
+		return(ERROR);
+	if (check_all_redir(shell) == ERROR)
+		free_all(shell);
+	else
+		manage_execution(shell, shell->env);
+	return(0);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -47,46 +80,38 @@ int	main(int argc, char **argv, char **envp)
 	handle_shell_sig (&shell);
 	while (1)
 	{
-		if(isatty(0) == 0)
-		{
-			if(non_interactive_shell(&shell) == ERROR)
-				free_exit(&shell, shell.exit_status, NULL);
-		}
-		else 
-		{
-			interactive_mode(&shell);
-		// if (get_prompt(&shell, shell.env, &shell.invite) == ERROR)
-		// 	free_exit(&shell, GEN_ERRNO, NULL);
-		// shell.rd_line = readline(shell.invite.prompt);
-		// sig_update_exit_status(&shell);
-		// if (shell.rd_line == NULL)
-		// 	free_exit(&shell, shell.exit_status, NULL);
-		// if (*shell.rd_line != '\0')
-		// 	add_history(shell.rd_line);
-		}
-		if (lexing(shell.rd_line, &shell.lst) == ERROR)
-			free_exit(&shell, GEN_ERRNO, NULL);
-		put_flags(shell.lst);
-
-		if (main_expand(&shell, shell.lst) == ERROR)// appeler main_expand()
-			free_exit(&shell, GEN_ERRNO, NULL);
-
-		if (split_param(&shell, shell.lst, NULL) == ERROR)
-			free_exit(&shell, GEN_ERRNO, NULL);
-		if (delete_quotes(&shell, shell.lst) == ERROR)
-			free_exit(&shell, GEN_ERRNO, NULL);
-		if (logical_struct(&shell, NULL, shell.lst) == ERROR)
-			free_exit(&shell, GEN_ERRNO, NULL);
-		//if (shell.cmd_lst)
-			//print_cmd_list(shell.cmd_lst);
-		if (check_all_redir(&shell) == ERROR)
-			free_all(&shell);
-		else
-			manage_execution(&shell, shell.env);
+		if(shell_mode(&shell) == ERROR)
+			free_exit(&shell, GEN_ERRNO, "malloc_failed");
+		if(command_line_processing(&shell) == ERROR)
+			free_exit(&shell, GEN_ERRNO, "malloc_failed");
+		execution(&shell);
 		free_all(&shell);
 	}
 }
 
+
+		// if (isatty(0) == 0)
+		// {
+		// 	if (non_interactive_shell(&shell) == ERROR)
+		// 		free_exit(&shell, shell.exit_status, NULL);
+		// }
+		// else 
+		// 	interactive_mode(&shell);
+		// if (lexing(shell.rd_line, &shell.lst) == ERROR)
+		// 	free_exit(&shell, GEN_ERRNO, NULL);
+		// put_flags(shell.lst);
+		// if (main_expand(&shell, shell.lst) == ERROR)
+		// 	free_exit(&shell, GEN_ERRNO, NULL);
+		// if (split_param(&shell, shell.lst, NULL) == ERROR)
+		// 	free_exit(&shell, GEN_ERRNO, NULL);
+		// if (delete_quotes(&shell, shell.lst) == ERROR)
+			// free_exit(&shell, GEN_ERRNO, NULL);
+		// if (logical_struct(&shell, NULL, shell.lst) == ERROR)
+		// 	free_exit(&shell, GEN_ERRNO, NULL);
+		// if (check_all_redir(&shell) == ERROR)
+		// 	free_all(&shell);
+		// else
+		// 	manage_execution(&shell, shell.env);
 
 // si stdin n'est pas in tty le shell doit : 
 /**

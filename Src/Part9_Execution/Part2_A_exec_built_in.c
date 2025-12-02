@@ -6,23 +6,11 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 19:54:50 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/27 12:49:24 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 02:19:36 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-enum	e_builtin_type
-{
-	NO_BUILT_IN,
-	ECHO,
-	CD,
-	PWD,
-	EXPORT,
-	UNSET,
-	ENV,
-	EXIT,
-};
 
 int	is_built_in(char *cmd)
 {

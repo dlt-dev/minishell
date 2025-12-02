@@ -6,39 +6,40 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:02:44 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/01 15:07:49 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 02:53:58 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int is_not_a_dir (t_redir *redir)
-{ 
-	struct stat st;
+int	is_not_a_dir(t_redir *redir)
+{
+	struct stat	st;
 
-	st = (struct stat){0}; 
+	st = (struct stat){0};
 	stat(redir->filename, &st);
-	if(S_ISDIR(st.st_mode) != 0)
-	{ 
+	if (S_ISDIR(st.st_mode) != 0)
+	{
 		write_str_fd("minishell: ", 2);
 		write_str_fd(redir->filename, 2);
 		write_str_fd(": Is a directory\n", 2);
-		return(ERROR);
+		return (ERROR);
 	}
-	return(0);
+	return (0);
 }
 
 int	open_infile(t_shell *shell, t_exec *current, t_redir *redir)
 {
 	int	fd_in;
-	if(is_not_a_dir(redir) == ERROR)
-	{ 
+
+	if (is_not_a_dir(redir) == ERROR)
+	{
 		shell->exit_status = GEN_ERRNO;
-				return(ERROR);
+		return (ERROR);
 	}
 	fd_in = open(redir->filename, O_RDONLY);
 	if (fd_in == ERROR)
-	{ 
+	{
 		shell->exit_status = GEN_ERRNO;
 		return (print_error_message(NULL, redir->filename), ERROR);
 	}
@@ -48,20 +49,22 @@ int	open_infile(t_shell *shell, t_exec *current, t_redir *redir)
 	return (0);
 }
 
-int	open_outfile(t_shell *shell, t_exec *current, t_redir *redir, int redir_type)
+int	open_outfile(t_shell *shell, t_exec *current,
+	t_redir *redir, int redir_type)
 {
 	int	fd_out;
-	if(is_not_a_dir(redir) == ERROR)
-	{ 
+
+	if (is_not_a_dir(redir) == ERROR)
+	{
 		shell->exit_status = GEN_ERRNO;
-		return(ERROR);
+		return (ERROR);
 	}
 	if (redir_type == OUTFILE)
 		fd_out = open(redir->filename, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (redir_type == OUTFILE_APPEND)
 		fd_out = open(redir->filename, O_WRONLY | O_CREAT | O_APPEND, 0664);
 	if (fd_out == ERROR)
-	{ 
+	{
 		shell->exit_status = GEN_ERRNO;
 		return (print_error_message(NULL, redir->filename), ERROR);
 	}
@@ -90,10 +93,10 @@ int	check_cmd_redir(t_shell *shell, t_exec *current, t_redir *redir)
 	{
 		if (redir->redir_type == INFILE)
 			if (open_infile(shell, current, redir) == ERROR)
-				return(ERROR);
+				return (ERROR);
 		if (redir->redir_type == OUTFILE)
 			if (open_outfile(shell, current, redir, OUTFILE) == ERROR)
-				return(ERROR);
+				return (ERROR);
 		if (redir->redir_type == HEREDOC)
 			if (open_heredoc(shell, current, redir) == ERROR)
 				return (ERROR);

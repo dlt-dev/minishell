@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:40:19 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/01 15:57:28 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 03:52:03 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char		*ft_itoa(int n);
 int			ft_atoi(const char *s);
 void		ft_free_tab(char **tab);
 void		ft_putnbr_fd(int n, int fd);
-char	*ft_strchr(char *str, char c);
+char		*ft_strchr(char *str, char c);
 
 
 // utils_lst.c

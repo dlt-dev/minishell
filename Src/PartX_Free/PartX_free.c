@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 17:44:28 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/30 02:31:59 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 03:50:31 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,12 @@ void	free_all(t_shell *shell)
 	close_all_redir(shell->cmd_lst);
 	ft_free_lst(&shell->lst);
 	ft_free_str(&shell->invite.prompt);
-	if(shell->rd_line != NULL)
+	if (shell->rd_line != NULL)
 	{
 		ft_free_str(&shell->rd_line);
-		shell->rd_line = NULL; 
+		shell->rd_line = NULL;
 	}
 	free_exec_lst(&shell->cmd_lst);
-	free_chunk_buffer(&shell->lst_buffer);
 	shell->prev_fd = -1;
 }
 

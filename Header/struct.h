@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:50:13 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/28 21:56:50 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/12/02 03:49:59 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,28 +36,6 @@ enum				e_token_type
 	OUTFILE = 12,
 	OUTFILE_APPEND = 13,
 };
-
-typedef struct s_buffer
-{
-	char			*buffer;
-	size_t			length;
-	size_t			capacity;
-	struct s_buffer	*next;
-}					t_buffer;
-
-typedef struct s_ptr_buffer
-{
-	t_buffer		*head;
-	t_buffer		*tail;
-	size_t			capacity;
-	size_t			total_len;
-	int				factor;
-}					t_cb;
-
-/**
- * @brief @param buffer_et_lst_buffer sont des structures de utils_chunk_buffer.
- * Ce sont tous les éléments pour faire un malloc sans avoir besoin de compter.
- */
 
 typedef struct s_flag
 {
@@ -103,14 +81,10 @@ typedef struct s_shell
 	t_list			*lst;
 	t_exec			*cmd_lst;
 	t_valist		*env;
-	t_cb			lst_buffer;
 	int				exit_status;
 	int				prev_fd;
-	//struct sigaction signal;
 	struct sigaction sigint;
 	struct sigaction sigquit;
-
-	
 }					t_shell;
 
 /**

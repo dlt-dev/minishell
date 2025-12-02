@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 15:47:46 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/30 04:02:23 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 02:13:16 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	routine_builtin_pipe(t_shell *shell, t_exec *current, char **cmd,
 		free_exit(shell, GEN_ERRNO, cmd[0]);
 	if (execute_built_in(shell, is_built_in(cmd[0]), cmd, 1) == ERROR)
 		free_exit(shell, GEN_ERRNO, cmd[0]);
-	printf("j'ai execute mon builtin\n");
 	free_exit(shell, shell->exit_status, NULL);
 }
 

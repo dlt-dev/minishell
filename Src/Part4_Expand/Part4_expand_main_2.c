@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 18:47:45 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/11/29 20:57:06 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 02:45:13 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ int	main_expand(t_shell *shell, t_list *lst_node)
 	(void)lst_node;
 	t_list	*curr_node;
 	t_list	*prev_node;
-	t_list *tmp;
+	t_list	*tmp;
 
+	prev_node = NULL;
+	curr_node = shell->lst;
 	if (lst_node == NULL)
 		return (0);
 	if (expand_shell_param(shell, shell->lst) == ERROR)
 		return (ERROR);
-	prev_node = NULL;
-	curr_node = shell->lst;
 	while (curr_node)
 	{
 		if (is_empty(curr_node) == 1)
@@ -65,3 +65,4 @@ int	main_expand(t_shell *shell, t_list *lst_node)
 	}
 	return (0);
 }
+

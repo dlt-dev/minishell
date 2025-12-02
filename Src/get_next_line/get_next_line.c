@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:57:10 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/01 01:36:22 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 02:32:15 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char	*get_next_line(int fd)
 {
 	static char	*heap;
 	char		*newline;
-	
+
 	newline = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);

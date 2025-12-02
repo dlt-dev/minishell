@@ -1,16 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_execution.c                                  :+:      :+:    :+:   */
+/*   Part4_utils_execution.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:24:17 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/01 16:21:32 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 03:34:50 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	exist_and_access(char *my_path, struct stat *st, int *check)
+{
+	*st = (struct stat){0};
+	if (stat(my_path, st) == 0)
+	{
+		if (access(my_path, X_OK) == 0)
+		{
+			*check = 0;
+			return (0);
+		}
+		*check = CMD_NO_PERMISSION;
+		return (CMD_NO_PERMISSION);
+	}
+	return (CMD_NOT_FOUND);
+}
 
 int	ft_lstexec_size(t_exec *lst)
 {
@@ -41,29 +57,12 @@ char	**split_tab_paths(char **envp)
 	return (paths);
 }
 
-int	exist_and_access(char *my_path, struct stat *st, int *check)
-{
-	
-	*st = (struct stat){0};
-	if (stat(my_path, st) == 0)
-	{
-		if (access(my_path, X_OK) == 0)
-		{ 
-			*check = 0;
-			return(0);
-		}
-		*check = CMD_NO_PERMISSION;
-		return (CMD_NO_PERMISSION);
-	}
-	return (CMD_NOT_FOUND);
-}
-
 char	*find_my_cmd_path(char *my_cmd, char **envp, int *check)
 {
-	int		i;
-	char	*my_path;
-	char	**paths;
-	struct stat st;
+	int			i;
+	char		*my_path;
+	char		**paths;
+	struct stat	st;
 
 	paths = split_tab_paths(envp);
 	if (paths == NULL)
@@ -73,7 +72,7 @@ char	*find_my_cmd_path(char *my_cmd, char **envp, int *check)
 	{
 		my_path = malloc(ft_strlen(paths[i]) + 1 + ft_strlen(my_cmd) + 1);
 		if (!my_path)
-			break;
+			break ;
 		my_path = ft_strcpy(my_path, paths[i]);
 		ft_strcat("/", my_path);
 		ft_strcat(my_cmd, my_path);
