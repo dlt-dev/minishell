@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main_open_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:02:44 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/02 02:53:58 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 12:44:13 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	is_not_a_dir(t_redir *redir)
-{
-	struct stat	st;
-
-	st = (struct stat){0};
-	stat(redir->filename, &st);
-	if (S_ISDIR(st.st_mode) != 0)
-	{
-		write_str_fd("minishell: ", 2);
-		write_str_fd(redir->filename, 2);
-		write_str_fd(": Is a directory\n", 2);
-		return (ERROR);
-	}
-	return (0);
-}
 
 int	open_infile(t_shell *shell, t_exec *current, t_redir *redir)
 {

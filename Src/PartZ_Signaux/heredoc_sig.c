@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_sig.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 03:04:12 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/02 03:07:31 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 12:58:13 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	handle_sigint_heredoc(int sig)
 {
-	flag_signal = sig + 128;
+	g_flag_signal = sig + 128;
 	close(STDIN_FILENO);
 }
 

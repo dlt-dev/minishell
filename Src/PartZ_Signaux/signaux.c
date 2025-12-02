@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signaux.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 17:42:35 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/02 03:07:57 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 12:58:34 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	set_default_sig(t_shell *shell)
 
 void	handle_sigint(int sig)
 {
-	flag_signal = sig + 128;
+	g_flag_signal = sig + 128;
 	write(STDOUT_FILENO, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
@@ -47,10 +47,9 @@ void	handle_shell_sig(t_shell *shell)
 
 void	sig_update_exit_status(t_shell *shell)
 {
-	if (flag_signal != 0)
+	if (g_flag_signal != 0)
 	{
-		shell->exit_status = flag_signal;
-		flag_signal = 0;
+		shell->exit_status = g_flag_signal;
+		g_flag_signal = 0;
 	}
 }
-

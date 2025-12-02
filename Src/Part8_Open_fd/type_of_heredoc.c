@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_of_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 12:59:57 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/02 02:57:38 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 12:57:56 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ int	here_doc_expand(t_shell *shell, char *delimit, int pipefd[2])
 	i = 1;
 	while (1)
 	{
-		flag_signal = 0;
+		g_flag_signal = 0;
 		str = readline(">");
-		if (str == NULL && flag_signal == SIGINT + 128)
+		if (str == NULL && g_flag_signal == SIGINT + 128)
 		{
 			if (str != NULL)
 				free(str);
@@ -91,9 +91,9 @@ int	here_doc_no_expand(char *delimit, int pipefd[2])
 		return (GEN_ERRNO);
 	while (1)
 	{
-		flag_signal = 0;
+		g_flag_signal = 0;
 		str = readline(">");
-		if (str == NULL && flag_signal == SIGINT + 128)
+		if (str == NULL && g_flag_signal == SIGINT + 128)
 		{
 			if (str != NULL)
 				free(str);

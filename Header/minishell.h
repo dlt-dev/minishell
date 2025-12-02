@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/02 04:09:13 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 12:56:24 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int		check_all_redir(t_shell *shell);
 int		handle_heredoc(t_shell *shell, char *delimit);
 int		here_doc_no_expand(char *delimit, int pipefd[2]);
 int		here_doc_expand(t_shell *shell, char *delimit, int pipefd[2]);
+int		is_not_a_dir(t_redir *redir);
 
 // Part9 : execution
 	//Part1_exec_main.c
@@ -138,6 +139,6 @@ void	set_default_sig(t_shell *shell);
 	//heredoc
 void	set_heredoc_sig(t_shell *shell);
 
-extern volatile sig_atomic_t	flag_signal;
+extern volatile sig_atomic_t	g_flag_signal;
 
 #endif

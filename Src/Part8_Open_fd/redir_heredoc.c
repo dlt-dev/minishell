@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   redir_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 19:18:46 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/02 02:56:32 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 12:44:21 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	is_not_a_dir(t_redir *redir)
+{
+	struct stat	st;
+
+	st = (struct stat){0};
+	stat(redir->filename, &st);
+	if (S_ISDIR(st.st_mode) != 0)
+	{
+		write_str_fd("minishell: ", 2);
+		write_str_fd(redir->filename, 2);
+		write_str_fd(": Is a directory\n", 2);
+		return (ERROR);
+	}
+	return (0);
+}
 
 void	routine_child_heredoc(t_shell *shell, char *delimit, int pipefd[2])
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_libft3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 16:59:40 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/01 15:56:30 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 12:41:25 by jdelattr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ void	ft_putnbr_fd(int n, int fd)
 		write(fd, &result, 1);
 	}
 }
-
 
 char	*ft_strchr(char *str, char c)
 {
