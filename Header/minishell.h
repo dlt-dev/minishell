@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/02 12:56:24 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/12/02 19:22:38 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		handle_double_quotes(t_shell *shell, t_cb *lst_buffer, char *str);
 int		handle_dollar(t_shell *shell, t_cb *lst_buffer, char *str);
 int		expand_shell_param(t_shell *shell, t_list *lst);
 char	*create_expand_str(t_shell *shell, char *str);
-int		main_expand(t_shell *shell, t_list *lst_node);
+int	main_expand(t_shell *shell);
 
 // Part5: Word_splitting
 int		split_param(t_shell *shell, t_list *curr_node, t_list *prev_node);

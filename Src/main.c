@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/02 16:45:08 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/12/02 19:53:19 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	command_line_processing(t_shell *shell)
 	if (lexing(shell->rd_line, &shell->lst) == ERROR)
 		return (ERROR);
 	put_flags(shell->lst);
-	if (main_expand(shell, shell->lst) == ERROR)
+	if (main_expand(shell) == ERROR)
 		return (ERROR);
 	if (split_param(shell, shell->lst, NULL) == ERROR)
 		return (ERROR);
