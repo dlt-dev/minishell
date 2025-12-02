@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/02 04:20:59 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 04:26:52 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		if(shell_mode(&shell) == ERROR)
-			free_exit(&shell, GEN_ERRNO, "malloc_failed");
+			free_exit(&shell, GEN_ERRNO, NULL);
 		if(command_line_processing(&shell) == ERROR)
-			free_exit(&shell, GEN_ERRNO, "malloc_failed");
+			free_exit(&shell, GEN_ERRNO, NULL);
 		execution(&shell);
 		free_all(&shell);
 	}
