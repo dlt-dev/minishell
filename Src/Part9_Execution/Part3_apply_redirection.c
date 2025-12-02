@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part3_apply_redirection.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 21:23:53 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/02 16:06:49 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/12/02 18:06:04 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,13 @@ int	redir_in_pipe(t_shell *shell, t_exec *current)
 	prev_fd = shell->prev_fd;
 	if (current->fd_in != STDIN_FILENO)
 	{
-		printf("stdin depuis le fichier, %s\n", current->cmds[0]);
 		if (dup2(current->fd_in, STDIN_FILENO) == ERROR)
 			return (GEN_ERRNO);
 		close(current->fd_in);
+		//current->fd_in = 0;
 	}
 	else if (prev_fd != -1)
 	{
-		printf("stdin depuis le pipe , %s\n", current->cmds[0]);
 		if (dup2(prev_fd, STDIN_FILENO) == ERROR)
 			return (GEN_ERRNO);
 		close(prev_fd);
@@ -38,10 +37,10 @@ int	redir_out_pipe(t_exec *current, int pipe_fd[2])
 {
 	if (current->fd_out != STDOUT_FILENO)
 	{
-		printf("stdout depuis le fichier, %s\n", current->cmds[0]);
 		if (dup2(current->fd_out, STDOUT_FILENO) == ERROR)
 			return (GEN_ERRNO);
 		close(current->fd_out);
+		//current->fd_out = 1;
 	}
 	else if (current->next)
 	{

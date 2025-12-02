@@ -3,27 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils_lst2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:15:44 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/28 21:32:44 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/12/02 19:01:38 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	node_exchange(t_list **lst, t_list *curr_node, t_list *prev_node,
-		t_list *new_node)
-{
-	if (curr_node == NULL || *lst == NULL)
-		return ;
-	if (*lst == curr_node)
-		switch_first_node(lst, curr_node, new_node);
-	else if (curr_node->next == NULL)
-		switch_last_node(curr_node, prev_node, new_node);
-	else
-		switch_middle_node(curr_node, prev_node, new_node);
-}
 
 void	insert_after_node(t_list *curr_node, t_list *new_node)
 {

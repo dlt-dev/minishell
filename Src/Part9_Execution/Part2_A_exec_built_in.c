@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 19:54:50 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/02 02:19:36 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 18:37:22 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,20 @@ int	execute_built_in(t_shell *shell, int type, char **args, int print_flag)
 {
 	int	fd_out;
 
+	
 	fd_out = shell->cmd_lst->fd_out;
+
+	if (ft_lstexec_size(shell->cmd_lst) > 1)
+		fd_out = STDOUT_FILENO;
+	
 	if (type == ECHO)
 		shell->exit_status = builtin_echo(args, fd_out);
 	if (type == CD)
-		shell->exit_status = builtin_cd(shell, args);
+		shell->exit_status = builtin_cd(shell, args, fd_out);
 	if (type == PWD)
 		shell->exit_status = builtin_pwd(fd_out);
 	if (type == EXPORT)
-		shell->exit_status = builtin_export(shell, shell->env, args);
+		shell->exit_status = builtin_export(shell, shell->env, args, fd_out);
 	if (type == UNSET)
 		shell->exit_status = builtin_unset(shell, shell->env, args);
 	if (type == ENV)

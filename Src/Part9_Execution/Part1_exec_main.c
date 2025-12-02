@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 21:25:50 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/02 03:33:23 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 19:12:05 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ int	manage_execution(t_shell *shell, t_valist *env)
 {
 	int	command_nb;
 	int	check_failed;
-
-	command_nb = ft_lstexec_size(shell->cmd_lst);
+	
 	if (!shell->cmd_lst || !shell->cmd_lst->cmds)
 		return (0);
+	command_nb = ft_lstexec_size(shell->cmd_lst);
 	if (command_nb == 1)
 	{
 		check_failed = handle_simple_command(shell, shell->cmd_lst, env);

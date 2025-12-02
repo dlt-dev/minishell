@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:00:10 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/27 12:32:48 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 18:17:07 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	add_affectation(t_shell *shell, t_valist *env, char *str, int len_name)
 	return (0);
 }
 
-int	builtin_export(t_shell *shell, t_valist *env, char **args)
+int	builtin_export(t_shell *shell, t_valist *env, char **args, int fd_out)
 {
 	int	i;
 	int	len_name;
@@ -58,7 +58,7 @@ int	builtin_export(t_shell *shell, t_valist *env, char **args)
 	i = 0;
 	if (args[1] == NULL)
 	{
-		builtin_env(env, shell->cmd_lst->fd_out, 1);
+		builtin_env(env, fd_out, 1);
 		return (0);
 	}
 	while (args[i] != NULL)

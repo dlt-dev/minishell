@@ -6,13 +6,13 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:56:31 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/02 02:23:22 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/02 18:31:33 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	cd_only(t_shell *shell)
+int	cd_only(t_shell *shell, int fd_out)
 {
 	char	*str;
 
@@ -30,12 +30,12 @@ int	cd_only(t_shell *shell)
 			return (GEN_ERRNO);
 		}
 	}
-	if (update_cwd(shell, shell->env) == ERROR)
+	if (update_cwd(shell, shell->env, fd_out) == ERROR)
 		return (GEN_ERRNO);
 	return (0);
 }
 
-int	builtin_cd(t_shell *shell, char **argv)
+int	builtin_cd(t_shell *shell, char **argv, int fd_out)
 {
 	int	i;
 
@@ -43,7 +43,7 @@ int	builtin_cd(t_shell *shell, char **argv)
 	while (argv[i] != NULL)
 		i++;
 	if (i == 1)
-		return (cd_only(shell));
+		return (cd_only(shell, fd_out));
 	if (i > 2)
 	{
 		write_str_fd("minishell: cd : too many arguments\n", 2);
@@ -54,7 +54,7 @@ int	builtin_cd(t_shell *shell, char **argv)
 		print_error_message("cd", argv[1]);
 		return (GEN_ERRNO);
 	}
-	if (update_cwd(shell, shell->env) == ERROR)
+	if (update_cwd(shell, shell->env, fd_out) == ERROR)
 		return (GEN_ERRNO);
 	return (0);
 }
