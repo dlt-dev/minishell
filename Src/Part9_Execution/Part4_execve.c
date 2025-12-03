@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 12:36:39 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/03 14:47:08 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:18:55 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,19 @@
 
 void	failed_exec_message(char *cmd, char *message)
 {
-	write_str_fd("minishell: ", 2);
-	write_str_fd(cmd, 2);
-	write_str_fd(message, 2);
+	int len;
+	char *error;
+
+	len = ft_strlen("minishell: ") + ft_strlen(cmd) + ft_strlen(message) + 1;
+	error = malloc(sizeof(char) * len);
+	ft_memset(error, '\0', len);
+	if(error == NULL)
+		return;
+	ft_strcat("minishell: ", error);
+	ft_strcat(cmd, error);
+	ft_strcat(message, error);
+	write_str_fd(error, 2);
+	free(error);
 }
 
 int	exec_env_path(char **env_tab_exe, char **cmd)
@@ -73,6 +83,7 @@ int	do_execve(char **cmd, t_valist *env)
 {
 	char	**env_tab_exe;
 	int		check;
+	
 	if(cmd == NULL)
 		return(0);
 	env_tab_exe = env_list_to_envp(env);

@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 15:47:46 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/03 16:07:03 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 16:57:35 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	routine_builtin_pipe(t_shell *shell, t_exec *current, char **cmd,
 		free_exit(shell, shell->exit_status, NULL);
 	}
 	shell->exit_status = 0;
-	// if(cmd == NULL)
-	// 	free_exit(shell, shell->exit_status, NULL);
 	if (apply_redir_pipe(shell, current, pipe_fd) == GEN_ERRNO)
 		free_exit(shell, GEN_ERRNO, NULL);
 	if (execute_built_in(shell, is_built_in(cmd), cmd, 1) == ERROR)
@@ -40,15 +38,12 @@ void	routine_pipe(t_shell *shell, t_exec *current, char **cmd,
 	{
 		close(pipe_fd[0]);
 		close(pipe_fd[1]);
-		// close(current->fd_in);
-		// close(current->fd_out);
 		free_exit(shell, shell->exit_status, NULL);
 	}
 	shell->exit_status = 0;
-	// if(cmd == NULL)
-	// 	free_exit(shell, shell->exit_status, NULL);
 	if (apply_redir_pipe(shell, current, pipe_fd) == GEN_ERRNO)
 		free_exit(shell, GEN_ERRNO, NULL);
+	
 	exit_status = do_execve(cmd, shell->env);
 	free_exit(shell, exit_status, NULL);
 }
@@ -56,13 +51,7 @@ void	routine_pipe(t_shell *shell, t_exec *current, char **cmd,
 int	exec_fork_pipe(t_shell *shell, t_exec *current, char **cmd, int pipe_fd[2])
 {
 	pid_t	child;
-	// static int i;
 
-	// printf("%d AHHHH\n" ,i);
-	// i++;
-	// print_cmd_list(current);
-	// test_print_fd(current);
-	// write(1, "\n", 1);
 	child = fork(); 
 	if (child == ERROR)
 		return (ERROR);

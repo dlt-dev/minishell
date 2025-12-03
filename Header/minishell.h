@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/03 15:12:53 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 16:38:48 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,8 @@ void	free_exec(t_exec *cmd);
 void	free_tab(char **cmds);
 
 // Part8_Open_fd
-int	check_cmd_redir(t_shell *shell, t_exec *current, t_redir *redir);
-
-int		check_all_redir(t_shell *shell);
+int		check_cmd_redir(t_shell *shell, t_exec *current, t_redir *redir);
+int		check_redir_heredoc(t_shell *shell);
 int		handle_heredoc(t_shell *shell, char *delimit);
 int		here_doc_no_expand(char *delimit, int pipefd[2]);
 int		here_doc_expand(t_shell *shell, char *delimit, int pipefd[2]);

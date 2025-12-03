@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:02:44 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/03 16:12:17 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 16:41:29 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,6 @@ int	check_cmd_redir(t_shell *shell, t_exec *current, t_redir *redir)
 		if (redir->redir_type == OUTFILE)
 			if (open_outfile(shell, current, redir, OUTFILE) == ERROR)
 				return (ERROR);
-		if (redir->redir_type == HEREDOC)
-			if (open_heredoc(shell, current, redir) == ERROR)
-				return (ERROR);
 		if (redir->redir_type == OUTFILE_APPEND)
 			if (open_outfile(shell, current, redir, OUTFILE_APPEND) == ERROR)
 				return (ERROR);
@@ -108,14 +105,27 @@ int	check_cmd_redir(t_shell *shell, t_exec *current, t_redir *redir)
 	return (0);
 }
 
-int	check_all_redir(t_shell *shell)
+int	check_heredoc(t_shell *shell, t_exec *current, t_redir *redir)
+{
+	while (redir != NULL)
+	{
+		if (redir->redir_type == HEREDOC)
+			if (open_heredoc(shell, current, redir) == ERROR)
+				return (ERROR);
+		redir = redir->next;
+	}
+	return (0);
+}
+
+
+int	check_redir_heredoc(t_shell *shell)
 {
 	t_exec	*current;
 
 	current = shell->cmd_lst;
 	while (current != NULL)
 	{
-		if (check_cmd_redir(shell, current, current->redir) == ERROR)
+		if (check_heredoc(shell, current, current->redir) == ERROR)
 			return (ERROR);
 		else
 			shell->exit_status = 0;
