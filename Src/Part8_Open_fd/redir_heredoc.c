@@ -6,27 +6,11 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 19:18:46 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/02 20:10:36 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:37:41 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	is_not_a_dir(t_redir *redir)
-{
-	struct stat	st;
-
-	st = (struct stat){0};
-	stat(redir->filename, &st);
-	if (S_ISDIR(st.st_mode) != 0)
-	{
-		write_str_fd("minishell: ", 2);
-		write_str_fd(redir->filename, 2);
-		write_str_fd(": Is a directory\n", 2);
-		return (ERROR);
-	}
-	return (0);
-}
 
 void	routine_child_heredoc(t_shell *shell, char *delimit, int pipefd[2])
 {
@@ -78,4 +62,32 @@ int	handle_heredoc(t_shell *shell, char *delimit)
 			return (ERROR);
 	}
 	return (pipefd[0]);
+}
+
+int	check_heredoc(t_shell *shell, t_exec *current, t_redir *redir)
+{
+	while (redir != NULL)
+	{
+		if (redir->redir_type == HEREDOC)
+			if (open_heredoc(shell, current, redir) == ERROR)
+				return (ERROR);
+		redir = redir->next;
+	}
+	return (0);
+}
+
+int	check_redir_heredoc(t_shell *shell)
+{
+	t_exec	*current;
+
+	current = shell->cmd_lst;
+	while (current != NULL)
+	{
+		if (check_heredoc(shell, current, current->redir) == ERROR)
+			return (ERROR);
+		else
+			shell->exit_status = 0;
+		current = current->next;
+	}
+	return (0);
 }

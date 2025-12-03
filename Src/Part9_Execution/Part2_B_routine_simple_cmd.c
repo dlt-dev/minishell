@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:21:20 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/03 15:47:21 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:35:29 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	redir_one_command(t_shell *shell)
 void	routine_child(t_shell *shell, char **cmd, t_valist *env)
 {
 	int	exit_status;
-	
-	if(check_cmd_redir(shell, shell->cmd_lst, shell->cmd_lst->redir) == ERROR)
+
+	if (check_cmd_redir(shell, shell->cmd_lst, shell->cmd_lst->redir) == ERROR)
 		free_exit(shell, shell->exit_status, NULL);
 	shell->exit_status = 0;
 	if (redir_one_command(shell) == GEN_ERRNO)

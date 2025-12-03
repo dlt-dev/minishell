@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:01:40 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/11/26 18:06:59 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:38:02 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,20 @@ void	print_error_message(char *fonction, char *arg)
 	}
 	write(2, error, ft_strlen(error));
 	write(2, "\n", 1);
+}
+
+int	is_not_a_dir(t_redir *redir)
+{
+	struct stat	st;
+
+	st = (struct stat){0};
+	stat(redir->filename, &st);
+	if (S_ISDIR(st.st_mode) != 0)
+	{
+		write_str_fd("minishell: ", 2);
+		write_str_fd(redir->filename, 2);
+		write_str_fd(": Is a directory\n", 2);
+		return (ERROR);
+	}
+	return (0);
 }

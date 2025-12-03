@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 19:54:50 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/03 15:12:07 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:35:21 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 int	is_built_in(char **cmd)
 {
-	if(cmd == NULL)
+	if (cmd == NULL)
 		return (NO_BUILT_IN);
-		
 	if (ft_strcmp(cmd[0], "echo") == 0)
 		return (ECHO);
 	if (ft_strcmp(cmd[0], "cd") == 0)
@@ -39,12 +38,9 @@ int	execute_built_in(t_shell *shell, int type, char **args, int print_flag)
 {
 	int	fd_out;
 
-	
 	fd_out = shell->cmd_lst->fd_out;
-
 	if (ft_lstexec_size(shell->cmd_lst) > 1)
 		fd_out = STDOUT_FILENO;
-	
 	if (type == ECHO)
 		shell->exit_status = builtin_echo(args, fd_out);
 	if (type == CD)

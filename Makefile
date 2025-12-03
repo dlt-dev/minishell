@@ -100,7 +100,7 @@ $(OBJ_DIR):
 install: $(BIN_DIR)/$(NAME)
 
 exec: $(NAME)
-	valgrind -s --leak-check=full --show-leak-kinds=all --suppressions=readline.supp --track-fds=yes --trace-children=yes ./minishell
+	valgrind -s --leak-check=full --show-leak-kinds=all --suppressions=readline.supp --track-fds=yes ./minishell
 
 $(BIN_DIR)/$(NAME): $(NAME)
 	mkdir -p $(BIN_DIR)
@@ -124,5 +124,9 @@ re:
 
 .PHONY: all install re clean fclean 
 
-#	SRC_PART8 = Part8_execution.c Part8_built_in.c Part8_heredoc.c Part8_open_redir.c \
-#	Part8_exec_fork_one.c
+#{
+#	ignore_libreadline_leaks
+#	Memcheck:Leak
+#	...
+#	obj:*libreadline.so.*
+#}

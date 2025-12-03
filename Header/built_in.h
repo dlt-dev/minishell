@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 17:33:42 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/02 18:31:51 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:30:45 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ enum	e_builtin_type
 	EXIT,
 };
 
-
 char	*getenv_intern(t_valist *env, char *pattern);
-int	update_cwd(t_shell *shell, t_valist *env, int fd_out);
-int	builtin_cd(t_shell *shell, char **argv, int fd_out);
+int		update_cwd(t_shell *shell, t_valist *env, int fd_out);
+int		builtin_cd(t_shell *shell, char **argv, int fd_out);
 
 int		builtin_echo(char **args, int fd_out);
 int		builtin_env(t_valist *env, int fd_out, int flag_export);

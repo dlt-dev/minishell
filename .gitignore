@@ -1,6 +1,0 @@
-objs/*
-
-*.test
-*.txt
-noir
-minishell

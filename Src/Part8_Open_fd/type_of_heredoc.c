@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 12:59:57 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/02 20:01:04 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:35:01 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	str_null(char *str, char *new_delimit)
 			free(str);
 		if (new_delimit != NULL)
 			free(new_delimit);
-			
 		return (SIGINT + 128);
 	}
 	return (0);
@@ -117,70 +116,3 @@ int	here_doc_no_expand(char *delimit, int pipefd[2])
 	}
 	return (0);
 }
-
-/* int	here_doc_expand(t_shell *shell, char *delimit, int pipefd[2])
-{
-	char	*str;
-	char	*new_str;
-	int		i;
-
-	i = 1;
-	while (1)
-	{
-		g_flag_signal = 0;
-		str = readline(">");
-		if (str == NULL && g_flag_signal == SIGINT + 128)
-		{
-			if (str != NULL)
-				free(str);
-			return (SIGINT + 128);
-		}
-		if (str == NULL)
-			return (here_doc_message(i, delimit), 0);
-		if (ft_strcmp(str, delimit) == 0)
-			return (free(str), 0);
-		new_str = create_expand_str(shell, str);
-		if (new_str == NULL)
-			return (free(str), ERROR);
-		write(pipefd[1], new_str, ft_strlen(new_str));
-		write(pipefd[1], "\n", 1);
-		free(str);
-		free(new_str);
-		i++;
-	}
-	return (0);
-} */
-/*
-int	here_doc_no_expand(char *delimit, int pipefd[2])
-{
-	char	*str;
-	char	*new_delimit;
-	int		i;
-
-	i = 1;
-	new_delimit = delimit_without_quotes(delimit);
-	if (new_delimit == NULL)
-		return (GEN_ERRNO);
-	while (1)
-	{
-		g_flag_signal = 0;
-		str = readline(">");
-		if (str == NULL && g_flag_signal == SIGINT + 128)
-		{
-			if (str != NULL)
-				free(str);
-			free(new_delimit);
-			return (SIGINT + 128);
-		}
-		if (str == NULL)
-			return (here_doc_message(i, new_delimit), free(new_delimit),
-				close(pipefd[1]), 0);
-		if (ft_strcmp(str, new_delimit) == 0)
-			return (free(str), free(new_delimit), 0);
-		write(pipefd[1], str, ft_strlen(str));
-		write(pipefd[1], "\n", 1);
-		free(str);
-		i++;
-	}
-	return (0);
-} */

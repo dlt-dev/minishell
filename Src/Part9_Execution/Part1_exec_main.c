@@ -6,22 +6,21 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 21:25:50 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/03 15:14:17 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:35:13 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	handle_simple_command(t_shell *shell, t_exec *cmd_lst, t_valist *env)
-{		
-	
+{
 	if (cmd_lst->cmds && (is_built_in(cmd_lst->cmds) != 0))
 	{
-		if(check_cmd_redir(shell, cmd_lst, shell->cmd_lst->redir) ==ERROR)
-			return(ERROR);
+		if (check_cmd_redir(shell, cmd_lst, shell->cmd_lst->redir) == ERROR)
+			return (ERROR);
 		shell->exit_status = 0;
-		if (execute_built_in(shell, is_built_in(cmd_lst->cmds),
-				cmd_lst->cmds, 0) == ERROR)
+		if (execute_built_in(shell, is_built_in(cmd_lst->cmds), cmd_lst->cmds,
+				0) == ERROR)
 			return (ERROR);
 	}
 	else
@@ -59,7 +58,7 @@ int	manage_execution(t_shell *shell, t_valist *env)
 {
 	int	command_nb;
 	int	check_failed;
-	
+
 	if (!shell->cmd_lst)
 		return (0);
 	command_nb = ft_lstexec_size(shell->cmd_lst);

@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 15:47:46 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/03 16:57:35 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:35:36 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	routine_builtin_pipe(t_shell *shell, t_exec *current, char **cmd,
 		int pipe_fd[2])
-{   
-	if(check_cmd_redir(shell, current, current->redir) == ERROR)
+{
+	if (check_cmd_redir(shell, current, current->redir) == ERROR)
 	{
 		close(pipe_fd[0]);
 		close(pipe_fd[1]);
@@ -34,7 +34,7 @@ void	routine_pipe(t_shell *shell, t_exec *current, char **cmd,
 {
 	int	exit_status;
 
-	if(check_cmd_redir(shell, current, current->redir) == ERROR)
+	if (check_cmd_redir(shell, current, current->redir) == ERROR)
 	{
 		close(pipe_fd[0]);
 		close(pipe_fd[1]);
@@ -43,7 +43,6 @@ void	routine_pipe(t_shell *shell, t_exec *current, char **cmd,
 	shell->exit_status = 0;
 	if (apply_redir_pipe(shell, current, pipe_fd) == GEN_ERRNO)
 		free_exit(shell, GEN_ERRNO, NULL);
-	
 	exit_status = do_execve(cmd, shell->env);
 	free_exit(shell, exit_status, NULL);
 }
@@ -52,12 +51,12 @@ int	exec_fork_pipe(t_shell *shell, t_exec *current, char **cmd, int pipe_fd[2])
 {
 	pid_t	child;
 
-	child = fork(); 
+	child = fork();
 	if (child == ERROR)
 		return (ERROR);
 	if (child > 0)
 	{
-		set_ignore_sig (shell);
+		set_ignore_sig(shell);
 		if (shell->prev_fd != -1)
 			close(shell->prev_fd);
 		close(pipe_fd[1]);
@@ -66,7 +65,6 @@ int	exec_fork_pipe(t_shell *shell, t_exec *current, char **cmd, int pipe_fd[2])
 	}
 	if (child == 0)
 	{
-
 		set_default_sig(shell);
 		if (is_built_in(current->cmds) != 0)
 			routine_builtin_pipe(shell, current, cmd, pipe_fd);

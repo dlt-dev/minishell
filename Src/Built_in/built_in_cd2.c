@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:50:04 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/02 18:30:30 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:39:12 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	**create_export_tab(char *pwd)
 	return (args);
 }
 
-int	update_env(t_shell *shell, t_valist *env, char *name, char *value, int fd_out)
+int	update_env(t_shell *shell, char *name, char *value, int fd_out)
 {
 	char	*affectation;
 	char	**args;
@@ -71,7 +71,7 @@ int	update_env(t_shell *shell, t_valist *env, char *name, char *value, int fd_ou
 	args = create_export_tab(affectation);
 	if (args == NULL)
 		return (free(affectation), GEN_ERRNO);
-	if (builtin_export(shell, env, args, fd_out) == ERROR)
+	if (builtin_export(shell, shell->env, args, fd_out) == ERROR)
 		return (free(affectation), ft_free_tab(args), GEN_ERRNO);
 	return (free(affectation), ft_free_tab(args), 0);
 }
@@ -87,10 +87,10 @@ int	update_cwd(t_shell *shell, t_valist *env, int fd_out)
 		return (perror("getcwd"), ERROR);
 	if (oldpwd != NULL)
 	{
-		if (update_env(shell, env, "OLDPWD", oldpwd, fd_out) == ERROR)
+		if (update_env(shell, "OLDPWD", oldpwd, fd_out) == ERROR)
 			return (free(pwd), ERROR);
 	}
-	if (update_env(shell, env, "PWD", pwd, fd_out) == ERROR)
+	if (update_env(shell, "PWD", pwd, fd_out) == ERROR)
 		return (free(pwd), ERROR);
 	free(pwd);
 	return (0);

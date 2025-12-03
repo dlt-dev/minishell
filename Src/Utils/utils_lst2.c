@@ -6,12 +6,11 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:15:44 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/02 19:01:38 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:36:27 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	insert_after_node(t_list *curr_node, t_list *new_node)
 {

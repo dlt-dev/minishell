@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/03 16:38:48 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:51:30 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		handle_double_quotes(t_shell *shell, t_cb *lst_buffer, char *str);
 int		handle_dollar(t_shell *shell, t_cb *lst_buffer, char *str);
 int		expand_shell_param(t_shell *shell, t_list *lst);
 char	*create_expand_str(t_shell *shell, char *str);
-int	main_expand(t_shell *shell);
+int		main_expand(t_shell *shell);
 
 // Part5: Word_splitting
 int		split_param(t_shell *shell, t_list *curr_node, t_list *prev_node);
@@ -96,6 +96,7 @@ int		check_cmd_redir(t_shell *shell, t_exec *current, t_redir *redir);
 int		check_redir_heredoc(t_shell *shell);
 int		handle_heredoc(t_shell *shell, char *delimit);
 int		here_doc_no_expand(char *delimit, int pipefd[2]);
+int		open_heredoc(t_shell *shell, t_exec *current, t_redir *redir);
 int		here_doc_expand(t_shell *shell, char *delimit, int pipefd[2]);
 int		is_not_a_dir(t_redir *redir);
 
@@ -103,7 +104,7 @@ int		is_not_a_dir(t_redir *redir);
 	//Part1_exec_main.c
 int		manage_execution(t_shell *shell, t_valist *env);
 	//Part2_A_exec_built_in.c
-int	is_built_in(char **cmd);
+int		is_built_in(char **cmd);
 int		execute_built_in(t_shell *shell, int type, char **args, int print_flag);
 	//Part2_B_routine_simple_cmd.c
 int		exec_fork_one(t_shell *shell, char **cmd, t_valist *env);
