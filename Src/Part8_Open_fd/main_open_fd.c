@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_open_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:02:44 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/02 16:42:29 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/12/03 14:16:09 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,5 @@ int	check_all_redir(t_shell *shell)
 			shell->exit_status = 0;
 		current = current->next;
 	}
-	// test_print_fd(shell->cmd_lst);
 	return (0);
 }

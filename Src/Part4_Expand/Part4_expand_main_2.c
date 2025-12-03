@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 18:47:45 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/02 19:50:39 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 14:06:31 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	main_expand(t_shell *shell)
 		{
 			tmp = curr_node->next;
 			del_one_relink(&shell->lst, curr_node, prev_node);
-			prev_node = curr_node;
 			curr_node = tmp;
 		}
 		else

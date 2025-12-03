@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part2_C_routine_pipe.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 15:47:46 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/02 16:46:25 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/12/03 14:01:41 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void	routine_builtin_pipe(t_shell *shell, t_exec *current, char **cmd,
 		int pipe_fd[2])
-{
+{     // 
 	if (apply_redir_pipe(shell, current, pipe_fd) == GEN_ERRNO)
 		free_exit(shell, GEN_ERRNO, cmd[0]);
+	//
 	if (execute_built_in(shell, is_built_in(cmd[0]), cmd, 1) == ERROR)
 		free_exit(shell, GEN_ERRNO, cmd[0]);
 	free_exit(shell, shell->exit_status, NULL);

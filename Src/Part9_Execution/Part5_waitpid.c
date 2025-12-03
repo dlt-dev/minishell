@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Part5_waitpid.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdelattr <jdelattr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 03:32:27 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/02 12:42:10 by jdelattr         ###   ########.fr       */
+/*   Updated: 2025/12/03 13:42:15 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	wait_and_status(t_shell *shell, pid_t last_pid)
 		if (WIFSIGNALED(status) != 0)
 			flag_n = 1;
 	}
-	if (shell->exit_status == SIGINT + 128)
+	if (shell->exit_status > 128)
 		flag_n = 1;
 	if (flag_n == 1)
 		write(1, "\n", 1);

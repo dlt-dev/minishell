@@ -100,7 +100,7 @@ $(OBJ_DIR):
 install: $(BIN_DIR)/$(NAME)
 
 exec: $(NAME)
-	valgrind -s --leak-check=full --show-leak-kinds=all --suppressions=readline.supp --track-fds=yes ./minishell
+	valgrind -s --leak-check=full --show-leak-kinds=all --suppressions=readline.supp --track-fds=yes --trace-children=yes ./minishell
 
 $(BIN_DIR)/$(NAME): $(NAME)
 	mkdir -p $(BIN_DIR)
