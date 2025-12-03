@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 21:23:53 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/02 18:06:04 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 16:27:06 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	redir_in_pipe(t_shell *shell, t_exec *current)
 		if (dup2(current->fd_in, STDIN_FILENO) == ERROR)
 			return (GEN_ERRNO);
 		close(current->fd_in);
-		//current->fd_in = 0;
 	}
 	else if (prev_fd != -1)
 	{
@@ -40,11 +39,9 @@ int	redir_out_pipe(t_exec *current, int pipe_fd[2])
 		if (dup2(current->fd_out, STDOUT_FILENO) == ERROR)
 			return (GEN_ERRNO);
 		close(current->fd_out);
-		//current->fd_out = 1;
 	}
 	else if (current->next)
 	{
-		printf("stdout vers le pipe , %s\n", current->cmds[0]);
 		if (dup2(pipe_fd[1], STDOUT_FILENO) == ERROR)
 			return (GEN_ERRNO);
 	}
@@ -59,5 +56,7 @@ int	apply_redir_pipe(t_shell *shell, t_exec *current, int pipe_fd[2])
 		return (close(pipe_fd[0]), close(pipe_fd[1]), GEN_ERRNO);
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
+	if (shell->prev_fd != -1)
+		close(shell->prev_fd);
 	return (0);
 }

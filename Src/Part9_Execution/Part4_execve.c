@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 12:36:39 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/02 19:44:46 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 14:47:08 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	do_execve(char **cmd, t_valist *env)
 {
 	char	**env_tab_exe;
 	int		check;
-
+	if(cmd == NULL)
+		return(0);
 	env_tab_exe = env_list_to_envp(env);
 	if (env_tab_exe == NULL)
 		return (GEN_ERRNO);

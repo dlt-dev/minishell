@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:02:44 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/03 14:16:09 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 16:12:17 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	open_infile(t_shell *shell, t_exec *current, t_redir *redir)
 	if (fd_in == ERROR)
 	{
 		shell->exit_status = GEN_ERRNO;
+		if (shell->prev_fd != -1)
+			close(shell->prev_fd);
 		return (print_error_message(NULL, redir->filename), ERROR);
 	}
 	if (current->fd_in != STDIN_FILENO)

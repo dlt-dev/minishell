@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:17:54 by jdelattr          #+#    #+#             */
-/*   Updated: 2025/12/02 19:22:38 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 15:12:53 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void	free_exec(t_exec *cmd);
 void	free_tab(char **cmds);
 
 // Part8_Open_fd
+int	check_cmd_redir(t_shell *shell, t_exec *current, t_redir *redir);
+
 int		check_all_redir(t_shell *shell);
 int		handle_heredoc(t_shell *shell, char *delimit);
 int		here_doc_no_expand(char *delimit, int pipefd[2]);
@@ -102,7 +104,7 @@ int		is_not_a_dir(t_redir *redir);
 	//Part1_exec_main.c
 int		manage_execution(t_shell *shell, t_valist *env);
 	//Part2_A_exec_built_in.c
-int		is_built_in(char *cmd);
+int	is_built_in(char **cmd);
 int		execute_built_in(t_shell *shell, int type, char **args, int print_flag);
 	//Part2_B_routine_simple_cmd.c
 int		exec_fork_one(t_shell *shell, char **cmd, t_valist *env);

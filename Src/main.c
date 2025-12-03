@@ -6,7 +6,7 @@
 /*   By: aoesterl <aoesterl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:04:25 by aoesterl          #+#    #+#             */
-/*   Updated: 2025/12/02 19:53:19 by aoesterl         ###   ########.fr       */
+/*   Updated: 2025/12/03 16:27:47 by aoesterl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,10 @@ int	execution(t_shell *shell)
 {
 	if (logical_struct(shell, NULL, shell->lst) == ERROR)
 		return (ERROR);
-	if (check_all_redir(shell) == ERROR)
-		free_all(shell);
+	// if (check_all_redir(shell) == ERROR)
+	// 	free_all(shell);
 	// print_cmd_list(shell->cmd_lst);
-	else
-		manage_execution(shell, shell->env);
+	manage_execution(shell, shell->env);
 	return (0);
 }
 
